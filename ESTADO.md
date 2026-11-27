@@ -128,7 +128,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): uso para las ⭐. Pestaña ⭐ Estrellas en la tienda (también al tocar ⭐ arriba): 10 trofeos por estrellas
   juntadas en total (STAR_GOALS, de 25 a 2000, cada uno regala 💎 al abrirlo; S.sgot), cambio de 20 ⭐ por 1 🔮 una vez por día
   (S.scrys) y 8 accesorios de ropa mágica que solo se compran con estrellas (ACC con st). Gastar estrellas no baja el nivel (S.spent).
-- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy ~1320 palabras y frases (base + vocab.js con 124 temas, lv 1-5,
+- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy ~1480 palabras y frases (base + vocab.js con 144 temas, lv 1-5,
   números generados 11-20 → decenas → 21-99 → cientos → miles/millón, ordinales, hora, países, pasado...).
   Mundos 2-4 traen al final 2 temas nuevos cada uno (NEWU[0..5]) + parada 🔁 Repaso del mundo anterior.
   Galaxias (mundo 5+) usan NEWU desde el 7º, 6 temas por galaxia en orden de dificultad (~10 galaxias de contenido nuevo).
@@ -139,12 +139,15 @@ le acepte la voz a la nena.
   Tanda 3 (27/11): 24 temas, 206 palabras/frases (mar, insectos, juegos de plaza, mi cuarto, colores, granja, frutas, comidas argentinas,
   baño, instrumentos, emociones, acciones, naturaleza, animales salvajes, deportes, auto, hospital, cielo, verbos útiles, me presento,
   tiempo libre, palabras largas, pasado, contar una historia).
+  Tanda 4 (27/11, b:4): 20 temas, 160 palabras/frases (selva argentina, juguetes, jardín, desayuno, disfraces, clima, escuela, mascotas,
+  verbos del día, cuentos de hadas, espacio, cosas de la casa, comparar, profesiones, cine, preguntas, palabras de tiempo, pasado, valores, conversación).
 - 🔄 EN CURSO: FRASES estilo Kumon. Juego 🧩 Frases con 36 patrones (PHR, lv1-5, desde "I like…" hasta "If it rains,
   I will…", "When I grow up I want to be a…", y uno de dos huecos "My best friend likes…, but I like…").
   Pasos: mirar/escuchar → completar → ordenar → cambiar una palabra → escuchar y elegir → frase larga (une dos frases
   con "and", nivel 3+, solo patrones cortos) → decirla con micrófono. Tanda 2 (27/11): +24 patrones (60 en total),
   p. ej. "I have a…", "Where is my…?", "It is time to…", "Let's … together!", "I have never seen a…", "I am happy because…",
-  "If I had a…, I would…".
+  "If I had a…, I would…". Tanda 3: +20 patrones (80 en total): "I want to…", "Please, …", "We are…", "What time is…?",
+  "I always … before bed", "Can you help me…?", "When I was little, I…", "My dream is to…", "Yesterday it was…, but today it is…".
 - ⏭️ PENDIENTE (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
