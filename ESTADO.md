@@ -35,7 +35,7 @@ le acepte la voz a la nena.
 - Memotest (parear palabra ↔ emoji con voz)
 - Escuchá y tocá: la voz dice una palabra y se toca el dibujo correcto entre 4 (botón 🐢 para oírla lento). 4 paradas en el camino
 - Camino dibujado: sendero en curva, paradas 3D por color, zorrito guía
-- Elegir voz (botón 🎙️ Voz en el camino): 12 personajes con voz de EE.UU. (Oso por defecto, León, Panda, Koala, Búho, Elefante, Tortuga, Zorrito, Perrito, Delfín, Gatita, Hada). Se guarda aparte del avance
+- Elegir voz (botón 🎙️ Voz en el camino): voz "Original" del teléfono sin retoque (por defecto) + 12 personajes con voz de EE.UU. (Oso, León, Panda, Koala, Búho, Elefante, Tortuga, Zorrito, Perrito, Delfín, Gatita, Hada). Se guarda aparte del avance
 - Botón Atrás de Android: vuelve al camino (y del camino al inicio), no cierra la app
 - Empezar de cero: mantener apretada la portada 3 segundos (para el adulto)
 - Modo baile
