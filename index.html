@@ -173,6 +173,10 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .pa-goal{display:flex;gap:6px;flex-wrap:wrap;} .pa-goal button{flex:1;border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 4px;font-weight:900;font-family:inherit;color:var(--ink);cursor:pointer;}
 .pa-goal button.on{border-color:var(--teal);background:#E9FAF4;color:var(--teal-d);}
 /* SAFARI */
+.sf-area.bg{background:#6CC4F5;}
+.sf-hole{position:absolute;width:90px;height:96px;overflow:hidden;z-index:3;}
+.sf-hole .sf-an{font-size:50px;}
+
 .sf-area{position:relative;align-self:stretch;height:100%;width:100%;overflow:hidden;background:linear-gradient(180deg,#8FD6FF 0,#C9EEFF 55%,#BDE7A0 56%,#8ACB6A 100%);min-height:440px;user-select:none;}
 .sf-bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;}
 .sf-sun{position:absolute;top:60px;right:18px;font-size:48px;pointer-events:none;}
@@ -1415,6 +1419,9 @@ function startPaint(u,lv){
 }
 
 /* 📸 SAFARI DE FOTOS: sacale la foto al animal que pide la voz */
+var SAFARI_BG='img/safari_bg.jpg';
+/* arbustos del dibujo: centro x y borde de arriba, en proporción de la imagen */
+var SAFARI_BUSH=[[0.16,0.625],[0.50,0.59],[0.83,0.625]];
 var SAFARI=[
  {en:'parrot',es:'loro',e:'🦜',f:1},{en:'owl',es:'búho',e:'🦉',f:1},{en:'eagle',es:'águila',e:'🦅',f:1},{en:'butterfly',es:'mariposa',e:'🦋',f:1},
  {en:'bee',es:'abeja',e:'🐝',f:1},{en:'bat',es:'murciélago',e:'🦇',f:1},{en:'peacock',es:'pavo real',e:'🦚',f:0},{en:'flamingo',es:'flamenco',e:'🦩',f:0},
@@ -1426,11 +1433,17 @@ function startSafari(u,lv){
  var NA=Math.min(SAFARI.length,6+2*lv), pool=shuffle(SAFARI).slice(0,NA);
  var GOAL=Math.min(14,7+lv), shots=GOAL+6, got=0, target=null, beasts=[], spawnT=0, showEs=lv<3;
  var spd=Math.min(3.4,1.2+0.35*(lv-1)), maxOn=Math.min(5,2+Math.ceil(lv/2));
- host.innerHTML='<div class="sf-area" id="sfArea">'+(window.SAFARI_BG?'<img class="sf-bgimg" src="'+SAFARI_BG+'" alt="">':'<div class="sf-sun">🌞</div><div class="sf-tree t1">🌳</div><div class="sf-tree t2">🌴</div>')
+ var BG=!!SAFARI_BG;
+ host.innerHTML='<div class="sf-area'+(BG?' bg':'')+'" id="sfArea">'+(BG?'<img class="sf-bgimg" src="'+SAFARI_BG+'" alt="">':'<div class="sf-sun">🌞</div><div class="sf-tree t1">🌳</div><div class="sf-tree t2">🌴</div>')
   +'<div class="sf-top"><button class="ls-spk slow" id="sfSay">🔊</button><div class="sf-ask" id="sfAsk"></div></div>'
-  +'<div class="sf-bush b1">🌿</div><div class="sf-bush b2">🌳</div><div class="sf-bush b3">🌿</div><div class="sf-grass"></div>'
+  +(BG?'':'<div class="sf-bush b1">🌿</div><div class="sf-bush b2">🌳</div><div class="sf-bush b3">🌿</div><div class="sf-grass"></div>')
   +'<div class="sf-flash" id="sfFlash"></div><div class="sf-roll" id="sfRoll"></div></div>';
- var area=document.getElementById('sfArea'), roll=document.getElementById('sfRoll');
+ var area=document.getElementById('sfArea'), roll=document.getElementById('sfRoll'), holes=[];
+ function layoutHoles(){ if(!BG)return; holes.forEach(function(h){h.remove();}); holes=[];
+  var W=area.clientWidth,H=area.clientHeight, sc=Math.max(W/941,H/1672), dx=(941*sc-W)/2, dy=(1672*sc-H)/2;
+  SAFARI_BUSH.forEach(function(bb){var cx=bb[0]*941*sc-dx, top=bb[1]*1672*sc-dy; var h=document.createElement('div');h.className='sf-hole';
+   h.style.left=(cx-45)+'px';h.style.top=(top-86)+'px';area.insertBefore(h,document.getElementById('sfFlash'));holes.push(h);}); }
+ layoutHoles();
  function hud(){gScore('📷'+shots+'  🖼️'+got+'/'+GOAL);}
  function ask(){return 'Take a picture of the '+target.en+'!';}
  function newTarget(){ var onScr=beasts.filter(function(b){return !b.dead;}).map(function(b){return b.a;});
@@ -1445,7 +1458,8 @@ function startSafari(u,lv){
   var el=document.createElement('button');el.className='sf-an';el.textContent=a.e;area.insertBefore(el,document.getElementById('sfFlash'));
   var W=area.clientWidth,H=area.clientHeight,b={a:a,el:el,t:0};
   if(a.f){var dir=Math.random()<.5?1:-1;b.kind='fly';b.x=dir>0?-60:W+10;b.y=H*(0.18+Math.random()*0.35);b.vx=dir*spd*(0.8+Math.random()*0.5);b.ph=Math.random()*6;if(dir<0)el.classList.add('flip');}
-  else{var bx=[0.12,0.5,0.82][(Math.random()*3)|0];b.kind='pop';b.x=W*bx-28;b.base=H*0.80;b.y=b.base;b.life=Math.max(70,170-lv*15);}
+  else if(BG&&holes.length){var hh=pickR(holes);hh.appendChild(el);b.kind='pop';b.x=12;b.base=96;b.y=b.base;b.rise=82;b.life=Math.max(70,170-lv*15);}
+  else{var bx=[0.12,0.5,0.82][(Math.random()*3)|0];b.kind='pop';b.x=W*bx-28;b.base=H*0.80;b.y=b.base;b.rise=70;b.life=Math.max(70,170-lv*15);}
   el.onclick=function(ev){ev.stopPropagation(); shoot(b);};
   beasts.push(b); }
  function snap(){var f=document.getElementById('sfFlash');f.classList.remove('on');void f.offsetWidth;f.classList.add('on');tone(1200,.04,'square',.1,0);tone(700,.06,'square',.08,.05);}
@@ -1464,7 +1478,7 @@ function startSafari(u,lv){
   var W=area.clientWidth,H=area.clientHeight;
   for(var i=beasts.length-1;i>=0;i--){var b=beasts[i]; if(b.dead){beasts.splice(i,1);continue;} b.t++;
    if(b.kind==='fly'){b.x+=b.vx;b.y+=Math.sin(b.t/14+b.ph)*1.1; if(b.x<-90||b.x>W+90){b.el.remove();beasts.splice(i,1);continue;}}
-   else{ var up=Math.min(1,b.t/20), down=b.t>b.life?Math.min(1,(b.t-b.life)/20):0; b.y=b.base-70*up+70*down; if(down>=1){b.el.remove();beasts.splice(i,1);continue;} }
+   else{ var up=Math.min(1,b.t/20), down=b.t>b.life?Math.min(1,(b.t-b.life)/20):0; b.y=b.base-b.rise*up+b.rise*down; if(down>=1){b.el.remove();beasts.splice(i,1);continue;} }
    b.el.style.transform='translate('+b.x+'px,'+b.y+'px)'+(b.el.classList.contains('flip')?' scaleX(-1)':''); }
   GAME.raf=requestAnimationFrame(loop); }
  hud(); setTimeout(function(){spawn();newTarget();loop();},300);
