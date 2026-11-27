@@ -2243,7 +2243,8 @@ var SAFARI_BG='img/safari_bg.jpg';
 /* arbustos del dibujo: centro x y borde de arriba, en proporción de la imagen */
 var SAFARI_BUSH=[[0.16,0.625],[0.50,0.59],[0.83,0.625]];
 /* paisajes que rotan: img (vertical), tamaño original w/h, arbustos [x,y del borde de arriba en proporción], tag de animales */
-var SAFARI_SCENES=[{id:'forest',n:'Bosque',img:'img/safari_bg.jpg',w:941,h:1672,bush:SAFARI_BUSH,tag:'forest'}];
+var SAFARI_SCENES=[{id:'forest',n:'Bosque',img:'img/safari_bg.jpg',w:941,h:1672,bush:SAFARI_BUSH,tag:'forest'},
+ {id:'farm',n:'Granja',img:'img/safari_farm.jpg',w:941,h:1672,bush:[[0.15,0.722],[0.50,0.755],[0.855,0.722]],tag:'farm'}];
 var SAFARI_TAGS={
  farm:'cow pig sheep goat horse chicken chick rooster duck turkey cat dog mouse rabbit goose fly',
  jungle:'monkey parrot tiger snake frog gorilla sloth leopard crocodile butterfly bat ant beetle lizard peacock',
@@ -2288,7 +2289,7 @@ function startSafari(u,lv){
  var GOAL=Math.min(12,6+lv), shots=GOAL+12, got=0, target=null, beasts=[], spawnT=0, showEs=lv<4, tAsk=0;
  var spd=Math.min(2.4,0.8+0.25*(lv-1)), maxOn=Math.min(4,2+Math.floor(lv/2));
  var BG=!!SC.img;
- document.getElementById('gTitle').textContent='📸 Safari · '+SC.n+' · Nivel '+lv;
+ document.getElementById('gTitle').textContent='📸 '+SC.n+' · Nv '+lv;
  host.innerHTML='<div class="sf-area'+(BG?' bg':'')+'" id="sfArea">'+(BG?'<img class="sf-bgimg" src="'+SC.img+'" alt="">':'<div class="sf-sun">🌞</div><div class="sf-tree t1">🌳</div><div class="sf-tree t2">🌴</div>')
   +'<div class="sf-top"><button class="ls-spk slow" id="sfSay">🔊</button><div class="sf-ask" id="sfAsk"></div></div>'
   +(BG?'':'<div class="sf-bush b1">🌿</div><div class="sf-bush b2">🌳</div><div class="sf-bush b3">🌿</div><div class="sf-grass"></div>')
