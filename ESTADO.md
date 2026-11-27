@@ -55,7 +55,7 @@ le acepte la voz a la nena.
   rebota y salta), baño (burbujas), dormir (luz baja, Zzz), mimos al tocarla (corazones; cuentan para crecer 3 por día).
   4 acciones al día = +15 💎. Se viste con accesorios de la tienda.
   POSES (arte nuevo por etapa): img/pet/<id>_<etapa>_<idle|closed|open|happy>.webp, cortadas de una hoja 2x2 de ChatGPT
-  con scratchpad sheet.py (alineadas por los pies). Activar en POSE_SETS. Hecho: kitty, fox, puppy, bunny, penguin, panda, unicorn (1-2-3). Parpadea, mueve la boca
+  con scratchpad sheet.py (alineadas por los pies). Activar en POSE_SETS. Hecho: los 8 amigos completos (1-2-3). Parpadea, mueve la boca
   al hablar, boca abierta al morder, ojos cerrados al dormir, pose feliz en mimos/juego. Arte ChatGPT: img/friend_<id>.png y img/home_bg.jpg.
 - 🕹️ Sala de Juegos (botón violeta del camino): juegos de premio que se compran con 💎 (Kart Quest 400; próximos 900/1600/2500)
   y se juegan gastando 🔮 cristales. 🔮 solo se ganan estudiando: 1 cada 3 paradas + 2 al cumplir la meta del día; máx. 5
