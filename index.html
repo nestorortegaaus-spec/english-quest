@@ -173,6 +173,15 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .pa-goal{display:flex;gap:6px;flex-wrap:wrap;} .pa-goal button{flex:1;border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 4px;font-weight:900;font-family:inherit;color:var(--ink);cursor:pointer;}
 .pa-goal button.on{border-color:var(--teal);background:#E9FAF4;color:var(--teal-d);}
 /* SAFARI */
+.sf-ask{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;}
+.sf-ae{font-size:40px;line-height:1;} .sf-at{display:flex;flex-direction:column;line-height:1.1;}
+.sf-at b{font-size:22px;color:#E06E58;} .sf-at small{font-size:14px;color:var(--muted);font-weight:800;}
+.sf-an{font-size:60px;padding:10px;}
+.sf-an.hint{border-radius:50%;background:radial-gradient(circle,rgba(255,236,90,.95) 0 42%,rgba(255,214,0,.55) 58%,transparent 72%);}
+.sf-an.hint::after{content:'👇';position:absolute;left:50%;top:-34px;transform:translateX(-50%);font-size:30px;animation:sfarrow .5s ease-in-out infinite alternate;}
+.sf-an.flip.hint::after{transform:translateX(-50%) scaleX(-1);}
+@keyframes sfarrow{to{top:-24px;}}
+
 .sf-area.bg{background:#6CC4F5;}
 .sf-hole{position:absolute;width:90px;height:96px;overflow:hidden;z-index:3;}
 .sf-hole .sf-an{font-size:50px;}
@@ -1678,9 +1687,9 @@ var SAFARI=[
 ];
 function startSafari(u,lv){
  lv=lv||1; var host=gSetup('📸 Safari · Nivel '+lv);
- var NA=Math.min(SAFARI.length,6+2*lv), pool=shuffle(SAFARI).slice(0,NA);
- var GOAL=Math.min(14,7+lv), shots=GOAL+6, got=0, target=null, beasts=[], spawnT=0, showEs=lv<3;
- var spd=Math.min(3.4,1.2+0.35*(lv-1)), maxOn=Math.min(5,2+Math.ceil(lv/2));
+ var NA=Math.min(SAFARI.length,5+lv), pool=shuffle(SAFARI).slice(0,NA);
+ var GOAL=Math.min(12,6+lv), shots=GOAL+12, got=0, target=null, beasts=[], spawnT=0, showEs=lv<4, tAsk=0;
+ var spd=Math.min(2.4,0.8+0.25*(lv-1)), maxOn=Math.min(4,2+Math.floor(lv/2));
  var BG=!!SAFARI_BG;
  host.innerHTML='<div class="sf-area'+(BG?' bg':'')+'" id="sfArea">'+(BG?'<img class="sf-bgimg" src="'+SAFARI_BG+'" alt="">':'<div class="sf-sun">🌞</div><div class="sf-tree t1">🌳</div><div class="sf-tree t2">🌴</div>')
   +'<div class="sf-top"><button class="ls-spk slow" id="sfSay">🔊</button><div class="sf-ask" id="sfAsk"></div></div>'
@@ -1697,17 +1706,19 @@ function startSafari(u,lv){
  function newTarget(){ var onScr=beasts.filter(function(b){return !b.dead;}).map(function(b){return b.a;});
   var prev=target; onScr=onScr.filter(function(a){return a!==prev;}); var rest=pool.filter(function(a){return a!==prev;});
   target=(onScr.length&&Math.random()<0.5)?pickR(onScr):pickR(rest);
-  document.getElementById('sfAsk').textContent=showEs?'📸 '+target.es:'📸 ¿Cuál? 👂'; say(ask()); }
+  tAsk=Date.now(); setAsk(false); say(ask()); }
+ function setAsk(full){ var a=document.getElementById('sfAsk'); if(!a||!target)return;
+  a.innerHTML=(showEs||full?'<span class="sf-ae">'+target.e+'</span>':'<span class="sf-ae q">❓</span>')+'<span class="sf-at"><b>'+target.en+'</b>'+(showEs||full?'<small>'+target.es+'</small>':'<small>Escuchá 👂</small>')+'</span>'; }
  document.getElementById('sfSay').onclick=function(){if(target)say(ask());};
  function spawn(){ var live=beasts.filter(function(b){return !b.dead;});
   if(live.length>=maxOn)return;
   var hasT=live.some(function(b){return b.a===target;});
-  var a=(!hasT&&target&&Math.random()<0.6)?target:pickR(pool);
+  var a=(!hasT&&target&&Math.random()<0.8)?target:pickR(pool);
   var el=document.createElement('button');el.className='sf-an';el.textContent=a.e;area.insertBefore(el,document.getElementById('sfFlash'));
   var W=area.clientWidth,H=area.clientHeight,b={a:a,el:el,t:0};
   if(a.f){var dir=Math.random()<.5?1:-1;b.kind='fly';b.x=dir>0?-60:W+10;b.y=H*(0.18+Math.random()*0.35);b.vx=dir*spd*(0.8+Math.random()*0.5);b.ph=Math.random()*6;if(dir<0)el.classList.add('flip');}
-  else if(BG&&holes.length){var hh=pickR(holes);hh.appendChild(el);b.kind='pop';b.x=12;b.base=96;b.y=b.base;b.rise=82;b.life=Math.max(70,170-lv*15);}
-  else{var bx=[0.12,0.5,0.82][(Math.random()*3)|0];b.kind='pop';b.x=W*bx-28;b.base=H*0.80;b.y=b.base;b.rise=70;b.life=Math.max(70,170-lv*15);}
+  else if(BG&&holes.length){var hh=pickR(holes);hh.appendChild(el);b.kind='pop';b.x=12;b.base=96;b.y=b.base;b.rise=82;b.life=Math.max(120,230-lv*15);}
+  else{var bx=[0.12,0.5,0.82][(Math.random()*3)|0];b.kind='pop';b.x=W*bx-28;b.base=H*0.80;b.y=b.base;b.rise=70;b.life=Math.max(120,230-lv*15);}
   el.onclick=function(ev){ev.stopPropagation(); shoot(b);};
   beasts.push(b); }
  function snap(){var f=document.getElementById('sfFlash');f.classList.remove('on');void f.offsetWidth;f.classList.add('on');tone(1200,.04,'square',.1,0);tone(700,.06,'square',.08,.05);}
@@ -1728,6 +1739,9 @@ function startSafari(u,lv){
    if(b.kind==='fly'){b.x+=b.vx;b.y+=Math.sin(b.t/14+b.ph)*1.1; if(b.x<-90||b.x>W+90){b.el.remove();beasts.splice(i,1);continue;}}
    else{ var up=Math.min(1,b.t/20), down=b.t>b.life?Math.min(1,(b.t-b.life)/20):0; b.y=b.base-b.rise*up+b.rise*down; if(down>=1){b.el.remove();beasts.splice(i,1);continue;} }
    b.el.style.transform='translate('+b.x+'px,'+b.y+'px)'+(b.el.classList.contains('flip')?' scaleX(-1)':''); }
+  var wait=(Date.now()-tAsk)/1000;
+  beasts.forEach(function(b){ b.el.classList.toggle('hint',!b.dead&&b.a===target&&wait>(lv>=3?4:2)); });
+  if(wait>6&&!showEs)setAsk(true);
   GAME.raf=requestAnimationFrame(loop); }
  hud(); setTimeout(function(){spawn();newTarget();loop();},300);
 }
