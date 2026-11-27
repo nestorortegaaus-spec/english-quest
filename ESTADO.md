@@ -87,11 +87,11 @@ le acepte la voz a la nena.
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
   Darles uso: por ejemplo canjear estrellas por premios especiales, desbloquear cosas que no se compran con gemas,
   o convertir estrellas en gemas/cristales.
-- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hecho 27/11: vocab.js con 48 temas nuevos (~460 palabras,
-  lv 1-5, números generados 11-20 → decenas → 21-99 → cientos → miles/millón). Las Galaxias (mundo 5+) usan los temas
-  nuevos en orden de dificultad (6 por galaxia). prioW() pone primero palabras no vistas o difíciles (S.hist) en varios
-  juegos. Falta: seguir sumando temas a vocab.js (subir ?v= en index.html), repaso espaciado, y meter palabras nuevas
-  también en mundos 2-4.
+- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy 933 palabras (232 base + vocab.js con 76 temas, lv 1-5,
+  números generados 11-20 → decenas → 21-99 → cientos → miles/millón, ordinales, hora, países, pasado...).
+  Mundos 2-4 traen al final 2 temas nuevos cada uno (NEWU[0..5]) + parada 🔁 Repaso del mundo anterior.
+  Galaxias (mundo 5+) usan NEWU desde el 7º, 6 temas por galaxia en orden de dificultad (~10 galaxias de contenido nuevo).
+  prioW() prioriza palabras no vistas o difíciles (S.hist). Para sumar: agregar temas en vocab.js y subir ?v= en index.html.
 - 🔄 EN CURSO: FRASES estilo Kumon. Hecho 27/11: juego 🧩 Frases (PHR: 16 patrones lv1-5). Cada partida toma un patrón
   y lo trabaja cambiando una palabra: mirar/escuchar → completar → ordenar fichas → cambiar una palabra → escuchar y
   elegir dibujo → decirla con micrófono (nivel 2+). Aparece en cada par de temas desde el mundo 3 y al final de cada mundo.

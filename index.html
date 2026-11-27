@@ -582,7 +582,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
   <div class="wtip" id="wtip"></div>
 </div>
 
-<script src="vocab.js?v=1"></script>
+<script src="vocab.js?v=2"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -771,7 +771,7 @@ function worldInfo(w){
  var r=rng(w*977), all=[], ph=[], k=w-5;
  for(var i=0;i<UNITS.length;i++){(UNITS[i].isP?ph:all).push(i);}
  all.sort(function(){return r()-0.5;}); ph.sort(function(){return r()-0.5;});
- var u=NEWU.slice(k*6,k*6+6), pp=NEWP.slice(k*2,k*2+2);
+ var u=NEWU.slice(6+k*6,12+k*6), pp=NEWP.slice(k*2,k*2+2);
  all.forEach(function(x){if(u.length<6&&u.indexOf(x)<0)u.push(x);}); ph.forEach(function(x){if(pp.length<2&&pp.indexOf(x)<0)pp.push(x);});
  return {n:'Galaxia '+(w-4),u:u,p:pp,s:(w-5)%STORIES.length,bg:['#E6E0FF','#EEE8FF','#E2DAF7'],deco:SPACE_DECO};
 }
@@ -789,6 +789,8 @@ function buildWorld(w){
    out.push({t:'chest'});
  }
  P.forEach(function(pu,pi){out.push({t:'lesson',u:pu},pi%2?{t:'game',g:'monster',u:U.slice(0,2),lv:lv}:{t:'game',g:'listen',us:[pu],lv:lv});});
+ if(w>=2&&w<=4){var x1=NEWU[(w-2)*2],x2=NEWU[(w-2)*2+1]; if(x1!=null&&x2!=null)out.push({t:'lesson',u:x1},{t:'lesson',u:x2},{t:'game',g:'listen',us:[x1,x2],lv:lv});}
+ var prevU=w===2?[0,1,2,7]:(worldInfo(w-1).u||[]).slice(0,4); if(prevU.length)out.push({t:'game',g:'listen',us:prevU,lv:lv,rev:true});
  out.push({t:'game',g:'tf',u:U.slice(),lv:lv+1});
  out.push({t:'game',g:'phrase',u:U.slice(),lv:Math.min(5,w-1)},{t:'game',g:'safari',u:U.slice(),lv:lv},{t:'game',g:'paint',u:U.slice(),lv:lv},{t:'game',g:'speak',u:U.slice(),lv:lv});
  out.push({t:'game',g:'memory',u:U.slice(),lv:lv+1});
@@ -866,7 +868,7 @@ function renderPath(){
    if(state==='lock')el.insertAdjacentHTML('beforeend','<span class="plock">🔒</span>');
    if(state==='done')el.insertAdjacentHTML('beforeend','<span class="pstar">⭐</span>');
    var label='';
-   if(nd.t==='game'){label=(GINFO[nd.g]||GINFO.blaster).n;if(nd.boss)label='👑 Desafío final';else if((nd.lv||1)>1)label+=' ⚡'+(nd.lv);}
+   if(nd.t==='game'){label=nd.rev?'🔁 Repaso':(GINFO[nd.g]||GINFO.blaster).n;if(nd.boss)label='👑 Desafío final';else if((nd.lv||1)>1)label+=' ⚡'+(nd.lv);}
    else if(nd.t==='dance')label='Baile';
    else if(nd.t==='story')label='Cuento';
    else if(nd.t==='chest')label='Premio';
@@ -2102,11 +2104,11 @@ try{if(sessionStorage.getItem('eqUpd')&&S.name){sessionStorage.removeItem('eqUpd
    }).catch(function(){});
  }
  function tryReload(){ if(!pending)return; var on=document.querySelector('.screen.on'); var id=on?on.id:'';
-   if(id==='s-start'||id==='s-path'){pending=false;try{sessionStorage.setItem('eqUpd','1');}catch(e){}location.reload();} }
+   if(id==='s-start'||id==='s-path'||id==='s-arcade'||id==='s-home'){pending=false;try{sessionStorage.setItem('eqUpd','1');}catch(e){}location.reload();} }
  window.addEventListener('load',function(){setTimeout(check,1500);});
  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')check();});
  setInterval(function(){ if(document.visibilityState==='visible')check(); },120000);
- var _show=show; show=function(id){_show(id); if(id==='s-path'||id==='s-start')setTimeout(tryReload,50);};
+ var _show=show; show=function(id){_show(id); if(id==='s-path'||id==='s-start'||id==='s-arcade'||id==='s-home')setTimeout(tryReload,50);};
 })();
 if('serviceWorker' in navigator){
  var hadSW=!!navigator.serviceWorker.controller, swReloaded=false;
