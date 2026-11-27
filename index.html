@@ -741,7 +741,12 @@ function cloop(){cx.clearRect(0,0,cv.width,cv.height);for(var i=ps.length-1;i>=0
 cloop();
 
 if(S.name){document.getElementById('nameIn').value=S.name;}
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+if('serviceWorker' in navigator){
+ var hadSW=!!navigator.serviceWorker.controller, swReloaded=false;
+ navigator.serviceWorker.addEventListener('controllerchange',function(){ if(hadSW&&!swReloaded){swReloaded=true;location.reload();} });
+ window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(r){r.update();}).catch(function(){});});
+ document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible'){navigator.serviceWorker.getRegistration().then(function(r){if(r)r.update();});} });
+}
 </script>
 </body>
 </html>
