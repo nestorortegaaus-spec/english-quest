@@ -48,8 +48,8 @@ le acepte la voz a la nena.
 - 🏝️ Isla: al agarrar cada manzana la voz dice la palabra en inglés y después en castellano (sayBoth, voz es-AR);
   cartel grande arriba con dibujo + inglés + castellano; mezcla palabras del tema con muchas nuevas de otros temas.
 - 🏡 Casa de Amigos = mascota virtual (inspirada en el diseño de Tamagotchi, propia y sin muerte):
-  8 amigos para adoptar con 💎 (Zorrito gratis; 150-1100 💎). Los nuevos llegan como 🥚 (4 toques para nacer).
-  Etapas: Bebé (🍼, más chico) → Chiquito (25 cuidados) → Grande (70 cuidados). 5 necesidades que bajan con el tiempo real
+  8 amigos para adoptar con 💎 (Zorrito gratis; 150-1100 💎). Los nuevos llegan como bebés; solo el Pingüino y el Dragoncito nacen de un 🥚 (4 toques).
+  Crecen de a poco con cada cuidado (tamaño 55% → 100% a los 70 cuidados): Bebé (🍼) → Chiquito (25) → Grande (70). 5 necesidades que bajan con el tiempo real
   (hambre, diversión, limpieza, energía, cariño; S.home.pets[id].nd) y caca 💩 cada 4 h para limpiar. Pide atención con voz
   y "!" en el botón del camino. Acciones animadas: comer (la comida vuela a la boca, mastica, migas), jugar (juguete
   rebota y salta), baño (burbujas), dormir (luz baja, Zzz), mimos al tocarla (corazones; cuentan para crecer 3 por día).

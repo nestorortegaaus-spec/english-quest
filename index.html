@@ -1584,8 +1584,8 @@ function startKart(){
 /* ===== 🏡 CASA DE AMIGOS — mascota virtual (necesidades, crecimiento, animaciones) ===== */
 var FRIENDS=[
  {id:'fox',n:'Zorrito',en:'fox',e:'🦊',p:0},{id:'kitty',n:'Gatita',en:'kitty',e:'🐱',p:150},{id:'puppy',n:'Perrito',en:'puppy',e:'🐶',p:250},
- {id:'bunny',n:'Conejita',en:'bunny',e:'🐰',p:350},{id:'penguin',n:'Pingüino',en:'penguin',e:'🐧',p:500},{id:'panda',n:'Panda',en:'panda',e:'🐼',p:650},
- {id:'unicorn',n:'Unicornio',en:'unicorn',e:'🦄',p:850},{id:'dragon',n:'Dragoncito',en:'dragon',e:'🐲',p:1100}
+ {id:'bunny',n:'Conejita',en:'bunny',e:'🐰',p:350},{id:'penguin',n:'Pingüino',en:'penguin',e:'🐧',p:500,egg:1},{id:'panda',n:'Panda',en:'panda',e:'🐼',p:650},
+ {id:'unicorn',n:'Unicornio',en:'unicorn',e:'🦄',p:850},{id:'dragon',n:'Dragoncito',en:'dragon',e:'🐲',p:1100,egg:1}
 ];
 var NEEDS=[{k:'food',e:'🍎',n:'Hambre',lo:'I am hungry!'},{k:'fun',e:'⚽',n:'Diversión',lo:'I am bored. Let\'s play!'},{k:'clean',e:'🛁',n:'Limpieza',lo:'I am dirty!'},{k:'energy',e:'😴',n:'Energía',lo:'I am sleepy…'},{k:'love',e:'❤️',n:'Cariño',lo:'Pet me, please!'}];
 var DECAY={food:7,fun:6,clean:4,energy:5,love:4}; /* puntos por hora */
@@ -1600,6 +1600,7 @@ var HACTS={
 var HOME_SEL=null, HOME_BUSY=false;
 function hData(){ if(!S.home)S.home={own:['fox'],cur:'fox',wear:{},day:'',done:{},gift:''}; var h=S.home;
  if(!h.pets)h.pets={}; h.own.forEach(function(id){ if(!h.pets[id])h.pets[id]={stage:2,care:30,nd:{food:70,fun:70,clean:70,energy:80,love:70},t:Date.now(),poop:0}; });
+ h.own.forEach(function(id){ var pp=h.pets[id]; if(pp&&pp.stage===0&&!friendById(id).egg){pp.stage=1;pp.care=pp.care||0;pp.t=Date.now();} });
  if(h.day!==dkey()){h.day=dkey();h.done={};} return h; }
 function pet(id){ return hData().pets[id||hData().cur]; }
 function petTick(p){ var now=Date.now(), hrs=Math.min(48,Math.max(0,(now-(p.t||now))/3600000)); if(p.stage===0){p.t=now;return;}
@@ -1608,6 +1609,7 @@ function petTick(p){ var now=Date.now(), hrs=Math.min(48,Math.max(0,(now-(p.t||n
  p.t=now; }
 function petMood(p){ if(p.stage===0)return 'egg'; var low=NEEDS.filter(function(n){return p.nd[n.k]<35;}); if(p.poop>=2)low.unshift({k:'poop'});
  if(!low.length)return 'happy'; return low[0].k; }
+function petScale(p){ return p.stage===0?STAGES[0].sc:Math.round((0.55+0.45*Math.min(1,(p.care||0)/STAGE_AT[3]))*100)/100; }
 function petStage(p){ for(var i=3;i>=1;i--)if(p.care>=STAGE_AT[i])return i; return 1; }
 function friendById(id){return FRIENDS.find(function(f){return f.id===id;})||FRIENDS[0];}
 function friendHTML(f,cls){ var h=hData(), a=h.wear[f.id]?accById(h.wear[f.id]):null;
@@ -1629,7 +1631,7 @@ function renderHome(){
  var html='<div class="hm-room'+(HOME_SEL==='sleep-on'?' dark':'')+'"><div class="hm-bub" id="hmBub"></div>'
   +'<div class="hm-mood">'+face+'</div>'
   +(p.stage===0?'<div class="hm-friend egg" onclick="petHatch()"><b class="fe">🥚</b></div>'
-   :'<div class="hm-friend m-'+mood+'" style="--sc:'+STAGES[p.stage].sc+'" onclick="petPet()">'+friendHTML(f,'hm-in').replace(/^<div class="hm-in">|<\/div>$/g,'')+(p.stage===1?'<span class="hm-baby">🍼</span>':'')+'</div>')
+   :'<div class="hm-friend m-'+mood+'" style="--sc:'+petScale(p)+'" onclick="petPet()">'+friendHTML(f,'hm-in').replace(/^<div class="hm-in">|<\/div>$/g,'')+(p.stage===1?'<span class="hm-baby">🍼</span>':'')+'</div>')
   +'<div class="hm-poops">'+Array.apply(null,Array(p.poop||0)).map(function(_,i){return '<button class="hm-poop" onclick="petClean('+i+')">💩</button>';}).join('')+'</div>'
   +'<div class="hm-name">'+f.n+' <small>('+f.en+') · '+STAGES[p.stage].n+'</small></div>'
   +(p.stage>0&&p.stage<3?'<div class="hm-grow"><i style="width:'+Math.min(100,Math.round((p.care-STAGE_AT[p.stage])/(STAGE_AT[p.stage+1]-STAGE_AT[p.stage])*100))+'%"></i><span>🌱 crece: '+(STAGE_AT[p.stage+1]-p.care)+' cuidados más</span></div>':'')
@@ -1646,7 +1648,7 @@ function renderHome(){
    return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>'; }
  document.getElementById('hmBody').innerHTML=html;
 }
-function careUp(p,k){ p.care=(p.care||0)+1; var before=p.stage, st=petStage(p);
+function careUp(p,k){ p.care=(p.care||0)+1; var before=p.stage, st=petStage(p); var el=document.querySelector('.hm-friend:not(.egg)'); if(el)el.style.setProperty('--sc',petScale(p));
  if(st>before){ p.stage=st; save(); setTimeout(function(){ renderHome(); petAnim('a-hatch',1500); fx(['✨','🌟','⭐'],14,'up'); sWin(); burst(160); var f=friendById(hData().cur); homeSay('Look! I am '+(st===2?'growing up':'big now')+'!'); toast('🌱 ¡'+f.n+' creció! Ahora es '+STAGES[st].n.toLowerCase()); },1700); } }
 function homeAct(k){ sTap(); HOME_SEL=k; renderHome(); homeSay(HACTS[k].ask); }
 function homeGive(i){ var h=hData(), f=friendById(h.cur), p=pet(), k=HOME_SEL, A=HACTS[k], it=A.items[i];
@@ -1670,8 +1672,8 @@ function petHatch(){ var p=pet(); if(!p||p.stage!==0)return; p.taps=(p.taps||0)+
 function homePick(id){ var h=hData(), x=friendById(id);
  if(h.own.indexOf(id)>=0){ h.cur=id; HOME_SEL=null; petTick(h.pets[id]); save(); sTap(); renderHome(); var p=h.pets[id]; homeSay(p.stage===0?'Tap the egg!':'Hi! I am '+x.en+'!'); return; }
  if(S.gems<x.p){ sBad(); toast('Te faltan '+(x.p-S.gems)+' 💎 para '+x.n); say(x.en); return; }
- if(!confirm('¿Adoptar a '+x.n+' por '+x.p+' 💎? Llega como un huevito 🥚'))return;
- S.gems-=x.p; h.own.push(id); h.pets[id]={stage:0,care:0,nd:{food:60,fun:60,clean:80,energy:80,love:60},t:Date.now(),poop:0}; h.cur=id; save(); sWin(); burst(160); renderHome(); homeSay('Tap the egg!'); }
+ if(!confirm('¿Adoptar a '+x.n+' por '+x.p+' 💎? '+(x.egg?'Llega como un huevito 🥚':'Llega como un bebé chiquito 🍼')))return;
+ S.gems-=x.p; h.own.push(id); h.pets[id]={stage:x.egg?0:1,care:0,nd:{food:60,fun:60,clean:80,energy:80,love:60},t:Date.now(),poop:0}; h.cur=id; save(); sWin(); burst(160); renderHome(); if(x.egg)homeSay('Tap the egg!'); else {petAnim('a-hatch',1500); homeSay('Hello! I am a baby '+x.en+'!');} }
 function homeDress(){ var h=hData(), f=friendById(h.cur), own=(S.owned||[]);
  var ov=document.createElement('div'); ov.className='pk-ov';
  ov.innerHTML='<div class="pk-box"><h2>👒 Vestir a '+f.n+'</h2>'+(own.length?'<div class="hm-items">'+own.map(function(id){var a=accById(id);return '<button class="hm-it'+(h.wear[f.id]===id?' on':'')+'" data-id="'+id+'"><b>'+a.e+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>':'<p>Todavía no compraste accesorios. ¡Conseguilos en la tienda 💎!</p>')
