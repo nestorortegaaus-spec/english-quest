@@ -77,6 +77,9 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Safari de fotos — los animales se repiten siempre (hoy hay 16 en la lista SAFARI y
+  cada partida usa 6-9). Agregar muchos más animales (voladores y de tierra) y que roten entre partidas/niveles
+  para que aprenda animales nuevos (por ejemplo, priorizar los que todavía no fotografió).
 - ⏭️ PRÓXIMO (pedido 27/11, después de terminar Kart Quest): "zona de descanso" tipo tienda pero más grande:
   más personajes para desbloquear con gemas, cada uno con accesorios/ropa, para entretenerse entre juegos.
   Con gráficos lindos hechos con ChatGPT (estilo render 3D como los pilotos de Kart Quest).
