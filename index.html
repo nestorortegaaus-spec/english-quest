@@ -931,7 +931,7 @@ var WTHEMES=[
  {id:'farm',ic:'🐄',n:'La granja',bg:['#DDF2FF','#E8F7DA','#D8EDC0'],road:['#B08A5C','#EED7AE'],fx:'petal',deco:['🐄','🐖','🐑','🐓','🚜','🌽','🏡','🐴','🥕','🌻','🐐','🦆']}
 ];
 /* fondos de ChatGPT que ya están subidos (img/world_<id>.jpg) */
-var WIMG={};
+var WIMG={meadow:1};
 function rng(seed){return function(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};}
 function worldInfo(w){
  if(w<=4)return WORLDS[w];
@@ -1020,7 +1020,7 @@ function renderPath(){
  box.insertAdjacentHTML('beforeend',svg);
  // decorations on the side opposite to the road
  var DECO=WI.deco;
- for(var d=0;d<N;d++){
+ for(var d=0;d<N;d++){ if(WIMG[WI.id]&&d%3)continue;
    var side=px(d)>0?-1:1, e=document.createElement('div');e.className='pdeco';
    e.textContent=DECO[d%DECO.length];
    e.style.fontSize=(24+(d*7)%16)+'px';
