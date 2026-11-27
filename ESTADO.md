@@ -76,6 +76,9 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PRÓXIMO (pedido 27/11, después de terminar Kart Quest): "zona de descanso" tipo tienda pero más grande:
+  más personajes para desbloquear con gemas, cada uno con accesorios/ropa, para entretenerse entre juegos.
+  Con gráficos lindos hechos con ChatGPT (estilo render 3D como los pilotos de Kart Quest).
 - Segundo cuento
 - "Modo desafío" en el juego de la Isla (palabra en español → agarrar la manzana en inglés correcta)
 - Más lecciones y contenido

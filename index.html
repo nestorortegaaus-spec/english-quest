@@ -1289,8 +1289,9 @@ var KTRACKS=[
  {id:'snow',n:'Montaña Nevada',e:'🏔️',sky:['#9FD3F5','#EEF7FF'],hill:['#FFFFFF','#DDE8F2'],g:['#F4F8FC','#E6EEF6'],road:['#8A93A3','#838C9C'],rum:['#FFFFFF','#2F9BE0'],lane:'#FFFFFF',deco:['🌲','⛄','🌲','❄️','🌲'],ai:0.91},
  {id:'space',n:'Pista Galaxia',e:'🪐',sky:['#120B33','#3B1F73'],hill:['#2B1A5E','#3D2780'],g:['#241645','#1E123B'],road:['#4B3C7A','#45376F'],rum:['#28E0FF','#FF4FD8'],lane:'#FFFFFF',deco:['🪐','⭐','🛸','☄️','⭐'],ai:0.96}
 ];
-var KART_IMG={}, KART_BG=null;
-function kartImgs(){ KCHARS.forEach(function(c){ if(KART_IMG[c.id])return; var im=new Image(); im.onload=function(){KART_IMG[c.id]=im;}; im.src='img/kart_'+c.id+'.png'; }); }
+var KART_IMG={}, KART_BG=null, KART_BGS={};
+function kartBg(id){ if(KART_BGS[id]!==undefined)return; KART_BGS[id]=null; var im=new Image(); im.onload=function(){KART_BGS[id]=im;}; im.src='img/kart_bg_'+id+'.jpg'; }
+function kartImgs(){ KTRACKS.forEach(function(t){kartBg(t.id);}); KCHARS.forEach(function(c){ if(KART_IMG[c.id])return; var im=new Image(); im.onload=function(){KART_IMG[c.id]=im;}; im.src='img/kart_'+c.id+'.png'; }); }
 function startKart(){
  var host=gSetup('🏎️ Kart Quest'); kartImgs(); if(!S.kart)S.kart={unl:1,cup:{}}; gScore('🔮'+(S.crys||0));
  var sel={c:S.kart.ch||'fox',t:0};
@@ -1389,7 +1390,7 @@ function startKart(){
   function render(){
    var base=segAt(P.z), bp=(P.z%segL)/segL, pseg=segAt(P.z+playerZ), pp=((P.z+playerZ)%segL)/segL, py=pseg.p1.world.y+(pseg.p2.world.y-pseg.p1.world.y)*pp;
    var sky=c.createLinearGradient(0,0,0,H*0.4);sky.addColorStop(0,T.sky[0]);sky.addColorStop(1,T.sky[1]);c.fillStyle=sky;c.fillRect(0,0,W,H);
-   if(KART_BG){var bw=H*0.38*KART_BG.width/KART_BG.height, ox=((-skyOff*W*0.5)%bw+bw)%bw;for(var xx=-ox;xx<W;xx+=bw)c.drawImage(KART_BG,xx,0,bw,H*0.38);}
+   var KB=KART_BGS[T.id]||KART_BG; if(KB){var bw=H*0.38*KB.width/KB.height, ox=((-skyOff*W*0.5)%bw+bw)%bw;for(var xx=-ox;xx<W;xx+=bw)c.drawImage(KB,xx,0,bw,H*0.38);}
    else{ [[T.hill[0],0.33,0.9,60],[T.hill[1],0.365,1.7,35]].forEach(function(L){c.fillStyle=L[0];c.beginPath();c.moveTo(0,H);for(var x=0;x<=W;x+=8){c.lineTo(x,H*L[1]-Math.sin((x/W*6.28*L[2])+skyOff*L[2]*3)*L[3]*0.5-L[3]*0.3);}c.lineTo(W,H);c.fill();});
      if(T.id==='space'){c.fillStyle='rgba(255,255,255,.8)';for(var s=0;s<40;s++){c.fillRect((s*97+skyOff*80)%W,(s*53)%(H*0.4),2,2);}} }
    var maxy=H, x=0, dx=-(base.curve*bp);
