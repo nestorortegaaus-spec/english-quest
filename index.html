@@ -1698,7 +1698,10 @@ function fx(chars,n,cls){ var room=document.querySelector('.hm-room'); if(!room)
  e.style.left=(35+Math.random()*30)+'%'; e.style.top=(30+Math.random()*25)+'%'; e.style.animationDelay=(i*0.12)+'s'; e.style.setProperty('--dx',((Math.random()-.5)*160)+'px'); room.appendChild(e); setTimeout(function(x){return function(){x.remove();};}(e),2400); } }
 function petAnim(cls,ms){ var el=document.querySelector('.hm-friend'); if(!el)return; el.classList.remove('a-eat','a-jump','a-bath','a-sleep','a-love','a-wiggle','a-hatch','a-chew','a-shake','a-stretch'); void el.offsetWidth; el.classList.add(cls); clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove(cls);},ms||1400); }
 function petIdle(){ if(HOME_BUSY)return; var p=pet(); if(!p)return; var m=petMood(p), el=document.querySelector('.hm-friend'); if(!el)return;
- if(m==='egg'){petAnim('a-wiggle',800);return;} if(m==='happy'&&Math.random()<.5){petAnim('a-jump',900);} else if(m!=='happy'&&Math.random()<.35){petTalk('need',m);} }
+ if(m==='egg'){petAnim('a-wiggle',800);return;}
+ if(m==='sick'){ var now=Date.now(); if(now-(window._sickT||0)<9000)return; window._sickT=now;
+   if(!window._sneezed&&Math.random()<0.25){ window._sneezed=1; petAnim('a-shake',700); setPose&&setPose('closed',500,true); var room=document.querySelector('.hm-room'),B=petBox&&petBox(); if(room&&B)pop(room,'Achoo!',B.x+B.w*0.3,B.y+10); homeSay('Achoo!','¡Achís!'); tone(500,.05,'square',.1,0);tone(300,.15,'sawtooth',.08,.05); }
+   else { window._sneezed=0; petAnim('a-wiggle',600); petTalk('need','sick'); } return; } if(m==='happy'&&Math.random()<.5){petAnim('a-jump',900);} else if(m!=='happy'&&Math.random()<.35){petTalk('need',m);} }
 function renderHome(){
  var h=hData(), f=friendById(h.cur), p=pet(), mood=petMood(p), done=h.done[f.id]||{}, st=p.stage===0?0:petStage(p); if(p.stage!==0&&st!==p.stage)p.stage=st;
  document.getElementById('hmGems').textContent=S.gems; var hs=document.getElementById('hmStars'); if(hs)hs.textContent=S.stars;
@@ -1753,7 +1756,7 @@ PET_LINES.need={
  energy:[['I am sleepy…','Tengo sueño…'],['I need a nap…','Necesito una siesta…'],['*yawn* So tired…','*bostezo* Qué cansancio…']],
  love:[['Pet me, please!','¡Haceme mimos, por favor!'],['I need a hug!','¡Necesito un abrazo!'],['Do you love me?','¿Me querés?']],
  poop:[['Oops! Clean up, please!','¡Ups! Limpiá, por favor!'],['It smells bad!','¡Huele feo!'],['Help! Clean it up!','¡Ayuda! ¡Limpialo!']],
- sick:[['I feel sick…','Me siento mal…'],['My tummy hurts…','Me duele la panza…'],['I need medicine…','Necesito un remedio…'],['Achoo! I have a cold…','¡Achís! Estoy resfriada…']],
+ sick:[['I feel a little sick…','Me siento un poco enferma…'],['My tummy hurts…','Me duele la panza…'],['My head hurts…','Me duele la cabeza…'],['I have a fever…','Tengo fiebre…'],['I don\'t feel well…','No me siento bien…'],['I feel dizzy…','Estoy mareada…'],['I am cold. I need a blanket…','Tengo frío. Necesito una mantita…'],['Achoo! I have a cold…','¡Achís! Estoy resfriada…'],['My throat hurts…','Me duele la garganta…'],['I need medicine, please…','Necesito un remedio, por favor…'],['Can you call the doctor?','¿Podés llamar al doctor?'],['I want to stay in bed…','Quiero quedarme en la cama…']],
  happy:[['Hi! I missed you!','¡Hola! ¡Te extrañé!'],['Hello, my friend!','¡Hola, amiga!'],['I am so happy to see you!','¡Qué feliz estoy de verte!'],['Let\'s have fun today!','¡Divirtámonos hoy!']],
  egg:[['Tap the egg!','¡Tocá el huevo!']]};
 /* frases propias de cada comida */
@@ -1846,7 +1849,7 @@ function homeGive(i){ if(HOME_BUSY)return; var h=hData(), f=friendById(h.cur), p
  if(Object.keys(h.done[f.id]).length===4&&h.gift!==dkey()){ h.gift=dkey(); S.gems+=15; save(); setTimeout(function(){toast('❤️ '+f.n+' está feliz: +15 💎 de regalo');sWin();burst(120);renderHome();},5600); } }
 function petPet(){ var p=pet(); if(!p||p.stage===0||HOME_BUSY)return; p.nd.love=Math.min(100,p.nd.love+12); if(p.ld!==dkey()){p.ld=dkey();p.lc=0;} if(p.lc<3&&(!p._lt||Date.now()-p._lt>8000)){p._lt=Date.now();p.lc++;careUp(p,'love');} save();
  petAnim('a-love',1100); setPose('happy',1000,true); fx(['❤️','💕','💖'],7,'up'); tone(880,.06,'sine',.12,0);tone(1100,.08,'sine',.12,.08);
- var b=document.querySelectorAll('.hm-need i')[4]; if(b)b.style.width=p.nd.love+'%'; petTalk('love','start'); }
+ var b=document.querySelectorAll('.hm-need i')[4]; if(b)b.style.width=p.nd.love+'%'; var pp=pet(); if(pp&&pp.sick){ var L=[['Thank you… I still feel sick.','Gracias… todavía me siento mal.'],['A hug helps… but I need medicine.','Un abrazo ayuda… pero necesito un remedio.'],['You are so kind…','Sos muy buena…']]; var l=L[(Math.random()*L.length)|0]; homeSay(l[0],l[1]); } else petTalk('love','start'); }
 function petClean(i){ var p=pet(); if(!p||!p.poop)return; p.poop--; p.nd.clean=Math.min(100,p.nd.clean+10); careUp(p,'clean'); save(); sTap(); fx(['✨'],5,'up'); homeSay('Thank you! So clean!'); renderHome(); }
 function petHatch(){ var p=pet(); if(!p||p.stage!==0)return; p.taps=(p.taps||0)+1; petAnim('a-wiggle',600); tone(400+p.taps*120,.1,'triangle',.15,0);
  if(p.taps>=4){ p.stage=1; p.care=0; p.t=Date.now(); p.nd={food:60,fun:60,clean:80,energy:80,love:60}; save(); sWin(); burst(200); renderHome(); petAnim('a-hatch',1500); var f=friendById(hData().cur); setTimeout(function(){homeSay('Hello! I am a baby '+f.en+'!');},300); }
