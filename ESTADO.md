@@ -219,3 +219,6 @@ le acepte la voz a la nena.
   castellano; nivel 3+ piden cantidades (two apples → tocar 2 veces + "Here you are!"); nivel 4+ estante sin nombres.
 - ✅ HECHO (27/11): Karaoke con 11 canciones (+Baa Baa Black Sheep, London Bridge, The Itsy Bitsy Spider, If You're Happy and You Know It,
   Are You Sleeping Brother John).
+- ✅ HECHO (27/11): los cuentos con amigos usan SOLO amigos desbloqueados y ya nacidos (storyPick/ownedFriends): si el cuento trae un
+  amigo que no tiene, se reemplaza por uno suyo (también en el texto: storyTxt) y aparece en su etapa real; si tiene pocos amigos, le tocan
+  cuentos con menos personajes o los clásicos. Así no se arruina la sorpresa de los amigos que faltan.
