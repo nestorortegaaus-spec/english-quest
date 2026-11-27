@@ -435,6 +435,14 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .br-body.sleep .pa-link{color:#C9C3FF;}
 /* SOPA / ADIVINANZAS / CONTAR */
 .ws-grid{display:grid;gap:4px;width:100%;max-width:380px;}
+.kk{gap:12px;} .kk-top{display:flex;align-items:center;gap:10px;background:#fff;border-radius:18px;padding:8px 14px;box-shadow:0 4px 0 rgba(120,140,170,.18);}
+.kk-top b{font-size:40px;} .kk-top span{display:block;font-weight:900;font-size:19px;color:var(--ink);} .kk-top small{font-weight:800;color:var(--muted);}
+.kk-stage{width:100%;background:linear-gradient(160deg,#3D3480,#6A4FC9);border-radius:24px;padding:18px 14px;text-align:center;color:#fff;box-shadow:0 6px 0 #2B2560;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.kk-pic{font-size:60px;line-height:1;animation:bob 1.6s ease-in-out infinite;}
+.kk-line{font-size:30px;font-weight:900;line-height:1.35;} .kk-s{display:inline;transition:color .1s;color:rgba(255,255,255,.55);} .kk-s.past{color:#fff;} .kk-s.on{color:#FFD36B;text-shadow:0 0 12px rgba(255,211,107,.8);}
+.kk-es{font-weight:800;font-size:17px;color:#D9D2FF;} .kk-step{font-weight:800;font-size:17px;color:#fff;min-height:24px;} .kk-step b{color:#FFD36B;}
+.kk-btns{display:flex;gap:10px;width:100%;} .kk-btns .btn{flex:1;}
+.kk-prog{display:flex;gap:6px;} .kk-prog i{width:14px;height:14px;border-radius:50%;background:#E3E9F0;} .kk-prog i.on{background:var(--teal);} .kk-prog i.cur{background:#FFD36B;}
 .cw{gap:10px;} .cw-grid{display:grid;gap:3px;justify-content:center;margin:2px auto;}
 .cw-c{position:relative;background:#fff;border-radius:7px;box-shadow:0 2px 0 rgba(120,140,170,.25);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--ink);}
 .cw-c i{position:absolute;top:1px;left:3px;font-style:normal;font-size:10px;font-weight:900;color:#8C7BD6;line-height:1;}
@@ -1028,8 +1036,8 @@ function buildWorld(w){
  out.push({t:'chest'});
  return out;
 }
-var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross'];
-var GINFO={cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
+var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross','sing'];
+var GINFO={sing:{i:'🎤',n:'Karaoke'},cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
 function wordsOf(u){var us=Array.isArray(u)?u:[u],out=[];us.forEach(function(i){out=out.concat(UNITS[i].w);});return out;}
 
 /* ===== STATE ===== */
@@ -1119,7 +1127,7 @@ function openNode(i){
  if(nd.t==='lesson')startLesson(nd.u);
  else if(nd.t==='story')openStory(nd.s);
  else if(nd.t==='chest')openChest();
- else if(nd.t==='game'){ var lv=nd.lv||1; var F={cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
+ else if(nd.t==='game'){ var lv=nd.lv||1; var F={sing:startSing,cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
  else if(nd.t==='dance')startDance();
 }
 function advance(){ countActivity(); S.prog=Math.max(S.prog, activeIdx+1); if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);NEW_WORLD=true;} save(); }
@@ -2852,6 +2860,81 @@ function startCross(u,lv){
    GAME.timer=setTimeout(function(){ var nx=P.find(function(o){return !o.got;}); if(nx)pick(nx); },1500); } }
  function pick(q){ if(q.got){ sayBoth(q.w.en,q.w.es); return; } cur=q; sTap(); clues(); paint(); bank(); if(!showEs)say(q.w.en,0.8); }
  gScore('0/'+P.length); clues(); paint(); pick(P[0]);
+}
+
+/* 🎤 KARAOKE: canciones infantiles tradicionales (dominio público). Sílabas separadas por espacio o guion; una nota por sílaba (nota:tiempos) */
+var SONGS=[
+ {t:'Twinkle, Twinkle, Little Star',es:'Brilla, brilla, estrellita',e:'⭐',bpm:100,L:[
+  ['Twin-kle, twin-kle, lit-tle star,','Brilla, brilla, estrellita,','⭐','C4 C4 G4 G4 A4 A4 G4:2'],
+  ['How I won-der what you are!','¡cómo me pregunto qué serás!','🤔','F4 F4 E4 E4 D4 D4 C4:2'],
+  ['Up a-bove the world so high,','Allá arriba del mundo, tan alto,','🌍','G4 G4 F4 F4 E4 E4 D4:2'],
+  ['Like a dia-mond in the sky.','como un diamante en el cielo.','💎','G4 G4 F4 F4 E4 E4 D4:2'],
+  ['Twin-kle, twin-kle, lit-tle star,','Brilla, brilla, estrellita,','⭐','C4 C4 G4 G4 A4 A4 G4:2'],
+  ['How I won-der what you are!','¡cómo me pregunto qué serás!','✨','F4 F4 E4 E4 D4 D4 C4:2']]},
+ {t:'Row, Row, Row Your Boat',es:'Remá, remá en tu bote',e:'🚣',bpm:100,L:[
+  ['Row, row, row your boat','Remá, remá, remá en tu bote','🚣','C4:1.5 C4:1.5 C4 D4:.5 E4:1.5'],
+  ['Gent-ly down the stream.','despacito por el arroyo.','🏞️','E4 D4:.5 E4 F4:.5 G4:3'],
+  ['Mer-ri-ly, mer-ri-ly, mer-ri-ly, mer-ri-ly,','Alegre, alegre, alegre, alegre,','😄','C5:.5 C5:.5 C5:.5 G4:.5 G4:.5 G4:.5 E4:.5 E4:.5 E4:.5 C4:.5 C4:.5 C4:.5'],
+  ['Life is but a dream.','la vida es solo un sueño.','💭','G4 F4:.5 E4 D4:.5 C4:3']]},
+ {t:'Mary Had a Little Lamb',es:'María tenía un corderito',e:'🐑',bpm:110,L:[
+  ['Ma-ry had a lit-tle lamb,','María tenía un corderito,','🐑','E4 D4 C4 D4 E4 E4 E4:2'],
+  ['lit-tle lamb, lit-tle lamb.','un corderito, un corderito.','🐑','D4 D4 D4:2 E4 G4 G4:2'],
+  ['Ma-ry had a lit-tle lamb,','María tenía un corderito,','👧','E4 D4 C4 D4 E4 E4 E4'],
+  ['its fleece was white as snow.','su lana era blanca como la nieve.','❄️','E4 D4 D4 E4 D4 C4:3']]},
+ {t:'Old MacDonald Had a Farm',es:'El viejo MacDonald tenía una granja',e:'🚜',bpm:115,L:[
+  ['Old Mac-Don-ald had a farm,','El viejo MacDonald tenía una granja,','👴','G4 G4 G4 D4 E4 E4 D4:2'],
+  ['E-I-E-I-O!','¡I-A-I-A-O!','🎶','B4 B4 A4 A4 G4:2'],
+  ['And on that farm he had a cow,','Y en esa granja tenía una vaca,','🐄','D4 G4 G4 G4 D4 E4 E4 D4:2'],
+  ['E-I-E-I-O!','¡I-A-I-A-O!','🎶','B4 B4 A4 A4 G4:2'],
+  ['And on that farm he had a pig,','Y en esa granja tenía un chancho,','🐷','D4 G4 G4 G4 D4 E4 E4 D4:2'],
+  ['E-I-E-I-O!','¡I-A-I-A-O!','🎶','B4 B4 A4 A4 G4:2']]},
+ {t:'The Wheels on the Bus',es:'Las ruedas del colectivo',e:'🚌',bpm:120,L:[
+  ['The wheels on the bus go round and round,','Las ruedas del colectivo giran y giran,','🚌','C4 F4 F4:.5 F4:.5 F4 A4 C5 A4 F4:2'],
+  ['round and round, round and round.','giran y giran, giran y giran.','🔄','G4 E4 C4:2 C5 A4 F4:2'],
+  ['The wheels on the bus go round and round,','Las ruedas del colectivo giran y giran,','🛞','C4 F4 F4:.5 F4:.5 F4 A4 C5 A4 F4:2'],
+  ['all through the town!','¡por toda la ciudad!','🏙️','G4:1.5 C4:.5 C4 F4:3']]},
+ {t:'Happy Birthday',es:'Feliz cumpleaños',e:'🎂',bpm:100,L:[
+  ['Hap-py birth-day to you,','Feliz cumpleaños a vos,','🎂','G4:.75 G4:.25 A4 G4 C5 B4:2'],
+  ['Hap-py birth-day to you,','Feliz cumpleaños a vos,','🎈','G4:.75 G4:.25 A4 G4 D5 C5:2'],
+  ['Hap-py birth-day, dear Fox-y,','Feliz cumpleaños, querido Zorrito,','🦊','G4:.75 G4:.25 G5 E5 C5 B4 A4:2'],
+  ['Hap-py birth-day to you!','¡feliz cumpleaños a vos!','🎉','F5:.75 F5:.25 E5 C5 D5 C5:2']]}
+];
+function noteHz(n){ var m=/^([A-G])(#?)(\d)$/.exec(n), k={C:-9,D:-7,E:-5,F:-4,G:-2,A:0,B:2}[m[1]]+(m[2]?1:0)+(+m[3]-4)*12; return 440*Math.pow(2,k/12); }
+function sylls(line){ var out=[]; line.split(' ').forEach(function(w,wi){ w.split('-').forEach(function(p,pi,arr){ out.push({t:p,end:pi===arr.length-1,w:wi}); }); }); return out; }
+function startSing(u,lv){
+ lv=lv||1; var host=gSetup('🎤 Karaoke · Nivel '+lv); GAME.quiet=true; /* sin narrador: no hablar encima de la música */
+ if(!S.song)S.song=0; var SG=SONGS[S.song%SONGS.length]; S.song++; save();
+ var li=0, playing=false, tmr=[];
+ host.innerHTML='<div class="g2 kk"><div class="kk-top"><b>'+SG.e+'</b><div><span>'+SG.t+'</span><small>'+SG.es+'</small></div></div>'
+  +'<div class="kk-stage"><div class="kk-pic" id="kkPic"></div><div class="kk-line" id="kkLine"></div><div class="kk-es" id="kkEs"></div><div class="kk-step" id="kkStep"></div></div>'
+  +'<div class="kk-btns"><button class="btn ghost" id="kkAgain">🔁 Otra vez</button><button class="btn teal" id="kkNext">Seguir →</button></div><div class="kk-prog" id="kkProg"></div></div>';
+ function clear(){ tmr.forEach(clearTimeout); tmr=[]; }
+ function T(f,ms){ tmr.push(setTimeout(function(){ if(GAME.on)f(); },ms)); }
+ function prog(){ document.getElementById('kkProg').innerHTML=SG.L.map(function(_,i){return '<i class="'+(i<li?'on':i===li?'cur':'')+'"></i>';}).join(''); gScore((li+1)+'/'+SG.L.length); }
+ function show(i){ var L=SG.L[i], sy=sylls(L[0]); document.getElementById('kkPic').textContent=L[2];
+  document.getElementById('kkLine').innerHTML=sy.map(function(x,j){return '<span class="kk-s" data-j="'+j+'">'+x.t+(x.end?' ':'')+'</span>';}).join('');
+  document.getElementById('kkEs').textContent=L[1]; prog(); }
+ function playLine(i,cb){ var L=SG.L[i], ns=L[3].split(' '), beat=60/SG.bpm, t=0, spans=document.querySelectorAll('#kkLine .kk-s');
+  ns.forEach(function(n,j){ var a=n.split(':'), d=(a[1]?+a[1]:1)*beat, f=noteHz(a[0]);
+   tone(f,d*0.92,'triangle',.2,t+0.05); tone(f*2,d*0.6,'sine',.04,t+0.05);
+   (function(j,t){ T(function(){ spans.forEach(function(s,k){ s.classList.toggle('on',k===j); s.classList.toggle('past',k<j); }); },t*1000); })(j,t);
+   t+=d; });
+  T(function(){ spans.forEach(function(s){s.classList.remove('on');s.classList.add('past');}); if(cb)cb(); },t*1000+250); return t; }
+ function waitSpeech(cb,max){ var t0=Date.now(); (function w(){ if(!GAME.on)return; var busy=false; try{busy=speechSynthesis.speaking||speechSynthesis.pending;}catch(e){} if(busy&&Date.now()-t0<(max||8000)){T(w,200);return;} T(cb,350); })(); }
+ function line(i){ clear(); li=i; show(i); var st=document.getElementById('kkStep'), clean=SG.L[i][0].replace(/-/g,'');
+  st.innerHTML='👂 <b>Escuchá</b> la frase'; say(clean,0.8);
+  T(function(){ waitSpeech(function(){ st.innerHTML='🎤 <b>¡Ahora cantá!</b>'; playLine(i,function(){ st.innerHTML='⭐ ¡Muy bien!'; sGood(); T(function(){ if(li===i)go(); },1100); }); }); },400); }
+ function go(){ if(li+1<SG.L.length)line(li+1); else finale(); }
+ function finale(){ clear(); li=SG.L.length; prog(); var st=document.getElementById('kkStep');
+  document.getElementById('kkPic').textContent='🎶'; document.getElementById('kkLine').innerHTML='<span class="kk-s on">¡Toda la canción!</span>'; document.getElementById('kkEs').textContent='Cantá la canción entera con la música 🎤';
+  st.innerHTML=''; document.getElementById('kkAgain').style.visibility='hidden'; document.getElementById('kkNext').textContent='Terminar ✓';
+  var acc=0; SG.L.forEach(function(L,i){ T(function(){ li=i; show(i); document.getElementById('kkStep').innerHTML='🎤 <b>¡Cantá!</b>'; playLine(i); },acc*1000+(i?0:600)); var b=60/SG.bpm; L[3].split(' ').forEach(function(n){var a=n.split(':');acc+=(a[1]?+a[1]:1)*b;}); acc+=0.35; });
+  T(end,acc*1000+1400); }
+ var ended=false;
+ function end(){ if(ended)return; ended=true; clear(); finishGameNode('🎤 ¡Qué lindo cantaste!','Cantaste "'+SG.t+'" en inglés 🎶'); }
+ document.getElementById('kkAgain').onclick=function(){ sTap(); line(li); };
+ document.getElementById('kkNext').onclick=function(){ sTap(); if(li>=SG.L.length)end(); else go(); };
+ sayBoth('Let\'s sing! '+SG.t,'¡Cantemos! '+SG.es); T(function(){ waitSpeech(function(){ line(0); },9000); },600);
 }
 
 /* 🔠 SOPA DE LETRAS */

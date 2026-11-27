@@ -139,7 +139,7 @@ le acepte la voz a la nena.
   con "and", nivel 3+, solo patrones cortos) → decirla con micrófono. Tanda 2 (27/11): +24 patrones (60 en total),
   p. ej. "I have a…", "Where is my…?", "It is time to…", "Let's … together!", "I have never seen a…", "I am happy because…",
   "If I had a…, I would…".
-- ⏭️ PENDIENTE (pedido 27/11): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
+- ⏭️ PENDIENTE (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
@@ -180,3 +180,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): ✏️ Crucigrama con dibujos (startCross, en la rotación GROT): grilla armada sola con 4-6 palabras que se cruzan; se toca
   un dibujo y se arma la palabra en inglés con letras (nivel 1-2 muestra la palabra en castellano; desde nivel 3 solo el dibujo y la voz en inglés;
   desde nivel 2 hay 2 letras de más). Botón 💡 pone la letra siguiente. Al completar cada palabra la dice en inglés y castellano.
+- ✅ HECHO (27/11): 🎤 Karaoke (startSing, en GROT): 6 canciones tradicionales de dominio público (Twinkle Twinkle, Row Row Row Your Boat,
+  Mary Had a Little Lamb, Old MacDonald, The Wheels on the Bus, Happy Birthday). Por cada frase: la voz la dice (escuchá) y después suena la
+  melodía con la letra que se ilumina sílaba por sílaba (cantá), con traducción y dibujo; al final se canta la canción entera. Melodías en
+  SONGS (nota:tiempos por sílaba), sintetizadas con tone(); sin narrador encima.
