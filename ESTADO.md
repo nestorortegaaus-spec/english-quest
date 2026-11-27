@@ -80,6 +80,10 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Kart Quest — choques reales. Hoy al chocar un rival el kart lo "traspasa", el rival
+  titila/desaparece (por el recorte de sprites cercanos) y solo suena un ruidito. Quiero: el rival NO desaparece,
+  ambos rebotan/se desplazan de costado, el rival se desestabiliza (gira/tambalea y pierde velocidad un momento),
+  chispas de choque y sonido de golpe más real.
 - ⏭️ PENDIENTE (pedido 27/11): Tienda/Vestir — hay muy pocos accesorios (10 en ACC, uno solo puesto a la vez).
   Agregar mucha más variedad de ropa y accesorios (sombreros, anteojos, collares, remeras/buzos, capas, mochilas,
   disfraces…) y poder combinar varios a la vez (uno por lugar: cabeza, cara, cuello, cuerpo). Ideal con arte de ChatGPT
