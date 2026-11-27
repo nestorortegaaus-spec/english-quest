@@ -45,6 +45,8 @@ le acepte la voz a la nena.
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
+- 🎒 Compañero de aventura: en la Casa de Amigos, botón "Llevar de aventura" (S.home.buddy). El elegido reemplaza al zorrito
+  en el camino (con su etapa y accesorio), aparece con su carita en el cartel del relator y festeja en la pantalla de premio.
 - 🎙️ Relator en todos los juegos (narr(), NARR): frases cortas en inglés + castellano hablado y cartelito, ligadas a lo
   que pasa (start, good, streak, close, miss, last, win, lose, pass, crash), espaciadas (≥9 s las comunes, ≥3 s las
   importantes), nunca encima de otra voz, rotando como mazo. Se dispara desde sGood/sBad y hooks en Ladrillos, Isla y Kart.
