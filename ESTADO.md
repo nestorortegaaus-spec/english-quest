@@ -98,6 +98,13 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Casa de Amigos — enfermedad y costos "como en la vida real":
+  * La mascota se puede enfermer (más probable si se la descuida: hambre/sucia/caca acumulada; raro si está bien cuidada).
+    Enferma: cara/pose triste, termómetro 🤒, barras bajan más rápido, no juega; se cura dándole medicina 💊
+    (opcional: ir al veterinario 🩺). Nunca se muere. Frases en inglés: "I feel sick", "My tummy hurts", "Thank you, doctor!".
+  * Que comer y la medicina cuesten un poco (ej.: comida 2-5 ⭐ o 💎 según el alimento; medicina más cara), así las
+    estrellas/gemas que gana estudiando tienen uso (se combina con el pendiente de darle uso a las ⭐).
+  * Cuidar que no frustre: precios bajos, nunca quedarse sin poder alimentarla (comida básica gratis o regalo diario).
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
