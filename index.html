@@ -308,6 +308,46 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .ph-swap i{font-style:normal;font-size:40px;display:block;} .ph-swap span{font-weight:900;font-size:14px;color:var(--ink);} .ph-swap b{font-size:24px;color:#8C7BD6;}
 .ph-pics{display:flex;gap:10px;justify-content:center;width:100%;}
 .ph-picb{flex:1;aspect-ratio:1/1;border:3px solid transparent;border-radius:20px;background:#fff;font-size:46px;cursor:pointer;box-shadow:0 5px 0 rgba(120,140,170,.22);}
+/* MASCOTA VIRTUAL */
+.hm-entry.alert b::after{content:' !';color:#FFF27A;animation:pulse 1s infinite;display:inline-block;}
+.hm-room{overflow:hidden;transition:filter .6s;} .hm-room.dark{filter:brightness(.45) saturate(.7);}
+.hm-mood{position:absolute;top:56px;right:14px;font-size:30px;background:rgba(255,255,255,.85);border-radius:50%;width:46px;height:46px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 rgba(0,0,0,.1);}
+.hm-friend{transform:scale(var(--sc,1));transform-origin:50% 100%;cursor:pointer;}
+.hm-friend img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 8px rgba(0,0,0,.18));pointer-events:none;}
+.hm-friend.egg{animation:none;} .hm-friend.egg .fe{font-size:120px;}
+.hm-friend.m-food img,.hm-friend.m-fun img,.hm-friend.m-energy img,.hm-friend.m-love img{filter:saturate(.75) drop-shadow(0 8px 8px rgba(0,0,0,.18));}
+.hm-friend.m-clean img,.hm-friend.m-poop img{filter:sepia(.35) saturate(.8) drop-shadow(0 8px 8px rgba(0,0,0,.18));}
+.hm-friend.m-energy{animation:sleepy 3s ease-in-out infinite;} @keyframes sleepy{50%{transform:scale(var(--sc,1)) rotate(-4deg) translateY(4px)}}
+.hm-baby{position:absolute;bottom:6%;right:4%;font-size:42px;transform:rotate(-20deg);}
+.a-eat{animation:p-eat .35s 4 ease-in-out!important;} @keyframes p-eat{50%{transform:scale(calc(var(--sc,1)*1.06),calc(var(--sc,1)*.92))}}
+.a-jump{animation:p-jump .8s ease-out!important;} @keyframes p-jump{0%,100%{transform:scale(var(--sc,1)) translateY(0)}30%{transform:scale(calc(var(--sc,1)*1.05),calc(var(--sc,1)*.93))}55%{transform:scale(var(--sc,1)) translateY(-60px) rotate(8deg)}80%{transform:scale(var(--sc,1)) translateY(0) rotate(-3deg)}}
+.a-bath{animation:p-bath .3s 6 ease-in-out!important;} @keyframes p-bath{50%{transform:scale(var(--sc,1)) rotate(7deg)}}
+.a-sleep{animation:p-sleep 3.2s ease-in-out!important;} @keyframes p-sleep{15%,85%{transform:scale(var(--sc,1)) rotate(-12deg) translateY(16px)}}
+.a-love{animation:p-love .55s 2 ease-in-out!important;} @keyframes p-love{50%{transform:scale(calc(var(--sc,1)*1.1)) rotate(-5deg)}}
+.a-wiggle{animation:p-wig .2s 4 ease-in-out!important;} @keyframes p-wig{25%{transform:scale(var(--sc,1)) rotate(-8deg)}75%{transform:scale(var(--sc,1)) rotate(8deg)}}
+.a-hatch{animation:p-hatch 1.4s ease-out!important;} @keyframes p-hatch{0%{transform:scale(.2);opacity:0}60%{transform:scale(calc(var(--sc,1)*1.2));opacity:1}100%{transform:scale(var(--sc,1))}}
+.hm-fx{position:absolute;font-size:26px;pointer-events:none;z-index:3;opacity:0;animation:fxup 2s ease-out forwards;}
+.hm-fx.crumb{font-size:18px;color:#B07A3C;animation:fxcrumb 1s ease-in forwards;top:55%!important;}
+.hm-fx.bub{color:#7FD3FF;font-size:30px;animation:fxbub 2.2s ease-out forwards;}
+.hm-fx.zz{color:#fff;font-weight:900;animation:fxzz 3s ease-out forwards;}
+@keyframes fxup{0%{opacity:0;transform:translate(0,0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-140px) scale(1.2)}}
+@keyframes fxcrumb{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--dx),90px)}}
+@keyframes fxbub{0%{opacity:0;transform:translate(0,40px) scale(.4)}25%{opacity:.95}100%{opacity:0;transform:translate(var(--dx),-170px) scale(1.3)}}
+@keyframes fxzz{0%{opacity:0;transform:translate(20px,0)}20%{opacity:1}100%{opacity:0;transform:translate(90px,-150px) scale(1.6)}}
+.hm-food{position:absolute;left:10%;top:62%;font-size:46px;z-index:3;animation:food .7s ease-in forwards;pointer-events:none;}
+@keyframes food{to{left:45%;top:38%;transform:scale(.3);opacity:.2}}
+.hm-toy{position:absolute;left:12%;bottom:22%;font-size:44px;z-index:3;animation:toy 1.8s ease-in-out forwards;pointer-events:none;}
+@keyframes toy{25%{left:30%;bottom:55%}50%{left:52%;bottom:24%}75%{left:70%;bottom:50%}100%{left:84%;bottom:22%}}
+.hm-poops{position:absolute;bottom:64px;left:10px;display:flex;gap:4px;z-index:2;} .hm-poop{border:none;background:none;font-size:34px;cursor:pointer;animation:p-wig .3s 2;}
+.hm-grow{width:80%;margin-top:6px;background:rgba(255,255,255,.88);border-radius:12px;padding:4px 8px;position:relative;}
+.hm-grow i{display:block;height:8px;border-radius:5px;background:linear-gradient(90deg,#9EDFC6,#57C4A6);} .hm-grow span{display:block;font-size:11px;font-weight:900;color:var(--teal-d);text-align:center;margin-top:2px;}
+.hm-needs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px;}
+.hm-need{background:#fff;border-radius:12px;padding:5px 4px;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:0 3px 0 rgba(120,140,170,.15);}
+.hm-need b{font-size:18px;} .hm-need span{width:100%;height:8px;background:#EEF1F5;border-radius:5px;overflow:hidden;} .hm-need i{display:block;height:100%;background:#57C4A6;transition:width .6s;}
+.hm-need i.mid{background:#FFC93C;} .hm-need i.low{background:#FF7A6B;animation:pulse 1s infinite;}
+.hm-act.need{box-shadow:0 0 0 3px #FF7A6B,0 5px 0 rgba(120,140,170,.22);animation:pulse 1.2s infinite;}
+.hm-tip{text-align:center;font-weight:800;font-size:13px;color:var(--muted);margin:-2px 0 10px;} .hm-tip.big{font-size:17px;color:var(--ink);margin:6px 0 14px;}
+.hm-fr{position:relative;} .hm-fr em{position:absolute;top:-6px;right:-4px;background:#FF7A6B;color:#fff;font-style:normal;font-weight:900;width:22px;height:22px;border-radius:50%;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:2;}
 /* VOICE */
 .vc-body{flex:1;overflow-y:auto;padding:6px 16px 24px;width:100%;max-width:460px;margin:0 auto;}
 .vc-h{font-weight:900;font-size:17px;color:var(--ink);margin:10px 0 8px;}
@@ -496,7 +536,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
     </div>
     <div style="padding:0 14px 2px;color:var(--muted);font-weight:800;font-size:13px;" id="hHello">¡Hola!</div>
     <div class="dl" id="hDaily"></div>
-    <div class="hm-entries"><button class="ar-entry hm-entry" onclick="openHome()">🏡 <b>Casa de Amigos</b></button><button class="ar-entry" id="hArc" onclick="openArcade()">🕹️ <b>Sala de Juegos</b><span>🔮 <i id="hCrys">0</i></span></button></div>
+    <div class="hm-entries"><button class="ar-entry hm-entry" id="hHome" onclick="openHome()">🏡 <b>Casa de Amigos</b></button><button class="ar-entry" id="hArc" onclick="openArcade()">🕹️ <b>Sala de Juegos</b><span>🔮 <i id="hCrys">0</i></span></button></div>
     <div class="path-scroll" id="pathScroll"><div id="pathNodes"></div></div>
   </section>
 
@@ -825,7 +865,7 @@ function startGame(){var n=document.getElementById('nameIn').value.trim();S.name
 function renderPath(){
  document.getElementById('hStars').textContent=S.stars;
  document.getElementById('hLvl').textContent=lvl();
- document.getElementById('hGems').textContent=S.gems; document.getElementById('hDaily').innerHTML=dailyHTML(); document.getElementById('hCrys').textContent=(S.crys||0)+'/'+crysMax(); document.getElementById('hArc').style.display=S.arcadeOff?'none':'';
+ document.getElementById('hGems').textContent=S.gems; document.getElementById('hDaily').innerHTML=dailyHTML(); document.getElementById('hCrys').textContent=(S.crys||0)+'/'+crysMax(); document.getElementById('hHome').classList.toggle('alert',homeNeedsAttention()); document.getElementById('hArc').style.display=S.arcadeOff?'none':'';
  var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! 🌍 Mundo '+S.world+' · '+WI.n;
  var psc=document.getElementById('pathScroll');psc.style.background='radial-gradient(circle at 15% 8%,rgba(255,255,255,.55) 0 40px,transparent 41px),linear-gradient(180deg,'+WI.bg[0]+' 0,'+WI.bg[1]+' 260px,'+WI.bg[2]+' 100%)';
  var box=document.getElementById('pathNodes');box.innerHTML='';
@@ -1541,51 +1581,97 @@ function startKart(){
  pickChar();
 }
 
-/* ===== 🏡 CASA DE AMIGOS (zona de descanso) ===== */
+/* ===== 🏡 CASA DE AMIGOS — mascota virtual (necesidades, crecimiento, animaciones) ===== */
 var FRIENDS=[
  {id:'fox',n:'Zorrito',en:'fox',e:'🦊',p:0},{id:'kitty',n:'Gatita',en:'kitty',e:'🐱',p:150},{id:'puppy',n:'Perrito',en:'puppy',e:'🐶',p:250},
  {id:'bunny',n:'Conejita',en:'bunny',e:'🐰',p:350},{id:'penguin',n:'Pingüino',en:'penguin',e:'🐧',p:500},{id:'panda',n:'Panda',en:'panda',e:'🐼',p:650},
  {id:'unicorn',n:'Unicornio',en:'unicorn',e:'🦄',p:850},{id:'dragon',n:'Dragoncito',en:'dragon',e:'🐲',p:1100}
 ];
+var NEEDS=[{k:'food',e:'🍎',n:'Hambre',lo:'I am hungry!'},{k:'fun',e:'⚽',n:'Diversión',lo:'I am bored. Let\'s play!'},{k:'clean',e:'🛁',n:'Limpieza',lo:'I am dirty!'},{k:'energy',e:'😴',n:'Energía',lo:'I am sleepy…'},{k:'love',e:'❤️',n:'Cariño',lo:'Pet me, please!'}];
+var DECAY={food:7,fun:6,clean:4,energy:5,love:4}; /* puntos por hora */
+var STAGES=[{n:'Huevo',en:'egg',sc:.55},{n:'Bebé',en:'baby',sc:.62},{n:'Chiquito',en:'little',sc:.8},{n:'Grande',en:'big',sc:1}];
+var STAGE_AT=[0,0,25,70]; /* puntos de cuidado para cada etapa */
 var HACTS={
- eat:{b:'🍎',n:'Comer',ask:'I am hungry!',items:[['🍎','apple','I love apples!'],['🍌','banana','Bananas are yummy!'],['🍪','cookie','Mmm, a cookie!'],['🍕','pizza','Pizza! My favorite!'],['🥕','carrot','Crunchy carrot!'],['🍓','strawberry','Sweet strawberry!']]},
- play:{b:'⚽',n:'Jugar',ask:'Let\'s play!',items:[['⚽','ball','I can kick the ball!'],['🪁','kite','My kite can fly!'],['🧸','teddy bear','I love my teddy bear!'],['🎨','paint','Let\'s paint together!'],['🎸','guitar','Listen to my song!'],['🛹','skateboard','Wow, so fast!']]},
- bath:{b:'🛁',n:'Bañar',ask:'I am dirty!',items:[['🧼','soap','Bubbles, bubbles!'],['🧽','sponge','Scrub, scrub!'],['🚿','shower','The water is warm!'],['🦆','rubber duck','Quack quack!']]},
- sleep:{b:'😴',n:'Dormir',ask:'I am sleepy…',items:[['🛏️','bed','Good night!'],['🧸','teddy bear','Sweet dreams!'],['📖','book','Read me a story, please!'],['🌙','moon','Good night, moon!']]}
+ eat:{b:'🍎',n:'Comer',need:'food',ask:'I am hungry!',items:[['🍎','apple','I love apples!'],['🍌','banana','Bananas are yummy!'],['🍪','cookie','Mmm, a cookie!'],['🍕','pizza','Pizza! My favorite!'],['🥕','carrot','Crunchy carrot!'],['🍓','strawberry','Sweet strawberry!'],['🧀','cheese','I like cheese!'],['🥛','milk','Milk makes me strong!']]},
+ play:{b:'⚽',n:'Jugar',need:'fun',ask:'Let\'s play!',items:[['⚽','ball','I can kick the ball!'],['🪁','kite','My kite can fly!'],['🧸','teddy bear','I love my teddy bear!'],['🎨','paint','Let\'s paint together!'],['🎸','guitar','Listen to my song!'],['🛹','skateboard','Wow, so fast!']]},
+ bath:{b:'🛁',n:'Bañar',need:'clean',ask:'I am dirty!',items:[['🧼','soap','Bubbles, bubbles!'],['🧽','sponge','Scrub, scrub!'],['🚿','shower','The water is warm!'],['🦆','rubber duck','Quack quack!']]},
+ sleep:{b:'😴',n:'Dormir',need:'energy',ask:'I am sleepy…',items:[['🛏️','bed','Good night!'],['🧸','teddy bear','Sweet dreams!'],['📖','book','Read me a story, please!'],['🌙','moon','Good night, moon!']]}
 };
-var HOME_SEL=null;
-function hData(){ if(!S.home)S.home={own:['fox'],cur:'fox',wear:{},day:'',done:{},gift:''}; if(S.home.day!==dkey()){S.home.day=dkey();S.home.done={};} return S.home; }
+var HOME_SEL=null, HOME_BUSY=false;
+function hData(){ if(!S.home)S.home={own:['fox'],cur:'fox',wear:{},day:'',done:{},gift:''}; var h=S.home;
+ if(!h.pets)h.pets={}; h.own.forEach(function(id){ if(!h.pets[id])h.pets[id]={stage:2,care:30,nd:{food:70,fun:70,clean:70,energy:80,love:70},t:Date.now(),poop:0}; });
+ if(h.day!==dkey()){h.day=dkey();h.done={};} return h; }
+function pet(id){ return hData().pets[id||hData().cur]; }
+function petTick(p){ var now=Date.now(), hrs=Math.min(48,Math.max(0,(now-(p.t||now))/3600000)); if(p.stage===0){p.t=now;return;}
+ NEEDS.forEach(function(n){ p.nd[n.k]=Math.max(0,Math.round(p.nd[n.k]-DECAY[n.k]*hrs)); });
+ p.pa=(p.pa||0)+hrs; while(p.pa>=4&&p.poop<3){p.pa-=4;p.poop++;} if(p.pa>=4)p.pa=0;
+ p.t=now; }
+function petMood(p){ if(p.stage===0)return 'egg'; var low=NEEDS.filter(function(n){return p.nd[n.k]<35;}); if(p.poop>=2)low.unshift({k:'poop'});
+ if(!low.length)return 'happy'; return low[0].k; }
+function petStage(p){ for(var i=3;i>=1;i--)if(p.care>=STAGE_AT[i])return i; return 1; }
 function friendById(id){return FRIENDS.find(function(f){return f.id===id;})||FRIENDS[0];}
 function friendHTML(f,cls){ var h=hData(), a=h.wear[f.id]?accById(h.wear[f.id]):null;
  return '<div class="'+cls+'"><img src="img/friend_'+f.id+'.png" alt="" onerror="this.outerHTML=\'<b class=fe>'+f.e+'</b>\'">'+(a?'<span class="acc '+a.pos+'">'+a.e+'</span>':'')+'</div>'; }
-function openHome(){ sTap(); unlockSpeech(); HOME_SEL=null; renderHome(); show('s-home'); var f=friendById(hData().cur); setTimeout(function(){homeSay('Hi! I am '+f.en+'. I missed you!');},350); }
+function homeNeedsAttention(){ try{var h=hData(); return h.own.some(function(id){var p=h.pets[id];petTick(p);return p.stage===0||petMood(p)!=='happy';});}catch(e){return false;} }
+function openHome(){ sTap(); unlockSpeech(); HOME_SEL=null; var h=hData(); h.own.forEach(function(id){petTick(h.pets[id]);}); save(); renderHome(); show('s-home');
+ var f=friendById(h.cur), p=pet(), m=petMood(p); setTimeout(function(){ homeSay(m==='egg'?'Tap the egg!':m==='happy'?'Hi! I am '+f.en+'. I missed you!':m==='poop'?'Oops! Clean up, please!':NEEDS.find(function(n){return n.k===m;}).lo); },350);
+ clearInterval(window._petIv); window._petIv=setInterval(function(){ if(!document.getElementById('s-home').classList.contains('on')){clearInterval(window._petIv);return;} petIdle(); },2600); }
 function homeSay(t){ var b=document.getElementById('hmBub'); if(b){b.textContent=t;b.classList.remove('on');void b.offsetWidth;b.classList.add('on');} say(t); }
+function fx(chars,n,cls){ var room=document.querySelector('.hm-room'); if(!room)return; for(var i=0;i<n;i++){ var e=document.createElement('span'); e.className='hm-fx '+(cls||''); e.textContent=chars[i%chars.length];
+ e.style.left=(35+Math.random()*30)+'%'; e.style.top=(30+Math.random()*25)+'%'; e.style.animationDelay=(i*0.12)+'s'; e.style.setProperty('--dx',((Math.random()-.5)*160)+'px'); room.appendChild(e); setTimeout(function(x){return function(){x.remove();};}(e),2400); } }
+function petAnim(cls,ms){ var el=document.querySelector('.hm-friend'); if(!el)return; el.classList.remove('a-eat','a-jump','a-bath','a-sleep','a-love','a-wiggle','a-hatch'); void el.offsetWidth; el.classList.add(cls); clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove(cls);},ms||1400); }
+function petIdle(){ if(HOME_BUSY)return; var p=pet(); if(!p)return; var m=petMood(p), el=document.querySelector('.hm-friend'); if(!el)return;
+ if(m==='egg'){petAnim('a-wiggle',800);return;} if(m==='happy'&&Math.random()<.5){petAnim('a-jump',900);} else if(m!=='happy'&&Math.random()<.35){var n=NEEDS.find(function(x){return x.k===m;});homeSay(n?n.lo:'Oops! Clean up, please!');} }
 function renderHome(){
- var h=hData(), f=friendById(h.cur), done=h.done[f.id]||{}, hearts=Object.keys(done).length;
+ var h=hData(), f=friendById(h.cur), p=pet(), mood=petMood(p), done=h.done[f.id]||{}, st=p.stage===0?0:petStage(p); if(p.stage!==0&&st!==p.stage)p.stage=st;
  document.getElementById('hmGems').textContent=S.gems;
- var html='<div class="hm-room"><div class="hm-bub" id="hmBub"></div>'+friendHTML(f,'hm-friend')+'<div class="hm-name">'+f.n+' <small>('+f.en+')</small></div>'
-  +'<div class="hm-hearts">'+[0,1,2,3].map(function(i){return '<i class="'+(i<hearts?'on':'')+'">❤️</i>';}).join('')+'</div></div>';
- if(HOME_SEL){ var A=HACTS[HOME_SEL];
+ var face={happy:'😊',food:'😋',fun:'🥱',clean:'😖',energy:'😪',love:'🥺',poop:'😣',egg:'🥚'}[mood];
+ var html='<div class="hm-room'+(HOME_SEL==='sleep-on'?' dark':'')+'"><div class="hm-bub" id="hmBub"></div>'
+  +'<div class="hm-mood">'+face+'</div>'
+  +(p.stage===0?'<div class="hm-friend egg" onclick="petHatch()"><b class="fe">🥚</b></div>'
+   :'<div class="hm-friend m-'+mood+'" style="--sc:'+STAGES[p.stage].sc+'" onclick="petPet()">'+friendHTML(f,'hm-in').replace(/^<div class="hm-in">|<\/div>$/g,'')+(p.stage===1?'<span class="hm-baby">🍼</span>':'')+'</div>')
+  +'<div class="hm-poops">'+Array.apply(null,Array(p.poop||0)).map(function(_,i){return '<button class="hm-poop" onclick="petClean('+i+')">💩</button>';}).join('')+'</div>'
+  +'<div class="hm-name">'+f.n+' <small>('+f.en+') · '+STAGES[p.stage].n+'</small></div>'
+  +(p.stage>0&&p.stage<3?'<div class="hm-grow"><i style="width:'+Math.min(100,Math.round((p.care-STAGE_AT[p.stage])/(STAGE_AT[p.stage+1]-STAGE_AT[p.stage])*100))+'%"></i><span>🌱 crece: '+(STAGE_AT[p.stage+1]-p.care)+' cuidados más</span></div>':'')
+  +'</div>';
+ if(p.stage>0)html+='<div class="hm-needs">'+NEEDS.map(function(n){var v=p.nd[n.k];return '<div class="hm-need"><b>'+n.e+'</b><span><i class="'+(v<35?'low':v<65?'mid':'')+'" style="width:'+v+'%"></i></span></div>';}).join('')+'</div>';
+ if(HOME_SEL&&HACTS[HOME_SEL]){ var A=HACTS[HOME_SEL];
   html+='<div class="hm-pick"><div class="hm-ph">'+A.b+' Elegí en inglés:</div><div class="hm-items">'+A.items.map(function(it,i){return '<button class="hm-it" onclick="homeGive('+i+')"><b>'+it[0]+'</b><span>'+it[1]+'</span></button>';}).join('')+'</div><button class="btn ghost" onclick="HOME_SEL=null;sTap();renderHome()">← Volver</button></div>';
- } else {
-  html+='<div class="hm-acts">'+Object.keys(HACTS).map(function(k){var A=HACTS[k];return '<button class="hm-act'+(done[k]?' done':'')+'" onclick="homeAct(\''+k+'\')"><b>'+A.b+'</b><span>'+A.n+'</span>'+(done[k]?'<i>✔</i>':'')+'</button>';}).join('')+'</div>';
+ } else if(p.stage>0) {
+  html+='<div class="hm-acts">'+Object.keys(HACTS).map(function(k){var A=HACTS[k];return '<button class="hm-act'+(done[k]?' done':'')+(p.nd[A.need]<35?' need':'')+'" onclick="homeAct(\''+k+'\')"><b>'+A.b+'</b><span>'+A.n+'</span>'+(done[k]?'<i>✔</i>':'')+'</button>';}).join('')+'</div>';
+  html+='<div class="hm-tip">Tocá a '+f.n+' para hacerle mimos ❤️'+(p.poop?' · ¡Limpiá la caca 💩!':'')+'</div>';
   html+='<button class="btn ghost hm-dress" onclick="homeDress()">👒 Vestir a '+f.n+'</button>';
-  html+='<div class="hm-h">🏡 Mis amigos</div><div class="hm-row">'+FRIENDS.map(function(x){var own=h.own.indexOf(x.id)>=0;
-   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>';
- }
+ } else html+='<div class="hm-tip big">🥚 ¡Tocá el huevo para que nazca tu '+f.n+'!</div>';
+ if(!HOME_SEL){ html+='<div class="hm-h">🏡 Mis amigos</div><div class="hm-row">'+FRIENDS.map(function(x){var own=h.own.indexOf(x.id)>=0, pp=own?h.pets[x.id]:null, alert=own&&(pp.stage===0||petMood(pp)!=='happy');
+   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>'; }
  document.getElementById('hmBody').innerHTML=html;
 }
+function careUp(p,k){ p.care=(p.care||0)+1; var before=p.stage, st=petStage(p);
+ if(st>before){ p.stage=st; save(); setTimeout(function(){ renderHome(); petAnim('a-hatch',1500); fx(['✨','🌟','⭐'],14,'up'); sWin(); burst(160); var f=friendById(hData().cur); homeSay('Look! I am '+(st===2?'growing up':'big now')+'!'); toast('🌱 ¡'+f.n+' creció! Ahora es '+STAGES[st].n.toLowerCase()); },1700); } }
 function homeAct(k){ sTap(); HOME_SEL=k; renderHome(); homeSay(HACTS[k].ask); }
-function homeGive(i){ var h=hData(), f=friendById(h.cur), A=HACTS[HOME_SEL], it=A.items[i], k=HOME_SEL;
- if(!h.done[f.id])h.done[f.id]={}; var first=!h.done[f.id][k]; h.done[f.id][k]=1; HOME_SEL=null; save(); renderHome();
- var el=document.querySelector('.hm-friend'); if(el){el.classList.remove('happy');void el.offsetWidth;el.classList.add('happy');}
- homeSay(it[2]); sGood(); burst(first?30:8);
- if(Object.keys(h.done[f.id]).length===4&&h.gift!==dkey()){ h.gift=dkey(); S.gems+=15; save(); setTimeout(function(){toast('❤️❤️❤️❤️ '+f.n+' está feliz: +15 💎 de regalo');sWin();burst(120);renderHome();},1600); } }
+function homeGive(i){ var h=hData(), f=friendById(h.cur), p=pet(), k=HOME_SEL, A=HACTS[k], it=A.items[i];
+ if(!h.done[f.id])h.done[f.id]={}; var first=!h.done[f.id][k]; h.done[f.id][k]=1; HOME_SEL=null; HOME_BUSY=true;
+ p.nd[A.need]=Math.min(100,p.nd[A.need]+(k==='bath'?55:k==='sleep'?60:40)); if(k==='play'){p.nd.energy=Math.max(0,p.nd.energy-10);p.nd.love=Math.min(100,p.nd.love+10);} if(k==='eat')p.nd.love=Math.min(100,p.nd.love+5);
+ careUp(p,k); save(); renderHome();
+ var room=document.querySelector('.hm-room');
+ if(k==='eat'){ var fo=document.createElement('span');fo.className='hm-food';fo.textContent=it[0];room.appendChild(fo);setTimeout(function(){fo.remove();petAnim('a-eat',1400);fx(['·','•','✦'],8,'crumb');tone(300,.08,'square',.1,0);tone(260,.08,'square',.1,.2);tone(300,.08,'square',.1,.4);},700); }
+ else if(k==='play'){ var to=document.createElement('span');to.className='hm-toy';to.textContent=it[0];room.appendChild(to);setTimeout(function(){to.remove();},1800);petAnim('a-jump',1700);setTimeout(function(){petAnim('a-jump',900);},900); }
+ else if(k==='bath'){ fx(['🫧','○','◯','🫧'],16,'bub'); petAnim('a-bath',1800); }
+ else if(k==='sleep'){ room.classList.add('dark'); petAnim('a-sleep',3200); fx(['💤','z','Z','💤'],6,'zz'); setTimeout(function(){room.classList.remove('dark');homeSay('Good morning!');},3300); }
+ setTimeout(function(){ if(k!=='sleep')homeSay(it[2]); else homeSay(it[2]); sGood(); if(first)burst(30); HOME_BUSY=false; },k==='eat'?1500:k==='sleep'?200:900);
+ if(Object.keys(h.done[f.id]).length===4&&h.gift!==dkey()){ h.gift=dkey(); S.gems+=15; save(); setTimeout(function(){toast('❤️ '+f.n+' está feliz: +15 💎 de regalo');sWin();burst(120);renderHome();},3600); } }
+function petPet(){ var p=pet(); if(!p||p.stage===0||HOME_BUSY)return; p.nd.love=Math.min(100,p.nd.love+12); if(p.ld!==dkey()){p.ld=dkey();p.lc=0;} if(p.lc<3&&(!p._lt||Date.now()-p._lt>8000)){p._lt=Date.now();p.lc++;careUp(p,'love');} save();
+ petAnim('a-love',1100); fx(['❤️','💕','💖'],7,'up'); tone(880,.06,'sine',.12,0);tone(1100,.08,'sine',.12,.08);
+ var b=document.querySelectorAll('.hm-need i')[4]; if(b)b.style.width=p.nd.love+'%'; var words=['I love you!','That tickles!','Hee hee!','You are my best friend!']; homeSay(words[(Math.random()*words.length)|0]); }
+function petClean(i){ var p=pet(); if(!p||!p.poop)return; p.poop--; p.nd.clean=Math.min(100,p.nd.clean+10); careUp(p,'clean'); save(); sTap(); fx(['✨'],5,'up'); homeSay('Thank you! So clean!'); renderHome(); }
+function petHatch(){ var p=pet(); if(!p||p.stage!==0)return; p.taps=(p.taps||0)+1; petAnim('a-wiggle',600); tone(400+p.taps*120,.1,'triangle',.15,0);
+ if(p.taps>=4){ p.stage=1; p.care=0; p.t=Date.now(); p.nd={food:60,fun:60,clean:80,energy:80,love:60}; save(); sWin(); burst(200); renderHome(); petAnim('a-hatch',1500); var f=friendById(hData().cur); setTimeout(function(){homeSay('Hello! I am a baby '+f.en+'!');},300); }
+ else homeSay(['Crack!','Crack, crack!','Almost!'][p.taps-1]); }
 function homePick(id){ var h=hData(), x=friendById(id);
- if(h.own.indexOf(id)>=0){ h.cur=id; save(); sTap(); renderHome(); homeSay('Hi! I am '+x.en+'!'); return; }
+ if(h.own.indexOf(id)>=0){ h.cur=id; HOME_SEL=null; petTick(h.pets[id]); save(); sTap(); renderHome(); var p=h.pets[id]; homeSay(p.stage===0?'Tap the egg!':'Hi! I am '+x.en+'!'); return; }
  if(S.gems<x.p){ sBad(); toast('Te faltan '+(x.p-S.gems)+' 💎 para '+x.n); say(x.en); return; }
- if(!confirm('¿Adoptar a '+x.n+' por '+x.p+' 💎?'))return;
- S.gems-=x.p; h.own.push(id); h.cur=id; save(); sWin(); burst(160); renderHome(); homeSay('Hello! I am your new friend, '+x.en+'!'); }
+ if(!confirm('¿Adoptar a '+x.n+' por '+x.p+' 💎? Llega como un huevito 🥚'))return;
+ S.gems-=x.p; h.own.push(id); h.pets[id]={stage:0,care:0,nd:{food:60,fun:60,clean:80,energy:80,love:60},t:Date.now(),poop:0}; h.cur=id; save(); sWin(); burst(160); renderHome(); homeSay('Tap the egg!'); }
 function homeDress(){ var h=hData(), f=friendById(h.cur), own=(S.owned||[]);
  var ov=document.createElement('div'); ov.className='pk-ov';
  ov.innerHTML='<div class="pk-box"><h2>👒 Vestir a '+f.n+'</h2>'+(own.length?'<div class="hm-items">'+own.map(function(id){var a=accById(id);return '<button class="hm-it'+(h.wear[f.id]===id?' on':'')+'" data-id="'+id+'"><b>'+a.e+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>':'<p>Todavía no compraste accesorios. ¡Conseguilos en la tienda 💎!</p>')
@@ -1593,7 +1679,7 @@ function homeDress(){ var h=hData(), f=friendById(h.cur), own=(S.owned||[]);
  document.body.appendChild(ov);
  ov.querySelectorAll('.hm-it').forEach(function(b){b.onclick=function(){h.wear[f.id]=b.dataset.id;save();say(accById(b.dataset.id).en);ov.querySelectorAll('.hm-it').forEach(function(x){x.classList.toggle('on',x===b);});};});
  document.getElementById('hmNone').onclick=function(){delete h.wear[f.id];save();ov.remove();renderHome();};
- document.getElementById('hmOk').onclick=function(){ov.remove();sTap();renderHome();homeSay('Do you like my look?');};
+ document.getElementById('hmOk').onclick=function(){ov.remove();sTap();renderHome();petAnim('a-wiggle',900);homeSay('Do you like my look?');};
 }
 
 /* ===== JUEGOS NUEVOS ===== */

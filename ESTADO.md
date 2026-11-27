@@ -47,9 +47,13 @@ le acepte la voz a la nena.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
 - 🏝️ Isla: al agarrar cada manzana la voz dice la palabra en inglés y después en castellano (sayBoth, voz es-AR);
   cartel grande arriba con dibujo + inglés + castellano; mezcla palabras del tema con muchas nuevas de otros temas.
-- 🏡 Casa de Amigos (zona de descanso, botón naranja del camino): 8 amigos para adoptar con 💎 (Zorrito gratis; 150 a 1100 💎).
-  Se los cuida en inglés (Comer/Jugar/Bañar/Dormir eligiendo cosas en inglés; responden con voz) y se los viste con los
-  accesorios de la tienda. 4 cuidados al día a un amigo = +15 💎 (una vez por día). Arte (ChatGPT, completo): img/friend_<id>.png y img/home_bg.jpg.
+- 🏡 Casa de Amigos = mascota virtual (inspirada en el diseño de Tamagotchi, propia y sin muerte):
+  8 amigos para adoptar con 💎 (Zorrito gratis; 150-1100 💎). Los nuevos llegan como 🥚 (4 toques para nacer).
+  Etapas: Bebé (🍼, más chico) → Chiquito (25 cuidados) → Grande (70 cuidados). 5 necesidades que bajan con el tiempo real
+  (hambre, diversión, limpieza, energía, cariño; S.home.pets[id].nd) y caca 💩 cada 4 h para limpiar. Pide atención con voz
+  y "!" en el botón del camino. Acciones animadas: comer (la comida vuela a la boca, mastica, migas), jugar (juguete
+  rebota y salta), baño (burbujas), dormir (luz baja, Zzz), mimos al tocarla (corazones; cuentan para crecer 3 por día).
+  4 acciones al día = +15 💎. Se viste con accesorios de la tienda. Arte ChatGPT: img/friend_<id>.png y img/home_bg.jpg.
 - 🕹️ Sala de Juegos (botón violeta del camino): juegos de premio que se compran con 💎 (Kart Quest 400; próximos 900/1600/2500)
   y se juegan gastando 🔮 cristales. 🔮 solo se ganan estudiando: 1 cada 3 paradas + 2 al cumplir la meta del día; máx. 5
   (configurable o apagable desde el panel de padres).
@@ -85,15 +89,6 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
-- ⏭️ PENDIENTE (pedido 27/11): Casa de Amigos estilo mascota virtual (tipo Tamagotchi), original:
-  * Barras de necesidades que bajan con el tiempo real (hambre, diversión, higiene, sueño/energía, cariño) y se
-    recuperan cuidándola; si se descuida se pone triste (nunca se muere ni se pierde: público infantil).
-  * Etapas de crecimiento: huevo/bebé → chiquito → grande, según días de cuidado; cambia de tamaño/apariencia
-    (ideal: arte de ChatGPT por etapa).
-  * Animaciones por acción: comer (mastica, migas), jugar (salta/rebota la pelota), baño (burbujas), dormir
-    (ojos cerrados, Zzz, luz baja), caricia (corazones), y estados (feliz, triste, con hambre, sucio).
-  * Vestirla con varios accesorios; todo con palabras/frases en inglés y voz.
-  * Investigar el diseño de Tamagotchi (ciclo de necesidades, etapas, atención) y hacer algo similar pero propio.
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
