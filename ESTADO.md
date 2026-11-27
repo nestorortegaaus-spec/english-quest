@@ -136,7 +136,9 @@ le acepte la voz a la nena.
 - 🔄 EN CURSO: FRASES estilo Kumon. Juego 🧩 Frases con 36 patrones (PHR, lv1-5, desde "I like…" hasta "If it rains,
   I will…", "When I grow up I want to be a…", y uno de dos huecos "My best friend likes…, but I like…").
   Pasos: mirar/escuchar → completar → ordenar → cambiar una palabra → escuchar y elegir → frase larga (une dos frases
-  con "and", nivel 3+, solo patrones cortos) → decirla con micrófono. Falta: más patrones.
+  con "and", nivel 3+, solo patrones cortos) → decirla con micrófono. Tanda 2 (27/11): +24 patrones (60 en total),
+  p. ej. "I have a…", "Where is my…?", "It is time to…", "Let's … together!", "I have never seen a…", "I am happy because…",
+  "If I had a…, I would…".
 - ⏭️ PENDIENTE (pedido 27/11): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
