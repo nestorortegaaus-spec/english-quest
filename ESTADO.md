@@ -33,6 +33,9 @@ le acepte la voz a la nena.
 - Juego "Word Blaster" (paleta arriba, zona libre para el dedo, power-ups) + versión difícil
 - Juego "Isla" (plataformas estilo Adventure Island, el zorrito corre y salta, junta manzanas-palabras)
 - Memotest (parear palabra ↔ emoji con voz)
+- Escuchá y tocá: la voz dice una palabra y se toca el dibujo correcto entre 4 (botón 🐢 para oírla lento). 4 paradas en el camino
+- Camino dibujado: sendero en curva, paradas 3D por color, zorrito guía
+- Empezar de cero: mantener apretada la portada 3 segundos (para el adulto)
 - Modo baile
 - Cofres / recompensas
 - Instalable como app con logo, offline

@@ -42,7 +42,7 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .name-in:focus{border-color:var(--teal);}
 
 /* HUD */
-.hud{display:flex;align-items:center;gap:7px;padding:12px 12px 6px;}
+.hud{display:flex;align-items:center;gap:7px;padding:12px 56px 6px 12px;}
 .pill{background:#fff;border-radius:16px;padding:5px 10px;font-weight:900;font-size:13px;display:flex;align-items:center;gap:5px;box-shadow:0 3px 8px rgba(120,140,170,.12);}
 .pill.s{color:#F2A33C;} .pill.g{color:var(--teal-d);} .pill.h{color:#FF8A9B;}
 .grow{flex:1;}
@@ -163,6 +163,23 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
 .dance-es{font-size:18px;font-weight:800;color:var(--muted);}
 .dance-next{max-width:220px;margin:0 auto 18px;}
 /* MEMORY */
+.ls-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:14px;padding:10px 16px 20px;width:100%;max-width:440px;margin:0 auto;}
+.ls-prog{display:flex;gap:6px;justify-content:center;}
+.ls-prog i{width:12px;height:12px;border-radius:50%;background:#E3E9F0;display:block;}
+.ls-prog i.ok{background:var(--teal);} .ls-prog i.now{background:var(--sun);transform:scale(1.25);}
+.ls-ask{font-weight:900;color:var(--muted);font-size:15px;text-align:center;}
+.ls-btns{display:flex;gap:12px;align-items:center;}
+.ls-spk{width:96px;height:96px;border-radius:50%;border:4px solid #fff;background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.5) 0 18%,transparent 19%),var(--blue);box-shadow:0 7px 0 #4E9FD4;font-size:44px;cursor:pointer;}
+.ls-spk:active{transform:translateY(5px);box-shadow:0 2px 0 #4E9FD4;}
+.ls-spk.slow{width:62px;height:62px;font-size:28px;background:var(--lav);box-shadow:0 5px 0 #8C7BD6;}
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;}
+.ls-card{aspect-ratio:1/1;border:none;border-radius:22px;background:#fff;font-size:64px;cursor:pointer;box-shadow:0 6px 0 rgba(120,140,170,.22);display:flex;align-items:center;justify-content:center;transition:transform .1s;font-family:inherit;}
+.ls-card:active{transform:scale(.95);}
+.ls-card.ok{background:#D9F6EC;box-shadow:0 6px 0 var(--teal);animation:lspop .4s;}
+.ls-card.no{background:#FFE3DD;opacity:.55;animation:lsshake .35s;}
+.ls-word{font-size:26px;font-weight:900;color:var(--teal-d);min-height:34px;}
+@keyframes lspop{50%{transform:scale(1.12)}}
+@keyframes lsshake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
 .mem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:12px;width:100%;max-width:420px;margin:auto;}
 .mem-card{min-height:84px;aspect-ratio:3/4;border:none;border-radius:14px;background:linear-gradient(160deg,#7FC4F2,#5aa7e0);color:#fff;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 rgba(0,0,0,.12);font-family:inherit;padding:4px;transition:transform .1s;}
 .mem-card:active{transform:scale(.96);}
@@ -320,10 +337,10 @@ var SCENES={'0_0':'img/scene1.jpg','0_1':'img/scene2.jpg','0_2':'img/scene3.jpg'
 
 /* NODES: single path */
 var NODES=[
- {t:'lesson',u:0},{t:'lesson',u:1},{t:'story',s:0},{t:'chest'},{t:'game',g:'island',u:0},
- {t:'game',g:'blaster',u:0},{t:'lesson',u:2},{t:'lesson',u:3},{t:'game',g:'memory',u:2},{t:'dance'},{t:'chest'},
- {t:'lesson',u:4},{t:'lesson',u:5},{t:'game',g:'blaster',u:1,lv:2},{t:'chest'},
- {t:'lesson',u:6},{t:'lesson',u:7},{t:'game',g:'memory',u:6},{t:'dance'},{t:'chest'},
+ {t:'lesson',u:0},{t:'lesson',u:1},{t:'game',g:'listen',us:[0,1]},{t:'story',s:0},{t:'chest'},{t:'game',g:'island',u:0},
+ {t:'game',g:'blaster',u:0},{t:'lesson',u:2},{t:'lesson',u:3},{t:'game',g:'listen',us:[2,3]},{t:'game',g:'memory',u:2},{t:'dance'},{t:'chest'},
+ {t:'lesson',u:4},{t:'lesson',u:5},{t:'game',g:'listen',us:[4,5]},{t:'game',g:'blaster',u:1,lv:2},{t:'chest'},
+ {t:'lesson',u:6},{t:'lesson',u:7},{t:'game',g:'listen',us:[6,7]},{t:'game',g:'memory',u:6},{t:'dance'},{t:'chest'},
  {t:'lesson',u:8},{t:'lesson',u:9},{t:'game',g:'blaster',u:2,lv:2},{t:'chest'},
  {t:'lesson',u:10},{t:'lesson',u:11},{t:'chest'}
 ];
@@ -379,7 +396,7 @@ function renderPath(){
    if(nd.t==='lesson'){var U=UNITS[nd.u];ico=U.isP?'💬':(U.w[0]&&U.w[0].e)||'📘';}
    else if(nd.t==='story'){ico='📖';cls='k-story';}
    else if(nd.t==='chest'){ico=state==='done'?'🎉':'🎁';cls='k-chest';}
-   else if(nd.t==='game'){ico=nd.g==='memory'?'🧠':nd.g==='island'?'🏝️':'🧱';cls='k-game';}
+   else if(nd.t==='game'){ico=nd.g==='memory'?'🧠':nd.g==='island'?'🏝️':nd.g==='listen'?'👂':'🧱';cls='k-game';}
    else if(nd.t==='dance'){ico='💃';cls='k-dance';}
    var el=document.createElement('div');
    el.className='pnode '+cls+' '+state;
@@ -387,7 +404,7 @@ function renderPath(){
    if(state==='lock')el.insertAdjacentHTML('beforeend','<span class="plock">🔒</span>');
    if(state==='done')el.insertAdjacentHTML('beforeend','<span class="pstar">⭐</span>');
    var label='';
-   if(nd.t==='game')label=nd.g==='memory'?'Memoria':nd.g==='island'?'Isla':(nd.lv>1?'Ladrillos ⚡':'Ladrillos');
+   if(nd.t==='game')label=nd.g==='memory'?'Memoria':nd.g==='island'?'Isla':nd.g==='listen'?'Escuchá':(nd.lv>1?'Ladrillos ⚡':'Ladrillos');
    else if(nd.t==='dance')label='Baile';
    else if(nd.t==='story')label='Cuento';
    else if(nd.t==='chest')label='Premio';
@@ -408,7 +425,7 @@ function openNode(i){
  if(nd.t==='lesson')startLesson(nd.u);
  else if(nd.t==='story')openStory(nd.s);
  else if(nd.t==='chest')openChest();
- else if(nd.t==='game'){ nd.g==='memory'?startMemory(nd.u):nd.g==='island'?startIsland(nd.u):startBlaster(nd.u, nd.lv||1); }
+ else if(nd.t==='game'){ nd.g==='memory'?startMemory(nd.u):nd.g==='island'?startIsland(nd.u):nd.g==='listen'?startListen(nd.us):startBlaster(nd.u, nd.lv||1); }
  else if(nd.t==='dance')startDance();
 }
 function advance(){ S.prog=Math.max(S.prog, activeIdx+1); save(); }
@@ -654,6 +671,46 @@ function startMemory(unitIdx){
  });
 }
 
+
+function startListen(us){
+ sTap();unlockSpeech();GAME.stop();show('s-game');
+ document.getElementById('gTitle').textContent='👂 Escuchá y tocá';
+ var pool=[],seen={};
+ us.forEach(function(u){UNITS[u].w.forEach(function(w){if(!seen[w.e]){seen[w.e]=1;pool.push(w);}});});
+ var ROUNDS=Math.min(8,pool.length), order=shuffle(pool).slice(0,ROUNDS), r=0, okCount=0;
+ var host=document.getElementById('gameHost');
+ GAME.on=true;
+ function score(){document.getElementById('gScore').textContent=okCount+'/'+ROUNDS;}
+ function round(){
+   if(!GAME.on)return;
+   if(r>=ROUNDS){ finishGameNode('👂 ¡Qué buen oído!','Acertaste '+okCount+' de '+ROUNDS+' a la primera 🎉'); return; }
+   var w=order[r], firstTry=true, solved=false;
+   var opts=shuffle([w].concat(shuffle(pool.filter(function(x){return x!==w;})).slice(0,3)));
+   var dots='';for(var i=0;i<ROUNDS;i++)dots+='<i class="'+(i<r?'ok':i===r?'now':'')+'"></i>';
+   host.innerHTML='<div class="ls-wrap"><div class="ls-prog">'+dots+'</div>'
+     +'<div class="ls-ask">Escuchá y tocá el dibujo correcto</div>'
+     +'<div class="ls-btns"><button class="ls-spk" id="lsSpk">🔊</button><button class="ls-spk slow" id="lsSlow">🐢</button></div>'
+     +'<div class="ls-word" id="lsWord"></div><div class="ls-grid" id="lsGrid"></div></div>';
+   document.getElementById('lsSpk').onclick=function(){say(w.en);};
+   document.getElementById('lsSlow').onclick=function(){say(w.en,0.5);};
+   var grid=document.getElementById('lsGrid');
+   opts.forEach(function(o){
+     var b=document.createElement('button');b.className='ls-card';b.textContent=o.e;
+     b.onclick=function(){
+       if(solved||!GAME.on||b.classList.contains('no'))return;
+       if(o===w){ solved=true;b.classList.add('ok');sGood();burst(10);if(firstTry)okCount++;score();
+         document.getElementById('lsWord').textContent=w.en+' = '+w.es; say(w.en);
+         r++; GAME.timer=setTimeout(round,1400);
+       } else { firstTry=false;b.classList.add('no');sBad();
+         document.getElementById('lsWord').textContent='';
+         GAME.timer=setTimeout(function(){say(w.en);},500); }
+     };
+     grid.appendChild(b);
+   });
+   GAME.timer=setTimeout(function(){say(w.en);},350);
+ }
+ score(); round();
+}
 
 function startDance(){
  sTap();unlockSpeech();GAME.stop();show('s-dance');
