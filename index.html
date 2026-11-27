@@ -194,6 +194,29 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .sf-roll{position:absolute;left:8px;right:8px;bottom:8px;height:62px;display:flex;gap:6px;overflow-x:auto;z-index:5;pointer-events:none;}
 .sf-photo{flex:none;width:52px;background:#fff;border-radius:6px;padding:3px 3px 1px;box-shadow:0 2px 6px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;animation:pkin .4s;}
 .sf-photo b{font-size:28px;line-height:1.1;background:#DDF1FF;width:100%;text-align:center;border-radius:3px;} .sf-photo small{font-size:9px;font-weight:900;color:var(--ink);}
+/* MICRÓFONO SEMÁFORO */
+.mic-w{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;}
+.mic-b{position:relative;width:110px;height:110px;border-radius:50%;border:6px solid #fff;cursor:pointer;font-size:46px;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;}
+.mic-b:active{transform:scale(.95);}
+.mic-ring{position:absolute;inset:-6px;border-radius:50%;border:5px solid currentColor;opacity:0;pointer-events:none;}
+.mic-ico{position:relative;z-index:1;}
+.mic-l{border-radius:16px;padding:8px 16px;text-align:center;min-width:220px;transition:background .2s;}
+.mic-l b{display:block;font-size:22px;font-weight:900;letter-spacing:.3px;} .mic-l small{display:block;font-size:13px;font-weight:800;opacity:.9;min-height:16px;}
+.mic-w.idle .mic-b{background:#4A9BEF;box-shadow:0 7px 0 #2F7CCF;} .mic-w.idle .mic-l{background:#E2F0FF;color:#2F6FB5;}
+.mic-w.wait .mic-b{background:#8FB8E8;box-shadow:0 7px 0 #6E98C8;} .mic-w.wait .mic-l{background:#EEF3FA;color:#5d7fa8;}
+.mic-w.listen .mic-b{background:#2FBF5B;box-shadow:0 7px 0 #1E9A45;color:#2FBF5B;transform:scale(1.08);}
+.mic-w.listen .mic-ico{color:#fff;}
+.mic-w.listen .mic-ring{animation:micwave 1.2s ease-out infinite;} .mic-w.listen .mic-ring.r2{animation-delay:.6s;}
+.mic-w.listen .mic-l{background:#2FBF5B;color:#fff;animation:micpulse 1s ease-in-out infinite;}
+.mic-w.hear .mic-b{background:#F4B400;box-shadow:0 7px 0 #CC9600;color:#F4B400;transform:scale(1.08);} .mic-w.hear .mic-ico{color:#fff;}
+.mic-w.hear .mic-ring{animation:micwave 1.6s ease-out infinite;}
+.mic-w.hear .mic-l{background:#FFF3C4;color:#8a6500;}
+.mic-w.ok .mic-b{background:#2FBF5B;box-shadow:0 7px 0 #1E9A45;} .mic-w.ok .mic-l{background:#D9F6E3;color:#1E8A40;}
+.mic-w.retry .mic-b{background:#FF9A3C;box-shadow:0 7px 0 #E07A1C;} .mic-w.retry .mic-l{background:#FFE9D2;color:#B35A00;}
+.mic-w.off .mic-b{background:#B6C1CE;box-shadow:0 7px 0 #97A3B2;} .mic-w.off .mic-l{background:#EEF1F5;color:#6b7686;}
+@keyframes micwave{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.7);opacity:0}}
+@keyframes micpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow .2s;}
 /* VOICE */
 .vc-body{flex:1;overflow-y:auto;padding:6px 16px 24px;width:100%;max-width:460px;margin:0 auto;}
 .vc-h{font-weight:900;font-size:17px;color:var(--ink);margin:10px 0 8px;}
@@ -663,7 +686,7 @@ S.mig1=1;
 if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);save();}
 var NEW_WORLD=false;
 
-function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
+function show(id){try{micStop();}catch(e){}document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
 function lvl(){return Math.floor(S.stars/9)+1;}
 
 function startGame(){var n=document.getElementById('nameIn').value.trim();S.name=n||'Explorador';save();unlockSpeech();sTap();renderPath();show('s-path');}
@@ -785,9 +808,10 @@ function renderQ(){
    var chk=document.createElement('button');chk.className='btn teal';chk.style.gridColumn='1 / span 2';chk.textContent='Revisar ✓';chk.onclick=function(){checkBuild(w);};op.appendChild(chk);
  } else { // say (mic)
    qt.textContent='Escuchá y repetí 🎤';
-   st.innerHTML='<div class="bigemoji" style="font-size:56px">'+w.e+'</div><div class="qword">'+w.en+'</div><div class="qsub">'+w.es+'</div><button class="spk sm" onclick="say(\''+w.en.replace(/\x27/g,'')+'\')">🔊</button><div class="qsub" id="micStatus" style="margin-top:8px;min-height:22px;font-weight:800"></div>';
+   st.innerHTML='<div class="bigemoji" style="font-size:56px">'+w.e+'</div><div class="qword">'+w.en+'</div><div class="qsub">'+w.es+'</div><button class="spk sm" onclick="say(\''+w.en.replace(/\x27/g,'')+'\')">🔊</button>';
    setTimeout(function(){say(w.en);},300);
-   var mb=document.createElement('button');mb.className='micbtn';mb.id='micB';mb.style.gridColumn='1 / span 2';mb.style.margin='0 auto';mb.textContent='🎤';mb.onclick=function(){doMic(w,mb);};op.appendChild(mb);
+   var mw=document.createElement('div');mw.style.gridColumn='1 / span 2';mw.innerHTML=micWidgetHTML('micL');op.appendChild(mw);
+   mw.querySelector('.mic-b').onclick=function(){ if(answered)return; micListen('micL',w.en,function(){setTimeout(function(){good(w);},350);},null); };
    var skip=document.createElement('button');skip.className='btn ghost';skip.style.gridColumn='1 / span 2';skip.textContent='Ya lo dije ✓';skip.onclick=function(){good(w);};op.appendChild(skip);
  }
 }
@@ -797,41 +821,45 @@ function moveChip(c,wd){ if(c.dataset.used)return; c.dataset.used='1';c.style.op
 function checkBuild(w){ var t=document.getElementById('tray'); var got=Array.prototype.map.call(t.children,function(x){return x.textContent;}).join(' '); if(got.trim().toLowerCase()===w.en.toLowerCase())good(w); else wrong(w); }
 function pick(b,right,label){ if(answered)return; if(right){good(L.qs[L.i].w,b);} else { answered=true;markWord(L.qs[L.i].w,false);b.classList.add('no');sBad();L.hearts--;document.getElementById('lhp').textContent=L.hearts;Array.prototype.forEach.call(document.querySelectorAll('.opt'),function(o){if(o!==b)o.classList.add('dim');}); setFox('foxStart','sad'); fb(false,L.qs[L.i].w); if(L.hearts<=0)document.getElementById('fbbtn').textContent='↻ Reintentar'; } }
 function micSt(t,col){var s=document.getElementById('micStatus');if(s){s.textContent=t;s.style.color=col||'var(--teal-d)';}}
-function doMic(w,btn){
- if(!SR){ micSt('Este navegador no escucha la voz. Usá Chrome, o tocá "Ya lo dije".','#e07a5f'); return; }
- var r;
- try{ r=new SR(); }catch(e){ micSt('No pude abrir el micrófono. Probá de nuevo 🎤','#e07a5f'); return; }
- r.lang='en-US'; r.interimResults=true; r.maxAlternatives=4; r.continuous=false;
- var done=false, heard='';
- btn.classList.add('rec'); micSt('Escuchando… 🎤 decí "'+w.en+'"');
- r.onresult=function(e){
-   var said='';
-   for(var i=0;i<e.results.length;i++){ said+=' '+e.results[i][0].transcript; }
-   heard=said.toLowerCase().trim();
-   var last=e.results[e.results.length-1];
-   if(last && last.isFinal){
-     done=true; btn.classList.remove('rec');
-     var tgt=w.en.toLowerCase().replace(/[?.!,]/g,'');
-     var ok=false; for(var k=0;k<last.length;k++){var alt=last[k].transcript.toLowerCase();if(alt.indexOf(tgt)>=0||sim(alt,tgt)){ok=true;break;}}
-     if(!ok) ok = heard.indexOf(tgt)>=0 || sim(heard,tgt);
-     if(ok){ micSt('¡Muy bien! 👏'); good(w); }
-     else { micSt('Escuché: "'+heard+'". Probá otra vez 🎤','#E8A52E'); }
-   } else { micSt('Te escucho… 🎤'); }
- };
- r.onerror=function(ev){ btn.classList.remove('rec'); var err=ev&&ev.error;
-   if(err==='not-allowed'||err==='service-not-allowed'){ var app=window.matchMedia&&matchMedia('(display-mode: standalone)').matches;
-     micSt(app?'🎤 El micrófono está bloqueado. Pedile a un adulto: abrir Chrome → ⋮ → Configuración → Configuración de sitios → Micrófono → permitir esta app. Mientras, tocá "Ya lo dije ✓".'
-              :'🎤 El micrófono está bloqueado: tocá el 🔒 o ⓘ al lado de la dirección → Permisos → Micrófono → Permitir. Mientras, tocá "Ya lo dije ✓".','#e07a5f');
-     try{ if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){ navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){st.getTracks().forEach(function(t){t.stop();});micSt('¡Listo! Micrófono permitido. Tocá 🎤 de nuevo.');}).catch(function(){}); } }catch(e){} }
-   else if(err==='no-speech'){ micSt('No te escuché. Tocá 🎤 y hablá fuerte y claro.','#E8A52E'); }
-   else if(err==='audio-capture'){ micSt('No encuentro el micrófono del teléfono.','#e07a5f'); }
-   else if(err==='network'){ micSt('Necesito internet para escucharte.','#e07a5f'); }
-   else if(err==='aborted'){ /* ignore */ }
-   else { micSt('Tocá 🎤 y probá otra vez.','#E8A52E'); }
- };
- r.onend=function(){ btn.classList.remove('rec'); };
- try{ r.start(); }catch(e){ btn.classList.remove('rec'); micSt('Tocá 🎤 de nuevo.','#E8A52E'); }
+/* ===== MICRÓFONO CON SEMÁFORO DE COLORES ===== */
+var MIC_TXT={idle:'Tocá el micrófono 🎤',wait:'Preparando…',listen:'¡HABLÁ AHORA!',hear:'¡Te escucho! 👂',ok:'¡Muy bien! 🎉',retry:'Probá otra vez',off:'Micrófono apagado'};
+function micWidgetHTML(id){return '<div class="mic-w idle" id="'+id+'"><button class="mic-b" type="button"><span class="mic-ring"></span><span class="mic-ring r2"></span><span class="mic-ico">🎤</span></button><div class="mic-l"><b>'+MIC_TXT.idle+'</b><small></small></div></div>';}
+function micSet(id,state,small){var w=document.getElementById(id);if(!w)return;w.className='mic-w '+state;
+ w.querySelector('b').textContent=MIC_TXT[state]; w.querySelector('small').textContent=small||'';
+ w.querySelector('.mic-ico').textContent=state==='ok'?'✔':state==='off'?'🔇':'🎤';
+ document.body.classList.toggle('mic-on',state==='listen'||state==='hear');}
+var MIC_REC=null;
+function micStop(){try{if(MIC_REC)MIC_REC.abort();}catch(e){}MIC_REC=null;document.body.classList.remove('mic-on');}
+/* escucha 'target' (texto en inglés); onOk() si lo dijo; onFail(oído) si no */
+function micListen(id,target,onOk,onFail){
+ if(!SR){micSet(id,'off','Este teléfono no escucha la voz acá. Decilo igual y tocá "Ya lo dije ✓".');onFail&&onFail(null,'nosr');return;}
+ micStop(); try{speechSynthesis.cancel();}catch(e){}
+ var rec; try{rec=new SR();}catch(e){micSet(id,'off','No pude abrir el micrófono. Tocá de nuevo.');return;}
+ MIC_REC=rec; rec.lang='en-US';rec.interimResults=true;rec.maxAlternatives=5;rec.continuous=false;
+ var done=false, heard='', opened=false, tgt=target.toLowerCase().replace(/[?.!,']/g,'');
+ micSet(id,'wait','');
+ function open(){ if(opened||done)return; opened=true; micSet(id,'listen','Decí: "'+target+'"'); tone(880,.08,'sine',.18,0);tone(1320,.12,'sine',.18,.09); }
+ rec.onstart=function(){setTimeout(open,120);}; rec.onaudiostart=function(){setTimeout(open,120);};
+ rec.onspeechstart=function(){ if(!done){open();micSet(id,'hear','');} };
+ rec.onresult=function(e){ if(done)return; var all=[];
+   for(var i=0;i<e.results.length;i++)for(var k=0;k<e.results[i].length;k++)all.push(e.results[i][k].transcript.toLowerCase());
+   heard=e.results[e.results.length-1][0].transcript.toLowerCase().trim();
+   if(all.some(function(a){a=a.replace(/[?.!,']/g,'');return a.indexOf(tgt)>=0||sim(a,tgt);})){done=true;micStop();micSet(id,'ok','Dijiste "'+target+'"');onOk&&onOk();return;}
+   if(e.results[e.results.length-1].isFinal){done=true;micStop();micSet(id,'retry','Escuché "'+heard+'". Tocá 🎤 y decilo de nuevo');onFail&&onFail(heard);}
+   else micSet(id,'hear','"'+heard+'"'); };
+ rec.onerror=function(ev){ if(done)return; var er=ev&&ev.error; if(er==='aborted')return; done=true; micStop();
+   if(er==='not-allowed'||er==='service-not-allowed'){var app=window.matchMedia&&matchMedia('(display-mode: standalone)').matches;
+     micSet(id,'off',app?'Pedile a un adulto: Chrome → ⋮ → Configuración → Configuración de sitios → Micrófono → permitir. Mientras, tocá "Ya lo dije ✓".':'Tocá el 🔒 al lado de la dirección → Micrófono → Permitir. Mientras, tocá "Ya lo dije ✓".');
+     try{navigator.mediaDevices.getUserMedia({audio:true}).then(function(s){s.getTracks().forEach(function(t){t.stop();});micSet(id,'idle','¡Listo! Ya podés tocar 🎤');}).catch(function(){});}catch(e){} onFail&&onFail(null,'blocked'); }
+   else if(er==='no-speech'){micSet(id,'retry','No te escuché. Tocá 🎤 y hablá fuerte');onFail&&onFail('');}
+   else if(er==='network'){micSet(id,'off','Necesito internet para escucharte');onFail&&onFail(null,'net');}
+   else {micSet(id,'retry','Tocá 🎤 y probá otra vez');onFail&&onFail('');} };
+ rec.onend=function(){ if(!done){done=true;MIC_REC=null;document.body.classList.remove('mic-on');micSet(id,'retry',heard?'Escuché "'+heard+'". Tocá 🎤 de nuevo':'No te escuché. Tocá 🎤 y hablá fuerte');onFail&&onFail(heard);} };
+ setTimeout(function(){ if(MIC_REC!==rec)return; try{rec.start();}catch(e){micSet(id,'retry','Tocá 🎤 de nuevo');} },60);
+ setTimeout(function(){ if(!done&&MIC_REC===rec)open(); },1200);
 }
+
+function doMic(w,btn){ micListen('micL',w.en,function(){good(w);},null); }
 function lev(a,b){var m=a.length,n=b.length,d=[],i,j;for(i=0;i<=m;i++){d[i]=[i];}for(j=0;j<=n;j++)d[0][j]=j;for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
 function sim(said,tgt){ var tw=tgt.split(' '),sw=said.split(/\s+/),hit=0;
  tw.forEach(function(x){ if(said.indexOf(x)>=0){hit++;return;} var tol=x.length<=3?1:Math.max(1,Math.floor(x.length*0.34)); if(sw.some(function(y){return y&&lev(y,x)<=tol;}))hit++; });
@@ -839,7 +867,7 @@ function sim(said,tgt){ var tw=tgt.split(' '),sw=said.split(/\s+/),hit=0;
 function good(w,b){ if(answered)return; answered=true; markWord(w,true); if(b)b.classList.add('ok'); L.ok++; sGood(); say(w.en); setFox('foxStart','happy'); burst(14); fb(true,w); }
 function wrong(w,fromMic){ if(answered)return; answered=true; markWord(w,false); sBad(); L.hearts--; document.getElementById('lhp').textContent=L.hearts; setFox('foxStart','sad'); fb(false,w); if(L.hearts<=0)document.getElementById('fbbtn').textContent='↻ Reintentar'; }
 function fb(ok,w){ var el=document.getElementById('fb');el.className='fb on '+(ok?'ok':'no'); var pr=['¡Excelente!','¡Muy bien!','¡Genial!','¡Crack!','¡Perfecto!']; document.getElementById('fbmsg').textContent = ok?pr[Math.floor(Math.random()*pr.length)]:'¡Casi!'; document.getElementById('fbsub').innerHTML='<b>'+w.en+'</b> = '+w.es; }
-function nextQ(){ var el=document.getElementById('fb');el.classList.remove('on'); if(L.hearts<=0){ startLesson(L.ui); return; } L.i++; if(L.i>=L.qs.length){ finishLesson(); return; } setTimeout(renderQ,160); }
+function nextQ(){ micStop(); var el=document.getElementById('fb');el.classList.remove('on'); if(L.hearts<=0){ startLesson(L.ui); return; } L.i++; if(L.i>=L.qs.length){ finishLesson(); return; } setTimeout(renderQ,160); }
 function quitLesson(){ if(confirm('¿Salir? Perdés el avance de esta parada.')){ sTap();renderPath();show('s-path'); } }
 function finishLesson(){
  var acc=L.ok/L.qs.length, stars=acc>=1?3:acc>=.75?2:1;
@@ -898,7 +926,7 @@ function toggleEs(){ document.getElementById('stEs').classList.toggle('show'); }
 function storyNext(){ var st=STORIES[ST.s]; if(ST.p>=st.pages.length-1){ S.stars+=2;S.gems+=10;advance(); var b=document.getElementById('rewBody'); b.innerHTML='<div class="chest">🏆</div><h2>¡Cuento terminado!</h2><p>Leíste “'+st.t+'” 📖</p><div class="rewpill">⭐ +2 · 💎 +10</div><button class="btn teal" onclick="afterReward()">Seguir el camino →</button>'; show('s-reward');sWin();burst(160); } else { ST.p++; sTap(); renderStoryPage(); } }
 
 /* ===== GAMES + DANCE ===== */
-var GAME={on:false,raf:0,timer:0,beat:0,stop:function(){this.on=false;if(this.raf)cancelAnimationFrame(this.raf);if(this.timer)clearTimeout(this.timer);if(this.beat)clearInterval(this.beat);this.raf=0;this.timer=0;this.beat=0;}};
+var GAME={on:false,raf:0,timer:0,beat:0,stop:function(){try{micStop();}catch(e){}this.on=false;if(this.raf)cancelAnimationFrame(this.raf);if(this.timer)clearTimeout(this.timer);if(this.beat)clearInterval(this.beat);this.raf=0;this.timer=0;this.beat=0;}};
 function exitGame(){ GAME.stop(); sTap(); renderPath(); show('s-path'); }
 function finishGameNode(title,msg){ GAME.stop(); S.stars+=2; S.gems+=12; advance(); var b=document.getElementById('rewBody'); b.innerHTML='<div class="chest">🏆</div><h2>'+title+'</h2><p>'+msg+'</p><div class="rewpill">⭐ +2 · 💎 +12</div><button class="btn teal" onclick="afterReward()">Seguir el camino →</button>'; show('s-reward'); sWin(); burst(160); }
 function gameLose(name,retry,msg){ var b=document.getElementById('rewBody'); b.innerHTML='<div class="chest">💛</div><h2>¡Casi!</h2><p>'+(msg||'Se te cayó la bola. ¡Probá de nuevo!')+'</p><button class="btn teal" onclick="_rg()">Reintentar ↻</button><div style="height:8px"></div><button class="btn ghost" onclick="afterReward()">Volver al camino</button>'; window._rg=function(){sTap();retry();}; show('s-reward'); }
@@ -1327,12 +1355,12 @@ function startSpeak(u,lv){
  var showEn=lv<3;
  host.innerHTML='<div class="sk-wrap"><div class="sk-sky" id="skSky"><div class="sk-moon">🌕</div><div class="sk-rocket" id="skRocket">🚀</div></div>'
   +'<div class="sk-panel"><div class="sk-emo" id="skEmo"></div><div class="sk-word" id="skWord"></div>'
-  +'<div class="sk-btns"><button class="ls-spk slow" id="skHear">🔊</button><button class="sk-mic" id="skMic">🎤</button><button class="sk-skip" id="skSkip">Ya lo dije ✓</button></div>'
-  +'<div class="sk-st" id="skSt">Tocá 🎤 y decilo en inglés</div></div></div>';
+  +'<div class="sk-btns"><button class="ls-spk slow" id="skHear">🔊</button><button class="sk-skip" id="skSkip">Ya lo dije ✓</button></div>'
+  +micWidgetHTML('skMicW')+'</div></div>';
  var sky=document.getElementById('skSky'), rocket=document.getElementById('skRocket');
- function st(t,c){var e=document.getElementById('skSt');if(e){e.textContent=t;e.style.color=c||'var(--teal-d)';}}
+ function st(t,c){}
  function place(){var h=sky.clientHeight-70;rocket.style.bottom=(8+(r/R)*h)+'px';}
- function stopRec(){try{if(rec)rec.abort();}catch(e){}rec=null;document.getElementById('skMic').classList.remove('rec');}
+ function stopRec(){micStop();}
  var w=null, tries=0;
  function round(){ if(!GAME.on)return; place();
   if(r>=R){stopRec();rocket.classList.add('land');sWin();GAME.timer=setTimeout(function(){finishGameNode('🚀 ¡Llegaste a la Luna!','Dijiste '+R+' palabras en inglés ('+firstOk+' a la primera) 🗣️');},900);return;}
@@ -1340,34 +1368,19 @@ function startSpeak(u,lv){
   document.getElementById('skEmo').textContent=w.e;
   document.getElementById('skWord').textContent=showEn?w.en:w.es+' → ¿en inglés?';
   document.getElementById('skSkip').style.visibility='hidden';
-  st('Tocá 🎤 y decilo en inglés');
+  micSet('skMicW','idle',showEn?'Decí: "'+w.en+'"':'Decilo en inglés');
   if(showEn)GAME.timer=setTimeout(function(){say(w.en);},300);
  }
  function success(){ stopRec(); if(tries===0)firstOk++; r++; sGood(); burst(16); say(w.en); st('¡Muy bien! 🚀');
   document.getElementById('skWord').textContent=w.en+' = '+w.es; rocket.classList.remove('boost');void rocket.offsetWidth;rocket.classList.add('boost');
   tone(300,.25,'sawtooth',.06,0);tone(500,.25,'sawtooth',.06,.1); gScore(r+'/'+R); GAME.timer=setTimeout(round,1500); }
  function fail(heard){ tries++; if(tries>=2)document.getElementById('skSkip').style.visibility='visible';
-  st(heard?('Escuché "'+heard+'". ¡Probá otra vez! 🎤'):'No te escuché. Tocá 🎤 y hablá fuerte.', '#E8A52E');
   if(tries>=2)GAME.timer=setTimeout(function(){say(w.en,0.7);},400); }
  document.getElementById('skHear').onclick=function(){if(w)say(w.en);};
  document.getElementById('skSkip').onclick=function(){ if(!w)return; tries++; success(); };
- document.getElementById('skMic').onclick=function(){
+ document.querySelector('#skMicW .mic-b').onclick=function(){
   if(!w||!GAME.on)return;
-  if(!SR){st('Este teléfono no escucha la voz acá. Decilo igual y tocá "Ya lo dije ✓".','#e07a5f');document.getElementById('skSkip').style.visibility='visible';return;}
-  stopRec(); try{speechSynthesis.cancel();}catch(e){}
-  try{rec=new SR();}catch(e){st('No pude abrir el micrófono.','#e07a5f');return;}
-  rec.lang='en-US';rec.interimResults=true;rec.maxAlternatives=5;rec.continuous=false;
-  var done=false, heard='', btn=document.getElementById('skMic'); btn.classList.add('rec'); st('Escuchando… 🎤 ¡decilo!');
-  rec.onresult=function(e){ var all=[]; for(var i=0;i<e.results.length;i++)for(var k=0;k<e.results[i].length;k++)all.push(e.results[i][k].transcript.toLowerCase());
-    heard=e.results[e.results.length-1][0].transcript.toLowerCase().trim();
-    var tgt=w.en.toLowerCase().replace(/[?.!,']/g,'');
-    if(all.some(function(a){return sim(a.replace(/[?.!,']/g,''),tgt);})){done=true;success();return;}
-    if(e.results[e.results.length-1].isFinal){done=true;btn.classList.remove('rec');fail(heard);} else st('Te escucho… 🎤');};
-  rec.onerror=function(ev){btn.classList.remove('rec');var er=ev&&ev.error;if(done)return;done=true;
-    if(er==='not-allowed'||er==='service-not-allowed'){st('🎤 El micrófono está bloqueado. Tocá "Ya lo dije ✓".','#e07a5f');document.getElementById('skSkip').style.visibility='visible';}
-    else if(er==='aborted'){} else fail('');};
-  rec.onend=function(){btn.classList.remove('rec');if(!done&&GAME.on){done=true;fail(heard);}};
-  try{rec.start();}catch(e){btn.classList.remove('rec');st('Tocá 🎤 de nuevo.','#E8A52E');}
+  micListen('skMicW',w.en,function(){setTimeout(success,300);},function(heard,why){ if(why==='nosr'||why==='blocked'){document.getElementById('skSkip').style.visibility='visible';return;} fail(heard); });
  };
  var _stop=GAME.stop; GAME.stop=function(){stopRec();GAME.stop=_stop;_stop.call(GAME);};
  gScore('0/'+R); setTimeout(round,50);
