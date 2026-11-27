@@ -266,7 +266,7 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .hm-body{flex:1;overflow-y:auto;padding:4px 14px 24px;width:100%;max-width:480px;margin:0 auto;}
 .hm-room{position:relative;border-radius:24px;padding:46px 10px 12px;display:flex;flex-direction:column;align-items:center;background:url(img/home_bg.jpg) center/cover,linear-gradient(180deg,#FFE9D6 0,#FFF5EA 62%,#E9C9A4 62%,#DDB892 100%);box-shadow:0 5px 0 rgba(120,90,60,.18);margin-bottom:12px;min-height:300px;}
 .hm-bub{position:absolute;top:10px;left:50%;transform:translateX(-50%) scale(.8);background:#fff;border-radius:16px;padding:8px 14px;font-weight:900;font-size:17px;color:var(--ink);box-shadow:0 4px 0 rgba(0,0,0,.12);opacity:0;transition:all .25s;white-space:nowrap;max-width:94%;overflow:hidden;text-overflow:ellipsis;}
-.hm-bub.on{opacity:1;transform:translateX(-50%) scale(1);}
+.hm-bub.on{opacity:1;transform:translateX(-50%) scale(1);} .hm-bub small{display:block;font-size:12px;color:var(--muted);font-weight:800;}
 .hm-friend{position:relative;z-index:2;width:190px;height:190px;display:flex;align-items:center;justify-content:center;animation:bob 2.2s ease-in-out infinite;}
 .hm-friend img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 8px rgba(0,0,0,.18));} .hm-friend .fe{font-size:140px;line-height:1;}
 .hm-friend.happy{animation:hmhappy .7s;} @keyframes hmhappy{30%{transform:translateY(-26px) scale(1.06)}60%{transform:translateY(0) scale(.96,1.04)}}
@@ -1631,14 +1631,14 @@ function friendHTML(f,cls){ var h=hData(), a=h.wear[f.id]?accById(h.wear[f.id]):
  return '<div class="'+cls+'"><img src="img/friend_'+f.id+'.png" alt="" onerror="this.outerHTML=\'<b class=fe>'+f.e+'</b>\'">'+(a?'<span class="acc '+a.pos+'">'+a.e+'</span>':'')+'</div>'; }
 function homeNeedsAttention(){ try{var h=hData(); return h.own.some(function(id){var p=h.pets[id];petTick(p);return p.stage===0||petMood(p)!=='happy';});}catch(e){return false;} }
 function openHome(){ sTap(); unlockSpeech(); HOME_SEL=null; var h=hData(); h.own.forEach(function(id){petTick(h.pets[id]);}); save(); renderHome(); show('s-home');
- var f=friendById(h.cur), p=pet(), m=petMood(p); setTimeout(function(){ homeSay(m==='egg'?'Tap the egg!':m==='happy'?'Hi! I am '+f.en+'. I missed you!':m==='poop'?'Oops! Clean up, please!':NEEDS.find(function(n){return n.k===m;}).lo); },350);
+ var f=friendById(h.cur), p=pet(), m=petMood(p); setTimeout(function(){ petTalk('need',m); },350);
  clearInterval(window._petIv); window._petIv=setInterval(function(){ if(!document.getElementById('s-home').classList.contains('on')){clearInterval(window._petIv);return;} petIdle(); },2600); }
-function homeSay(t){ var b=document.getElementById('hmBub'); if(b){b.textContent=t;b.classList.remove('on');void b.offsetWidth;b.classList.add('on');} say(t); }
+function homeSay(t,es){ var b=document.getElementById('hmBub'); if(b){b.innerHTML='';b.appendChild(document.createTextNode(t));if(es){var sm=document.createElement('small');sm.textContent=es;b.appendChild(sm);}b.classList.remove('on');void b.offsetWidth;b.classList.add('on');} say(t); }
 function fx(chars,n,cls){ var room=document.querySelector('.hm-room'); if(!room)return; for(var i=0;i<n;i++){ var e=document.createElement('span'); e.className='hm-fx '+(cls||''); e.textContent=chars[i%chars.length];
  e.style.left=(35+Math.random()*30)+'%'; e.style.top=(30+Math.random()*25)+'%'; e.style.animationDelay=(i*0.12)+'s'; e.style.setProperty('--dx',((Math.random()-.5)*160)+'px'); room.appendChild(e); setTimeout(function(x){return function(){x.remove();};}(e),2400); } }
 function petAnim(cls,ms){ var el=document.querySelector('.hm-friend'); if(!el)return; el.classList.remove('a-eat','a-jump','a-bath','a-sleep','a-love','a-wiggle','a-hatch','a-chew','a-shake','a-stretch'); void el.offsetWidth; el.classList.add(cls); clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove(cls);},ms||1400); }
 function petIdle(){ if(HOME_BUSY)return; var p=pet(); if(!p)return; var m=petMood(p), el=document.querySelector('.hm-friend'); if(!el)return;
- if(m==='egg'){petAnim('a-wiggle',800);return;} if(m==='happy'&&Math.random()<.5){petAnim('a-jump',900);} else if(m!=='happy'&&Math.random()<.35){var n=NEEDS.find(function(x){return x.k===m;});homeSay(n?n.lo:'Oops! Clean up, please!');} }
+ if(m==='egg'){petAnim('a-wiggle',800);return;} if(m==='happy'&&Math.random()<.5){petAnim('a-jump',900);} else if(m!=='happy'&&Math.random()<.35){petTalk('need',m);} }
 function renderHome(){
  var h=hData(), f=friendById(h.cur), p=pet(), mood=petMood(p), done=h.done[f.id]||{}, st=p.stage===0?0:petStage(p); if(p.stage!==0&&st!==p.stage)p.stage=st;
  document.getElementById('hmGems').textContent=S.gems;
@@ -1666,7 +1666,40 @@ function renderHome(){
 function careUp(p,k){ p.care=(p.care||0)+1; var before=p.stage, st=petStage(p); var el=document.querySelector('.hm-friend:not(.egg)'); if(el)el.style.setProperty('--sc',petScale(p));
  if(st>before){ p.stage=st; save(); setTimeout(function(){ renderHome(); petAnim('a-hatch',1500); fx(['✨','🌟','⭐'],14,'up'); sWin(); burst(160); var f=friendById(hData().cur); homeSay('Look! I am '+(st===2?'growing up':'big now')+'!'); toast('🌱 ¡'+f.n+' creció! Ahora es '+STAGES[st].n.toLowerCase()); },1700); } }
 function homeAct(k){ if(HOME_BUSY)return; sTap(); HOME_SEL=k; renderHome(); homeSay(HACTS[k].ask); }
-/* escenas animadas de varias segundos para cada cuidado */
+/* frases variadas de la mascota (inglés + castellano), sin repetir la última */
+var PET_LINES={
+ eat:{start:[['Yummy, {x}!','¡Qué rico, {y}!'],['Oh, {x}! My favorite!','¡Oh, {y}! ¡Mi favorito!'],['Can I eat it now?','¿Lo puedo comer ya?'],['I am so hungry!','¡Tengo mucha hambre!'],['Thank you for the {n}!','¡Gracias por la comida!']],
+  mid:[['Delicious!','¡Delicioso!'],['Mmm, so good!','¡Mmm, qué rico!'],['Tasty!','¡Sabroso!'],['I love it!','¡Me encanta!'],['Crunch, crunch!','¡Crunch, crunch!'],['Yum yum!','¡Ñam ñam!'],['So sweet!','¡Qué dulce!'],['One more bite!','¡Un mordisco más!']],
+  end:[['I am full!','¡Estoy llena!'],['That was yummy!','¡Estuvo riquísimo!'],['Thank you!','¡Gracias!'],['More, please!','¡Más, por favor!'],['My tummy is happy!','¡Mi pancita está feliz!'],['Best snack ever!','¡La mejor merienda!']]},
+ play:{start:[['Let\'s play!','¡Juguemos!'],['Throw it to me!','¡Tirámela!'],['I am ready!','¡Estoy lista!'],['Play with me!','¡Jugá conmigo!']],
+  mid:[['Wheee!','¡Uiii!'],['I got it!','¡La agarré!'],['Again, again!','¡Otra vez!'],['This is fun!','¡Qué divertido!'],['Catch!','¡Atrapala!'],['So high!','¡Qué alto!']],
+  end:[['That was fun!','¡Fue divertido!'],['You are the best!','¡Sos la mejor!'],['I am tired now!','¡Ahora estoy cansada!'],['Let\'s play again later!','¡Juguemos de nuevo más tarde!']]},
+ bath:{start:[['Bath time!','¡Hora del baño!'],['Bubbles!','¡Burbujas!'],['The water is warm!','¡El agua está tibia!'],['Wash me, please!','¡Lavame, por favor!']],
+  mid:[['Scrub, scrub!','¡Frota, frota!'],['That tickles!','¡Me hace cosquillas!'],['Splash!','¡Splash!'],['So many bubbles!','¡Cuántas burbujas!'],['Wash my ears!','¡Lavame las orejas!']],
+  end:[['I am so clean!','¡Estoy re limpia!'],['I smell nice!','¡Huelo rico!'],['Sparkly clean!','¡Limpia y brillante!'],['Thank you!','¡Gracias!']]},
+ sleep:{start:[['Good night!','¡Buenas noches!'],['I am so sleepy…','Tengo mucho sueño…'],['Sweet dreams!','¡Dulces sueños!'],['Read me a story…','Leeme un cuento…']],
+  end:[['Good morning!','¡Buen día!'],['I feel great!','¡Me siento genial!'],['What a nice nap!','¡Qué linda siesta!'],['I had a funny dream!','¡Tuve un sueño gracioso!']]},
+ love:{start:[['I love you!','¡Te quiero!'],['That tickles!','¡Me hace cosquillas!'],['Hee hee!','¡Ji ji!'],['You are my best friend!','¡Sos mi mejor amiga!'],['Hug me!','¡Abrazame!'],['More pets, please!','¡Más mimos, por favor!'],['I am happy!','¡Estoy feliz!']]}
+};
+PET_LINES.need={
+ food:[['I am hungry!','¡Tengo hambre!'],['My tummy is rumbling!','¡Me ruge la panza!'],['Can I have a snack?','¿Me das algo para comer?'],['Food, please!','¡Comida, por favor!']],
+ fun:[['I am bored!','¡Estoy aburrida!'],['Let\'s play!','¡Juguemos!'],['Play with me, please!','¡Jugá conmigo, por favor!']],
+ clean:[['I am dirty!','¡Estoy sucia!'],['I need a bath!','¡Necesito un baño!'],['I am so messy!','¡Estoy toda desarreglada!']],
+ energy:[['I am sleepy…','Tengo sueño…'],['I need a nap…','Necesito una siesta…'],['*yawn* So tired…','*bostezo* Qué cansancio…']],
+ love:[['Pet me, please!','¡Haceme mimos, por favor!'],['I need a hug!','¡Necesito un abrazo!'],['Do you love me?','¿Me querés?']],
+ poop:[['Oops! Clean up, please!','¡Ups! Limpiá, por favor!'],['It smells bad!','¡Huele feo!'],['Help! Clean it up!','¡Ayuda! ¡Limpialo!']],
+ happy:[['Hi! I missed you!','¡Hola! ¡Te extrañé!'],['Hello, my friend!','¡Hola, amiga!'],['I am so happy to see you!','¡Qué feliz estoy de verte!'],['Let\'s have fun today!','¡Divirtámonos hoy!']],
+ egg:[['Tap the egg!','¡Tocá el huevo!']]};
+var PET_LAST={};
+function pline(k,ph,it){ var arr=(PET_LINES[k]||{})[ph]||[['Hi!','¡Hola!']], key=k+ph, i, tries=0;
+ do{ i=(Math.random()*arr.length)|0; tries++; }while(arr.length>1&&PET_LAST[key]===i&&tries<10); PET_LAST[key]=i;
+ var en=arr[i][0], es=arr[i][1];
+ if(it){ var nm=it[1], art=/s$/.test(nm)?'':(/^[aeiou]/i.test(nm)?'an ':'a '); en=en.replace('{x}',art+nm).replace('{n}',nm); es=es.replace('{y}',(ES_ITEM[nm]||nm)); }
+ return [en,es]; }
+var ES_ITEM={apple:'una manzana',banana:'una banana',cookie:'una galletita',pizza:'pizza',carrot:'una zanahoria',strawberry:'una frutilla',cheese:'queso',milk:'leche'};
+function petTalk(k,ph,it){ var l=pline(k,ph,it); homeSay(l[0],l[1]); }
+
+/* escenas animadas de varios segundos para cada cuidado */
 function petBox(){ var room=document.querySelector('.hm-room'), im=document.querySelector('.hm-friend img,.hm-friend .fe'); if(!room||!im)return null;
  var r=room.getBoundingClientRect(), f=im.getBoundingClientRect(); return {room:room,x:f.left-r.left+f.width/2,y:f.top-r.top,w:f.width,h:f.height}; }
 function sprite(room,txt,cls,x,y,size){ var e=document.createElement('span'); e.className='hm-sp '+(cls||''); e.textContent=txt; e.style.left=x+'px'; e.style.top=y+'px'; if(size)e.style.fontSize=size+'px'; room.appendChild(e); return e; }
@@ -1678,30 +1711,30 @@ function petScene(k,it,done){
  if(k==='eat'){
   var fo=sprite(room,it[0],'hm-held',B.x-B.w*0.9,B.y+B.h*0.95,fs); fo.style.transition='left .8s cubic-bezier(.3,1.4,.6,1),top .8s cubic-bezier(.3,1.4,.6,1),transform .8s';
   add(30,function(){fo.style.left=(mx-fs*0.15)+'px';fo.style.top=(my)+'px';fo.style.transform='rotate(-15deg)';});
-  add(700,function(){homeSay('Yummy, '+(/s$/.test(it[1])?'':'a ')+it[1]+'!');});
+  add(700,function(){petTalk('eat','start',it);});
   [0,1,2,3].forEach(function(i){ add(1300+i*800,function(){
     fo.style.clipPath=bitePoly((i+1)*24); petAnim('a-chew',600); fx(['·','•','✦','·'],6,'crumb');
-    tone(260-i*10,.07,'square',.12,0); tone(200,.06,'square',.1,.12); pop(room,['Chomp!','Ñam!','Chomp!','Ñam ñam!'][i],mx+fs*0.6,my-20); }); });
-  add(1300+4*800,function(){ fo.remove(); var t=sprite(room,'😋','hm-pop big',mx-10,my-10); setTimeout(function(){t.remove();},1200); petAnim('a-love',1100); fx(['❤️','💕'],5,'up'); });
+    tone(260-i*10,.07,'square',.12,0); tone(200,.06,'square',.1,.12); pop(room,['Chomp!','Ñam!','Chomp!','Ñam ñam!'][i],mx+fs*0.6,my-20); if(i===1||i===3)petTalk('eat','mid'); }); });
+  add(1300+4*800,function(){ fo.remove(); petTalk('eat','end'); var t=sprite(room,'😋','hm-pop big',mx-10,my-10); setTimeout(function(){t.remove();},1200); petAnim('a-love',1100); fx(['❤️','💕'],5,'up'); });
   add(1300+4*800+900,done);
  } else if(k==='play'){
   var toy=sprite(room,it[0],'hm-held',B.x+B.w*0.95,B.y+B.h*0.75,fs*0.8);
   [0,1,2].forEach(function(i){ add(200+i*1300,function(){ toy.className='hm-sp hm-held throw'; void toy.offsetWidth; toy.classList.add('go'); petAnim('a-jump',900); tone(520+i*80,.08,'triangle',.14,0);
-    if(i===1)homeSay('Wheee!'); add(650,function(){pop(room,['Catch!','Got it!','Yay!'][i],B.x-B.w*0.4,B.y);}); }); });
-  add(200+3*1300,function(){toy.remove();fx(['⭐','✨'],6,'up');}); add(200+3*1300+300,done);
+    if(i===0)petTalk('play','start'); if(i===1||i===2)petTalk('play','mid'); add(650,function(){pop(room,['Catch!','Got it!','Yay!'][i],B.x-B.w*0.4,B.y);}); }); });
+  add(200+3*1300,function(){toy.remove();fx(['⭐','✨'],6,'up');petTalk('play','end');}); add(200+3*1300+300,done);
  } else if(k==='bath'){
   var tub=sprite(room,'🛁','hm-tub',B.x-fs*0.9,B.y+B.h*0.55,fs*2.2);
   var sp=sprite(room,it[0],'hm-held scrub',B.x-fs*0.4,B.y+B.h*0.35,fs*0.75);
   var iv=setInterval(function(){fx(['🫧','○','◯'],3,'bub');},350); T.push(iv);
-  add(300,function(){petAnim('a-bath',2600);homeSay('Scrub, scrub!');tone(700,.05,'sine',.1,0);});
-  add(1600,function(){tone(800,.05,'sine',.1,0);pop(room,'Splash!',B.x+B.w*0.4,B.y+10);});
-  add(3000,function(){clearInterval(iv);sp.remove();tub.remove();petAnim('a-shake',900);fx(['✨','💧','✨'],10,'up');pop(room,'So clean!',B.x,B.y-6);});
+  add(300,function(){petAnim('a-bath',2600);petTalk('bath','start');tone(700,.05,'sine',.1,0);});
+  add(1700,function(){tone(800,.05,'sine',.1,0);pop(room,'Splash!',B.x+B.w*0.4,B.y+10);petTalk('bath','mid');});
+  add(3000,function(){clearInterval(iv);sp.remove();tub.remove();petAnim('a-shake',900);fx(['✨','💧','✨'],10,'up');pop(room,'✨',B.x,B.y-6);petTalk('bath','end');});
   add(4000,done);
  } else {
   room.classList.add('dark'); var bed=sprite(room,it[0]==='🛏️'?'🛏️':it[0],'hm-bed',B.x-fs*1.05,B.y+B.h*0.45,fs*2.1); var sl=sprite(room,'😴','hm-sleepface',B.x+B.w*0.18,B.y-6,fs*0.75);
-  add(200,function(){petAnim('a-sleep',3800);homeSay(it[2]);});
+  add(200,function(){petAnim('a-sleep',3800);petTalk('sleep','start');});
   [0,1,2,3,4].forEach(function(i){ add(700+i*650,function(){ var z=sprite(room,i%2?'z':'Z','hm-z',B.x+B.w*0.3,B.y+B.h*0.05,30+i*6); setTimeout(function(){z.remove();},1800); tone(110+(i%2)*20,.35,'sine',.05,0); }); });
-  add(4100,function(){room.classList.remove('dark');bed.remove();sl.remove();petAnim('a-stretch',1100);homeSay('Good morning!');fx(['☀️','✨'],4,'up');});
+  add(4100,function(){room.classList.remove('dark');bed.remove();sl.remove();petAnim('a-stretch',1100);petTalk('sleep','end');fx(['☀️','✨'],4,'up');});
   add(5100,done);
  }
  window._sceneT=T;
@@ -1711,11 +1744,11 @@ function homeGive(i){ if(HOME_BUSY)return; var h=hData(), f=friendById(h.cur), p
  if(!h.done[f.id])h.done[f.id]={}; var first=!h.done[f.id][k]; h.done[f.id][k]=1; HOME_SEL=null; HOME_BUSY=true;
  p.nd[A.need]=Math.min(100,p.nd[A.need]+(k==='bath'?55:k==='sleep'?60:40)); if(k==='play'){p.nd.energy=Math.max(0,p.nd.energy-10);p.nd.love=Math.min(100,p.nd.love+10);} if(k==='eat')p.nd.love=Math.min(100,p.nd.love+5);
  careUp(p,k); save(); renderHome();
- petScene(k,it,function(){ if(k!=='sleep')homeSay(it[2]); sGood(); if(first)burst(30); HOME_BUSY=false; });
+ petScene(k,it,function(){ sGood(); if(first)burst(30); HOME_BUSY=false; });
  if(Object.keys(h.done[f.id]).length===4&&h.gift!==dkey()){ h.gift=dkey(); S.gems+=15; save(); setTimeout(function(){toast('❤️ '+f.n+' está feliz: +15 💎 de regalo');sWin();burst(120);renderHome();},5600); } }
 function petPet(){ var p=pet(); if(!p||p.stage===0||HOME_BUSY)return; p.nd.love=Math.min(100,p.nd.love+12); if(p.ld!==dkey()){p.ld=dkey();p.lc=0;} if(p.lc<3&&(!p._lt||Date.now()-p._lt>8000)){p._lt=Date.now();p.lc++;careUp(p,'love');} save();
  petAnim('a-love',1100); fx(['❤️','💕','💖'],7,'up'); tone(880,.06,'sine',.12,0);tone(1100,.08,'sine',.12,.08);
- var b=document.querySelectorAll('.hm-need i')[4]; if(b)b.style.width=p.nd.love+'%'; var words=['I love you!','That tickles!','Hee hee!','You are my best friend!']; homeSay(words[(Math.random()*words.length)|0]); }
+ var b=document.querySelectorAll('.hm-need i')[4]; if(b)b.style.width=p.nd.love+'%'; petTalk('love','start'); }
 function petClean(i){ var p=pet(); if(!p||!p.poop)return; p.poop--; p.nd.clean=Math.min(100,p.nd.clean+10); careUp(p,'clean'); save(); sTap(); fx(['✨'],5,'up'); homeSay('Thank you! So clean!'); renderHome(); }
 function petHatch(){ var p=pet(); if(!p||p.stage!==0)return; p.taps=(p.taps||0)+1; petAnim('a-wiggle',600); tone(400+p.taps*120,.1,'triangle',.15,0);
  if(p.taps>=4){ p.stage=1; p.care=0; p.t=Date.now(); p.nd={food:60,fun:60,clean:80,energy:80,love:60}; save(); sWin(); burst(200); renderHome(); petAnim('a-hatch',1500); var f=friendById(hData().cur); setTimeout(function(){homeSay('Hello! I am a baby '+f.en+'!');},300); }
