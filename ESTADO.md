@@ -103,6 +103,14 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Casa de Amigos — ciclo de vida con "graduación" (nunca muerte):
+  * Tras ~7 días siendo Grande, la mascota avisa que está lista para irse a jugar con otros amigos. La niña decide
+    cuándo (botón "🎓 Despedir a…"); nunca se va sola. Fiesta: confeti, mochila, "Thank you for taking care of me!",
+    "I will miss you!", premio (medalla + gemas).
+  * Muro "Amigos que crecieron" (foto + días cuidados) y postales en inglés que llegan cada tanto de las mascotas
+    graduadas ("Hi! I am at the beach with my new friends!") con traducción y voz → lectura disfrazada.
+  * Al graduar llega un bebé nuevo de regalo (otra especie o color) para que la casa no quede vacía y no sienta que
+    perdió las gemas; más adelante especies nuevas que se desbloquean graduando.
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
