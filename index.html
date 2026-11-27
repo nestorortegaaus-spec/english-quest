@@ -1167,6 +1167,9 @@ function cloop(){cx.clearRect(0,0,cv.width,cv.height);for(var i=ps.length-1;i>=0
 cloop();
 
 if(S.name){document.getElementById('nameIn').value=S.name;}
+(function(){try{var d=new Date(document.lastModified);if(isNaN(d))return;var t=document.createElement('div');t.id='appVer';t.style.cssText='font-size:11px;font-weight:800;color:#a9b4c2;margin-top:6px;text-align:center';
+ function z(n){return (n<10?'0':'')+n;}t.textContent='Versión del '+z(d.getDate())+'/'+z(d.getMonth()+1)+' '+z(d.getHours())+':'+z(d.getMinutes());
+ var c=document.querySelector('#s-start .start');if(c)c.appendChild(t);}catch(e){}})();
 /* Botón Atrás de Android: no cierra la app, vuelve al camino (y del camino al inicio) */
 (function(){
  function guard(){try{history.pushState({eq:1},'');}catch(e){}}
@@ -1200,7 +1203,7 @@ if(S.name){document.getElementById('nameIn').value=S.name;}
    }).catch(function(){});
  }
  function tryReload(){ if(!pending)return; var on=document.querySelector('.screen.on'); var id=on?on.id:'';
-   if(id==='s-start'||id==='s-path'){pending=false;location.reload();} }
+   if(id==='s-start'||id==='s-path'||id==='s-lesson'||id==='s-reward'){pending=false;location.reload();} }
  window.addEventListener('load',function(){setTimeout(check,1500);});
  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')check();});
  setInterval(function(){ if(document.visibilityState==='visible')check(); },120000);
