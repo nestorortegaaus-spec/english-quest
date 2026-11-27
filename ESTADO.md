@@ -203,3 +203,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): Isla con 9 paisajes que rotan cada partida (ISL_SCN, S.islScn): Isla clásica, Selva, Desierto, Nieve, Golosinas, Luna,
   Bosque de hadas, Valle Dino, Ciudad Musical. Fondo = img/kart_bg_<id>.jpg con parallax, piso y líquido de colores propios, y un bichito
   distinto para pisar (snake, scorpion, penguin, snail, alien, ladybug, dinosaur, mouse) que dice su nombre en inglés y castellano.
+- ✅ HECHO (27/11): Kart con 16 pistas (+Granja Feliz y Bajo el Mar, bloqueadas en cadena).
+- ⏭️ PENDIENTE: pilotos nuevos del Kart hechos con ChatGPT (los armados por código quedaron feos y se descartaron).

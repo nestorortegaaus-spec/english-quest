@@ -2045,7 +2045,9 @@ var KTRACKS=[
  {id:'dino',n:'Valle Dino',e:'🦕',sky:['#8FD0F5','#FFE6C9'],hill:['#AFBA37','#98A22F'],g:['#8FC24E','#83B645'],road:['#7A6E62','#72675C'],rum:['#FFFFFF','#8CD98C'],lane:'#F4F4F4',deco:['🦕','🌋','🦖','🌴','🥚'],ai:1.0},
  {id:'fairy',n:'Bosque de Hadas',e:'🧚',sky:['#C9A8F0','#FFD6F0'],hill:['#93974A','#80843F'],g:['#86C46A','#7AB85F'],road:['#7E6BB0','#7664A6'],rum:['#FFFFFF','#C79BFF'],lane:'#FFE9FF',deco:['🍄','🧚','🌸','✨','🦋'],ai:1.0},
  {id:'sky',n:'Islas del Cielo',e:'☁️',sky:['#7EC8FF','#DDF1FF'],hill:['#90C5BD','#7FB5AD'],g:['#E9F5FF','#DDEEFB'],road:['#9AA6B8','#929EB0'],rum:['#FFFFFF','#7FC4F2'],lane:'#FFFFFF',deco:['☁️','🎈','🪁','☁️','🌈'],ai:1.01},
- {id:'music',n:'Ciudad Musical',e:'🎵',sky:['#6FC8FF','#E6F5FF'],hill:['#9E8068','#8C705A'],g:['#C6A5E8','#BB98DE'],road:['#3B3B4A','#363644'],rum:['#FFFFFF','#222222'],lane:'#FFFFFF',deco:['🎸','🎹','🥁','🎺','🎵'],ai:1.02}
+ {id:'music',n:'Ciudad Musical',e:'🎵',sky:['#6FC8FF','#E6F5FF'],hill:['#9E8068','#8C705A'],g:['#C6A5E8','#BB98DE'],road:['#3B3B4A','#363644'],rum:['#FFFFFF','#222222'],lane:'#FFFFFF',deco:['🎸','🎹','🥁','🎺','🎵'],ai:1.02},
+ {id:'farm',n:'Granja Feliz',e:'🐄',sky:['#7EC8FF','#DDF1FF'],hill:['#8DBF4A','#7DAF3F'],g:['#8FCB4A','#82BE3F'],road:['#8A6E52','#82684C'],rum:['#FFFFFF','#E84A4A'],lane:'#FFF1C9',deco:['🐄','🐑','🌻','🚜','🐓'],ai:1.03},
+ {id:'sea',n:'Bajo el Mar',e:'🐠',sky:['#5DBCE4','#9EE0F5'],hill:['#3796C6','#2F86B4'],g:['#E8D29A','#DFC88E'],road:['#4A7FA8','#457AA2'],rum:['#FFFFFF','#FF9A3C'],lane:'#DDF6FF',deco:['🐠','🐙','🪸','🐢','🐚'],ai:1.04}
 ];
 var KART_IMG={}, KART_BG=null, KART_BGS={};
 function kartBg(id){ if(KART_BGS[id]!==undefined)return; KART_BGS[id]=null; var im=new Image(); im.onload=function(){KART_BGS[id]=im;}; im.src='img/kart_bg_'+id+'.jpg'; }
