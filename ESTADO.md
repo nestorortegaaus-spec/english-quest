@@ -153,3 +153,6 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): en ¡Hablá! no aparece el narrador (GAME.quiet), porque se mezclaba con el micrófono. Voz: say() espera 150 ms después de cortar
   otra frase (en Android hablar justo después de cancel se perdía) y sayBoth dice el castellano después del inglés. Kart: la consigna dice solo
   la palabra y espera a que termine la palabra anterior en inglés + castellano.
+- ⏭️ PENDIENTE (pedido 27/11, idea tipo Buddy.ai): en el descanso de 5 minutos, el amigo compañero aparece grande y animado (poses
+  idle/closed/open/happy, boca que se mueve al hablar, parpadeo) y guía el descanso hablando: la saluda por su nombre, hace "Simon says"
+  con movimientos y le pide repetir palabras con el micrófono. Guion fijo (sin IA paga), funciona sin internet.
