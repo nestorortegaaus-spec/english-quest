@@ -93,7 +93,7 @@ le acepte la voz a la nena.
   Choques: rebote lateral de ambos, el rival tambalea/gira y frena, sacudón de cámara, chispas y sonido de golpe.
   Arte (ChatGPT, completo): img/kart_<piloto>.png (fox, panda, koala, lion, bunny, robot; sin fondo, 360 px)
   y img/kart_bg_<pista>.jpg (beach, city, snow, space; panorama 1400 px).
-- 🎨 Pintá: "Color the star yellow": elegir el color y tocar el dibujo (10 dibujos, 8 colores; nivel 3+: solo escuchando). Al final de cada mundo y alternado con ¡Hablá! desde el mundo 3.
+- 🎨 Pintá: "Color the star yellow": elegir el color y tocar el dibujo (32 dibujos, 12 colores que rotan: salen primero los que menos vio, guardado en S.pnt; nivel 3+: solo escuchando). Al final de cada mundo y alternado con ¡Hablá! desde el mundo 3.
 - 👨‍👩‍👧 Panel para padres: link "Para padres" en el inicio, protegido con una multiplicación. Muestra mundo y parada, racha, % de aciertos, gráfico de 14 días, palabras que más le cuestan (con audio), palabras dominadas, meta diaria (3/5/8/10) y empezar de cero.
 - 🔥 Racha diaria: meta de 5 paradas por día; al cumplirla suma un día de racha y regala 20 💎 (si saltea un día, vuelve a 0).
 - 🏪 Tienda (botón 💎 del camino): accesorios para el zorrito (se ven en el camino) y 📒 álbum de 48 figuritas en sobres de 3 (25 💎), cada una con su palabra en inglés; las repetidas devuelven 5 💎.
@@ -140,9 +140,7 @@ le acepte la voz a la nena.
   Agregar mucha más variedad de ropa y accesorios (sombreros, anteojos, collares, remeras/buzos, capas, mochilas,
   disfraces…) y poder combinar varios a la vez (uno por lugar: cabeza, cara, cuello, cuerpo). Ideal con arte de ChatGPT
   para que combine con los amigos 3D de la Casa de Amigos.
-- ⏭️ PENDIENTE (pedido 27/11): Pintá — siempre salen los mismos objetos y colores (hoy 10 dibujos en PAINT_OBJ y
-  8 colores en PAINT_COL; el nivel 1 usa solo los 4 primeros colores). Agregar muchos más dibujos y colores
-  (white, black, gray, light blue…) y que roten entre partidas, priorizando los que menos vio.
+- ✅ HECHO (27/11): Pintá ahora tiene 32 dibujos y 12 colores (suma negro, blanco, gris y celeste). Rotan priorizando los menos vistos.
 - Segundo cuento
 - "Modo desafío" en el juego de la Isla (palabra en español → agarrar la manzana en inglés correcta)
 - Más lecciones y contenido

@@ -143,11 +143,12 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .pt-ask{display:flex;align-items:center;gap:10px;background:#fff;border-radius:18px;padding:8px 14px 8px 8px;box-shadow:0 4px 0 rgba(120,140,170,.2);font-weight:900;font-size:19px;color:var(--ink);}
 .pt-ask .ls-spk.slow{width:52px;height:52px;font-size:24px;}
 .pt-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;}
+.pt-obj.wh{background:#DDE6F0;}
 .pt-obj{aspect-ratio:1/1;border:none;border-radius:18px;background:#fff;box-shadow:0 5px 0 rgba(120,140,170,.2);padding:10px;cursor:pointer;color:#fff;}
 .pt-obj svg{width:100%;height:100%;overflow:visible;} .pt-obj svg *{stroke:#2b2a4a;stroke-width:3;stroke-linejoin:round;}
 .pt-obj .cp,.pt-obj .cp *{fill:currentColor;} .pt-obj.painted{animation:lspop .4s;}
 .pt-obj.no{animation:lsshake .35s;}
-.pt-board.nine .pt-obj{padding:7px;}
+.pt-board.nine .pt-obj{padding:7px;} .pt-pal{max-width:400px;} .pt-col i{width:34px!important;height:34px!important;}
 .pt-pal{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
 .pt-col{border:3px solid transparent;background:#fff;border-radius:16px;padding:6px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-family:inherit;box-shadow:0 3px 0 rgba(120,140,170,.2);}
 .pt-col i{width:40px;height:40px;border-radius:50%;display:block;border:3px solid rgba(0,0,0,.12);} .pt-col small{font-weight:900;font-size:12px;color:var(--ink);}
@@ -2206,12 +2207,39 @@ var PAINT_OBJ=[
  {en:'balloon',es:'globo',svg:'<ellipse class="cp" cx="50" cy="40" rx="28" ry="33"/><path class="cp" d="M50 73 L44 81 L56 81Z"/><path d="M50 81 Q44 90 52 98" fill="none"/>'},
  {en:'flower',es:'flor',svg:'<g class="cp"><circle cx="50" cy="24" r="15"/><circle cx="75" cy="42" r="15"/><circle cx="66" cy="70" r="15"/><circle cx="34" cy="70" r="15"/><circle cx="25" cy="42" r="15"/></g><circle cx="50" cy="50" r="12" fill="#FFF3C4"/>'},
  {en:'car',es:'auto',svg:'<path class="cp" d="M8 66 L14 46 L32 44 L42 30 L68 30 L80 46 L92 50 L92 66Z"/><path d="M45 34 L64 34 L72 45 L40 45Z" fill="#DDF1FF"/><circle cx="28" cy="68" r="10" fill="#2b2a4a"/><circle cx="74" cy="68" r="10" fill="#2b2a4a"/>'}
-];
+,
+ {en:'sun',es:'sol',svg:'<g class="cp"><circle cx="50" cy="50" r="22"/><path d="M50 8L56 22L44 22Z M50 92L44 78L56 78Z M8 50L22 44L22 56Z M92 50L78 56L78 44Z M20 20L33 27L27 33Z M80 80L67 73L73 67Z M80 20L73 33L67 27Z M20 80L27 67L33 73Z"/></g>'},
+ {en:'apple',es:'manzana',svg:'<path class="cp" d="M50 30 C30 18 10 30 14 55 C18 80 36 92 50 84 C64 92 82 80 86 55 C90 30 70 18 50 30Z"/><path d="M50 30 Q50 16 58 8" fill="none"/><path d="M54 18 Q68 10 74 20 Q62 26 54 18Z" fill="#4CC37A"/>'},
+ {en:'tree',es:'árbol',svg:'<rect x="42" y="60" width="16" height="32" fill="#A86B3C"/><path class="cp" d="M50 8 C76 8 90 30 82 48 C88 64 70 74 50 68 C30 74 12 64 18 48 C10 30 24 8 50 8Z"/>'},
+ {en:'umbrella',es:'paraguas',svg:'<path class="cp" d="M8 52 C8 26 30 10 50 10 C70 10 92 26 92 52 C84 46 76 46 68 52 C60 46 40 46 32 52 C24 46 16 46 8 52Z"/><path d="M50 52 L50 84 Q50 92 42 90" fill="none"/>'},
+ {en:'cup',es:'taza',svg:'<path class="cp" d="M18 28 L72 28 L66 84 Q64 90 58 90 L32 90 Q26 90 24 84Z"/><path d="M72 40 Q90 42 88 58 Q86 72 68 70" fill="none"/>'},
+ {en:'kite',es:'barrilete',svg:'<path class="cp" d="M50 6 L82 40 L50 84 L18 40Z"/><path d="M50 6 L50 84 M18 40 L82 40" fill="none"/><path d="M50 84 Q40 92 50 96 Q60 98 54 100" fill="none"/>'},
+ {en:'rocket',es:'cohete',svg:'<path class="cp" d="M50 6 C66 20 68 50 64 72 L36 72 C32 50 34 20 50 6Z"/><path class="cp" d="M36 56 L20 78 L36 74Z M64 56 L80 78 L64 74Z"/><circle cx="50" cy="38" r="8" fill="#DDF1FF"/><path d="M42 74 L50 94 L58 74Z" fill="#FF9A3C"/>'},
+ {en:'boat',es:'barco',svg:'<path class="cp" d="M10 62 L90 62 L76 84 L24 84Z"/><path d="M52 12 L52 58 L82 58Z" fill="#fff"/><path d="M48 18 L48 58 L24 58Z" fill="#fff"/>'},
+ {en:'butterfly',es:'mariposa',svg:'<g class="cp"><ellipse cx="30" cy="34" rx="20" ry="22"/><ellipse cx="70" cy="34" rx="20" ry="22"/><ellipse cx="32" cy="70" rx="15" ry="17"/><ellipse cx="68" cy="70" rx="15" ry="17"/></g><rect x="46" y="22" width="8" height="64" rx="4" fill="#2b2a4a"/>'},
+ {en:'crown',es:'corona',svg:'<path class="cp" d="M12 76 L16 28 L34 50 L50 20 L66 50 L84 28 L88 76Z"/><rect x="12" y="76" width="76" height="12" fill="#FFD43B"/>'},
+ {en:'mushroom',es:'hongo',svg:'<path class="cp" d="M8 52 C8 22 30 10 50 10 C70 10 92 22 92 52Z"/><path d="M36 52 L64 52 L62 88 L38 88Z" fill="#FFF3D6"/><circle cx="34" cy="32" r="6" fill="#fff"/><circle cx="62" cy="28" r="7" fill="#fff"/>'},
+ {en:'ice cream',es:'helado',svg:'<path d="M30 50 L70 50 L50 96Z" fill="#E8B26A"/><g class="cp"><circle cx="38" cy="42" r="16"/><circle cx="62" cy="42" r="16"/><circle cx="50" cy="26" r="16"/></g>'},
+ {en:'hat',es:'sombrero',svg:'<path class="cp" d="M30 66 L32 26 Q50 16 68 26 L70 66Z"/><ellipse class="cp" cx="50" cy="70" rx="44" ry="12"/><rect x="31" y="54" width="38" height="8" fill="#2b2a4a"/>'},
+ {en:'shirt',es:'remera',svg:'<path class="cp" d="M36 12 Q50 22 64 12 L92 28 L82 46 L72 40 L72 90 L28 90 L28 40 L18 46 L8 28Z"/>'},
+ {en:'gift',es:'regalo',svg:'<rect class="cp" x="14" y="40" width="72" height="50"/><rect class="cp" x="10" y="28" width="80" height="16"/><rect x="45" y="28" width="10" height="62" fill="#FFD43B"/><path d="M50 28 Q34 6 30 20 Q30 28 50 28 Q66 6 70 20 Q70 28 50 28Z" fill="#FFD43B"/>'},
+ {en:'cake',es:'torta',svg:'<rect class="cp" x="14" y="50" width="72" height="40" rx="6"/><path d="M14 58 Q24 66 32 58 Q42 66 50 58 Q58 66 68 58 Q76 66 86 58 L86 50 L14 50Z" fill="#fff"/><rect x="47" y="30" width="6" height="20" fill="#7FC4F2"/><path d="M50 18 Q56 26 50 30 Q44 26 50 18Z" fill="#FF9A3C"/>'},
+ {en:'bell',es:'campana',svg:'<path class="cp" d="M50 12 C70 12 76 30 76 50 C76 64 84 70 90 76 L10 76 C16 70 24 64 24 50 C24 30 30 12 50 12Z"/><circle cx="50" cy="84" r="8" fill="#2b2a4a"/>'},
+ {en:'leaf',es:'hoja',svg:'<path class="cp" d="M14 86 C10 40 40 10 88 12 C90 60 60 92 14 86Z"/><path d="M14 86 Q50 50 80 20" fill="none"/>'},
+ {en:'egg',es:'huevo',svg:'<path class="cp" d="M50 8 C74 8 86 48 86 64 C86 84 70 94 50 94 C30 94 14 84 14 64 C14 48 26 8 50 8Z"/>'},
+ {en:'sock',es:'media',svg:'<path class="cp" d="M34 8 L62 8 L62 56 L84 70 Q94 80 84 90 Q76 96 64 90 L38 74 Q30 68 32 58Z"/><rect x="34" y="8" width="28" height="12" fill="#fff"/>'},
+ {en:'drum',es:'tambor',svg:'<path class="cp" d="M14 34 L86 34 L86 74 Q50 92 14 74Z"/><ellipse cx="50" cy="34" rx="36" ry="12" fill="#FFF3D6"/><path d="M14 40 L30 74 L50 40 L70 74 L86 40" fill="none"/>'},
+ {en:'key',es:'llave',svg:'<circle class="cp" cx="30" cy="50" r="20"/><circle cx="30" cy="50" r="7" fill="#fff"/><rect class="cp" x="46" y="44" width="46" height="12"/><rect class="cp" x="76" y="56" width="8" height="14"/><rect class="cp" x="62" y="56" width="8" height="10"/>'}];
 var PAINT_COL=[{en:'red',es:'rojo',c:'#FF5A5A'},{en:'blue',es:'azul',c:'#4A9BEF'},{en:'green',es:'verde',c:'#4CC37A'},{en:'yellow',es:'amarillo',c:'#FFD43B'},
- {en:'orange',es:'naranja',c:'#FF9A3C'},{en:'purple',es:'violeta',c:'#9B6BE8'},{en:'pink',es:'rosa',c:'#FF8DC7'},{en:'brown',es:'marrón',c:'#A86B3C'}];
+ {en:'orange',es:'naranja',c:'#FF9A3C'},{en:'purple',es:'violeta',c:'#9B6BE8'},{en:'pink',es:'rosa',c:'#FF8DC7'},{en:'brown',es:'marrón',c:'#A86B3C'},
+ {en:'black',es:'negro',c:'#2E2E36'},{en:'white',es:'blanco',c:'#FFFFFF'},{en:'gray',es:'gris',c:'#9AA3AE'},{en:'light blue',es:'celeste',c:'#8FD3FF'}];
+/* rotación: primero lo que menos vio */
+function ptLeast(arr,kind,n){ if(!S.pnt)S.pnt={o:{},c:{}}; var m=S.pnt[kind]; return shuffle(arr).sort(function(a,b){return (m[a.en]||0)-(m[b.en]||0);}).slice(0,n); }
+function ptSeen(kind,en){ if(!S.pnt)S.pnt={o:{},c:{}}; S.pnt[kind][en]=(S.pnt[kind][en]||0)+1; }
 function startPaint(u,lv){
  lv=lv||1; var host=gSetup('🎨 Pintá · Nivel '+lv);
- var NO=lv>=3?9:6, NC=Math.min(8,4+2*(lv-1)), objs=shuffle(PAINT_OBJ).slice(0,NO), cols=PAINT_COL.slice(0,NC), hideTxt=lv>=3;
+ var NO=lv>=3?9:6, NC=Math.min(12,4+2*(lv-1)), objs=ptLeast(PAINT_OBJ,'o',NO), base=PAINT_COL.slice(0,lv<=1?8:12), cols=ptLeast(base,'c',NC), hideTxt=lv>=3;
+ objs.forEach(function(o){ptSeen('o',o.en);}); save();
  var sel=null, r=0, R=NO, target=null, tcol=null, firstOk=0, miss=false;
  host.innerHTML='<div class="g2 pt"><div class="pt-ask" id="ptAsk"><button class="ls-spk slow" id="ptSay">🔊</button><span id="ptTxt"></span></div>'
   +'<div class="pt-board'+(NO>6?' nine':'')+'" id="ptBoard"></div><div class="pt-pal" id="ptPal"></div></div>';
@@ -2221,7 +2249,7 @@ function startPaint(u,lv){
    if(!sel){document.getElementById('ptTxt').textContent='Primero elegí un color 👇';say(tcol.en);return;}
    if(o!==target){miss=true;sBad();b.classList.add('no');setTimeout(function(){b.classList.remove('no');},350);say('This is the '+o.en);return;}
    if(sel!==tcol){miss=true;sBad();say('That is '+sel.en+'. Find '+tcol.en+'!');return;}
-   o.done=true;b.style.color=tcol.c;b.classList.add('painted');if(!miss)firstOk++;r++;sGood();burst(14);say('Great! The '+o.en+' is '+tcol.en+'!');gScore(r+'/'+R);
+   o.done=true;b.style.color=tcol.c;b.classList.add('painted');ptSeen('c',tcol.en);if(tcol.en==='white')b.classList.add('wh');if(!miss)firstOk++;r++;sGood();burst(14);say('Great! The '+o.en+' is '+tcol.en+'!');gScore(r+'/'+R);
    GAME.timer=setTimeout(next,1500); };
   board.appendChild(b);});
  cols.forEach(function(c){var b=document.createElement('button');b.className='pt-col';b.innerHTML='<i style="background:'+c.c+'"></i>'+(hideTxt?'':'<small>'+c.en+'</small>');
@@ -2231,7 +2259,7 @@ function startPaint(u,lv){
  function next(){ if(!GAME.on)return;
   var left=objs.filter(function(o){return !o.done;});
   if(!left.length){finishGameNode('🎨 ¡Qué lindo dibujo!','Pintaste '+R+' cosas en inglés ('+firstOk+' a la primera) 🖌️');return;}
-  target=pickR(left); tcol=pickR(cols); miss=false;
+  target=pickR(left); var cm=(S.pnt&&S.pnt.c)||{}; tcol=shuffle(cols).sort(function(a,b){return (cm[a.en]||0)-(cm[b.en]||0);})[Math.random()<0.6?0:((Math.random()*cols.length)|0)]; miss=false;
   document.getElementById('ptTxt').textContent=hideTxt?'Escuchá y pintá 👂':phrase();
   say(phrase()); }
  document.getElementById('ptSay').onclick=function(){if(target)say(phrase());};
