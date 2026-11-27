@@ -213,3 +213,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): 🏪 La Tienda (startStore, en GROT): ella atiende un negocio (rotan: frutería, panadería, juguetería, librería, ropa, kiosco)
   y los amigos de la Casa le piden cosas en inglés ("Can I have…, please?", "I want…", "I would like…"). Nivel 1 con traducción y voz en
   castellano; nivel 3+ piden cantidades (two apples → tocar 2 veces + "Here you are!"); nivel 4+ estante sin nombres.
+- ✅ HECHO (27/11): Karaoke con 11 canciones (+Baa Baa Black Sheep, London Bridge, The Itsy Bitsy Spider, If You're Happy and You Know It,
+  Are You Sleeping Brother John).
