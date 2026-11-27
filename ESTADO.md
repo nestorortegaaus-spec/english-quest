@@ -170,3 +170,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): Kart con 14 pistas: 10 nuevas bloqueadas (Pradera Florida, Bosque de Ardillas, Castillo Aventura, Selva Loca, Carrera Dulce,
   Dunas Doradas, Valle Dino, Bosque de Hadas, Islas del Cielo, Ciudad Musical). Se abren de a una saliendo en el podio en la anterior; los rivales
   van un poquito más rápido en cada una. Fondos img/kart_bg_<id>.jpg recortados del arte de los mundos (parte de arriba, en espejo para repetir).
+- ✅ HECHO (27/11): Isla: se puede pisar al cangrejo (cae desde arriba → lo aplasta, rebota, +1 y dice crab / cangrejo); chocarlo de costado sigue
+  sacando vida. Corre el amigo que la acompaña en la aventura (sus poses y su ropa); si no tiene dibujo, el zorrito de siempre.
