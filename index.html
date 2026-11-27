@@ -464,16 +464,12 @@ var STORIES=[
    {emo:'🧒😢',en:'Sam is sad. He cannot play outside.',es:'Sam está triste. No puede jugar afuera.'},
    {emo:'👩🪟',en:'Mom says: Look!',es:'Mamá dice: ¡Mirá!'},
    {emo:'☀️🌈',en:'The rain stops. The sun comes out.',es:'La lluvia para. Sale el sol.'},
-   {emo:'🌈😮',en:'There is a big rainbow!',es:'¡Hay un arcoíris grande!'},
-   {emo:'🧒💦😄',en:'Sam jumps in the puddles. What a fun day!',es:'Sam salta en los charcos. ¡Qué día divertido!'}
+   {emo:'🌈😮',en:'There is a big rainbow! What a fun day!',es:'¡Hay un arcoíris grande! ¡Qué día divertido!'}
  ]},
- {t:'El Cohete a la Luna',gl:{zoe:'Zoe',has:'tiene',a:'un',red:'rojo',rocket:'cohete',three:'tres',two:'dos',one:'uno',go:'¡ya!',goes:'va',up:'arriba',to:'a',the:'el/la',moon:'luna',sees:'ve',stars:'estrellas',earth:'Tierra',is:'es',blue:'azul',small:'chiquita',says:'dice',hello:'hola',and:'y',back:'de vuelta',home:'casa',fly:'volar',i:'yo',love:'amo',space:'espacio',flies:'vuela'},pages:[
+ {t:'El Cohete a la Luna',gl:{zoe:'Zoe',has:'tiene',a:'un',red:'rojo',rocket:'cohete',three:'tres',two:'dos',one:'uno',go:'¡ya!',goes:'va',up:'arriba',to:'a',the:'el/la',moon:'luna',sees:'ve',stars:'estrellas',earth:'Tierra',is:'es',blue:'azul',small:'chiquita',says:'dice',hello:'hola',and:'y',back:'de vuelta',home:'casa',fly:'volar',i:'yo',love:'amo',space:'espacio',bye:'chau',flies:'vuela'},pages:[
    {emo:'👧🚀',en:'Zoe has a red rocket.',es:'Zoe tiene un cohete rojo.'},
-   {emo:'3️⃣2️⃣1️⃣',en:'Three, two, one, go!',es:'¡Tres, dos, uno, ya!'},
-   {emo:'🚀⭐⭐',en:'The rocket goes up. Zoe sees the stars.',es:'El cohete sube. Zoe ve las estrellas.'},
-   {emo:'🌍💙',en:'The Earth is blue and small.',es:'La Tierra es azul y chiquita.'},
-   {emo:'🌙👋',en:'Zoe says: Hello, Moon!',es:'Zoe dice: ¡Hola, Luna!'},
-   {emo:'🚀🏠😴',en:'Zoe flies back home. I love space!',es:'Zoe vuelve volando a casa. ¡Amo el espacio!'}
+   {emo:'3️⃣2️⃣1️⃣🚀',en:'Three, two, one, go! The rocket goes up.',es:'¡Tres, dos, uno, ya! El cohete sube.'},
+   {emo:'👋🌙',en:'Bye, Earth! Hello, Moon!',es:'¡Chau, Tierra! ¡Hola, Luna!'}
  ]}
 ];
 
@@ -485,7 +481,7 @@ var IMG={fox:'img/guide_fox.png',lina:'img/lina.png',dani:'img/dani.png',cat:'im
 var SCENES={'0_0':'img/scene1.jpg','0_1':'img/scene2.jpg','0_2':'img/scene3.jpg','0_3':'img/scene4.jpg','0_4':'img/scene5.jpg',
  '1_0':'img/perro_1.jpg','1_1':'img/perro_2.jpg','1_2':'img/perro_3.jpg','1_3':'img/perro_4.jpg','1_4':'img/perro_5.jpg','1_5':'img/perro_6.jpg',
  '2_0':'img/lluvia_1.jpg','2_1':'img/lluvia_2.jpg','2_2':'img/lluvia_3.jpg','2_3':'img/lluvia_4.jpg','2_4':'img/lluvia_5.jpg',
- '3_0':'img/cohete_1.jpg','3_1':'img/cohete_2.jpg'};
+ '3_0':'img/cohete_1.jpg','3_1':'img/cohete_2.jpg','3_2':'img/cohete_3.jpg'};
 
 /* NODES: mundos (el 1 es el camino original) */
 var NODES_W1=[
@@ -703,7 +699,10 @@ function doMic(w,btn){
    } else { micSt('Te escucho… 🎤'); }
  };
  r.onerror=function(ev){ btn.classList.remove('rec'); var err=ev&&ev.error;
-   if(err==='not-allowed'||err==='service-not-allowed'){ micSt('Tenés que permitir el micrófono: tocá el 🔒 (o ⓘ) arriba, Permisos → Micrófono → Permitir.','#e07a5f'); }
+   if(err==='not-allowed'||err==='service-not-allowed'){ var app=window.matchMedia&&matchMedia('(display-mode: standalone)').matches;
+     micSt(app?'🎤 El micrófono está bloqueado. Pedile a un adulto: abrir Chrome → ⋮ → Configuración → Configuración de sitios → Micrófono → permitir esta app. Mientras, tocá "Ya lo dije ✓".'
+              :'🎤 El micrófono está bloqueado: tocá el 🔒 o ⓘ al lado de la dirección → Permisos → Micrófono → Permitir. Mientras, tocá "Ya lo dije ✓".','#e07a5f');
+     try{ if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){ navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){st.getTracks().forEach(function(t){t.stop();});micSt('¡Listo! Micrófono permitido. Tocá 🎤 de nuevo.');}).catch(function(){}); } }catch(e){} }
    else if(err==='no-speech'){ micSt('No te escuché. Tocá 🎤 y hablá fuerte y claro.','#E8A52E'); }
    else if(err==='audio-capture'){ micSt('No encuentro el micrófono del teléfono.','#e07a5f'); }
    else if(err==='network'){ micSt('Necesito internet para escucharte.','#e07a5f'); }
