@@ -366,7 +366,6 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .narr-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) scale(.85);background:rgba(43,42,74,.86);color:#fff;border-radius:14px;padding:5px 14px;font-weight:900;font-size:17px;text-align:center;opacity:0;transition:all .25s;pointer-events:none;z-index:9;white-space:nowrap;}
 .narr-cap small{display:block;font-size:11px;font-weight:800;color:#C9D3FF;}
 .narr-cap.on{opacity:1;transform:translateX(-50%) scale(1);}
-#s-game{position:relative;}
 .hm-two{display:flex;gap:8px;margin-bottom:12px;} .hm-two .btn{flex:1;margin:0;padding:11px 8px;font-size:15px;}
 .hm-buddy.on{flex:1;display:flex;align-items:center;justify-content:center;border-radius:16px;background:#E9FAF4;color:var(--teal-d);font-weight:900;font-size:15px;border:2px solid var(--teal);}
 .narr-cap{display:flex;flex-direction:column;align-items:center;padding-left:52px!important;}
@@ -2243,15 +2242,38 @@ function startPaint(u,lv){
 var SAFARI_BG='img/safari_bg.jpg';
 /* arbustos del dibujo: centro x y borde de arriba, en proporción de la imagen */
 var SAFARI_BUSH=[[0.16,0.625],[0.50,0.59],[0.83,0.625]];
+/* f:1 vuela por el cielo, f:0 se asoma de los arbustos; d: dificultad 1-3 */
 var SAFARI=[
- {en:'parrot',es:'loro',e:'🦜',f:1},{en:'owl',es:'búho',e:'🦉',f:1},{en:'eagle',es:'águila',e:'🦅',f:1},{en:'butterfly',es:'mariposa',e:'🦋',f:1},
- {en:'bee',es:'abeja',e:'🐝',f:1},{en:'bat',es:'murciélago',e:'🦇',f:1},{en:'peacock',es:'pavo real',e:'🦚',f:0},{en:'flamingo',es:'flamenco',e:'🦩',f:0},
- {en:'rabbit',es:'conejo',e:'🐇',f:0},{en:'squirrel',es:'ardilla',e:'🐿️',f:0},{en:'frog',es:'rana',e:'🐸',f:0},{en:'hedgehog',es:'erizo',e:'🦔',f:0},
- {en:'turtle',es:'tortuga',e:'🐢',f:0},{en:'snail',es:'caracol',e:'🐌',f:0},{en:'ladybug',es:'vaquita de San Antonio',e:'🐞',f:1},{en:'dove',es:'paloma',e:'🕊️',f:1}
+ {en:'bird',es:'pájaro',e:'🐦',f:1,d:1},{en:'butterfly',es:'mariposa',e:'🦋',f:1,d:1},{en:'bee',es:'abeja',e:'🐝',f:1,d:1},{en:'duck',es:'pato',e:'🦆',f:1,d:1},
+ {en:'owl',es:'búho',e:'🦉',f:1,d:1},{en:'ladybug',es:'vaquita de San Antonio',e:'🐞',f:1,d:2},{en:'parrot',es:'loro',e:'🦜',f:1,d:1},{en:'eagle',es:'águila',e:'🦅',f:1,d:2},
+ {en:'bat',es:'murciélago',e:'🦇',f:1,d:2},{en:'dove',es:'paloma',e:'🕊️',f:1,d:2},{en:'swan',es:'cisne',e:'🦢',f:1,d:2},{en:'goose',es:'ganso',e:'🪿',f:1,d:3},
+ {en:'crow',es:'cuervo',e:'🐦‍⬛',f:1,d:3},{en:'fly',es:'mosca',e:'🪰',f:1,d:2},{en:'mosquito',es:'mosquito',e:'🦟',f:1,d:2},{en:'chick',es:'pollito',e:'🐤',f:1,d:1},
+ {en:'cat',es:'gato',e:'🐈',f:0,d:1},{en:'dog',es:'perro',e:'🐕',f:0,d:1},{en:'rabbit',es:'conejo',e:'🐇',f:0,d:1},{en:'mouse',es:'ratón',e:'🐁',f:0,d:1},
+ {en:'frog',es:'rana',e:'🐸',f:0,d:1},{en:'turtle',es:'tortuga',e:'🐢',f:0,d:1},{en:'snail',es:'caracol',e:'🐌',f:0,d:1},{en:'pig',es:'chancho',e:'🐖',f:0,d:1},
+ {en:'cow',es:'vaca',e:'🐄',f:0,d:1},{en:'horse',es:'caballo',e:'🐎',f:0,d:1},{en:'sheep',es:'oveja',e:'🐑',f:0,d:1},{en:'lion',es:'león',e:'🦁',f:0,d:1},
+ {en:'monkey',es:'mono',e:'🐒',f:0,d:1},{en:'bear',es:'oso',e:'🐻',f:0,d:1},{en:'fox',es:'zorro',e:'🦊',f:0,d:1},{en:'elephant',es:'elefante',e:'🐘',f:0,d:1},
+ {en:'squirrel',es:'ardilla',e:'🐿️',f:0,d:2},{en:'hedgehog',es:'erizo',e:'🦔',f:0,d:2},{en:'goat',es:'cabra',e:'🐐',f:0,d:2},{en:'rooster',es:'gallo',e:'🐓',f:0,d:2},
+ {en:'turkey',es:'pavo',e:'🦃',f:0,d:2},{en:'peacock',es:'pavo real',e:'🦚',f:0,d:2},{en:'flamingo',es:'flamenco',e:'🦩',f:0,d:2},{en:'tiger',es:'tigre',e:'🐅',f:0,d:2},
+ {en:'zebra',es:'cebra',e:'🦓',f:0,d:2},{en:'giraffe',es:'jirafa',e:'🦒',f:0,d:2},{en:'koala',es:'koala',e:'🐨',f:0,d:2},{en:'panda',es:'panda',e:'🐼',f:0,d:2},
+ {en:'wolf',es:'lobo',e:'🐺',f:0,d:2},{en:'deer',es:'ciervo',e:'🦌',f:0,d:2},{en:'snake',es:'serpiente',e:'🐍',f:0,d:2},{en:'lizard',es:'lagartija',e:'🦎',f:0,d:2},
+ {en:'spider',es:'araña',e:'🕷️',f:0,d:2},{en:'ant',es:'hormiga',e:'🐜',f:0,d:2},{en:'kangaroo',es:'canguro',e:'🦘',f:0,d:2},{en:'camel',es:'camello',e:'🐫',f:0,d:2},
+ {en:'raccoon',es:'mapache',e:'🦝',f:0,d:3},{en:'skunk',es:'zorrino',e:'🦨',f:0,d:3},{en:'badger',es:'tejón',e:'🦡',f:0,d:3},{en:'otter',es:'nutria',e:'🦦',f:0,d:3},
+ {en:'beaver',es:'castor',e:'🦫',f:0,d:3},{en:'sloth',es:'perezoso',e:'🦥',f:0,d:3},{en:'gorilla',es:'gorila',e:'🦍',f:0,d:3},{en:'leopard',es:'leopardo',e:'🐆',f:0,d:3},
+ {en:'hippo',es:'hipopótamo',e:'🦛',f:0,d:3},{en:'rhino',es:'rinoceronte',e:'🦏',f:0,d:3},{en:'crocodile',es:'cocodrilo',e:'🐊',f:0,d:3},{en:'llama',es:'llama',e:'🦙',f:0,d:3},
+ {en:'boar',es:'jabalí',e:'🐗',f:0,d:3},{en:'beetle',es:'escarabajo',e:'🪲',f:0,d:3},{en:'cricket',es:'grillo',e:'🦗',f:0,d:3},{en:'worm',es:'gusano',e:'🪱',f:0,d:3},
+ {en:'hamster',es:'hámster',e:'🐹',f:0,d:2},{en:'rat',es:'rata',e:'🐀',f:0,d:3},{en:'dodo',es:'dodo',e:'🦤',f:0,d:3},{en:'mammoth',es:'mamut',e:'🦣',f:0,d:3}
 ];
+/* elige animales: primero los que nunca fotografió (o le cuestan), algunos conocidos para repasar; siempre con voladores y de tierra */
+function safariPool(NA,lv){ var maxD=Math.min(3,lv), h=(S&&S.hist)||{};
+ var cand=SAFARI.filter(function(a){return a.d<=maxD;});
+ var fresh=shuffle(cand.filter(function(a){var x=h[a.en];return !x||x[1]>=x[0];})), known=shuffle(cand.filter(function(a){var x=h[a.en];return x&&x[0]>x[1];}));
+ var nNew=Math.min(fresh.length,Math.ceil(NA*0.7)), pick=fresh.slice(0,nNew).concat(known.slice(0,NA-nNew)); if(pick.length<NA)pick=pick.concat(fresh.slice(nNew,nNew+NA-pick.length));
+ if(!pick.some(function(a){return a.f;})){var fl=shuffle(cand.filter(function(a){return a.f;}))[0];if(fl)pick[0]=fl;}
+ if(!pick.some(function(a){return !a.f;})){var gr=shuffle(cand.filter(function(a){return !a.f;}))[0];if(gr)pick[pick.length-1]=gr;}
+ return shuffle(pick); }
 function startSafari(u,lv){
  lv=lv||1; var host=gSetup('📸 Safari · Nivel '+lv);
- var NA=Math.min(SAFARI.length,5+lv), pool=shuffle(SAFARI).slice(0,NA);
+ var NA=Math.min(12,5+lv), pool=safariPool(NA,lv);
  var GOAL=Math.min(12,6+lv), shots=GOAL+12, got=0, target=null, beasts=[], spawnT=0, showEs=lv<4, tAsk=0;
  var spd=Math.min(2.4,0.8+0.25*(lv-1)), maxOn=Math.min(4,2+Math.floor(lv/2));
  var BG=!!SAFARI_BG;

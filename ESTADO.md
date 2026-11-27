@@ -44,6 +44,7 @@ le acepte la voz a la nena.
 - 🚀 ¡Hablá!: decir la palabra en voz alta con el micrófono hace subir el cohete hasta la Luna
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
+- 📸 Safari: 72 animales (SAFARI con f vuela/tierra y d dificultad 1-3); safariPool elige ~70% que nunca fotografió o le cuestan + ~30% conocidos, con voladores y de tierra.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
 - 🆕 Juegos 27/11: 🔠 Sopa de letras (grilla 6→8, 4-6 palabras, diagonales nivel 3+, al revés nivel 4+, palabras ocultas
   nivel 3+; al encontrar dice inglés+castellano), ❓ Adivinanzas (RIDDLES: 30 con 3 pistas en inglés; menos pistas = más
@@ -142,9 +143,6 @@ le acepte la voz a la nena.
 - ⏭️ PENDIENTE (pedido 27/11): Pintá — siempre salen los mismos objetos y colores (hoy 10 dibujos en PAINT_OBJ y
   8 colores en PAINT_COL; el nivel 1 usa solo los 4 primeros colores). Agregar muchos más dibujos y colores
   (white, black, gray, light blue…) y que roten entre partidas, priorizando los que menos vio.
-- ⏭️ PENDIENTE (pedido 27/11): Safari de fotos — los animales se repiten siempre (hoy hay 16 en la lista SAFARI y
-  cada partida usa 6-9). Agregar muchos más animales (voladores y de tierra) y que roten entre partidas/niveles
-  para que aprenda animales nuevos (por ejemplo, priorizar los que todavía no fotografió).
 - Segundo cuento
 - "Modo desafío" en el juego de la Isla (palabra en español → agarrar la manzana en inglés correcta)
 - Más lecciones y contenido
