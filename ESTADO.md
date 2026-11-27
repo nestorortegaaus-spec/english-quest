@@ -233,3 +233,6 @@ le acepte la voz a la nena.
 - ⏭️ EN COLA: Kart con tienda de autos más rápidos (se compran con ⭐ o 💎 dentro del juego), autos nuevos con ChatGPT.
 - 🔄 EN CURSO (hechos: Pradera, Playa; rotan en cada carrera, RSCN en run.js, S.run.scn): más paisajes para la Carrera Mágica con ChatGPT (por paisaje: 1 horizonte panorámico + 1 hoja 2x2 de decorados; el camino y el
   pasto se dibujan por código con los colores del paisaje).
+- ⏭️ EN COLA (pedido 27/11): juego nuevo de carreras de BUGGYS en la playa (estilo de juego de Beach Buggy Racing, pero original: arte, personajes
+  y nombre propios). Caminos de arena anchos, 3D con three.js como la Carrera Mágica, rivales, y el buggy tira poderes a los contrincantes
+  (por ejemplo burbuja, cáscara de banana, ola, cohete de confeti). Inglés integrado (cajas de poder con palabras). Arte de buggys y pilotos con ChatGPT.
