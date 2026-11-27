@@ -26,6 +26,19 @@ El arreglo: mensajes claros en pantalla cuando escucha ("Escuchando…",
 alternativas de reconocimiento y comparación por similitud para que
 le acepte la voz a la nena.
 
+## Mundos (desde 27/11/2026)
+- Mundo 1 · La pradera: el camino original (31 paradas, temas 0-11).
+- Mundo 2 · La ciudad: Ropa, Escuela, Transporte, Lugares + frases "En la escuela" + cuento "El Perro Perdido".
+- Mundo 3 · La naturaleza: Clima, Naturaleza, Zoológico, Frutas y Verduras + frases del clima + cuento "El Día de Lluvia".
+- Mundo 4 · Gran aventura: Emociones, Deportes, Más Acciones, Profesiones + "Mi día" y "Más preguntas" + cuento "El Cohete a la Luna".
+- Mundo 5 en adelante · Galaxias: repaso mezclando todos los temas, infinito.
+- Cada mundo sube de nivel todos los juegos (nivel = número de mundo; el desafío final es un nivel más).
+- Dificultad: Ladrillos (más filas, 5 columnas desde nivel 3, formas distintas, ladrillos de 2 golpes,
+  pelota más rápida, bloques más cerca, paleta más chica); Memotest (6 → 8 → 10 pares, se tapan más rápido);
+  Isla (más larga, más rápida, más pozos y cangrejos, cangrejos que caminan desde nivel 3);
+  Escuchá (6 opciones y más rondas desde nivel 2).
+- Ideas: más cuentos con ilustraciones de ChatGPT (hoy los nuevos usan emojis).
+
 ## Estado de features (funcionando)
 - Camino con niveles, estrellas, vidas (corazones)
 - Lecciones con voz + micrófono
