@@ -1025,7 +1025,7 @@ function startMonster(u,lv){
   if(r>=R){finishGameNode('👾 ¡Monstruo feliz!','Le diste de comer '+R+' veces 😋');return;}
   var opts=shuffle(pool).slice(0,NOPT), want=two?opts.slice(0,2):[opts[0]], got=[];
   opts=shuffle(opts);
-  var phrase='I want '+want.map(function(w){var e=w.en;return (/s$/i.test(e)&&!/(us|ss|is)$/i.test(e)?'some ':/^[aeiou]/i.test(e)?'an ':'a ')+e;}).join(' and ');
+  var phrase='I want '+want.map(function(w){var e=w.en;return ((/s$/i.test(e)&&!/(us|ss|is)$/i.test(e))||/^(water|milk|bread|rice|juice|cheese|corn|soup|chocolate|ice cream|pizza)$/i.test(e)?'some ':/^[aeiou]/i.test(e)?'an ':'a ')+e;}).join(' and ');
   host.innerHTML='<div class="g2"><div class="mo-face" id="moFace">'+mon+'</div><div class="mo-bub" id="moBub">🔊 '+phrase+'</div>'
    +(lv>=2?'<div class="mo-time"><i id="moT"></i></div>':'')+'<div class="ls-grid'+(NOPT>4?' six':'')+'" id="moGrid"></div></div>';
   document.getElementById('moBub').onclick=function(){say(phrase);};
