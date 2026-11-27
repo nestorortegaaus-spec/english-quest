@@ -80,18 +80,20 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
-- ⏭️ PENDIENTE PRIORITARIO (pedido 27/11): MUCHO más vocabulario, progresivo. Hoy hay ~29 temas x 8 palabras (~230)
-  y los juegos repiten. Meta: que la app permita aprender MILES de palabras. Que cada nivel/mundo sume palabras nuevas
-  y más difíciles (ej.: Números 1-10 → 11-20 → decenas → cientos → miles; colores básicos → tonos; etc.).
-  Rotación que priorice palabras no vistas o que le cuestan (usar S.hist), y repaso espaciado de las ya aprendidas.
-  Probablemente conviene un archivo aparte de vocabulario (words.json) con niveles, cargado por la app.
-- ⏭️ PENDIENTE PRIORITARIO (pedido 27/11): pasar de palabras sueltas a FRASES. Los próximos juegos tienen que hacerla
-  combinar palabras para decir algo: primero ve/oye las palabras sueltas y después las usa para armar frases.
-  Inspiración: método Kumon (pasos chicos y progresivos, repetición, patrones que cambian de a una palabra:
-  "I like dogs" → "I like cats" → "I don't like cats"; completar huecos; ordenar; luego producir) + apps de chicos.
-  Ideas: armar oraciones con fichas (con dibujo de lo que dice), completar la frase con la palabra que falta,
-  cambiar una palabra para que la frase diga otra cosa, frase escuchada → tocar la escena correcta, decirla con el micrófono.
-  Usar las palabras de los temas ya vistos (sujeto + verbo + objeto/color/número).
+- ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
+  ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
+- ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
+  Darles uso: por ejemplo canjear estrellas por premios especiales, desbloquear cosas que no se compran con gemas,
+  o convertir estrellas en gemas/cristales.
+- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hecho 27/11: vocab.js con 48 temas nuevos (~460 palabras,
+  lv 1-5, números generados 11-20 → decenas → 21-99 → cientos → miles/millón). Las Galaxias (mundo 5+) usan los temas
+  nuevos en orden de dificultad (6 por galaxia). prioW() pone primero palabras no vistas o difíciles (S.hist) en varios
+  juegos. Falta: seguir sumando temas a vocab.js (subir ?v= en index.html), repaso espaciado, y meter palabras nuevas
+  también en mundos 2-4.
+- 🔄 EN CURSO: FRASES estilo Kumon. Hecho 27/11: juego 🧩 Frases (PHR: 16 patrones lv1-5). Cada partida toma un patrón
+  y lo trabaja cambiando una palabra: mirar/escuchar → completar → ordenar fichas → cambiar una palabra → escuchar y
+  elegir dibujo → decirla con micrófono (nivel 2+). Aparece en cada par de temas desde el mundo 3 y al final de cada mundo.
+  Falta: más patrones y frases más largas.
 - ⏭️ PENDIENTE (pedido 27/11): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
