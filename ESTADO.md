@@ -85,6 +85,15 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Casa de Amigos estilo mascota virtual (tipo Tamagotchi), original:
+  * Barras de necesidades que bajan con el tiempo real (hambre, diversión, higiene, sueño/energía, cariño) y se
+    recuperan cuidándola; si se descuida se pone triste (nunca se muere ni se pierde: público infantil).
+  * Etapas de crecimiento: huevo/bebé → chiquito → grande, según días de cuidado; cambia de tamaño/apariencia
+    (ideal: arte de ChatGPT por etapa).
+  * Animaciones por acción: comer (mastica, migas), jugar (salta/rebota la pelota), baño (burbujas), dormir
+    (ojos cerrados, Zzz, luz baja), caricia (corazones), y estados (feliz, triste, con hambre, sucio).
+  * Vestirla con varios accesorios; todo con palabras/frases en inglés y voz.
+  * Investigar el diseño de Tamagotchi (ciclo de necesidades, etapas, atención) y hacer algo similar pero propio.
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
