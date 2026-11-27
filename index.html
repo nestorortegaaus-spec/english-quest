@@ -90,6 +90,21 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .tf-b{width:110px;height:84px;border:none;border-radius:24px;font-size:40px;font-weight:900;color:#fff;cursor:pointer;font-family:inherit;}
 .tf-b.si{background:var(--teal);box-shadow:0 7px 0 var(--teal-d);} .tf-b.no{background:#FF8A7A;box-shadow:0 7px 0 #E06E58;}
 .tf-b:active{transform:translateY(5px);}
+.sk-wrap{align-self:stretch;display:flex;flex-direction:column;width:100%;height:100%;}
+.sk-sky{position:relative;flex:1;min-height:220px;background:linear-gradient(180deg,#1d2350,#3a3f8f 60%,#7FC4F2);overflow:hidden;border-radius:0 0 26px 26px;}
+.sk-sky::before{content:'✦ · ✧ · ✦ · ✧';position:absolute;top:30%;left:8%;color:rgba(255,255,255,.5);letter-spacing:22px;font-size:14px;}
+.sk-moon{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:54px;}
+.sk-rocket{position:absolute;left:50%;bottom:8px;transform:translateX(-50%) rotate(-45deg);font-size:52px;transition:bottom .8s cubic-bezier(.3,1.4,.5,1);}
+.sk-rocket.boost{animation:skboost .8s;} .sk-rocket.land{transform:translateX(-50%) rotate(0) scale(1.2);}
+@keyframes skboost{30%{filter:drop-shadow(0 18px 10px #FFB43C)}}
+.sk-panel{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 16px 18px;}
+.sk-emo{font-size:64px;line-height:1;} .sk-word{font-size:26px;font-weight:900;color:var(--ink);text-align:center;}
+.sk-btns{display:flex;gap:14px;align-items:center;}
+.sk-mic{width:92px;height:92px;border-radius:50%;border:5px solid #fff;background:var(--coral);box-shadow:0 7px 0 #E06E58;font-size:42px;cursor:pointer;}
+.sk-mic.rec{background:#FF5A5A;animation:pulse 1s infinite;}
+.sk-mic:active{transform:translateY(5px);box-shadow:0 2px 0 #E06E58;}
+.sk-skip{border:none;background:#fff;border-radius:14px;padding:10px 12px;font-weight:900;color:var(--muted);box-shadow:0 3px 0 rgba(120,140,170,.2);font-family:inherit;visibility:hidden;}
+.sk-st{font-weight:900;font-size:15px;min-height:40px;text-align:center;}
 /* VOICE */
 .vc-body{flex:1;overflow-y:auto;padding:6px 16px 24px;width:100%;max-width:460px;margin:0 auto;}
 .vc-h{font-weight:900;font-size:17px;color:var(--ink);margin:10px 0 8px;}
@@ -517,18 +532,20 @@ function buildWorld(w){
    out.push({t:'lesson',u:a},{t:'lesson',u:b});
    if(kk===0)out.push({t:'story',s:wi.s});
    for(var q=0;q<3;q++){var g=GROT[(gi++)%GROT.length];out.push(g==='listen'?{t:'game',g:'listen',us:[a,b],lv:lv}:{t:'game',g:g,u:[a,b],lv:lv});}
+   if(w>=3)out.push({t:'game',g:'speak',u:[a,b],lv:lv});
    if(kk%2===1)out.push({t:'dance'});
    out.push({t:'chest'});
  }
  P.forEach(function(pu,pi){out.push({t:'lesson',u:pu},pi%2?{t:'game',g:'monster',u:U.slice(0,2),lv:lv}:{t:'game',g:'listen',us:[pu],lv:lv});});
  out.push({t:'game',g:'tf',u:U.slice(),lv:lv+1});
+ out.push({t:'game',g:'speak',u:U.slice(),lv:lv});
  out.push({t:'game',g:'memory',u:U.slice(),lv:lv+1});
  out.push({t:'game',g:'blaster',u:U.slice(),lv:lv+1,boss:true});
  out.push({t:'chest'});
  return out;
 }
 var GROT=['spell','balloons','blaster','monster','sort','tf','island','memory','listen'];
-var GINFO={blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
+var GINFO={blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
 function wordsOf(u){var us=Array.isArray(u)?u:[u],out=[];us.forEach(function(i){out=out.concat(UNITS[i].w);});return out;}
 
 /* ===== STATE ===== */
@@ -618,7 +635,7 @@ function openNode(i){
  if(nd.t==='lesson')startLesson(nd.u);
  else if(nd.t==='story')openStory(nd.s);
  else if(nd.t==='chest')openChest();
- else if(nd.t==='game'){ var lv=nd.lv||1; var F={memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
+ else if(nd.t==='game'){ var lv=nd.lv||1; var F={speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
  else if(nd.t==='dance')startDance();
 }
 function advance(){ S.prog=Math.max(S.prog, activeIdx+1); if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);NEW_WORLD=true;} save(); }
@@ -712,7 +729,10 @@ function doMic(w,btn){
  r.onend=function(){ btn.classList.remove('rec'); };
  try{ r.start(); }catch(e){ btn.classList.remove('rec'); micSt('Tocá 🎤 de nuevo.','#E8A52E'); }
 }
-function sim(said,tgt){ var tw=tgt.split(' '),hit=0; tw.forEach(function(x){if(said.indexOf(x)>=0)hit++;}); return hit/tw.length>=0.6; }
+function lev(a,b){var m=a.length,n=b.length,d=[],i,j;for(i=0;i<=m;i++){d[i]=[i];}for(j=0;j<=n;j++)d[0][j]=j;for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
+function sim(said,tgt){ var tw=tgt.split(' '),sw=said.split(/\s+/),hit=0;
+ tw.forEach(function(x){ if(said.indexOf(x)>=0){hit++;return;} var tol=x.length<=3?1:Math.max(1,Math.floor(x.length*0.34)); if(sw.some(function(y){return y&&lev(y,x)<=tol;}))hit++; });
+ return hit/tw.length>=0.6; }
 function good(w,b){ if(answered)return; answered=true; if(b)b.classList.add('ok'); L.ok++; sGood(); say(w.en); setFox('foxStart','happy'); burst(14); fb(true,w); }
 function wrong(w,fromMic){ if(answered)return; answered=true; sBad(); L.hearts--; document.getElementById('lhp').textContent=L.hearts; setFox('foxStart','sad'); fb(false,w); if(L.hearts<=0)document.getElementById('fbbtn').textContent='↻ Reintentar'; }
 function fb(ok,w){ var el=document.getElementById('fb');el.className='fb on '+(ok?'ok':'no'); var pr=['¡Excelente!','¡Muy bien!','¡Genial!','¡Crack!','¡Perfecto!']; document.getElementById('fbmsg').textContent = ok?pr[Math.floor(Math.random()*pr.length)]:'¡Casi!'; document.getElementById('fbsub').innerHTML='<b>'+w.en+'</b> = '+w.es; }
@@ -1076,6 +1096,61 @@ function startTF(u,lv){
  (function tick(){ if(!GAME.on)return; if(cur){var left=1-(Date.now()-t0)/T;document.getElementById('tfT').style.width=Math.max(0,left*100)+'%';if(left<=0)answer(null);}
   GAME.raf=requestAnimationFrame(tick);})();
  gScore('0/'+R); next();
+}
+
+
+/* 🚀 ¡HABLÁ!: decí la palabra en voz alta y el cohete sube */
+function startSpeak(u,lv){
+ lv=lv||1; var host=gSetup('🚀 ¡Hablá! · Nivel '+lv);
+ var pool=shuffle(uniqEmo(wordsOf(u)).filter(function(w){return w.en.split(' ').length<=(lv>=3?4:2);}));
+ var R=Math.min(pool.length,5+lv), r=0, firstOk=0, rec=null;
+ var showEn=lv<3;
+ host.innerHTML='<div class="sk-wrap"><div class="sk-sky" id="skSky"><div class="sk-moon">🌕</div><div class="sk-rocket" id="skRocket">🚀</div></div>'
+  +'<div class="sk-panel"><div class="sk-emo" id="skEmo"></div><div class="sk-word" id="skWord"></div>'
+  +'<div class="sk-btns"><button class="ls-spk slow" id="skHear">🔊</button><button class="sk-mic" id="skMic">🎤</button><button class="sk-skip" id="skSkip">Ya lo dije ✓</button></div>'
+  +'<div class="sk-st" id="skSt">Tocá 🎤 y decilo en inglés</div></div></div>';
+ var sky=document.getElementById('skSky'), rocket=document.getElementById('skRocket');
+ function st(t,c){var e=document.getElementById('skSt');if(e){e.textContent=t;e.style.color=c||'var(--teal-d)';}}
+ function place(){var h=sky.clientHeight-70;rocket.style.bottom=(8+(r/R)*h)+'px';}
+ function stopRec(){try{if(rec)rec.abort();}catch(e){}rec=null;document.getElementById('skMic').classList.remove('rec');}
+ var w=null, tries=0;
+ function round(){ if(!GAME.on)return; place();
+  if(r>=R){stopRec();rocket.classList.add('land');sWin();GAME.timer=setTimeout(function(){finishGameNode('🚀 ¡Llegaste a la Luna!','Dijiste '+R+' palabras en inglés ('+firstOk+' a la primera) 🗣️');},900);return;}
+  w=pool[r]; tries=0;
+  document.getElementById('skEmo').textContent=w.e;
+  document.getElementById('skWord').textContent=showEn?w.en:w.es+' → ¿en inglés?';
+  document.getElementById('skSkip').style.visibility='hidden';
+  st('Tocá 🎤 y decilo en inglés');
+  if(showEn)GAME.timer=setTimeout(function(){say(w.en);},300);
+ }
+ function success(){ stopRec(); if(tries===0)firstOk++; r++; sGood(); burst(16); say(w.en); st('¡Muy bien! 🚀');
+  document.getElementById('skWord').textContent=w.en+' = '+w.es; rocket.classList.remove('boost');void rocket.offsetWidth;rocket.classList.add('boost');
+  tone(300,.25,'sawtooth',.06,0);tone(500,.25,'sawtooth',.06,.1); gScore(r+'/'+R); GAME.timer=setTimeout(round,1500); }
+ function fail(heard){ tries++; if(tries>=2)document.getElementById('skSkip').style.visibility='visible';
+  st(heard?('Escuché "'+heard+'". ¡Probá otra vez! 🎤'):'No te escuché. Tocá 🎤 y hablá fuerte.', '#E8A52E');
+  if(tries>=2)GAME.timer=setTimeout(function(){say(w.en,0.7);},400); }
+ document.getElementById('skHear').onclick=function(){if(w)say(w.en);};
+ document.getElementById('skSkip').onclick=function(){ if(!w)return; tries++; success(); };
+ document.getElementById('skMic').onclick=function(){
+  if(!w||!GAME.on)return;
+  if(!SR){st('Este teléfono no escucha la voz acá. Decilo igual y tocá "Ya lo dije ✓".','#e07a5f');document.getElementById('skSkip').style.visibility='visible';return;}
+  stopRec(); try{speechSynthesis.cancel();}catch(e){}
+  try{rec=new SR();}catch(e){st('No pude abrir el micrófono.','#e07a5f');return;}
+  rec.lang='en-US';rec.interimResults=true;rec.maxAlternatives=5;rec.continuous=false;
+  var done=false, heard='', btn=document.getElementById('skMic'); btn.classList.add('rec'); st('Escuchando… 🎤 ¡decilo!');
+  rec.onresult=function(e){ var all=[]; for(var i=0;i<e.results.length;i++)for(var k=0;k<e.results[i].length;k++)all.push(e.results[i][k].transcript.toLowerCase());
+    heard=e.results[e.results.length-1][0].transcript.toLowerCase().trim();
+    var tgt=w.en.toLowerCase().replace(/[?.!,']/g,'');
+    if(all.some(function(a){return sim(a.replace(/[?.!,']/g,''),tgt);})){done=true;success();return;}
+    if(e.results[e.results.length-1].isFinal){done=true;btn.classList.remove('rec');fail(heard);} else st('Te escucho… 🎤');};
+  rec.onerror=function(ev){btn.classList.remove('rec');var er=ev&&ev.error;if(done)return;done=true;
+    if(er==='not-allowed'||er==='service-not-allowed'){st('🎤 El micrófono está bloqueado. Tocá "Ya lo dije ✓".','#e07a5f');document.getElementById('skSkip').style.visibility='visible';}
+    else if(er==='aborted'){} else fail('');};
+  rec.onend=function(){btn.classList.remove('rec');if(!done&&GAME.on){done=true;fail(heard);}};
+  try{rec.start();}catch(e){btn.classList.remove('rec');st('Tocá 🎤 de nuevo.','#E8A52E');}
+ };
+ var _stop=GAME.stop; GAME.stop=function(){stopRec();GAME.stop=_stop;_stop.call(GAME);};
+ gScore('0/'+R); setTimeout(round,50);
 }
 
 

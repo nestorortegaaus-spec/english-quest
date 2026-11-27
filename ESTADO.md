@@ -41,6 +41,9 @@ le acepte la voz a la nena.
   🔤 Deletreá (armar la palabra letra por letra), 🎈 Globos (reventar el que dice la voz antes de que se escape),
   👾 Monstruo (darle de comer lo que pide, con frases "I want a/some..."), 🗂️ Ordená (cada cosa a su caja),
   ✅ ¿Sí o no? (rápido, con rachas 🔥). Todos con niveles.
+- 🚀 ¡Hablá!: decir la palabra en voz alta con el micrófono hace subir el cohete hasta la Luna
+  (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
+- Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
 - En los mundos 2+ los juegos rotan (9 tipos), así cada mundo tiene una mezcla distinta.
 - Ideas: más cuentos con ilustraciones de ChatGPT (hoy los nuevos usan emojis).
 
