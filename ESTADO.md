@@ -80,6 +80,13 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE PRIORITARIO (pedido 27/11): pasar de palabras sueltas a FRASES. Los próximos juegos tienen que hacerla
+  combinar palabras para decir algo: primero ve/oye las palabras sueltas y después las usa para armar frases.
+  Inspiración: método Kumon (pasos chicos y progresivos, repetición, patrones que cambian de a una palabra:
+  "I like dogs" → "I like cats" → "I don't like cats"; completar huecos; ordenar; luego producir) + apps de chicos.
+  Ideas: armar oraciones con fichas (con dibujo de lo que dice), completar la frase con la palabra que falta,
+  cambiar una palabra para que la frase diga otra cosa, frase escuchada → tocar la escena correcta, decirla con el micrófono.
+  Usar las palabras de los temas ya vistos (sujeto + verbo + objeto/color/número).
 - ⏭️ PENDIENTE (pedido 27/11): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
