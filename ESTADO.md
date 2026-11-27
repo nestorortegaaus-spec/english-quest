@@ -82,6 +82,10 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Isla (zorrito que salta) — se concentra en jugar y no mira las palabras de arriba.
+  Al agarrar una manzana, la voz tiene que decir la palabra en inglés Y su significado en castellano (ej.: "dog… perro"),
+  para aprender escuchando. Y que la Isla use muchas palabras nuevas (más manzanas/palabras distintas, de todos los temas,
+  priorizando las nuevas).
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
