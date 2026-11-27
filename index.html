@@ -305,6 +305,7 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .rn-best{font-weight:900;color:#C98A1C;font-size:17px;} .rn-load{font-weight:900;font-size:22px;color:var(--muted);}
 .rn-wrap{position:relative;align-self:stretch;width:100%;height:100%;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;background:#3FB0FB;} .rn-wrap canvas{display:block;width:100%;height:100%;}
 .rn-hud{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;gap:6px;pointer-events:none;} .rn-hud span{background:rgba(255,255,255,.9);border-radius:14px;padding:5px 11px;font-weight:900;font-size:17px;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.12);}
+.rn-hitfx{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 60%,transparent 40%,rgba(255,40,40,.55) 100%);} .rn-hitfx.on{animation:rnHit .6s ease-out;} @keyframes rnHit{0%{opacity:1}100%{opacity:0}}
 .rn-spd{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(255,255,255,.35) 46px 49px,transparent 49px 90px);-webkit-mask:radial-gradient(ellipse at 50% 45%,transparent 35%,#000 75%);mask:radial-gradient(ellipse at 50% 45%,transparent 35%,#000 75%);animation:rnSpd .25s linear infinite;}
 .rn-spd.on{opacity:1;} @keyframes rnSpd{from{background-position:0 0}to{background-position:90px 0}}
 .rn-pw{position:absolute;top:50px;right:8px;display:flex;flex-direction:column;gap:6px;pointer-events:none;} .rn-pw span{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.88);border-radius:12px;padding:3px 8px 3px 4px;font-weight:900;color:var(--ink);} .rn-pw img{width:30px;height:30px;object-fit:contain;}
@@ -839,7 +840,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
 </div>
 
 <script src="vocab.js?v=5"></script>
-<script src="run.js?v=2" defer></script>
+<script src="run.js?v=3" defer></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -861,6 +862,35 @@ setFox('foxStart','happy');
 var muted=false,actx=null;
 function AC(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==='suspended'){try{actx.resume();}catch(e){}}return actx;}
 function tone(f,d,t,v,w){if(muted)return;var c=AC();if(!c)return;var tt=c.currentTime+(w||0);var o=c.createOscillator(),g=c.createGain();o.type=t||'sine';o.frequency.value=f;o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(.0001,tt);g.gain.exponentialRampToValueAtTime(v||.2,tt+.02);g.gain.exponentialRampToValueAtTime(.0001,tt+d);o.start(tt);o.stop(tt+d+.02);}
+/* 🔊 efectos con sonido sintetizado */
+function noiseHit(d,v,f,w){ if(muted)return; var c=AC(); if(!c)return; var tt=c.currentTime+(w||0), n=Math.floor(c.sampleRate*d), b=c.createBuffer(1,n,c.sampleRate), a=b.getChannelData(0); for(var i=0;i<n;i++)a[i]=(Math.random()*2-1)*(1-i/n);
+ var src=c.createBufferSource(); src.buffer=b; var fl=c.createBiquadFilter(); fl.type='lowpass'; fl.frequency.value=f||1200; var g=c.createGain(); g.gain.setValueAtTime(v||0.2,tt); g.gain.exponentialRampToValueAtTime(0.0001,tt+d); src.connect(fl); fl.connect(g); g.connect(c.destination); src.start(tt); }
+function sfxSlide(f1,f2,d,t,v,w){ if(muted)return; var c=AC(); if(!c)return; var tt=c.currentTime+(w||0), o=c.createOscillator(), g=c.createGain(); o.type=t||'sine'; o.frequency.setValueAtTime(f1,tt); o.frequency.exponentialRampToValueAtTime(f2,tt+d); g.gain.setValueAtTime(v||0.15,tt); g.gain.exponentialRampToValueAtTime(0.0001,tt+d); o.connect(g); g.connect(c.destination); o.start(tt); o.stop(tt+d+0.02); }
+var SFX={
+ star:function(k){ var f=880*Math.pow(2,((k||0)%5)/12); tone(f,.09,'triangle',.11,0); tone(f*2,.14,'sine',.05,.03); },
+ power:function(){ [523,659,784,1047,1319].forEach(function(f,i){ tone(f,.12,'triangle',.13,i*.055); }); tone(2093,.3,'sine',.05,.28); },
+ gate:function(){ [784,988,1175,1568].forEach(function(f,i){ tone(f,.18,'triangle',.15,i*.08); }); },
+ wrong:function(){ sfxSlide(420,200,.35,'triangle',.12,0); },
+ hit:function(){ noiseHit(.25,.35,700,0); sfxSlide(220,60,.35,'sine',.3,0); tone(90,.25,'square',.06,.02); },
+ jump:function(){ sfxSlide(380,760,.16,'square',.07,0); },
+ land:function(){ noiseHit(.08,.12,500,0); },
+ whoosh:function(){ noiseHit(.45,.18,2600,0); sfxSlide(300,1200,.4,'sawtooth',.05,0); },
+ turbo:function(){ sfxSlide(200,1400,.6,'sawtooth',.08,0); noiseHit(.7,.15,3000,.05); [784,1047,1568].forEach(function(f,i){ tone(f,.12,'square',.06,.3+i*.06); }); },
+ lane:function(d){ sfxSlide(d>0?500:560,d>0?640:440,.08,'triangle',.07,0); }
+};
+/* 🎵 música suave de fondo para los menús de los juegos (sintetizada, en loop) */
+var MUSIC={on:false,iv:0,t:0,step:0,g:null};
+var MSONG=[[60,64,67,72],[57,60,64,69],[53,57,60,65],[55,59,62,67]], MMEL=[76,74,72,74,76,76,76,0,74,74,74,0,76,79,79,0, 76,74,72,74,76,76,76,76,74,74,76,74,72,0,0,0];
+function midi(n){ return 440*Math.pow(2,(n-69)/12); }
+function musicStart(){ if(MUSIC.on||muted)return; var c=AC(); if(!c)return; MUSIC.on=true; MUSIC.g=c.createGain(); MUSIC.g.gain.value=0.0001; MUSIC.g.connect(c.destination); MUSIC.g.gain.exponentialRampToValueAtTime(0.5,c.currentTime+1.5);
+ MUSIC.t=c.currentTime+0.1; MUSIC.step=0; var beat=0.42;
+ function note(f,t0,d,type,v){ var o=c.createOscillator(), g=c.createGain(); o.type=type; o.frequency.value=f; g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(v,t0+0.04); g.gain.exponentialRampToValueAtTime(0.0001,t0+d); o.connect(g); g.connect(MUSIC.g); o.start(t0); o.stop(t0+d+0.05); }
+ MUSIC.iv=setInterval(function(){ if(!MUSIC.on)return; while(MUSIC.t<c.currentTime+0.6){ var s=MUSIC.step, ch=MSONG[Math.floor(s/8)%4];
+   if(s%8===0)ch.forEach(function(n){ note(midi(n-12),MUSIC.t,beat*8,'sine',0.035); });
+   if(s%2===0)note(midi(ch[(s/2)%4]),MUSIC.t,beat*1.6,'triangle',0.03);
+   var m=MMEL[s%MMEL.length]; if(m)note(midi(m),MUSIC.t,beat*0.95,'sine',0.045);
+   MUSIC.t+=beat/2; MUSIC.step++; } },200); }
+function musicStop(){ if(!MUSIC.on)return; MUSIC.on=false; clearInterval(MUSIC.iv); try{ var c=AC(), g=MUSIC.g; g.gain.cancelScheduledValues(c.currentTime); g.gain.setValueAtTime(g.gain.value,c.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+0.6); setTimeout(function(){ try{g.disconnect();}catch(e){} },800); }catch(e){} }
 /* ===== RELATOR: frases cortas en inglés + castellano, espaciadas, ligadas a lo que pasa en el juego ===== */
 var NARR={
  start:[['Let\'s go!','¡Vamos!'],['Ready? Go!','¿Lista? ¡Ya!'],['You can do it!','¡Vos podés!'],['Let\'s play!','¡A jugar!']],
@@ -1194,7 +1224,7 @@ S.mig1=1;
 if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);save();}
 var NEW_WORLD=false;
 
-function show(id){try{micStop();}catch(e){} try{if(checkRest(id))return;}catch(e){} if(id==='s-reward'){setTimeout(function(){var r=document.getElementById('s-reward');if(!r||!r.classList.contains('on'))return;var o=r.querySelector('.rew-buddy');if(!o){o=document.createElement('img');o.className='rew-buddy';r.appendChild(o);}o.src=buddyImg('happy');o.classList.remove('go');void o.offsetWidth;o.classList.add('go');},30);} if(id==='s-game'){NSTREAK=0;NARR_T=0;NARR_START=Date.now();narr('start',1200);}document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
+function show(id){try{micStop();}catch(e){} if(id!=='s-game')musicStop(); try{if(checkRest(id))return;}catch(e){} if(id==='s-reward'){setTimeout(function(){var r=document.getElementById('s-reward');if(!r||!r.classList.contains('on'))return;var o=r.querySelector('.rew-buddy');if(!o){o=document.createElement('img');o.className='rew-buddy';r.appendChild(o);}o.src=buddyImg('happy');o.classList.remove('go');void o.offsetWidth;o.classList.add('go');},30);} if(id==='s-game'){NSTREAK=0;NARR_T=0;NARR_START=Date.now();narr('start',1200);}document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
 function lvl(){return Math.floor((S.stars+(S.spent||0))/9)+1;}
 
 function startGame(){var n=document.getElementById('nameIn').value.trim();S.name=n||'Explorador';save();unlockSpeech();sTap();renderPath();show('s-path');}
@@ -2092,7 +2122,7 @@ function renderParents(){
 /* ===== SALA DE JUEGOS: cristales 🔮 y cartuchos ===== */
 var CARTS=[
  {id:'kart',n:'Kart Quest',e:'🏎️',p:400,d:'Carreras de karts con portones de palabras en inglés'},
- {id:'run',n:'Carrera Mágica',e:'🦊',p:600,d:'Corré, saltá y pasá por la puerta de la palabra en inglés'},
+ {id:'run',n:'Carrera Mágica',e:'🦊',p:2000,d:'Corré, saltá y pasá por la puerta de la palabra en inglés'},
  {id:'snow',n:'Snow Rush',e:'🏂',p:900,d:'Próximamente',soon:true},
  {id:'space',n:'Star Pilot',e:'🚀',p:1600,d:'Próximamente',soon:true},
  {id:'dino',n:'Dino Run',e:'🦖',p:2500,d:'Próximamente',soon:true}
@@ -2150,7 +2180,7 @@ function kartBg(id){ if(KART_BGS[id]!==undefined)return; KART_BGS[id]=null; var 
 function kartImgs(){ KTRACKS.forEach(function(t){kartBg(t.id);}); KCHARS.forEach(function(c){ if(KART_IMG[c.id])return; var im=new Image(); im.onload=function(){KART_IMG[c.id]=im;}; im.src='img/kart_'+c.id+'.png'; }); }
 function startKart(){
  var host=gSetup('🏎️ Kart Quest'); kartImgs(); if(!S.kart)S.kart={unl:1,cup:{}}; KTRACKS.forEach(function(t,i){ var c=S.kart.cup&&S.kart.cup[t.id]; if(c&&c<=3&&S.kart.unl<i+2&&i+1<KTRACKS.length)S.kart.unl=i+2; }); gScore('🔮'+(S.crys||0));
- var sel={c:S.kart.ch||'fox',t:0};
+ var sel={c:S.kart.ch||'fox',t:0}; musicStart();
  function pickChar(){ host.innerHTML='<div class="kq-sel"><h2>Elegí tu piloto</h2><div class="kq-grid">'+KCHARS.map(function(c){return '<button class="kq-ch'+(sel.c===c.id?' on':'')+'" data-id="'+c.id+'" style="--c:'+c.c+'"><img src="img/kart_'+c.id+'.png" alt="" onerror="this.outerHTML=\'<b>'+c.e+'</b>\'"><span>'+c.n+'</span></button>';}).join('')+'</div><button class="btn teal" id="kqNext">Elegir pista →</button></div>';
   host.querySelectorAll('.kq-ch').forEach(function(b){b.onclick=function(){sel.c=b.dataset.id;sTap();pickChar();};});
   document.getElementById('kqNext').onclick=function(){S.kart.ch=sel.c;save();sTap();pickTrack();}; }
@@ -2161,6 +2191,7 @@ function startKart(){
   document.getElementById('kqBack').onclick=function(){sTap();pickChar();}; }
  function race(){
   if((S.crys||0)<1){toast('Necesitás 🔮 para correr');return;}
+  musicStop();
   S.crys--; save(); gScore('🔮'+S.crys);
   var T=KTRACKS[sel.t], me=KCHARS.find(function(c){return c.id===sel.c;});
   host.innerHTML='<div class="kq-wrap"><canvas id="kqC"></canvas><div class="kq-hud"><span id="kqLap">Vuelta 1/3</span><span id="kqPos">6°</span></div>'

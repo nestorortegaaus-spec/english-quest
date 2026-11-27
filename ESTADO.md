@@ -227,3 +227,9 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): los cuentos con amigos usan SOLO amigos desbloqueados y ya nacidos (storyPick/ownedFriends): si el cuento trae un
   amigo que no tiene, se reemplaza por uno suyo (también en el texto: storyTxt) y aparece en su etapa real; si tiene pocos amigos, le tocan
   cuentos con menos personajes o los clásicos. Así no se arruina la sorpresa de los amigos que faltan.
+- ✅ HECHO (27/11): Carrera Mágica cuesta 2000 💎. Golpe sin titilar (sale despedido girando, rebote, temblor de cámara, destello rojo, estrellitas
+  de mareo, vibración). Sonidos sintetizados SFX (estrella, poder, puerta, error, golpe, salto, aterrizaje, rampa, turbo, carril). Música suave
+  sintetizada (musicStart/musicStop) en los menús del Kart y de la Carrera; se corta al empezar a jugar.
+- ⏭️ EN COLA: Kart con tienda de autos más rápidos (se compran con ⭐ o 💎 dentro del juego), autos nuevos con ChatGPT.
+- 🔄 EN CURSO: más paisajes para la Carrera Mágica con ChatGPT (por paisaje: 1 horizonte panorámico + 1 hoja 2x2 de decorados; el camino y el
+  pasto se dibujan por código con los colores del paisaje).
