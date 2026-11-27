@@ -156,3 +156,6 @@ le acepte la voz a la nena.
 - ⏭️ PENDIENTE (pedido 27/11, idea tipo Buddy.ai): en el descanso de 5 minutos, el amigo compañero aparece grande y animado (poses
   idle/closed/open/happy, boca que se mueve al hablar, parpadeo) y guía el descanso hablando: la saluda por su nombre, hace "Simon says"
   con movimientos y le pide repetir palabras con el micrófono. Guion fijo (sin IA paga), funciona sin internet.
+- ✅ HECHO (27/11): Sopa de letras más fácil (diagonal desde nivel 4, al revés desde nivel 5, menos palabras) y la lista muestra ícono + inglés +
+  castellano; tocar una palabra la dice en inglés y castellano y hace titilar su primera letra como pista. Frases: la frase en castellano a armar va
+  grande en un recuadro (ph-goal).
