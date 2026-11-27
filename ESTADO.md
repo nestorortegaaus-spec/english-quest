@@ -92,6 +92,13 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Ladrillos (bloques, pelota y barra) con "relator" — hoy dice la palabra en cada ladrillo roto.
+  Cambiar a frases cortas de relato, espaciadas (no en cada bloque), en inglés + castellano hablado: "Good shot!" /
+  "¡Buena jugada!", "So close!" / "¡Casi!", "Combo!", "Last one!" / "¡El último!", y frases cortas de ánimo al perder una
+  vida ("Try again!" / "¡Otra vez!"). Base pedagógica: aprendizaje incidental mientras juega (atención en el juego):
+  frases muy cortas, repetidas y ligadas a lo que pasa en el momento (contingencia), con prosodia emotiva, sin cortar
+  el flujo; pocas frases que se repiten mucho para que las absorba sin darse cuenta; ritmo espaciado (cada ~8-15 s o en
+  hitos), nunca encimadas; subir la variedad de a poco.
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
