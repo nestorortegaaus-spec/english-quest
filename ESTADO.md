@@ -166,3 +166,4 @@ le acepte la voz a la nena.
 - ✅ ARREGLADO (27/11): el descanso se trababa en "Try again": al cortar el micrófono (Ya lo dije ✓), Chrome avisaba tarde "no te escuché" y esa
   frase pisaba la que hacía avanzar. micListen ignora el aviso después de un corte, cada actividad del descanso tiene su turno (actTok) y hay un
   seguro: si nada avanza en 45 s pasa a la siguiente actividad.
+- ✅ HECHO (27/11): cuentos sin botón ES: la traducción en castellano se ve siempre debajo del inglés.

@@ -568,7 +568,7 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .sen{font-size:20px;font-weight:900;line-height:1.4;}
 .sen w{cursor:pointer;border-bottom:2px solid transparent;}
 .sen w:active{border-bottom-color:var(--blue);color:var(--teal-d);}
-.ses{color:var(--muted);font-weight:700;font-size:14px;margin-top:5px;display:none;}
+.ses{color:#5B6478;font-weight:800;font-size:17px;line-height:1.35;margin-top:8px;padding-top:8px;border-top:2px dashed #E3E9F0;display:block;}
 .ses.show{display:block;}
 .srow{display:flex;gap:8px;padding:8px 14px 16px;}
 .wtip{position:fixed;background:#2b3442;color:#fff;font-weight:800;font-size:14px;padding:6px 12px;border-radius:12px;transform:transl(-50%,0);z-index:30;display:none;box-shadow:0 6px 16px rgba(0,0,0,.25);}
@@ -720,7 +720,6 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
       <div class="stext"><div class="sen" id="stEn"></div><div class="ses" id="stEs"></div></div>
       <div class="srow">
         <button class="btn ghost" style="flex:0 0 auto;width:auto" onclick="narrate()">🔊</button>
-        <button class="btn ghost" style="flex:0 0 auto;width:auto" onclick="toggleEs()">ES</button>
         <button class="btn teal" id="stNext" onclick="storyNext()">Siguiente →</button>
       </div>
     </div>
