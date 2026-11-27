@@ -205,3 +205,9 @@ le acepte la voz a la nena.
   distinto para pisar (snake, scorpion, penguin, snail, alien, ladybug, dinosaur, mouse) que dice su nombre en inglés y castellano.
 - ✅ HECHO (27/11): Kart con 16 pistas (+Granja Feliz y Bajo el Mar, bloqueadas en cadena).
 - ⏭️ PENDIENTE: pilotos nuevos del Kart hechos con ChatGPT (los armados por código quedaron feos y se descartaron).
+- ⏭️ EN COLA (pedido 27/11): juego de corredor estilo Subway Surfers para la 🕹️ Sala de Juegos (junto al Kart). Ilustraciones con ChatGPT
+  (personaje de espaldas corriendo, vías/carriles, obstáculos, monedas, fondos). Calidad alta "tipo Nintendo 64", no puede ser mediocre:
+  3 carriles, saltar/agacharse/cambiar de carril con gestos, perspectiva pseudo-3D fluida, palabras en inglés integradas como en el Kart.
+- ✅ HECHO (27/11): 🏪 La Tienda (startStore, en GROT): ella atiende un negocio (rotan: frutería, panadería, juguetería, librería, ropa, kiosco)
+  y los amigos de la Casa le piden cosas en inglés ("Can I have…, please?", "I want…", "I would like…"). Nivel 1 con traducción y voz en
+  castellano; nivel 3+ piden cantidades (two apples → tocar 2 veces + "Here you are!"); nivel 4+ estante sin nombres.
