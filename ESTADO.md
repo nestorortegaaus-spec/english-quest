@@ -45,6 +45,10 @@ le acepte la voz a la nena.
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
+- 🎓 Graduación (ciclo de vida sin muerte): a los 7 días de ser Grande (p.bigAt) la mascota avisa que está lista;
+  la niña decide con "Despedir a…". Escena con mochila y frases, premio (🏅 S.medals + 60💎), queda en el muro
+  "Amigos que crecieron" (S.home.grads) y llega un bebé nuevo de otra especie gratis. Postales en inglés de las graduadas
+  (POSTCARDS, ~1 por día al abrir la Casa) con traducción y voz.
 - 🤒 Enfermedad y costos (Casa de Amigos): se enferma sobre todo si se la descuida (hambre/suciedad <20 o 3 cacas:
   ~90% en 20 h; bien cuidada ~1% en 8 h). Enferma: pálida, termómetro, frases "I feel sick…", barras bajan x1.5, no juega.
   Botón 💊 Remedio: jarabe 8⭐, pastilla 12⭐, veterinario 25💎, con escenas. Nunca se muere.
@@ -103,14 +107,6 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
-- ⏭️ PENDIENTE (pedido 27/11): Casa de Amigos — ciclo de vida con "graduación" (nunca muerte):
-  * Tras ~7 días siendo Grande, la mascota avisa que está lista para irse a jugar con otros amigos. La niña decide
-    cuándo (botón "🎓 Despedir a…"); nunca se va sola. Fiesta: confeti, mochila, "Thank you for taking care of me!",
-    "I will miss you!", premio (medalla + gemas).
-  * Muro "Amigos que crecieron" (foto + días cuidados) y postales en inglés que llegan cada tanto de las mascotas
-    graduadas ("Hi! I am at the beach with my new friends!") con traducción y voz → lectura disfrazada.
-  * Al graduar llega un bebé nuevo de regalo (otra especie o color) para que la casa no quede vacía y no sienta que
-    perdió las gemas; más adelante especies nuevas que se desbloquean graduando.
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).

@@ -377,6 +377,14 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .hm-friend.m-sick img{filter:saturate(.35) sepia(.35) hue-rotate(55deg) brightness(.92) drop-shadow(0 8px 8px rgba(0,0,0,.18))!important;} .hm-friend.m-sick{animation:sleepy 2.4s ease-in-out infinite;}
 .hm-therm{position:absolute;top:96px;left:50%;margin-left:40px;font-size:38px;z-index:3;transform:rotate(25deg);animation:p-wig .6s infinite alternate;}
 .hm-tip.sick{color:#E06E58;font-size:15px;}
+.gr-ready{background:linear-gradient(160deg,#FFF6DE,#fff);border:3px solid #FFD36B;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px;margin-bottom:10px;text-align:center;}
+.gr-ready b{font-size:15px;color:var(--ink);} .gr-ready span{font-size:12px;font-weight:800;color:var(--muted);}
+.gr-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+.gr-ph{background:#fff;border-radius:12px;padding:6px 4px 8px;box-shadow:0 3px 8px rgba(0,0,0,.12);display:flex;flex-direction:column;align-items:center;transform:rotate(-2deg);}
+.gr-ph:nth-child(even){transform:rotate(2deg);} .gr-ph img{width:100%;height:80px;object-fit:contain;background:#EAF5FF;border-radius:8px;} .gr-ph b{font-size:12px;} .gr-ph small{font-size:10px;font-weight:800;color:var(--muted);}
+.gr-img{width:150px;height:170px;object-fit:contain;margin:0 auto;display:block;}
+.pk-box.pc{background:#FFFBF0;border:3px dashed #E0A82E;position:relative;} .pc-stamp{position:absolute;top:10px;right:12px;font-size:34px;transform:rotate(12deg);}
+.pc-en{font-size:20px;font-weight:900;color:var(--ink);} .pc-es{font-size:14px;font-weight:800;color:var(--muted);}
 /* VOICE */
 .vc-body{flex:1;overflow-y:auto;padding:6px 16px 24px;width:100%;max-width:460px;margin:0 auto;}
 .vc-h{font-weight:900;font-size:17px;color:var(--ink);margin:10px 0 8px;}
@@ -1661,6 +1669,7 @@ var HOME_SEL=null, HOME_BUSY=false;
 function hData(){ if(!S.home)S.home={own:['fox'],cur:'fox',wear:{},day:'',done:{},gift:''}; var h=S.home;
  if(!h.pets)h.pets={}; h.own.forEach(function(id){ if(!h.pets[id])h.pets[id]={stage:2,care:30,nd:{food:70,fun:70,clean:70,energy:80,love:70},t:Date.now(),poop:0}; });
  h.own.forEach(function(id){ var pp=h.pets[id]; if(pp&&pp.stage===0&&!friendById(id).egg){pp.stage=1;pp.care=pp.care||0;pp.t=Date.now();} });
+ h.own.forEach(function(id){var pp=h.pets[id]; if(pp&&pp.stage===3&&!pp.bigAt)pp.bigAt=Date.now(); if(pp&&!pp.born)pp.born=pp.t||Date.now();});
  if(h.day!==dkey()){h.day=dkey();h.done={};} return h; }
 function pet(id){ return hData().pets[id||hData().cur]; }
 function petTick(p){ var now=Date.now(), hrs=Math.min(48,Math.max(0,(now-(p.t||now))/3600000)); if(p.stage===0){p.t=now;return;}
@@ -1689,9 +1698,9 @@ function blinkLoop(){ clearTimeout(window._blinkT); window._blinkT=setTimeout(fu
 
 function friendHTML(f,cls){ var h=hData(), a=h.wear[f.id]?accById(h.wear[f.id]):null;
  return '<div class="'+cls+'"><img src="img/friend_'+f.id+'.png" alt="" onerror="this.outerHTML=\'<b class=fe>'+f.e+'</b>\'">'+(a?'<span class="acc '+a.pos+'">'+a.e+'</span>':'')+'</div>'; }
-function homeNeedsAttention(){ try{var h=hData(); return h.own.some(function(id){var p=h.pets[id];petTick(p);return p.stage===0||petMood(p)!=='happy';});}catch(e){return false;} }
+function homeNeedsAttention(){ try{var h=hData(); return h.own.some(function(id){var p=h.pets[id];petTick(p);return p.stage===0||petMood(p)!=='happy'||petReady(p);});}catch(e){return false;} }
 function openHome(){ sTap(); unlockSpeech(); HOME_SEL=null; blinkLoop(); Object.keys(POSE_SETS).forEach(function(id){Object.keys(POSE_SETS[id]).forEach(function(st){preloadPoses('img/pet/'+id+'_'+st);});}); var h=hData(); h.own.forEach(function(id){petTick(h.pets[id]);}); save(); renderHome(); show('s-home');
- var f=friendById(h.cur), p=pet(), m=petMood(p); setTimeout(function(){ petTalk('need',m); },350);
+ var f=friendById(h.cur), p=pet(), m=petMood(p); setTimeout(function(){ if(petReady(p)&&m==='happy')homeSay('I am big now! I want to play with other friends!','¡Ya soy grande! ¡Quiero ir a jugar con otros amigos!'); else petTalk('need',m); },350); setTimeout(maybePostcard,2500);
  clearInterval(window._petIv); window._petIv=setInterval(function(){ if(!document.getElementById('s-home').classList.contains('on')){clearInterval(window._petIv);return;} petIdle(); },2600); }
 function homeSay(t,es){ mouthFlap(Math.min(8,2+Math.round(String(t).length/5))); var b=document.getElementById('hmBub'); if(b){b.innerHTML='';b.appendChild(document.createTextNode(t));if(es){var sm=document.createElement('small');sm.textContent=es;b.appendChild(sm);}b.classList.remove('on');void b.offsetWidth;b.classList.add('on');} say(t); }
 function fx(chars,n,cls){ var room=document.querySelector('.hm-room'); if(!room)return; for(var i=0;i<n;i++){ var e=document.createElement('span'); e.className='hm-fx '+(cls||''); e.textContent=chars[i%chars.length];
@@ -1720,15 +1729,62 @@ function renderHome(){
   html+='<div class="hm-pick"><div class="hm-ph">'+A.b+' Elegí en inglés:</div><div class="hm-items">'+A.items.map(function(it,i){var pr=it[4]?it[4]+' 💎':it[3]?it[3]+' ⭐':'Gratis';var can=it[4]?S.gems>=it[4]:S.stars>=(it[3]||0);return '<button class="hm-it'+(can?'':' poor')+'" onclick="homeGive('+i+')"><b>'+it[0]+'</b><span>'+it[1]+'</span><em class="'+(it[3]||it[4]?'':'free')+'">'+pr+'</em></button>';}).join('')+'</div><button class="btn ghost" onclick="HOME_SEL=null;sTap();renderHome()">← Volver</button></div>';
  } else if(p.stage>0) {
   html+='<div class="hm-acts">'+Object.keys(HACTS).map(function(k){var A=HACTS[k];return '<button class="hm-act'+(done[k]?' done':'')+((A.need==='health'?p.sick:p.nd[A.need]<35)?' need':'')+'" onclick="homeAct(\''+k+'\')"><b>'+A.b+'</b><span>'+A.n+'</span>'+(done[k]?'<i>✔</i>':'')+'</button>';}).join('')+'</div>';
+  if(petReady(p))html+='<div class="gr-ready"><b>🎓 '+f.n+' ya es grande y está lista para irse a jugar con otros amigos.</b><span>Podés despedirla cuando quieras: te deja un premio, te manda postales y llega un bebé nuevo.</span><button class="btn sun" onclick="graduate()">🎓 Despedir a '+f.n+'</button></div>';
+  else if(p.stage===3&&p.bigAt)html+='<div class="hm-tip">🎓 En '+Math.max(1,Math.ceil((GRAD_DAYS*86400000-(Date.now()-p.bigAt))/86400000))+' días '+f.n+' va a estar lista para graduarse</div>';
   html+='<div class="hm-tip'+(p.sick?' sick':'')+'">'+(p.sick?'🤒 '+f.n+' está enferma: dale un remedio 💊':'Tocá a '+f.n+' para hacerle mimos ❤️'+(p.poop?' · ¡Limpiá la caca 💩!':''))+'</div>';
   html+='<div class="hm-two"><button class="btn ghost hm-dress" onclick="homeDress()">👒 Vestir</button>'+(buddyId()===f.id?'<div class="hm-buddy on">🎒 Te acompaña ✓</div>':'<button class="btn sun hm-buddy" onclick="setBuddy()">🎒 Llevar de aventura</button>')+'</div>';
  } else html+='<div class="hm-tip big">🥚 ¡Tocá el huevo para que nazca tu '+f.n+'!</div>';
  if(!HOME_SEL){ html+='<div class="hm-h">🏡 Mis amigos</div><div class="hm-row">'+FRIENDS.map(function(x){var own=h.own.indexOf(x.id)>=0, pp=own?h.pets[x.id]:null, alert=own&&(pp.stage===0||petMood(pp)!=='happy');
-   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own&&petArt(x.id,pp.stage)?'<div class="hm-mini"><img src="'+petArt(x.id,pp.stage)+'_idle.webp" alt=""></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>'; }
+   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own&&petArt(x.id,pp.stage)?'<div class="hm-mini"><img src="'+petArt(x.id,pp.stage)+'_idle.webp" alt=""></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>';
+  if(h.grads&&h.grads.length)html+='<div class="hm-h">🎓 Amigos que crecieron</div><div class="gr-wall">'+h.grads.map(function(g){return '<div class="gr-ph"><img src="'+gradImg(g.id)+'" alt=""><b>'+g.n+'</b><small>'+g.days+' días cuidado'+'</small></div>';}).join('')+'</div>'; }
  document.getElementById('hmBody').innerHTML=html;
 }
 function careUp(p,k){ p.care=(p.care||0)+1; var before=p.stage, st=petStage(p); var el=document.querySelector('.hm-friend:not(.egg)'); if(el)el.style.setProperty('--sc',petScale2(hData().cur,p));
- if(st>before){ p.stage=st; save(); setTimeout(function(){ renderHome(); petAnim('a-hatch',1500); fx(['✨','🌟','⭐'],14,'up'); sWin(); burst(160); var f=friendById(hData().cur); homeSay('Look! I am '+(st===2?'growing up':'big now')+'!'); toast('🌱 ¡'+f.n+' creció! Ahora es '+STAGES[st].n.toLowerCase()); },1700); } }
+ if(st>before){ p.stage=st; if(st===3&&!p.bigAt)p.bigAt=Date.now(); save(); setTimeout(function(){ renderHome(); petAnim('a-hatch',1500); fx(['✨','🌟','⭐'],14,'up'); sWin(); burst(160); var f=friendById(hData().cur); homeSay('Look! I am '+(st===2?'growing up':'big now')+'!'); toast('🌱 ¡'+f.n+' creció! Ahora es '+STAGES[st].n.toLowerCase()); },1700); } }
+/* ===== 🎓 GRADUACIÓN: ciclo de vida sin muerte ===== */
+var GRAD_DAYS=7;
+var POSTCARDS=[
+ ['Hi! I am at the beach with my new friends!','¡Hola! ¡Estoy en la playa con mis nuevos amigos!','🏖️'],
+ ['Hello from the mountains! It is cold here!','¡Hola desde las montañas! ¡Acá hace frío!','🏔️'],
+ ['I go to school now! I can count to one hundred!','¡Ahora voy a la escuela! ¡Sé contar hasta cien!','🏫'],
+ ['Today I played soccer with a lion!','¡Hoy jugué al fútbol con un león!','⚽'],
+ ['I saw a rainbow and I thought of you!','¡Vi un arcoíris y me acordé de vos!','🌈'],
+ ['I made a cake for my friends!','¡Hice una torta para mis amigos!','🎂'],
+ ['I am on a boat! The sea is blue!','¡Estoy en un barco! ¡El mar es azul!','⛵'],
+ ['I learned to dance! It is so fun!','¡Aprendí a bailar! ¡Es re divertido!','💃'],
+ ['It is snowing! I made a snowman!','¡Está nevando! ¡Hice un muñeco de nieve!','⛄'],
+ ['I miss you! Thank you for taking care of me!','¡Te extraño! ¡Gracias por cuidarme!','💌']
+];
+function petReady(p){ return p&&p.stage===3&&p.bigAt&&Date.now()-p.bigAt>=GRAD_DAYS*86400000; }
+function petDays(p){ return Math.max(1,Math.round((Date.now()-(p.born||p.bigAt||Date.now()))/86400000)); }
+function gradImg(id){ return POSE_SETS[id]&&POSE_SETS[id][3]?'img/pet/'+id+'_3_happy.webp':'img/friend_'+id+'.png'; }
+function graduate(){ var h=hData(), f=friendById(h.cur), p=pet(); if(!petReady(p)||HOME_BUSY)return;
+ if(!confirm('¿Despedir a '+f.n+'? Ya es grande y se va a jugar con otros amigos. Vas a recibir un premio, sus postales y un bebé nuevo 🍼'))return;
+ HOME_BUSY=true; var B=petBox&&petBox(), room=document.querySelector('.hm-room');
+ if(room&&B){ var bp=sprite(room,'🎒','hm-held',B.x+B.w*0.15,B.y+B.h*0.35,Math.max(40,B.w*0.35)); setTimeout(function(){bp.remove();},5200); }
+ homeSay('I am big now! Thank you for taking care of me!','¡Ya soy grande! ¡Gracias por cuidarme!'); setPose&&setPose('happy',2000,true); petAnim('a-jump',900); burst(120); sWin();
+ setTimeout(function(){ homeSay('I will miss you! I will send you postcards!','¡Te voy a extrañar! ¡Te voy a mandar postales!'); fx(['💌','❤️','✨'],12,'up'); },2600);
+ setTimeout(function(){ var el=document.querySelector('.hm-friend'); if(el){el.style.transition='transform 1.6s ease-in, opacity 1.6s';el.style.transform='translateX(260px) scale(.6)';el.style.opacity='0';} homeSay('Bye bye! See you!','¡Chau chau! ¡Nos vemos!'); },5200);
+ setTimeout(function(){
+  if(!h.grads)h.grads=[]; h.grads.unshift({id:f.id,n:f.n,days:petDays(p),d:dkey()});
+  h.own=h.own.filter(function(x){return x!==f.id;}); delete h.pets[f.id]; delete h.wear[f.id]; if(h.buddy===f.id)h.buddy=null;
+  S.gems+=60; S.medals=(S.medals||0)+1;
+  var cand=FRIENDS.filter(function(x){return h.own.indexOf(x.id)<0&&x.id!==f.id;}); var nb=cand.length?cand[(Math.random()*cand.length)|0]:f;
+  h.own.push(nb.id); h.pets[nb.id]={stage:nb.egg?0:1,care:0,nd:{food:70,fun:70,clean:80,energy:80,love:70},t:Date.now(),born:Date.now(),poop:0}; h.cur=nb.id; h.pcT=Date.now();
+  save(); HOME_BUSY=false;
+  var ov=document.createElement('div'); ov.className='pk-ov';
+  ov.innerHTML='<div class="pk-box"><h2>🎓 ¡'+f.n+' se graduó!</h2><img class="gr-img" src="'+gradImg(f.id)+'" alt=""><p>La cuidaste <b>'+petDays(p)+' días</b>. Ahora se va a jugar con otros amigos y te va a mandar postales en inglés 💌</p><div class="rewpill">🏅 Medalla · 💎 +60</div><p>Y llegó un amigo nuevo para cuidar: <b>'+nb.e+' '+nb.n+'</b> '+(nb.egg?'🥚':'🍼')+'</p><button class="btn teal" id="grOk">¡Conocer a '+nb.n+'!</button></div>';
+  document.body.appendChild(ov); sWin(); burst(200);
+  document.getElementById('grOk').onclick=function(){ ov.remove(); renderHome(); petAnim('a-hatch',1500); homeSay(nb.egg?'Tap the egg!':'Hello! I am a baby '+nb.en+'!'); };
+ },7000);
+}
+function maybePostcard(){ var h=hData(); if(!h.grads||!h.grads.length)return; if(Date.now()-(h.pcT||0)<20*3600000)return; if(Math.random()<0.4){h.pcT=Date.now()-14*3600000;save();return;}
+ h.pcT=Date.now(); var g=h.grads[(Math.random()*h.grads.length)|0]; if(!S.pdeck)S.pdeck={}; var d=S.pdeck.pc||(S.pdeck.pc={q:[]}); if(!d.q.length)d.q=shuffle(POSTCARDS.map(function(_,i){return i;})); var c=POSTCARDS[d.q.shift()]; save();
+ var ov=document.createElement('div'); ov.className='pk-ov';
+ ov.innerHTML='<div class="pk-box pc"><div class="pc-stamp">'+c[2]+'</div><h2>💌 ¡Postal de '+g.n+'!</h2><img class="gr-img" src="'+gradImg(g.id)+'" alt=""><div class="pc-en">'+c[0]+'</div><div class="pc-es">'+c[1]+'</div><div style="display:flex;gap:8px"><button class="btn ghost" id="pcHear">🔊 Escuchar</button><button class="btn teal" id="pcOk">¡Qué lindo!</button></div></div>';
+ document.body.appendChild(ov); sWin(); setTimeout(function(){say(c[0]);},500);
+ document.getElementById('pcHear').onclick=function(){say(c[0],0.75);}; document.getElementById('pcOk').onclick=function(){ov.remove();sTap();}; }
+
 function setBuddy(){ var h=hData(), f=friendById(h.cur); if(pet().stage===0)return; h.buddy=f.id; save(); sWin(); burst(60); renderHome(); setPose&&setPose('happy',1200,true); homeSay('Yay! Let\'s go on an adventure!','¡Bien! ¡Vamos de aventura!'); toast('🎒 '+f.n+' te acompaña en el camino y en los juegos'); }
 function homeAct(k){ if(HOME_BUSY)return; var p=pet();
  if(k==='play'&&p&&p.sick){ sBad(); petAnim('a-wiggle',600); homeSay('I feel sick… I can\'t play now.','Me siento mal… ahora no puedo jugar.'); return; }
