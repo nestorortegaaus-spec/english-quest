@@ -167,3 +167,6 @@ le acepte la voz a la nena.
   frase pisaba la que hacía avanzar. micListen ignora el aviso después de un corte, cada actividad del descanso tiene su turno (actTok) y hay un
   seguro: si nada avanza en 45 s pasa a la siguiente actividad.
 - ✅ HECHO (27/11): cuentos sin botón ES: la traducción en castellano se ve siempre debajo del inglés.
+- ✅ HECHO (27/11): Kart con 14 pistas: 10 nuevas bloqueadas (Pradera Florida, Bosque de Ardillas, Castillo Aventura, Selva Loca, Carrera Dulce,
+  Dunas Doradas, Valle Dino, Bosque de Hadas, Islas del Cielo, Ciudad Musical). Se abren de a una saliendo en el podio en la anterior; los rivales
+  van un poquito más rápido en cada una. Fondos img/kart_bg_<id>.jpg recortados del arte de los mundos (parte de arriba, en espejo para repetir).
