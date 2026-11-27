@@ -184,3 +184,7 @@ le acepte la voz a la nena.
   Mary Had a Little Lamb, Old MacDonald, The Wheels on the Bus, Happy Birthday). Por cada frase: la voz la dice (escuchá) y después suena la
   melodía con la letra que se ilumina sílaba por sílaba (cantá), con traducción y dibujo; al final se canta la canción entera. Melodías en
   SONGS (nota:tiempos por sílaba), sintetizadas con tone(); sin narrador encima.
+- ✅ HECHO (27/11): Panel para padres rediseñado (colores calmos salvia/azul, letra 15-30 px, tarjetas): entrada con teclado propio (sin prompt),
+  anillo de avance del mundo, 4 indicadores, "Hoy" (anillo de meta + tiempo vs límite), barras de 14 días con línea de meta, minutos y aciertos
+  por día (S.dlog, se guarda desde el 27/11, 60 días), aciertos totales + temas más practicados, palabras para practicar con barra, ajustes en
+  botones segmentados.
