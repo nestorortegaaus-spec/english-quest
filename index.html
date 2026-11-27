@@ -256,7 +256,7 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .kq-hud span{background:rgba(0,0,0,.45);color:#fff;font-weight:900;border-radius:12px;padding:4px 12px;font-size:18px;}
 .kq-ask{position:absolute;top:50px;left:50%;transform:translateX(-50%) scale(.8);background:#fff;border-radius:16px;padding:8px 16px;font-size:20px;font-weight:900;color:var(--ink);opacity:0;transition:all .25s;pointer-events:none;box-shadow:0 5px 0 rgba(0,0,0,.2);white-space:nowrap;}
 .kq-ask.on{opacity:1;transform:translateX(-50%) scale(1);} .kq-ask b{color:#E06E58;}
-.kq-big{position:absolute;top:32%;left:0;right:0;text-align:center;font-size:44px;font-weight:900;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.35);opacity:0;transform:scale(.6);transition:all .2s;pointer-events:none;}
+.kq-big{position:absolute;top:32%;left:0;right:0;padding:0 12px;line-height:1.15;text-align:center;font-size:36px;font-weight:900;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.35);opacity:0;transform:scale(.6);transition:all .2s;pointer-events:none;}
 .kq-big.on{opacity:1;transform:scale(1);}
 .kq-btn{position:absolute;bottom:60px;width:84px;height:84px;border-radius:50%;border:4px solid rgba(255,255,255,.8);background:rgba(0,0,0,.28);color:#fff;font-size:34px;font-weight:900;touch-action:none;}
 .kq-btn.l{left:12px;} .kq-btn.r{right:12px;} .kq-btn:active{background:rgba(255,255,255,.35);}
@@ -292,7 +292,7 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .hm-mini{position:relative;width:56px;height:56px;display:flex;align-items:center;justify-content:center;} .hm-mini img{width:100%;height:100%;object-fit:contain;} .hm-mini .fe{font-size:42px;}
 .hm-mini .acc{display:none;}
 /* FRASES */
-.ph{gap:10px;} .ph-pic{font-size:72px;line-height:1.1;text-align:center;} .ph-step{font-weight:900;color:#8C7BD6;font-size:16px;text-align:center;}
+.ph{gap:10px;} .ph-plus{font-size:34px;color:#8C7BD6;font-weight:900;margin:0 8px;vertical-align:middle;} .ph-pic{font-size:72px;line-height:1.1;text-align:center;} .ph-step{font-weight:900;color:#8C7BD6;font-size:16px;text-align:center;}
 .ph-sen{font-size:24px;font-weight:900;color:var(--ink);text-align:center;line-height:1.3;} .ph-sen.big{font-size:30px;}
 .ph-sen span{display:inline-block;animation:pkin .4s backwards;} .ph-gap{color:#E06E58;border-bottom:3px dashed #E06E58;padding:0 6px;}
 .ph-es{font-weight:800;color:var(--muted);font-size:15px;text-align:center;}
@@ -1478,8 +1478,8 @@ function startKart(){
    gates.forEach(function(g){ var ahead=(g.i-pi+N)%N;
     if(ahead<70&&ahead>2&&g.said!==P.lap){g.said=P.lap;var w=g.o[g.t];ask.innerHTML='🔊 <b>'+w.en+'</b>';ask.className='kq-ask on';say('Go through the '+w.en+'!');}
     if(ahead===0&&g.done!==P.lap){g.done=P.lap; var side=P.x<0?0:1; ask.className='kq-ask';
-      if(side===g.t){P.boost=1.6;sGood();burst(20);bigMsg('🔥 TURBO! '+g.o[g.t].en,1100);markWord(g.o[g.t],true);}
-      else{P.slow=1.2;sBad();bigMsg('😵 '+g.o[side].en+' ≠ '+g.o[g.t].en,1200);markWord(g.o[g.t],false);}
+      if(side===g.t){P.boost=1.6;sGood();burst(20);bigMsg('🔥 '+g.o[g.t].en+' = '+g.o[g.t].es,1600);markWord(g.o[g.t],true);sayBoth(g.o[g.t].en,g.o[g.t].es);}
+      else{P.slow=1.2;sBad();bigMsg('😵 '+g.o[g.t].en+' = '+g.o[g.t].es,1600);markWord(g.o[g.t],false);sayBoth(g.o[g.t].en,g.o[g.t].es);}
       var gg=g; setTimeout(function(){fillGate(gg);},1500); } });
    // puesto
    var pd=dist(P); place=1+cars.filter(function(k){return dist(k)>pd;}).length;
@@ -1921,7 +1921,27 @@ var PHR=[
  {lv:4,en:'There are {} birds in the tree.',s:[['two','Hay dos pájaros en el árbol.','🐦🐦🌳'],['three','Hay tres pájaros en el árbol.','🐦🐦🐦🌳'],['four','Hay cuatro pájaros en el árbol.','🐦🐦🐦🐦🌳'],['five','Hay cinco pájaros en el árbol.','🐦🐦🐦🐦🐦🌳']]},
  {lv:4,en:'My {} is very funny.',s:[['dog','Mi perro es muy gracioso.','🐕'],['brother','Mi hermano es muy gracioso.','👦'],['grandpa','Mi abuelo es muy gracioso.','👴'],['teacher','Mi maestra es muy graciosa.','👩‍🏫'],['friend','Mi amiga es muy graciosa.','👧'],['cat','Mi gato es muy gracioso.','🐈']]},
  {lv:5,en:'Yesterday I {} in the park.',s:[['played','Ayer jugué en la plaza.','⚽'],['ran','Ayer corrí en la plaza.','🏃'],['walked','Ayer caminé en la plaza.','🚶'],['danced','Ayer bailé en la plaza.','💃'],['read','Ayer leí en la plaza.','📖']]},
- {lv:5,en:'Tomorrow I will {}.',s:[['play soccer','Mañana voy a jugar al fútbol.','⚽'],['visit grandma','Mañana voy a visitar a la abuela.','👵'],['go to the beach','Mañana voy a ir a la playa.','🏖️'],['read a book','Mañana voy a leer un libro.','📖'],['bake a cake','Mañana voy a hacer una torta.','🎂']]}
+ {lv:5,en:'Tomorrow I will {}.',s:[['play soccer','Mañana voy a jugar al fútbol.','⚽'],['visit grandma','Mañana voy a visitar a la abuela.','👵'],['go to the beach','Mañana voy a ir a la playa.','🏖️'],['read a book','Mañana voy a leer un libro.','📖'],['bake a cake','Mañana voy a hacer una torta.','🎂']]},
+ {lv:1,en:'Look at the {}!',s:[['dog','¡Mirá el perro!','🐶'],['moon','¡Mirá la luna!','🌙'],['rainbow','¡Mirá el arcoíris!','🌈'],['butterfly','¡Mirá la mariposa!','🦋'],['plane','¡Mirá el avión!','✈️'],['cake','¡Mirá la torta!','🎂']]},
+ {lv:1,en:'This is my {}.',s:[['backpack','Esta es mi mochila.','🎒'],['book','Este es mi libro.','📕'],['cat','Este es mi gato.','🐱'],['bike','Esta es mi bici.','🚲'],['house','Esta es mi casa.','🏠'],['doll','Esta es mi muñeca.','🪆']]},
+ {lv:2,en:'My favorite color is {}.',s:[['red','Mi color favorito es el rojo.','🔴'],['blue','Mi color favorito es el azul.','🔵'],['green','Mi color favorito es el verde.','🟢'],['yellow','Mi color favorito es el amarillo.','🟡'],['purple','Mi color favorito es el violeta.','🟣'],['orange','Mi color favorito es el naranja.','🟠']]},
+ {lv:2,en:'It is {} today.',s:[['sunny','Hoy está soleado.','☀️'],['rainy','Hoy está lluvioso.','🌧️'],['cold','Hoy hace frío.','🥶'],['hot','Hoy hace calor.','🥵'],['windy','Hoy hay viento.','🌬️'],['cloudy','Hoy está nublado.','☁️']]},
+ {lv:2,en:'I go to school by {}.',s:[['bus','Voy a la escuela en colectivo.','🚌'],['car','Voy a la escuela en auto.','🚗'],['bike','Voy a la escuela en bici.','🚲'],['train','Voy a la escuela en tren.','🚆'],['taxi','Voy a la escuela en taxi.','🚕']]},
+ {lv:2,en:'I am wearing a {}.',s:[['hat','Tengo puesto un sombrero.','🎩'],['dress','Tengo puesto un vestido.','👗'],['jacket','Tengo puesta una campera.','🧥'],['scarf','Tengo puesta una bufanda.','🧣'],['cap','Tengo puesta una gorra.','🧢'],['shirt','Tengo puesta una remera.','👕']]},
+ {lv:3,en:'There is a {} under the bed.',s:[['cat','Hay un gato debajo de la cama.','🐱'],['ball','Hay una pelota debajo de la cama.','⚽'],['shoe','Hay un zapato debajo de la cama.','👟'],['book','Hay un libro debajo de la cama.','📕'],['spider','Hay una araña debajo de la cama.','🕷️'],['sock','Hay una media debajo de la cama.','🧦']]},
+ {lv:3,en:'My {} hurts.',s:[['head','Me duele la cabeza.','🤕'],['tooth','Me duele un diente.','🦷'],['leg','Me duele la pierna.','🦵'],['arm','Me duele el brazo.','💪'],['foot','Me duele el pie.','🦶'],['ear','Me duele el oído.','👂']]},
+ {lv:3,en:'How many {} do you have?',s:[['pencils','¿Cuántos lápices tenés?','✏️'],['books','¿Cuántos libros tenés?','📚'],['toys','¿Cuántos juguetes tenés?','🧸'],['friends','¿Cuántos amigos tenés?','🧒'],['pets','¿Cuántas mascotas tenés?','🐾'],['balloons','¿Cuántos globos tenés?','🎈']]},
+ {lv:3,en:'We are going to the {}.',s:[['beach','Vamos a la playa.','🏖️'],['park','Vamos a la plaza.','🏞️'],['zoo','Vamos al zoológico.','🦁'],['cinema','Vamos al cine.','🎬'],['museum','Vamos al museo.','🏛️'],['supermarket','Vamos al supermercado.','🛒']]},
+ {lv:4,en:'Can I have {}, please?',s:[['some juice','¿Me das jugo, por favor?','🧃'],['a cookie','¿Me das una galletita, por favor?','🍪'],['a pencil','¿Me das un lápiz, por favor?','✏️'],['some water','¿Me das agua, por favor?','💧'],['a hug','¿Me das un abrazo, por favor?','🤗'],['an apple','¿Me das una manzana, por favor?','🍎']]},
+ {lv:4,en:'On Saturdays I {}.',s:[['play soccer','Los sábados juego al fútbol.','⚽'],['visit my grandma','Los sábados visito a mi abuela.','👵'],['go swimming','Los sábados voy a nadar.','🏊'],['watch movies','Los sábados miro películas.','🎬'],['ride my bike','Los sábados ando en bici.','🚴'],['bake cookies','Los sábados hago galletitas.','🍪']]},
+ {lv:4,en:'When I grow up I want to be a {}.',s:[['doctor','Cuando sea grande quiero ser doctora.','🧑‍⚕️'],['teacher','Cuando sea grande quiero ser maestra.','👩‍🏫'],['vet','Cuando sea grande quiero ser veterinaria.','🐾'],['pilot','Cuando sea grande quiero ser piloto.','🧑‍✈️'],['singer','Cuando sea grande quiero ser cantante.','🧑‍🎤'],['scientist','Cuando sea grande quiero ser científica.','🧑‍🔬']]},
+ {lv:4,en:'The {} is next to the house.',s:[['tree','El árbol está al lado de la casa.','🌳'],['car','El auto está al lado de la casa.','🚗'],['dog','El perro está al lado de la casa.','🐕'],['bike','La bici está al lado de la casa.','🚲'],['flower','La flor está al lado de la casa.','🌷']]},
+ {lv:5,en:'I would like to visit {} one day.',s:[['Japan','Me gustaría visitar Japón algún día.','🇯🇵'],['Paris','Me gustaría visitar París algún día.','🗼'],['the moon','Me gustaría visitar la Luna algún día.','🌙'],['Brazil','Me gustaría visitar Brasil algún día.','🇧🇷'],['Italy','Me gustaría visitar Italia algún día.','🇮🇹'],['Mexico','Me gustaría visitar México algún día.','🇲🇽']]},
+ {lv:5,en:'Last summer we went to the {}.',s:[['beach','El verano pasado fuimos a la playa.','🏖️'],['mountains','El verano pasado fuimos a las montañas.','🏔️'],['countryside','El verano pasado fuimos al campo.','🌾'],['lake','El verano pasado fuimos al lago.','🏞️'],['city','El verano pasado fuimos a la ciudad.','🏙️']]},
+ {lv:5,en:'If it rains, I will {}.',s:[['read a book','Si llueve, voy a leer un libro.','📖'],['watch TV','Si llueve, voy a mirar tele.','📺'],['play board games','Si llueve, voy a jugar juegos de mesa.','🎲'],['paint a picture','Si llueve, voy a pintar un cuadro.','🎨'],['bake a cake','Si llueve, voy a hacer una torta.','🎂']]},
+ {lv:5,en:'I am taller than my {}.',s:[['brother','Soy más alta que mi hermano.','👦'],['sister','Soy más alta que mi hermana.','👧'],['cousin','Soy más alta que mi primo.','🧒'],['cat','Soy más alta que mi gato.','🐈'],['dog','Soy más alta que mi perro.','🐕']]},
+ {lv:5,en:'First I wake up, then I {}.',s:[['brush my teeth','Primero me despierto, después me lavo los dientes.','🪥'],['eat breakfast','Primero me despierto, después desayuno.','🥣'],['take a shower','Primero me despierto, después me ducho.','🚿'],['get dressed','Primero me despierto, después me visto.','👕'],['make my bed','Primero me despierto, después hago la cama.','🛏️']]},
+ {lv:5,en:'My best friend likes {}, but I like {}.',two:1,s:[['cats','A mi mejor amiga le gustan los gatos, pero a mí me gustan los perros.','🐱🐶','dogs'],['pizza','A mi mejor amiga le gusta la pizza, pero a mí me gusta el helado.','🍕🍦','ice cream'],['red','A mi mejor amiga le gusta el rojo, pero a mí me gusta el azul.','🔴🔵','blue'],['soccer','A mi mejor amiga le gusta el fútbol, pero a mí me gusta el tenis.','⚽🎾','tennis'],['winter','A mi mejor amiga le gusta el invierno, pero a mí me gusta el verano.','⛄🏖️','summer']]}
 ];
 function startPhrase(u,lv){
  lv=lv||1; var host=gSetup('🧩 Frases · Nivel '+lv);
@@ -1929,33 +1949,36 @@ function startPhrase(u,lv){
  var T=cands[S.phr%cands.length]; S.phr++; save();
  var items=shuffle(T.s), STEPS=['look','gap','gap','order','swap','listen','order'];
  if(lv>=2)STEPS.push(SR?'say':'order'); if(lv>=3)STEPS.splice(2,0,'swap');
+ var canJoin=!/\?$/.test(T.en)&&!T.two&&T.en.split(' ').length<=5; if(lv>=3&&canJoin)STEPS.splice(STEPS.length-1,0,'long'); if(lv>=4&&canJoin)STEPS.push('long');
  var R=STEPS.length, r=0, first=0, prev=null;
- function sent(it){return T.en.replace('{}',it[0]);}
+ function sent(it){var x=T.en.replace('{}',it[0]);return T.two?x.replace('{}',it[3]):x;}
  function clean(w){return w.replace(/[.,?!]/g,'');}
  function head(it,txt){return '<div class="ph-pic">'+it[2]+'</div><div class="ph-step">'+txt+'</div>';}
  function next(){ if(!GAME.on)return;
   if(r>=R){finishGameNode('🧩 ¡Armaste frases!','Hiciste '+R+' pasos ('+first+' sin errores). ¡Ya sabés decir "'+T.en.replace('{}','…').replace(/\.$/,'')+'"! 🗣️');return;}
   var st=STEPS[r], it=items[r%items.length], others=items.filter(function(x){return x!==it;}), err=false;
   gScore((r+1)+'/'+R);
-  function ok(){ if(!err)first++; sGood(); burst(12); say(sent(it)); prev=it; r++; GAME.timer=setTimeout(next,1500); }
+  function ok(){ if(!err)first++; sGood(); burst(12); say(it._full||sent(it)); prev=items[r%items.length]; r++; GAME.timer=setTimeout(next,it._full&&it._full.length>40?2600:1500); }
   function bad(el){ err=true; sBad(); if(el){el.classList.add('no');setTimeout(function(){el.classList.remove('no');},400);} }
   var h='<div class="g2 ph">';
   if(st==='look'){
    h+=head(it,'👀 Mirá y escuchá')+'<div class="ph-sen big">'+sent(it).split(' ').map(function(w){return '<span>'+w+'</span>';}).join(' ')+'</div><div class="ph-es">'+it[1]+'</div><button class="btn teal" id="phGo">¡Entendí! →</button>';
    host.innerHTML=h+'</div>'; say(sent(it)); document.getElementById('phGo').onclick=function(){sTap();prev=it;r++;next();}; return; }
   if(st==='gap'){
-   h+=head(it,'✏️ Completá la frase')+'<div class="ph-sen">'+T.en.replace('{}','<b class="ph-gap">____</b>')+'</div><div class="ph-es">'+it[1]+'</div><div class="ph-opts" id="phO"></div>';
+   h+=head(it,'✏️ Completá la frase')+'<div class="ph-sen">'+(T.two?T.en.replace('{}','<b class="ph-gap">____</b>').replace('{}',it[3]):T.en.replace('{}','<b class="ph-gap">____</b>'))+'</div><div class="ph-es">'+it[1]+'</div><div class="ph-opts" id="phO"></div>';
    host.innerHTML=h+'</div>'; var o=document.getElementById('phO');
    shuffle([it].concat(shuffle(others).slice(0,2))).forEach(function(x){var b=document.createElement('button');b.className='ph-opt';b.innerHTML='<i>'+x[2]+'</i>'+x[0];
     b.onclick=function(){ if(x===it){b.classList.add('ok');document.querySelector('.ph-gap').textContent=it[0];ok();} else bad(b); };o.appendChild(b);});
    say(T.en.replace('{}','…')); return; }
-  if(st==='order'){
-   var words=sent(it).split(' '), pos=0;
-   h+=head(it,'🧩 Ordená las palabras')+'<div class="ph-es">'+it[1]+'</div><div class="ph-tray" id="phT"></div><div class="ph-bank" id="phB"></div>';
+  if(st==='order'||st==='long'){
+   var full=sent(it), esT=it[1], pic=it;
+   if(st==='long'){ var it2=others[(r+1)%others.length]; var b2=sent(it2); full=sent(it).replace(/[.!]$/,'')+' and '+(b2.indexOf('I ')===0?b2:b2.charAt(0).toLowerCase()+b2.slice(1)); esT=it[1].replace(/[.!]$/,'')+' y '+it2[1].charAt(0).toLowerCase()+it2[1].slice(1); pic=[it[0],it[1],it[2]+'<small class="ph-plus">+</small>'+it2[2]]; }
+   var words=full.split(' '), pos=0; it={0:it[0],1:it[1],2:it[2],3:it[3],length:4,_full:full};
+   h+=head(pic,st==='long'?'🔗 Frase larga: uní las dos ideas':'🧩 Ordená las palabras')+'<div class="ph-es">'+esT+'</div><div class="ph-tray" id="phT"></div><div class="ph-bank" id="phB"></div>';
    host.innerHTML=h+'</div>'; var tray=document.getElementById('phT'), bank=document.getElementById('phB');
    shuffle(words.map(function(w,i){return {w:w,i:i};})).forEach(function(o){var c=document.createElement('button');c.className='ph-chip';c.textContent=clean(o.w);
     c.onclick=function(){ if(c.disabled)return; if(clean(o.w).toLowerCase()===clean(words[pos]).toLowerCase()){c.disabled=true;c.classList.add('used');var t=document.createElement('span');t.className='ph-chip in';t.textContent=words[pos];tray.appendChild(t);pos++;tone(500+pos*50,.06,'triangle',.14,0);if(pos>=words.length)ok();} else {bad(c);say(clean(words[pos]));} };
-    bank.appendChild(c);}); say(sent(it)); return; }
+    bank.appendChild(c);}); say(full); return; }
   if(st==='swap'){
    var p0=prev||others[0]; if(p0===it)p0=others[0];
    h+='<div class="ph-step">🔄 Cambiá una palabra</div><div class="ph-swap"><div><i>'+p0[2]+'</i><span>'+sent(p0)+'</span></div><b>➜</b><div><i>'+it[2]+'</i><span>?</span></div></div><div class="ph-es">'+it[1]+'</div><div class="ph-opts col" id="phO"></div>';

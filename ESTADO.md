@@ -55,6 +55,7 @@ le acepte la voz a la nena.
   (configurable o apagable desde el panel de padres).
 - 🏎️ Kart Quest: carrera pseudo-3D de 3 vueltas contra 5 rivales, 6 pilotos, 4 pistas (Playa, Ciudad, Nieve, Galaxia;
   se desbloquean saliendo 1°-3°). Portones con palabras: la voz dice "Go through the apple!" y pasar por el correcto da turbo.
+  Al pasar un portón la voz dice la palabra en inglés y en castellano (sayBoth).
   Portones: 8 por vuelta, palabras distintas en cada vuelta, de todos los temas hasta el nivel del mundo (prioriza nuevas/difíciles).
   Choques: rebote lateral de ambos, el rival tambalea/gira y frena, sacudón de cámara, chispas y sonido de golpe.
   Arte (ChatGPT, completo): img/kart_<piloto>.png (fox, panda, koala, lion, bunny, robot; sin fondo, 360 px)
@@ -94,10 +95,10 @@ le acepte la voz a la nena.
   Mundos 2-4 traen al final 2 temas nuevos cada uno (NEWU[0..5]) + parada 🔁 Repaso del mundo anterior.
   Galaxias (mundo 5+) usan NEWU desde el 7º, 6 temas por galaxia en orden de dificultad (~10 galaxias de contenido nuevo).
   prioW() prioriza palabras no vistas o difíciles (S.hist). Para sumar: agregar temas en vocab.js y subir ?v= en index.html.
-- 🔄 EN CURSO: FRASES estilo Kumon. Hecho 27/11: juego 🧩 Frases (PHR: 16 patrones lv1-5). Cada partida toma un patrón
-  y lo trabaja cambiando una palabra: mirar/escuchar → completar → ordenar fichas → cambiar una palabra → escuchar y
-  elegir dibujo → decirla con micrófono (nivel 2+). Aparece en cada par de temas desde el mundo 3 y al final de cada mundo.
-  Falta: más patrones y frases más largas.
+- 🔄 EN CURSO: FRASES estilo Kumon. Juego 🧩 Frases con 36 patrones (PHR, lv1-5, desde "I like…" hasta "If it rains,
+  I will…", "When I grow up I want to be a…", y uno de dos huecos "My best friend likes…, but I like…").
+  Pasos: mirar/escuchar → completar → ordenar → cambiar una palabra → escuchar y elegir → frase larga (une dos frases
+  con "and", nivel 3+, solo patrones cortos) → decirla con micrófono. Falta: más patrones.
 - ⏭️ PENDIENTE (pedido 27/11): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
