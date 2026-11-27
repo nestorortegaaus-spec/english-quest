@@ -2242,6 +2242,15 @@ function startPaint(u,lv){
 var SAFARI_BG='img/safari_bg.jpg';
 /* arbustos del dibujo: centro x y borde de arriba, en proporción de la imagen */
 var SAFARI_BUSH=[[0.16,0.625],[0.50,0.59],[0.83,0.625]];
+/* paisajes que rotan: img (vertical), tamaño original w/h, arbustos [x,y del borde de arriba en proporción], tag de animales */
+var SAFARI_SCENES=[{id:'forest',n:'Bosque',img:'img/safari_bg.jpg',w:941,h:1672,bush:SAFARI_BUSH,tag:'forest'}];
+var SAFARI_TAGS={
+ farm:'cow pig sheep goat horse chicken chick rooster duck turkey cat dog mouse rabbit goose fly',
+ jungle:'monkey parrot tiger snake frog gorilla sloth leopard crocodile butterfly bat ant beetle lizard peacock',
+ savanna:'lion zebra giraffe elephant hippo rhino camel kangaroo leopard eagle ant snake ostrich flamingo',
+ snow:'polar_bear penguin seal wolf deer fox owl rabbit crow mammoth goose',
+ forest:'owl squirrel hedgehog fox deer wolf bear rabbit raccoon skunk badger beaver otter snail ladybug bee butterfly bird frog'};
+function nextScene(){ var L=SAFARI_SCENES; S.safScene=((S.safScene==null?-1:S.safScene)+1)%L.length; save(); return L[S.safScene]; }
 /* f:1 vuela por el cielo, f:0 se asoma de los arbustos; d: dificultad 1-3 */
 var SAFARI=[
  {en:'bird',es:'pájaro',e:'🐦',f:1,d:1},{en:'butterfly',es:'mariposa',e:'🦋',f:1,d:1},{en:'bee',es:'abeja',e:'🐝',f:1,d:1},{en:'duck',es:'pato',e:'🦆',f:1,d:1},
@@ -2261,11 +2270,13 @@ var SAFARI=[
  {en:'beaver',es:'castor',e:'🦫',f:0,d:3},{en:'sloth',es:'perezoso',e:'🦥',f:0,d:3},{en:'gorilla',es:'gorila',e:'🦍',f:0,d:3},{en:'leopard',es:'leopardo',e:'🐆',f:0,d:3},
  {en:'hippo',es:'hipopótamo',e:'🦛',f:0,d:3},{en:'rhino',es:'rinoceronte',e:'🦏',f:0,d:3},{en:'crocodile',es:'cocodrilo',e:'🐊',f:0,d:3},{en:'llama',es:'llama',e:'🦙',f:0,d:3},
  {en:'boar',es:'jabalí',e:'🐗',f:0,d:3},{en:'beetle',es:'escarabajo',e:'🪲',f:0,d:3},{en:'cricket',es:'grillo',e:'🦗',f:0,d:3},{en:'worm',es:'gusano',e:'🪱',f:0,d:3},
- {en:'hamster',es:'hámster',e:'🐹',f:0,d:2},{en:'rat',es:'rata',e:'🐀',f:0,d:3},{en:'dodo',es:'dodo',e:'🦤',f:0,d:3},{en:'mammoth',es:'mamut',e:'🦣',f:0,d:3}
+ {en:'hamster',es:'hámster',e:'🐹',f:0,d:2},{en:'chicken',es:'gallina',e:'🐔',f:0,d:1},{en:'polar bear',es:'oso polar',e:'🐻‍❄️',f:0,d:2},{en:'penguin',es:'pingüino',e:'🐧',f:0,d:1},{en:'seal',es:'foca',e:'🦭',f:0,d:2},{en:'rat',es:'rata',e:'🐀',f:0,d:3},{en:'dodo',es:'dodo',e:'🦤',f:0,d:3},{en:'mammoth',es:'mamut',e:'🦣',f:0,d:3}
 ];
 /* elige animales: primero los que nunca fotografió (o le cuestan), algunos conocidos para repasar; siempre con voladores y de tierra */
-function safariPool(NA,lv){ var maxD=Math.min(3,lv), h=(S&&S.hist)||{};
+function safariPool(NA,lv,tag){ var maxD=Math.min(3,lv), h=(S&&S.hist)||{};
  var cand=SAFARI.filter(function(a){return a.d<=maxD;});
+ if(tag&&SAFARI_TAGS[tag]){ var T=SAFARI_TAGS[tag].split(' '), inT=SAFARI.filter(function(a){return T.indexOf(a.en.replace(/ /g,'_'))>=0&&a.d<=Math.min(3,lv+1);}), outT=cand.filter(function(a){return T.indexOf(a.en.replace(/ /g,'_'))<0;});
+   var nT=Math.min(inT.length,Math.ceil(NA*0.65)); cand=shuffle(inT).slice(0,Math.max(nT,4)).concat(shuffle(outT).slice(0,Math.max(3,NA-nT)+4)); }
  var fresh=shuffle(cand.filter(function(a){var x=h[a.en];return !x||x[1]>=x[0];})), known=shuffle(cand.filter(function(a){var x=h[a.en];return x&&x[0]>x[1];}));
  var nNew=Math.min(fresh.length,Math.ceil(NA*0.7)), pick=fresh.slice(0,nNew).concat(known.slice(0,NA-nNew)); if(pick.length<NA)pick=pick.concat(fresh.slice(nNew,nNew+NA-pick.length));
  if(!pick.some(function(a){return a.f;})){var fl=shuffle(cand.filter(function(a){return a.f;}))[0];if(fl)pick[0]=fl;}
@@ -2273,18 +2284,19 @@ function safariPool(NA,lv){ var maxD=Math.min(3,lv), h=(S&&S.hist)||{};
  return shuffle(pick); }
 function startSafari(u,lv){
  lv=lv||1; var host=gSetup('📸 Safari · Nivel '+lv);
- var NA=Math.min(12,5+lv), pool=safariPool(NA,lv);
+ var SC=nextScene(), NA=Math.min(12,5+lv), pool=safariPool(NA,lv,SC.tag);
  var GOAL=Math.min(12,6+lv), shots=GOAL+12, got=0, target=null, beasts=[], spawnT=0, showEs=lv<4, tAsk=0;
  var spd=Math.min(2.4,0.8+0.25*(lv-1)), maxOn=Math.min(4,2+Math.floor(lv/2));
- var BG=!!SAFARI_BG;
- host.innerHTML='<div class="sf-area'+(BG?' bg':'')+'" id="sfArea">'+(BG?'<img class="sf-bgimg" src="'+SAFARI_BG+'" alt="">':'<div class="sf-sun">🌞</div><div class="sf-tree t1">🌳</div><div class="sf-tree t2">🌴</div>')
+ var BG=!!SC.img;
+ document.getElementById('gTitle').textContent='📸 Safari · '+SC.n+' · Nivel '+lv;
+ host.innerHTML='<div class="sf-area'+(BG?' bg':'')+'" id="sfArea">'+(BG?'<img class="sf-bgimg" src="'+SC.img+'" alt="">':'<div class="sf-sun">🌞</div><div class="sf-tree t1">🌳</div><div class="sf-tree t2">🌴</div>')
   +'<div class="sf-top"><button class="ls-spk slow" id="sfSay">🔊</button><div class="sf-ask" id="sfAsk"></div></div>'
   +(BG?'':'<div class="sf-bush b1">🌿</div><div class="sf-bush b2">🌳</div><div class="sf-bush b3">🌿</div><div class="sf-grass"></div>')
   +'<div class="sf-flash" id="sfFlash"></div><div class="sf-roll" id="sfRoll"></div></div>';
  var area=document.getElementById('sfArea'), roll=document.getElementById('sfRoll'), holes=[];
  function layoutHoles(){ if(!BG)return; holes.forEach(function(h){h.remove();}); holes=[];
-  var W=area.clientWidth,H=area.clientHeight, sc=Math.max(W/941,H/1672), dx=(941*sc-W)/2, dy=(1672*sc-H)/2;
-  SAFARI_BUSH.forEach(function(bb){var cx=bb[0]*941*sc-dx, top=bb[1]*1672*sc-dy; var h=document.createElement('div');h.className='sf-hole';
+  var W=area.clientWidth,H=area.clientHeight, IW=SC.w, IH=SC.h, sc=Math.max(W/IW,H/IH), dx=(IW*sc-W)/2, dy=(IH*sc-H)/2;
+  SC.bush.forEach(function(bb){var cx=bb[0]*IW*sc-dx, top=bb[1]*IH*sc-dy; var h=document.createElement('div');h.className='sf-hole';
    h.style.left=(cx-45)+'px';h.style.top=(top-86)+'px';area.insertBefore(h,document.getElementById('sfFlash'));holes.push(h);}); }
  layoutHoles();
  function hud(){gScore('📷'+shots+'  🖼️'+got+'/'+GOAL);}
