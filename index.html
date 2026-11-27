@@ -1628,15 +1628,15 @@ function petScale(p){ return p.stage===0?STAGES[0].sc:Math.round((0.55+0.45*Math
 function petStage(p){ for(var i=3;i>=1;i--)if(p.care>=STAGE_AT[i])return i; return 1; }
 function friendById(id){return FRIENDS.find(function(f){return f.id===id;})||FRIENDS[0];}
 /* ===== POSES (arte por etapa): img/pet/<id>_<etapa>_<pose>.png  poses: idle, closed, open, happy ===== */
-var POSE_SETS={}; /* ej: kitty:{1:1} cuando existe img/pet/kitty_1_idle.png ... */
+var POSE_SETS={kitty:{1:1}}; /* ej: kitty:{1:1} cuando existe img/pet/kitty_1_idle.png ... */
 var POSE_SC={1:[.74,.86],2:[.84,.95],3:[.95,1.02]};
 function petArt(id,st){ return POSE_SETS[id]&&POSE_SETS[id][st]?'img/pet/'+id+'_'+st:null; }
 function petScale2(id,p){ var art=petArt(id,p.stage); if(!art)return petScale(p); var r=POSE_SC[p.stage]||[1,1], lo=STAGE_AT[p.stage]||0, hi=STAGE_AT[p.stage+1]||STAGE_AT[3]+30;
  var t=Math.max(0,Math.min(1,((p.care||0)-lo)/Math.max(1,hi-lo))); return Math.round((r[0]+(r[1]-r[0])*t)*100)/100; }
-function preloadPoses(base){ ['idle','closed','open','happy'].forEach(function(n){ var im=new Image(); im.src=base+'_'+n+'.png'; }); }
+function preloadPoses(base){ ['idle','closed','open','happy'].forEach(function(n){ var im=new Image(); im.src=base+'_'+n+'.webp'; }); }
 var POSE_HOLD=0, POSE_T=null;
-function setPose(name,ms,hold){ var im=document.querySelector('.hm-friend img[data-art]'); if(!im)return; im.src=im.dataset.art+'_'+name+'.png'; clearTimeout(POSE_T);
- if(hold)POSE_HOLD=Date.now()+ms; if(ms)POSE_T=setTimeout(function(){ var i2=document.querySelector('.hm-friend img[data-art]'); if(i2)i2.src=i2.dataset.art+'_idle.png'; },ms); }
+function setPose(name,ms,hold){ var im=document.querySelector('.hm-friend img[data-art]'); if(!im)return; im.src=im.dataset.art+'_'+name+'.webp'; clearTimeout(POSE_T);
+ if(hold)POSE_HOLD=Date.now()+ms; if(ms)POSE_T=setTimeout(function(){ var i2=document.querySelector('.hm-friend img[data-art]'); if(i2)i2.src=i2.dataset.art+'_idle.webp'; },ms); }
 function mouthFlap(n){ var im=document.querySelector('.hm-friend img[data-art]'); if(!im||Date.now()<POSE_HOLD)return; for(var i=0;i<n;i++){ (function(i){ setTimeout(function(){ if(Date.now()<POSE_HOLD)return; setPose(i%2?'idle':'open'); },i*170); })(i); } setTimeout(function(){ if(Date.now()>=POSE_HOLD)setPose('idle'); },n*170); }
 function blinkLoop(){ clearTimeout(window._blinkT); window._blinkT=setTimeout(function(){ if(!document.getElementById('s-home').classList.contains('on'))return;
   if(Date.now()>=POSE_HOLD&&!HOME_BUSY){ setPose('closed',140); } blinkLoop(); },2400+Math.random()*2600); }
@@ -1660,7 +1660,7 @@ function renderHome(){
  var html='<div class="hm-room'+(HOME_SEL==='sleep-on'?' dark':'')+'"><div class="hm-bub" id="hmBub"></div>'
   +'<div class="hm-mood">'+face+'</div>'
   +(p.stage===0?'<div class="hm-friend egg" onclick="petHatch()"><b class="fe">🥚</b></div>'
-   :(petArt(f.id,p.stage)?'<div class="hm-friend art m-'+mood+'" style="--sc:'+petScale2(f.id,p)+'" onclick="petPet()"><img data-art="'+petArt(f.id,p.stage)+'" src="'+petArt(f.id,p.stage)+'_idle.png" alt="">'+(h.wear[f.id]?'<span class="acc '+accById(h.wear[f.id]).pos+'">'+accById(h.wear[f.id]).e+'</span>':'')+'</div>'
+   :(petArt(f.id,p.stage)?'<div class="hm-friend art m-'+mood+'" style="--sc:'+petScale2(f.id,p)+'" onclick="petPet()"><img data-art="'+petArt(f.id,p.stage)+'" src="'+petArt(f.id,p.stage)+'_idle.webp" alt="">'+(h.wear[f.id]?'<span class="acc '+accById(h.wear[f.id]).pos+'">'+accById(h.wear[f.id]).e+'</span>':'')+'</div>'
    :'<div class="hm-friend m-'+mood+'" style="--sc:'+petScale(p)+'" onclick="petPet()">'+friendHTML(f,'hm-in').replace(/^<div class="hm-in">|<\/div>$/g,'')+(p.stage===1?'<span class="hm-baby">🍼</span>':'')+'</div>'))
   +'<div class="hm-poops">'+Array.apply(null,Array(p.poop||0)).map(function(_,i){return '<button class="hm-poop" onclick="petClean('+i+')">💩</button>';}).join('')+'</div>'
   +'<div class="hm-name">'+f.n+' <small>('+f.en+') · '+STAGES[p.stage].n+'</small></div>'
@@ -1675,7 +1675,7 @@ function renderHome(){
   html+='<button class="btn ghost hm-dress" onclick="homeDress()">👒 Vestir a '+f.n+'</button>';
  } else html+='<div class="hm-tip big">🥚 ¡Tocá el huevo para que nazca tu '+f.n+'!</div>';
  if(!HOME_SEL){ html+='<div class="hm-h">🏡 Mis amigos</div><div class="hm-row">'+FRIENDS.map(function(x){var own=h.own.indexOf(x.id)>=0, pp=own?h.pets[x.id]:null, alert=own&&(pp.stage===0||petMood(pp)!=='happy');
-   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>'; }
+   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own&&petArt(x.id,pp.stage)?'<div class="hm-mini"><img src="'+petArt(x.id,pp.stage)+'_idle.webp" alt=""></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>'; }
  document.getElementById('hmBody').innerHTML=html;
 }
 function careUp(p,k){ p.care=(p.care||0)+1; var before=p.stage, st=petStage(p); var el=document.querySelector('.hm-friend:not(.egg)'); if(el)el.style.setProperty('--sc',petScale2(hData().cur,p));
