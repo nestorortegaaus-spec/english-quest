@@ -159,3 +159,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): Sopa de letras más fácil (diagonal desde nivel 4, al revés desde nivel 5, menos palabras) y la lista muestra ícono + inglés +
   castellano; tocar una palabra la dice en inglés y castellano y hace titilar su primera letra como pista. Frases: la frase en castellano a armar va
   grande en un recuadro (ph-goal).
+- ✅ HECHO (27/11): ropa bien ubicada en todas las poses: la pose feliz tiene anclas propias (ACC_ANH) y ojos cerrados / boca abierta se
+  corrigen con ACC_PF; accPose() reacomoda la ropa cada vez que cambia la imagen. Casa: la comida, esponja, juguete… se ARRASTRAN hasta la
+  mascota (tocar solo muestra una pista); la habitación con el globito queda fija arriba al bajar. Palabras en inglés más grandes en
+  Ladrillos, Adivinanzas, Ordená, Memotest, Deletreá, ¿Cuántos hay?, lecciones, Globos, Isla y Kart.
