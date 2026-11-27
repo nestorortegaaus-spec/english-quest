@@ -250,9 +250,6 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
     <div class="vc-body">
       <div class="vc-h">¿Quién te habla?</div>
       <div class="vc-grid" id="vcChars"></div>
-      <div class="vc-h">Voces del teléfono</div>
-      <div class="vc-sub">Opcional: cambia el acento del personaje elegido</div>
-      <div class="vc-list" id="vcList"></div>
       <button class="btn teal" onclick="closeVoice()" style="margin-top:14px">¡Listo! ✓</button>
     </div>
   </section>
@@ -324,12 +321,18 @@ if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pick
 function unlockSpeech(){ if(speechReady)return; speechReady=true; try{AC();var u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){} }
 /* Voz elegida (se guarda aparte del avance) */
 var VCHARS=[
- {id:'bear',e:'🐻',n:'Oso',d:'grave y tierno',p:0.75,r:0.9,l:['en-US'],hi:"Hi! I am Bear. Let's learn English together!"},
- {id:'panda',e:'🐼',n:'Panda',d:'alegre',p:0.85,r:0.95,l:['en-GB','en-US'],hi:"Hello! I am Panda. You are doing great!"},
- {id:'koala',e:'🐨',n:'Koala',d:'tranquilo',p:0.8,r:0.82,l:['en-AU','en-GB','en-US'],hi:"Hello, friend. I am Koala. Let's learn slowly."},
- {id:'lion',e:'🦁',n:'León',d:'valiente',p:0.65,r:0.88,l:['en-US'],hi:"Hi! I am Lion. You are brave and smart!"},
- {id:'fox',e:'🦊',n:'Zorrito',d:'amigo',p:0.95,r:0.95,l:['en-US'],hi:"Hi! I am Fox. Follow me!"},
- {id:'fairy',e:'🧚',n:'Hada',d:'dulce',p:1.1,r:0.9,l:['en-GB','en-US'],hi:"Hello! I am Fairy. Let's learn English!"}
+ {id:'bear',e:'🐻',n:'Oso',d:'grave y tierno',p:0.75,r:0.9,hi:"Hi! I am Bear. Let's learn English together!"},
+ {id:'lion',e:'🦁',n:'León',d:'valiente',p:0.6,r:0.85,hi:"Hi! I am Lion. You are brave and smart!"},
+ {id:'panda',e:'🐼',n:'Panda',d:'alegre',p:0.92,r:1.0,hi:"Hello! I am Panda. You are doing great!"},
+ {id:'koala',e:'🐨',n:'Koala',d:'tranquilo',p:0.82,r:0.78,hi:"Hello, friend. I am Koala. Let's go slowly."},
+ {id:'owl',e:'🦉',n:'Búho',d:'sabio',p:0.68,r:0.76,hi:"Hello. I am Owl. Listen carefully."},
+ {id:'elephant',e:'🐘',n:'Elefante',d:'grandote',p:0.55,r:0.8,hi:"Hello! I am Elephant. I never forget a word!"},
+ {id:'turtle',e:'🐢',n:'Tortuga',d:'lentita',p:0.88,r:0.68,hi:"Hi. I am Turtle. Slow and steady!"},
+ {id:'fox',e:'🦊',n:'Zorrito',d:'rápido',p:1.05,r:1.1,hi:"Hi! I am Fox. Follow me, quick quick!"},
+ {id:'puppy',e:'🐶',n:'Perrito',d:'juguetón',p:1.15,r:1.05,hi:"Woof! I am Puppy. Let's play with English!"},
+ {id:'dolphin',e:'🐬',n:'Delfín',d:'feliz',p:1.2,r:0.95,hi:"Hello! I am Dolphin. Let's swim into English!"},
+ {id:'kitty',e:'🐱',n:'Gatita',d:'suave',p:1.25,r:0.9,hi:"Hi! I am Kitty. You are so smart!"},
+ {id:'fairy',e:'🧚',n:'Hada',d:'mágica',p:1.32,r:0.85,hi:"Hello! I am Fairy. English is magic!"}
 ];
 var VOICE={ch:'bear',vn:''};
 try{var _v=localStorage.getItem('eqVoice');if(_v)VOICE=Object.assign(VOICE,JSON.parse(_v));}catch(e){}
@@ -337,28 +340,18 @@ if(!VCHARS.some(function(c){return c.id===VOICE.ch;}))VOICE.ch='bear';
 function saveVoice(){try{localStorage.setItem('eqVoice',JSON.stringify(VOICE));}catch(e){}}
 function vChar(){return VCHARS.find(function(c){return c.id===VOICE.ch;})||VCHARS[0];}
 function enVoices(){try{return speechSynthesis.getVoices().filter(function(v){return /^en/i.test(v.lang);});}catch(e){return [];}}
-function bestOf(vs){return vs.find(function(v){return /natural|neural|enhanced|premium/i.test(v.name);})||vs.find(function(v){return /google/i.test(v.name);})||vs[0];}
-function curVoice(){var vs=enVoices();var picked=vs.find(function(v){return v.name===VOICE.vn;});if(picked)return picked;
- var c=vChar();for(var i=0;i<c.l.length;i++){var L=c.l[i].toLowerCase().replace('_','-');var m=vs.filter(function(v){return v.lang.toLowerCase().replace('_','-')===L;});if(m.length)return bestOf(m);}
- return enVoice;}
+function usVoices(){var vs=enVoices().filter(function(v){return /en[-_]US/i.test(v.lang);});
+ vs.sort(function(a,b){function sc(v){return /natural|neural|enhanced|premium/i.test(v.name)?0:/google/i.test(v.name)?1:2;}return sc(a)-sc(b);});return vs;}
+function curVoice(){var vs=usVoices();if(!vs.length)return enVoice;var i=VCHARS.indexOf(vChar());return vs[Math.max(0,i)%vs.length];}
 function say(t,rate){if(muted)return;try{speechSynthesis.cancel();speechSynthesis.resume();var c=vChar();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=Math.min(2,(rate||0.85)*c.r);u.pitch=c.p;var v=curVoice();if(v){try{u.voice=v;u.lang=v.lang;}catch(e){}}speechSynthesis.speak(u);}catch(e){}}
 var VPREV='screen';
 function openVoice(){sTap();unlockSpeech();var on=document.querySelector('.screen.on');VPREV=on?on.id:'s-path';renderVoice();show('s-voice');}
 function closeVoice(){sTap();renderPath();show(VPREV==='s-voice'?'s-path':VPREV);}
-function vFlag(l){l=(l||'').toUpperCase();return l.indexOf('GB')>=0?'🇬🇧':l.indexOf('AU')>=0?'🇦🇺':l.indexOf('IN')>=0?'🇮🇳':l.indexOf('CA')>=0?'🇨🇦':l.indexOf('IE')>=0?'🇮🇪':l.indexOf('ZA')>=0?'🇿🇦':l.indexOf('NZ')>=0?'🇳🇿':'🇺🇸';}
 function renderVoice(){
  var g=document.getElementById('vcChars');g.innerHTML='';
  VCHARS.forEach(function(c){var b=document.createElement('button');b.className='vc-char'+(VOICE.ch===c.id?' on':'');
    b.innerHTML='<b>'+c.e+'</b><span>'+c.n+'</span><small>'+c.d+'</small>';
-   b.onclick=function(){VOICE.ch=c.id;VOICE.vn='';saveVoice();renderVoice();say(c.hi);};g.appendChild(b);});
- var l=document.getElementById('vcList');l.innerHTML='';
- var vs=enVoices();
- if(!vs.length){l.innerHTML='<div class="vc-sub">Este teléfono no tiene otras voces en inglés.</div>';return;}
- var cur=VOICE.vn?curVoice():null, n=0;
- vs.slice(0,12).forEach(function(v){n++;var b=document.createElement('button');b.className='vc-row'+(cur&&cur.name===v.name?' on':'');
-   var nm=v.name.replace(/^(Google|Microsoft)\s*/i,'').replace(/\s*\(.*\)$/,'').replace(/English\s*/i,'').trim();
-   b.innerHTML=vFlag(v.lang)+' Voz '+n+(nm&&nm.length<22?' · '+nm:'')+'<i>▶</i>';
-   b.onclick=function(){VOICE.vn=v.name;saveVoice();renderVoice();say(vChar().hi);};l.appendChild(b);});
+   b.onclick=function(){VOICE.ch=c.id;saveVoice();renderVoice();say(c.hi);};g.appendChild(b);});
 }
 
 function unlockAudio(){try{var c=AC();if(c&&c.state==='suspended')c.resume();}catch(e){} try{speechSynthesis.resume();}catch(e){} if(!speechReady){try{speechReady=true;var u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}}
