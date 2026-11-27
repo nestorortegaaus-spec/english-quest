@@ -45,6 +45,11 @@ le acepte la voz a la nena.
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
+- 🤒 Enfermedad y costos (Casa de Amigos): se enferma sobre todo si se la descuida (hambre/suciedad <20 o 3 cacas:
+  ~90% en 20 h; bien cuidada ~1% en 8 h). Enferma: pálida, termómetro, frases "I feel sick…", barras bajan x1.5, no juega.
+  Botón 💊 Remedio: jarabe 8⭐, pastilla 12⭐, veterinario 25💎, con escenas. Nunca se muere.
+  Comida: manzana, banana, zanahoria y leche GRATIS; frutilla 1⭐, queso 2⭐, galletita 2⭐, pizza 3⭐.
+  Gastar ⭐ no baja el nivel 🌱 (lvl usa S.stars + S.spent).
 - 🎒 Compañero de aventura: en la Casa de Amigos, botón "Llevar de aventura" (S.home.buddy). El elegido reemplaza al zorrito
   en el camino (con su etapa y accesorio), aparece con su carita en el cartel del relator y festeja en la pantalla de premio.
 - 🎙️ Relator en todos los juegos (narr(), NARR): frases cortas en inglés + castellano hablado y cartelito, ligadas a lo
@@ -98,13 +103,6 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
-- ⏭️ PENDIENTE (pedido 27/11): Casa de Amigos — enfermedad y costos "como en la vida real":
-  * La mascota se puede enfermer (más probable si se la descuida: hambre/sucia/caca acumulada; raro si está bien cuidada).
-    Enferma: cara/pose triste, termómetro 🤒, barras bajan más rápido, no juega; se cura dándole medicina 💊
-    (opcional: ir al veterinario 🩺). Nunca se muere. Frases en inglés: "I feel sick", "My tummy hurts", "Thank you, doctor!".
-  * Que comer y la medicina cuesten un poco (ej.: comida 2-5 ⭐ o 💎 según el alimento; medicina más cara), así las
-    estrellas/gemas que gana estudiando tienen uso (se combina con el pendiente de darle uso a las ⭐).
-  * Cuidar que no frustre: precios bajos, nunca quedarse sin poder alimentarla (comida básica gratis o regalo diario).
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
