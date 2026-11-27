@@ -145,7 +145,9 @@ le acepte la voz a la nena.
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
-- ✅ HECHO (27/11): Vestir combinable con 34 accesorios (cabeza, cara, cuello y mano), posicionados por amigo y etapa. Queda como idea: arte de ChatGPT (remeras, capas, mochilas) en vez de emojis.
+- ✅ HECHO (27/11): Vestir combinable con 34 accesorios (cabeza, cara, cuello y mano), posicionados por amigo y etapa. 27/11: +12 prendas DIBUJADAS en código (SVG en ACC_SVG, svg:1): gorrito de fiesta, tiara, corona de flores, sombrero
+  de bruja, gorro de chef, moñito, corbata, pañuelo y el lugar nuevo "Espalda" (capa, alas de hada, de mariposa y de ángel, van detrás del cuerpo).
+  Se ven en la casa, el camino, la tienda, el descanso, los cuentos y la Isla (canvas: accImg). Total 54 accesorios en 5 lugares.
 - ✅ HECHO (27/11): Pintá ahora tiene 32 dibujos y 12 colores (suma negro, blanco, gris y celeste). Rotan priorizando los menos vistos.
 - ✅ HECHO (27/11): 🎯 Modo desafío de la Isla (nivel 3+): arriba dice una palabra en castellano (con dibujo hasta nivel 4, sin dibujo en
   nivel 5) y la voz la dice en castellano; vienen pares de manzanas (una abajo, otra arriba para saltar) y hay que agarrar la de esa palabra

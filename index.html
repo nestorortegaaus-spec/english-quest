@@ -113,7 +113,9 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .foxguide img{width:100%;height:100%;object-fit:contain;display:block;}
 /* accesorios combinables: capa sobre el dibujo, posiciones en % de la imagen */
 .pa{position:relative;height:100%;max-width:100%;margin:0 auto;container-type:inline-size;}
-.pa>img{width:100%;height:100%;object-fit:contain;display:block;}
+.pa>img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;display:block;}
+.pa .acc svg{width:1em;height:1em;display:block;overflow:visible;} .pa .acc.back{z-index:0;} .pa .acc.svg.head svg{width:1.7em;height:1.7em;} .pa .acc.svg.neck svg{width:1.8em;height:1.8em;} .pa .acc.svg.neck{transform:translate(-50%,-22%);}
+.acc-ico{display:inline-block;width:1.15em;height:1.15em;vertical-align:middle;} .acc-ico svg{width:100%;height:100%;display:block;}
 .pa .acc{position:absolute;line-height:1;pointer-events:none;transform:translate(-50%,-50%);z-index:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18));}
 .pa .acc.head{transform:translate(-50%,-66%);} .pa .acc.neck{transform:translate(-50%,-22%);} .pa .acc.hand{transform:translate(-50%,-50%) rotate(-12deg);}
 .sh-tabs{display:flex;gap:8px;padding:0 14px 8px;}
@@ -1652,7 +1654,7 @@ function moreTime(){ askPin('Dar más tiempo',function(){ var p=playD(); p.extra
 function markWord(w,ok){ if(!w||!w.en)return; try{noteAnswer(ok);}catch(e){} if(!S.hist)S.hist={}; var h=S.hist[w.en]||[0,0]; h[ok?0:1]++; S.hist[w.en]=h; }
 
 /* ===== TIENDA Y ÁLBUM ===== */
-var ACC_SLOTS=[{k:'head',n:'Cabeza',e:'👒'},{k:'eyes',n:'Cara',e:'🕶️'},{k:'neck',n:'Cuello',e:'📿'},{k:'hand',n:'En la mano',e:'🎈'}];
+var ACC_SLOTS=[{k:'head',n:'Cabeza',e:'👒'},{k:'eyes',n:'Cara',e:'🕶️'},{k:'neck',n:'Cuello',e:'📿'},{k:'hand',n:'En la mano',e:'🎈'},{k:'back',n:'Espalda',e:'🦸'}];
 var ACC=[
  {id:'cap',e:'🧢',en:'cap',es:'gorra',p:90,pos:'head'},{id:'bow',e:'🎀',en:'bow',es:'moño',p:90,pos:'head'},
  {id:'flower',e:'🌸',en:'flower',es:'flor',p:120,pos:'head'},{id:'sunflower',e:'🌻',en:'sunflower',es:'girasol',p:120,pos:'head'},
@@ -1675,8 +1677,19 @@ var ACC=[
  {id:'sparkles',e:'✨',en:'sparkles',es:'brillitos',st:30,pos:'head'},{id:'moon',e:'🌙',en:'moon',es:'luna',st:45,pos:'head'},
  {id:'shooting',e:'💫',en:'shooting star',es:'estrella fugaz',st:60,pos:'head'},{id:'rosette',e:'🏵️',en:'rosette',es:'escarapela',st:50,pos:'neck'},
  {id:'diamond',e:'💎',en:'diamond',es:'diamante',st:90,pos:'neck'},{id:'sparkler',e:'🎇',en:'sparkler',es:'bengalita',st:50,pos:'hand'},
- {id:'crystalball',e:'🔮',en:'crystal ball',es:'bola de cristal',st:70,pos:'hand'},{id:'glowstar',e:'🌟',en:'glowing star',es:'estrella brillante',st:100,pos:'hand'}
+ {id:'crystalball',e:'🔮',en:'crystal ball',es:'bola de cristal',st:70,pos:'hand'},{id:'glowstar',e:'🌟',en:'glowing star',es:'estrella brillante',st:100,pos:'hand'},
+ /* 🎨 ropa dibujada (SVG hecho a mano): cabeza, cuello y el lugar nuevo "Espalda" (va detrás del cuerpo) */
+ {id:'partyhat',svg:1,e:'🥳',en:'party hat',es:'gorrito de fiesta',p:160,pos:'head'},{id:'tiara',svg:1,e:'👸',en:'tiara',es:'tiara',p:260,pos:'head'},
+ {id:'flowercrown',svg:1,e:'🌼',en:'flower crown',es:'corona de flores',p:200,pos:'head'},{id:'witchhat',svg:1,e:'🧙',en:'witch hat',es:'sombrero de bruja',p:220,pos:'head'},
+ {id:'chefhat',svg:1,e:'🧑‍🍳',en:'chef hat',es:'gorro de chef',p:180,pos:'head'},
+ {id:'bowtie',svg:1,e:'🎀',en:'bow tie',es:'moñito',p:120,pos:'neck'},{id:'tie',svg:1,e:'👔',en:'tie',es:'corbata',p:140,pos:'neck'},{id:'bandana',svg:1,e:'🧣',en:'bandana',es:'pañuelo',p:110,pos:'neck'},
+ {id:'cape',svg:1,e:'🦸',en:'cape',es:'capa',p:300,pos:'back'},{id:'fairywings',svg:1,e:'🧚',en:'fairy wings',es:'alas de hada',p:350,pos:'back'},
+ {id:'bflywings',svg:1,e:'🦋',en:'butterfly wings',es:'alas de mariposa',p:320,pos:'back'},{id:'angelwings',svg:1,e:'👼',en:'angel wings',es:'alas de ángel',st:120,pos:'back'}
 ];
+var ACC_SVG={partyhat:'<path d="M50 8 L76 72 L24 72 Z" fill="#FF7BAC" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M40 36 L60 36 M33 54 L67 54" stroke="#FFE07A" stroke-width="6"/><circle cx="50" cy="8" r="8" fill="#FFD36B" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="73" rx="28" ry="6" fill="#7FD3FF" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/>',tiara:'<path d="M14 74 L22 44 L36 60 L50 28 L64 60 L78 44 L86 74 Z" fill="#FFD36B" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><rect x="13" y="69" width="74" height="9" rx="4" fill="#F2B632" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="54" r="7" fill="#FF6FB5" stroke="#2b2a4a" stroke-width="2"/><circle cx="31" cy="63" r="4" fill="#7FD3FF"/><circle cx="69" cy="63" r="4" fill="#7FD3FF"/><circle cx="50" cy="28" r="4" fill="#fff" stroke="#2b2a4a" stroke-width="2"/>',flowercrown:'<path d="M8 74 Q50 52 92 74" fill="none" stroke="#4CC37A" stroke-width="6"/><circle cx="23.0" cy="70.0" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="16.8" cy="78.6" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="6.7" cy="75.3" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="6.7" cy="64.7" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="16.8" cy="61.4" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="14" cy="70" r="4.5" fill="#FFD36B" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="41.9" cy="62.0" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="35.1" cy="71.4" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="24.0" cy="67.8" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="24.0" cy="56.2" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="35.1" cy="52.6" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="32" cy="62" r="5.0" fill="#FFD36B" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="60.8" cy="58.0" r="7.4" fill="#B58BFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="53.3" cy="68.3" r="7.4" fill="#B58BFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="41.3" cy="64.3" r="7.4" fill="#B58BFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="41.3" cy="51.7" r="7.4" fill="#B58BFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="53.3" cy="47.7" r="7.4" fill="#B58BFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="50" cy="58" r="5.4" fill="#FFD36B" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="77.9" cy="62.0" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="71.1" cy="71.4" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="60.0" cy="67.8" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="60.0" cy="56.2" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="71.1" cy="52.6" r="6.8" fill="#FFFFFF" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="68" cy="62" r="5.0" fill="#FFD36B" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="95.0" cy="70.0" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="88.8" cy="78.6" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="78.7" cy="75.3" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="78.7" cy="64.7" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="88.8" cy="61.4" r="6.2" fill="#FF8DC7" stroke="#2b2a4a" stroke-width="1.6"/><circle cx="86" cy="70" r="4.5" fill="#FFD36B" stroke="#2b2a4a" stroke-width="1.6"/>',witchhat:'<ellipse cx="50" cy="72" rx="45" ry="10" fill="#6A4FC9" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M50 6 C58 26 66 48 70 70 L30 70 C34 48 42 26 50 6Z" fill="#8C6BE8" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><rect x="31" y="58" width="38" height="9" fill="#FFD36B" stroke="#2b2a4a" stroke-width="2"/><path d="M58 34 l3 6 6 1 -5 4 1 6 -5 -3 -5 3 1 -6 -5 -4 6 -1z" fill="#FFE07A"/>',chefhat:'<rect x="28" y="52" width="44" height="22" rx="4" fill="#fff" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M28 56 C12 54 12 30 30 32 C30 12 52 8 56 22 C68 8 90 20 76 36 C90 40 86 58 72 56 Z" fill="#fff" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M40 56 L40 72 M50 56 L50 72 M60 56 L60 72" stroke="#D6DEE8" stroke-width="3"/>',bowtie:'<path d="M50 24 L18 8 L18 40 Z" fill="#E84A4A" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M50 24 L82 8 L82 40 Z" fill="#E84A4A" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><rect x="43" y="16" width="14" height="16" rx="5" fill="#C93636" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><circle cx="28" cy="18" r="3" fill="#fff"/><circle cx="72" cy="30" r="3" fill="#fff"/>',tie:'<path d="M41 12 L59 12 L55 28 L45 28 Z" fill="#3F6FD0" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M45 28 L55 28 L63 80 L50 94 L37 80 Z" fill="#5A8CF0" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M42 50 L58 42 M40 66 L61 56 M41 80 L62 70" stroke="#FFD36B" stroke-width="4"/>',bandana:'<path d="M10 14 Q50 28 90 14 L50 66 Z" fill="#E84A4A" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><circle cx="36" cy="28" r="3.5" fill="#fff"/><circle cx="60" cy="30" r="3.5" fill="#fff"/><circle cx="48" cy="44" r="3.5" fill="#fff"/><circle cx="66" cy="18" r="3" fill="#fff"/>',cape:'<path d="M34 10 Q50 18 66 10 L90 92 Q50 100 10 92 Z" fill="#E84A4A" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M34 10 Q50 18 66 10" fill="none" stroke="#FFD36B" stroke-width="5"/><path d="M50 64 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z" fill="#FFD36B" stroke="#2b2a4a" stroke-width="1.5"/>',fairywings:'<g stroke="#2b2a4a" stroke-width="2.5" fill-opacity=".9"><ellipse cx="24" cy="36" rx="22" ry="31" transform="rotate(-28 24 36)" fill="#BFE6FF"/><ellipse cx="76" cy="36" rx="22" ry="31" transform="rotate(28 76 36)" fill="#BFE6FF"/><ellipse cx="28" cy="72" rx="15" ry="21" transform="rotate(24 28 72)" fill="#FFC9E5"/><ellipse cx="72" cy="72" rx="15" ry="21" transform="rotate(-24 72 72)" fill="#FFC9E5"/></g><circle cx="20" cy="30" r="3" fill="#fff"/><circle cx="80" cy="30" r="3" fill="#fff"/><circle cx="26" cy="72" r="2.5" fill="#fff"/><circle cx="74" cy="72" r="2.5" fill="#fff"/>',angelwings:'<path d="M48 52 C30 18 4 16 2 38 C12 38 6 48 14 50 C8 58 16 62 22 60 C20 70 34 68 48 58Z" fill="#fff" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M52 52 C70 18 96 16 98 38 C88 38 94 48 86 50 C92 58 84 62 78 60 C80 70 66 68 52 58Z" fill="#fff" stroke="#2b2a4a" stroke-width="3" stroke-linejoin="round"/><path d="M20 34 C28 36 36 42 42 50 M80 34 C72 36 64 42 58 50" fill="none" stroke="#D6DEE8" stroke-width="3"/>',bflywings:'<g stroke="#2b2a4a" stroke-width="2.5"><path d="M50 48 C34 10 2 8 6 36 C8 50 26 56 50 52Z" fill="#FF9A3C"/><path d="M50 48 C66 10 98 8 94 36 C92 50 74 56 50 52Z" fill="#FF9A3C"/><path d="M50 54 C30 54 14 66 22 82 C30 94 46 80 50 60Z" fill="#B58BFF"/><path d="M50 54 C70 54 86 66 78 82 C70 94 54 80 50 60Z" fill="#B58BFF"/></g><circle cx="22" cy="30" r="6" fill="#FFE07A"/><circle cx="78" cy="30" r="6" fill="#FFE07A"/><circle cx="32" cy="74" r="4" fill="#fff"/><circle cx="68" cy="74" r="4" fill="#fff"/>'};
+function accGlyph(a){ return a.svg&&ACC_SVG[a.id]?'<svg viewBox="0 0 100 100">'+ACC_SVG[a.id]+'</svg>':a.e; }
+function accIcon(a){ return a.svg&&ACC_SVG[a.id]?'<i class="acc-ico">'+accGlyph(a)+'</i>':a.e; }
+var ACC_IMG={}; function accImg(a){ if(!ACC_IMG[a.id]){ var im=new Image(); im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'+ACC_SVG[a.id]+'</svg>'); ACC_IMG[a.id]=im; } return ACC_IMG[a.id]; }
 /* ⭐ trofeos por estrellas juntadas (las gastadas también cuentan) */
 var STAR_GOALS=[{n:25,t:'Estrellita',e:'⭐',g:20},{n:50,t:'Brillante',e:'🌟',g:30},{n:100,t:'Súper Estrella',e:'💫',g:50},{n:200,t:'Cometa',e:'☄️',g:80},
  {n:350,t:'Constelación',e:'✨',g:120},{n:500,t:'Galaxia',e:'🌌',g:160},{n:750,t:'Supernova',e:'🎆',g:220},{n:1000,t:'Leyenda de las Estrellas',e:'👑',g:300},
@@ -1715,6 +1728,7 @@ function accAnchors(key,pose){ var an=ACC_AN[key]||ACC_GEN; if(pose==='happy'&&A
  var f=ACC_PF[key], d=f&&(pose==='closed'?f.c:pose==='open'?f.o:0); if(d){an=an.slice();for(var i=1;i<4;i++)an[i]+=d/100;} return an; }
 function accPos(slot,an){ var x=an[0], hw=an[4], L=x*100, T, F;
  if(slot==='head'){T=an[1]*100+3;F=hw*60;} else if(slot==='eyes'){T=an[2]*100;F=hw*70;} else if(slot==='neck'){T=an[3]*100-1;F=hw*34;}
+ else if(slot==='back'){T=(an[3]+0.12)*100;F=hw*195;}
  else {L=Math.min(86,(x+hw*.62)*100);T=Math.min(80,(an[3]+.12)*100);F=Math.max(22,hw*48);}
  return 'left:'+L.toFixed(1)+'%;top:'+T.toFixed(1)+'%;font-size:'+F.toFixed(1)+'cqw'; }
 /* cada vez que cambia la imagen (pose), la ropa se acomoda a la cabeza */
@@ -1728,7 +1742,7 @@ function wearOf(id){ if(!S.home)S.home={own:['fox'],cur:'fox',wear:{},day:'',don
 function wearCount(w){ return ACC_SLOTS.filter(function(sl){return w&&w[sl.k];}).length; }
 function accLayer(key,w,pose){ var an=accAnchors(key,pose||'idle'), o='';
  ACC_SLOTS.forEach(function(sl){ var a=w&&w[sl.k]&&accById(w[sl.k]); if(!a)return;
-  o+='<span class="acc '+sl.k+'" data-s="'+sl.k+'" style="'+accPos(sl.k,an)+'">'+a.e+'</span>'; });
+  o+='<span class="acc '+sl.k+(a.svg?' svg':'')+'" data-s="'+sl.k+'" style="'+accPos(sl.k,an)+'">'+accGlyph(a)+'</span>'; });
  return o; }
 function dressWrap(key,img,w){ var d=ACC_DIM[key]||[1,1], m=/_(idle|closed|open|happy)\.webp/.exec(img); img=img.replace('<img ','<img onload="accPose(this)" ');
  return '<div class="pa" data-k="'+key+'" style="aspect-ratio:'+d[0]+'/'+d[1]+'">'+img+accLayer(key,w,m?m[1]:'idle')+'</div>'; }
@@ -1767,7 +1781,7 @@ function renderShop(){
   ACC_SLOTS.forEach(function(sl){ var its=ACC.filter(function(a){return a.pos===sl.k;}), n=its.filter(function(a){return S.owned.indexOf(a.id)>=0;}).length;
    h+='<div class="sh-slot">'+sl.e+' '+sl.n+' <small>'+n+'/'+its.length+'</small></div><div class="sh-grid">';
    its.forEach(function(a){var own=S.owned.indexOf(a.id)>=0, on=bw[sl.k]===a.id;
-    h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+a.e+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
+    h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+accIcon(a)+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
    h+='</div>'; });
   if(wearCount(bw))h+='<button class="btn ghost" style="margin-top:12px" onclick="S.home.wear[buddyId()]={};save();renderShop();">Sacar todo</button>';
   b.innerHTML=h;
@@ -1799,7 +1813,7 @@ function starTabHTML(){ var T=starsTotal(), cur=starTitle(), nx=STAR_GOALS.find(
  var bw=wearOf(buddyId()), its=ACC.filter(function(a){return a.st;});
  h+='<div class="sh-slot">✨ Ropa mágica <small>solo con estrellas</small></div><div class="sh-grid">';
  its.forEach(function(a){var own=(S.owned||[]).indexOf(a.id)>=0, on=bw[a.pos]===a.id;
-  h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+a.e+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
+  h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+accIcon(a)+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
  h+='</div><div class="sh-hint" style="margin-top:10px">🍓 En la 🏡 Casa de Amigos también podés usar estrellas para darles comidas ricas a tus amigos.</div>';
  return h; }
 function starClaim(n){ var g=STAR_GOALS.find(function(x){return x.n===n;}); if(!S.sgot)S.sgot={};
@@ -1811,7 +1825,7 @@ function shopPick(id){var a=accById(id); say(a.en); if(!S.owned)S.owned=[];
  if(S.owned.indexOf(id)>=0){var w=wearOf(buddyId()); if(w[a.pos]===id)delete w[a.pos]; else w[a.pos]=id; SHOP_SEL=null;save();sGood();renderShop();return;}
  if(SHOP_SEL!==id){SHOP_SEL=id;renderShop();
    var bar=document.createElement('div');bar.className='sh-buy';
-   bar.innerHTML=foxHTML('sh-mini',id)+(canPay(a)?'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<button class="btn '+(a.st?'sun':'teal')+'" onclick="shopBuy(\''+id+'\')">Comprar · '+priceTxt(a)+'</button>':'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<div class="sh-need">'+missTxt(a)+'</div>');
+   bar.innerHTML=foxHTML('sh-mini',id)+(canPay(a)?'<b>'+accIcon(a)+' '+a.en+'</b> = '+a.es+'<button class="btn '+(a.st?'sun':'teal')+'" onclick="shopBuy(\''+id+'\')">Comprar · '+priceTxt(a)+'</button>':'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<div class="sh-need">'+missTxt(a)+'</div>');
    document.getElementById('shBody').appendChild(bar);bar.scrollIntoView({block:'nearest'});return;}
 }
 function shopBuy(id){var a=accById(id); if(!canPay(a))return; if(a.st)spendStars(a.st); else S.gems-=a.p; S.owned.push(id); wearOf(buddyId())[a.pos]=id; SHOP_SEL=null; save(); sWin(); burst(80); renderShop();}
@@ -2451,7 +2465,7 @@ function homeDress(){ var h=hData(), f=friendById(h.cur), own=(S.owned||[]), w=w
  function draw(){ var its=ACC.filter(function(a){return a.pos===DRESS_SLOT&&own.indexOf(a.id)>=0;});
   ov.innerHTML='<div class="pk-box"><h2>👒 Vestir a '+f.n+'</h2><div class="dr-prev">'+prev()+'</div>'
    +'<div class="dr-tabs">'+ACC_SLOTS.map(function(sl){return '<button class="dr-tab'+(sl.k===DRESS_SLOT?' on':'')+'" data-s="'+sl.k+'">'+sl.e+' '+sl.n+(w[sl.k]?' ✓':'')+'</button>';}).join('')+'</div>'
-   +(its.length?'<div class="hm-items">'+its.map(function(a){return '<button class="hm-it'+(w[a.pos]===a.id?' on':'')+'" data-id="'+a.id+'"><b>'+a.e+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>'
+   +(its.length?'<div class="hm-items">'+its.map(function(a){return '<button class="hm-it'+(w[a.pos]===a.id?' on':'')+'" data-id="'+a.id+'"><b>'+accIcon(a)+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>'
      :'<p>Todavía no tenés nada para '+ACC_SLOTS.find(function(x){return x.k===DRESS_SLOT;}).n.toLowerCase()+'. ¡Conseguilo en la tienda 💎!</p><button class="btn sun" id="hmShop">🏪 Ir a la tienda</button>')
    +'<div style="display:flex;gap:8px"><button class="btn ghost" id="hmNone">Sacar todo</button><button class="btn teal" id="hmOk">Listo</button></div></div>';
   ov.querySelectorAll('.dr-tab').forEach(function(b){b.onclick=function(){DRESS_SLOT=b.dataset.s;sTap();draw();};});
@@ -3224,7 +3238,7 @@ function startIsland(unitIdx,lv){
  /* corre el amigo que la acompaña (sus poses de la Casa de Amigos, con su ropa) */
  var bId=buddyId(), bKey=petKey(bId), bF=friendById(bId)||{n:'Zorrito'}, BP={};
  if(bKey){ ['idle','open','happy'].forEach(function(ps){ var im=new Image(); im.src=buddyImg(ps); BP[ps]=im; }); }
- var bWear=wearOf(bId), squash=[];
+ var bWear=wearOf(bId), squash=[]; Object.keys(bWear).forEach(function(k){ var a=accById(bWear[k]); if(a&&a.svg)accImg(a); });
  var N=Math.min(130,78+10*(lv-1)), solid=[]; for(var i=0;i<N;i++) solid[i]=true;
  var holeP=Math.min(0.24,0.13+0.025*(lv-1)), crabP=Math.min(0.22,0.11+0.025*(lv-1));
  for(var i=9;i<N-6;i++){ if(Math.random()<holeP && solid[i-1] && solid[i+1]){ solid[i]=false; i+=2; } }
@@ -3292,10 +3306,14 @@ function startIsland(unitIdx,lv){
    if(!(inv>0 && Math.floor(Date.now()/90)%2)){
      var pIm=bKey?(onGround?(Math.floor(Date.now()/160)%2?BP.open:BP.idle):BP.happy):null;
      if(pIm&&pIm.complete&&pIm.naturalWidth){ var ph=foxH*1.45, pw=ph*pIm.naturalWidth/pIm.naturalHeight, bob=onGround?Math.abs(Math.sin(Date.now()/90))*-4:0, px0=foxX+foxW/2-pw/2, py0=foxY+foxH-ph+bob;
-       c.save(); if(onGround){ c.translate(px0+pw/2,py0+ph); c.rotate(Math.sin(Date.now()/120)*0.06); c.translate(-(px0+pw/2),-(py0+ph)); } c.drawImage(pIm,px0,py0,pw,ph);
-       var an=accAnchors(bKey,onGround?'idle':'happy'); ACC_SLOTS.forEach(function(sl){ var a=bWear[sl.k]&&accById(bWear[sl.k]); if(!a)return; var hw=an[4], X=an[0], Y, F;
-         if(sl.k==='head'){Y=an[1]+0.03;F=hw*.6;} else if(sl.k==='eyes'){Y=an[2];F=hw*.7;} else if(sl.k==='neck'){Y=an[3]+0.02;F=hw*.34;} else {X=Math.min(.86,X+hw*.62);Y=Math.min(.8,an[3]+.12);F=Math.max(.22,hw*.48);}
-         var fs=Math.round(F*pw); c.font=fs+'px sans-serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(a.e,px0+X*pw,py0+Y*ph-(sl.k==='head'?fs*0.3:0)); });
+       c.save(); if(onGround){ c.translate(px0+pw/2,py0+ph); c.rotate(Math.sin(Date.now()/120)*0.06); c.translate(-(px0+pw/2),-(py0+ph)); }
+       var an=accAnchors(bKey,onGround?'idle':'happy');
+       function dAcc(back){ ACC_SLOTS.forEach(function(sl){ if((sl.k==='back')!==back)return; var a=bWear[sl.k]&&accById(bWear[sl.k]); if(!a)return; var hw=an[4], X=an[0], Y, F;
+         if(sl.k==='head'){Y=an[1]+0.03;F=hw*.6;} else if(sl.k==='eyes'){Y=an[2];F=hw*.7;} else if(sl.k==='neck'){Y=an[3]+0.02;F=hw*.34;} else if(sl.k==='back'){Y=an[3]+0.12;F=hw*1.95;} else {X=Math.min(.86,X+hw*.62);Y=Math.min(.8,an[3]+.12);F=Math.max(.22,hw*.48);}
+         var fs=Math.round(F*pw*(a.svg?(sl.k==='head'?1.7:sl.k==='neck'?1.8:1):1)), cx=px0+X*pw, cy=py0+Y*ph;
+         if(a.svg){ var im=accImg(a); if(im.complete&&im.naturalWidth){ var oy=sl.k==='head'?fs*0.66:sl.k==='neck'?fs*0.22:fs*0.5; c.drawImage(im,cx-fs/2,cy-oy,fs,fs); } return; }
+         c.font=fs+'px sans-serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(a.e,cx,cy-(sl.k==='head'?fs*0.3:0)); }); }
+       dAcc(true); c.drawImage(pIm,px0,py0,pw,ph); dAcc(false);
        c.restore(); }
      else drawImg(c, onGround?SPR.run:SPR.jump, foxX, foxY, foxW, foxH); }
    if(msgT>0&&msgW){msgT--;var bw=Math.min(W-20,300),bx=W/2-bw/2,a=Math.min(1,msgT/12);c.globalAlpha=a;c.fillStyle='rgba(255,255,255,.95)';roundRect(c,bx,10,bw,64,16);c.fill();
