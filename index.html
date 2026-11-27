@@ -877,6 +877,22 @@ if(S.name){document.getElementById('nameIn').value=S.name;}
  },3000);});
  ['pointerup','pointerleave','pointercancel'].forEach(function(ev){c.addEventListener(ev,stop);});
 })();
+/* Auto-actualización: al volver a la app, si hay versión nueva publicada, recarga (solo en inicio o camino) */
+(function(){
+ var base=null, pending=false;
+ function h(t){var x=0;for(var i=0;i<t.length;i++){x=(x*31+t.charCodeAt(i))|0;}return x+':'+t.length;}
+ function check(){ if(!navigator.onLine)return;
+   fetch('./index.html?u='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():null;}).then(function(t){
+     if(!t)return; var v=h(t); if(base===null){base=v;return;} if(v!==base){pending=true;tryReload();}
+   }).catch(function(){});
+ }
+ function tryReload(){ if(!pending)return; var on=document.querySelector('.screen.on'); var id=on?on.id:'';
+   if(id==='s-start'||id==='s-path'){pending=false;location.reload();} }
+ window.addEventListener('load',function(){setTimeout(check,1500);});
+ document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')check();});
+ setInterval(function(){ if(document.visibilityState==='visible')check(); },120000);
+ var _show=show; show=function(id){_show(id); if(id==='s-path'||id==='s-start')setTimeout(tryReload,50);};
+})();
 if('serviceWorker' in navigator){
  var hadSW=!!navigator.serviceWorker.controller, swReloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',function(){ if(hadSW&&!swReloaded){swReloaded=true;location.reload();} });
