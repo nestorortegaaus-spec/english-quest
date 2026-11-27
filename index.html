@@ -439,7 +439,8 @@ var GLOSS={have:'tienen',has:'tiene',a:'un/una',red:'roja/rojo',ball:'pelota',ca
 UNITS.forEach(function(u){u.w.forEach(function(w){if(!u.isP)GLOSS[w.en.toLowerCase()]=w.es;});});
 STORIES.forEach(function(st){if(st.gl)Object.keys(st.gl).forEach(function(k){if(!GLOSS[k])GLOSS[k]=st.gl[k];});});
 var IMG={fox:'img/guide_fox.png',lina:'img/lina.png',dani:'img/dani.png',cat:'img/cat.png'};
-var SCENES={'0_0':'img/scene1.jpg','0_1':'img/scene2.jpg','0_2':'img/scene3.jpg','0_3':'img/scene4.jpg','0_4':'img/scene5.jpg'};
+var SCENES={'0_0':'img/scene1.jpg','0_1':'img/scene2.jpg','0_2':'img/scene3.jpg','0_3':'img/scene4.jpg','0_4':'img/scene5.jpg',
+ '1_1':'img/perro_2.jpg','1_2':'img/perro_3.jpg','1_3':'img/perro_4.jpg','1_4':'img/perro_5.jpg','1_5':'img/perro_6.jpg'};
 
 /* NODES: mundos (el 1 es el camino original) */
 var NODES_W1=[
@@ -712,7 +713,7 @@ function renderStoryPage(){
  var st=STORIES[ST.s],pg=st.pages[ST.p];
  document.getElementById('stTitle').textContent='📖 '+st.t;
  document.getElementById('stPage').textContent=(ST.p+1)+'/'+st.pages.length;
- var _sc=SCENES[ST.s+'_'+ST.p]; document.getElementById('stScene').innerHTML = _sc ? '<img src="'+_sc+'" style="width:100%;height:100%;object-fit:cover">' : ('<div class="emo">'+pg.emo+'</div>');
+ var _sc=SCENES[ST.s+'_'+ST.p]; document.getElementById('stScene').innerHTML = _sc ? '<div style="position:relative;width:100%;height:100%;overflow:hidden"><img src="'+_sc+'" alt="" style="position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(18px) saturate(1.2);opacity:.75"><img src="'+_sc+'" alt="" style="position:relative;width:100%;height:100%;object-fit:contain"></div>' : ('<div class="emo">'+pg.emo+'</div>');
  var en=document.getElementById('stEn');en.innerHTML='';
  pg.en.split(' ').forEach(function(word){var w=document.createElement('w');w.textContent=word+' ';w.onclick=function(ev){tapWord(word,ev);};en.appendChild(w);});
  var es=document.getElementById('stEs');es.textContent=pg.es;es.classList.remove('show');
