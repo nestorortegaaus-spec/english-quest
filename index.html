@@ -923,7 +923,7 @@ var WTHEMES=[
  {id:'sea',ic:'🐠',n:'Bajo el mar',bg:['#8CDAF3','#5DBCE4','#3796C6'],road:['#B9783A','#FFF8E8'],fx:'bubble',deco:['🐠','🐙','🐚','🦀','🐡','🪸','🐳','🦈','🪼','🐢','🫧','⚓']},
  {id:'jungle',ic:'🐒',n:'La selva',bg:['#CFF2C9','#B8E6B0','#9ED69A'],road:['#A8805A','#D8B48A'],fx:'leaf',deco:['🌴','🐒','🦜','🐍','🐆','🌺','🦎','🍌','🐸','🌿','🦥','🐘']},
  {id:'candy',ic:'🍭',n:'Tierra de golosinas',bg:['#FFE0F0','#FFEAF5','#FFD6EC'],road:['#F59AC5','#FFE3F1'],fx:'heart',deco:['🍭','🍬','🧁','🍩','🍫','🍪','🎂','🍰','🍦','🍡','🍓','🧸']},
- {id:'desert',ic:'🌵',n:'El desierto',bg:['#FFE9C4','#FFE0B0','#F5CF94'],road:['#C79A5C','#F2D9A8'],fx:'spark',deco:['🌵','🐪','🏜️','🦂','🐍','☀️','🦎','🌴','🏺','🪨','🦅','⛺']},
+ {id:'desert',ic:'🌵',n:'El desierto',bg:['#FFE9C4','#FFE0B0','#F5CF94'],road:['#9A5E2A','#FFF6E0'],fx:'spark',deco:['🌵','🐪','🏜️','🦂','🐍','☀️','🦎','🌴','🏺','🪨','🦅','⛺']},
  {id:'dino',ic:'🦕',n:'Valle de dinosaurios',bg:['#E2F5D0','#D3EDBE','#C2E2A8'],road:['#9C7B54','#D9BE8E'],fx:'leaf',deco:['🦕','🦖','🌋','🥚','🌿','🪨','🦴','🌴','🐊','🦎','🍃','🌾']},
  {id:'fairy',ic:'🧚',n:'Bosque de hadas',bg:['#EDE2FF','#E3F3E8','#D8EBDD'],road:['#B9A5E6','#F1EAFF'],fx:'spark',deco:['🧚','🍄','🌸','🦋','✨','🌙','🦄','🪄','🌷','🐞','🌈','🏡']},
  {id:'sky',ic:'☁️',n:'Islas en las nubes',bg:['#BEE3FF','#E2F2FF','#F5FAFF'],road:['#B7C9DA','#FFFFFF'],fx:'cloud',deco:['☁️','🎈','🪁','🦅','🌈','🛩️','🐦','☀️','🕊️','🏝️','🪂','🌤️']},
@@ -931,7 +931,7 @@ var WTHEMES=[
  {id:'farm',ic:'🐄',n:'La granja',bg:['#DDF2FF','#E8F7DA','#D8EDC0'],road:['#B08A5C','#EED7AE'],fx:'petal',deco:['🐄','🐖','🐑','🐓','🚜','🌽','🏡','🐴','🥕','🌻','🐐','🦆']}
 ];
 /* fondos de ChatGPT que ya están subidos (img/world_<id>.jpg) */
-var WIMG={meadow:1,city:1,nature:1,adventure:1,beach:1,snow:1,space:1,sea:1,jungle:1,candy:1};
+var WIMG={meadow:1,city:1,nature:1,adventure:1,beach:1,snow:1,space:1,sea:1,jungle:1,candy:1,desert:1};
 function rng(seed){return function(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};}
 function worldInfo(w){
  if(w<=4)return WORLDS[w];
