@@ -178,7 +178,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
   <!-- START -->
   <section class="screen on" id="s-start">
     <div class="start">
-      <img class="cover bounce" src="img/cover.jpg" alt="English Quest">
+      <img class="cover bounce" id="coverImg" src="img/cover.jpg" alt="English Quest" draggable="false" style="-webkit-touch-callout:none;">
       <div class="sub">¡Tu aventura para aprender inglés! 🌱</div>
       <div class="card">
         <p style="font-weight:800;color:var(--muted);margin-bottom:10px;">¿Cómo te llamás?</p>
@@ -741,6 +741,17 @@ function cloop(){cx.clearRect(0,0,cv.width,cv.height);for(var i=ps.length-1;i>=0
 cloop();
 
 if(S.name){document.getElementById('nameIn').value=S.name;}
+/* Empezar de cero (para el adulto): mantener apretada la portada 3 segundos */
+(function(){var c=document.getElementById('coverImg'),t=null;if(!c)return;
+ function stop(){if(t){clearTimeout(t);t=null;}}
+ c.addEventListener('contextmenu',function(e){e.preventDefault();});
+ c.addEventListener('pointerdown',function(){stop();t=setTimeout(function(){t=null;
+   if(confirm('¿Empezar de cero?\nSe borra todo el avance (camino, estrellas y nombre).')){
+     try{localStorage.removeItem('englishQuest');}catch(e){}
+     S={name:'',prog:0,stars:0,gems:0};document.getElementById('nameIn').value='';alert('Listo, empieza de cero 🌱');}
+ },3000);});
+ ['pointerup','pointerleave','pointercancel'].forEach(function(ev){c.addEventListener(ev,stop);});
+})();
 if('serviceWorker' in navigator){
  var hadSW=!!navigator.serviceWorker.controller, swReloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',function(){ if(hadSW&&!swReloaded){swReloaded=true;location.reload();} });
