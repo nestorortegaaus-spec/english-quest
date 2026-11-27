@@ -930,7 +930,7 @@ function gSetup(title){sTap();unlockSpeech();GAME.stop();show('s-game');document
 function gScore(t){document.getElementById('gScore').textContent=t;}
 function singleWords(u){return wordsOf(u).filter(function(w){return /^[a-z]+$/i.test(w.en);});}
 function uniqEmo(ws){var seen={},out=[];ws.forEach(function(w){if(!seen[w.e]){seen[w.e]=1;out.push(w);}});return out;}
-function pick(a){return a[(Math.random()*a.length)|0];}
+function pickR(a){return a[(Math.random()*a.length)|0];}
 
 /* 🔤 DELETREÁ: armar la palabra letra por letra */
 function startSpell(u,lv){
@@ -970,11 +970,11 @@ function startBalloons(u,lv){
  var area=document.getElementById('blArea'), balloons=[], spawnT=0, speed=Math.min(2.6,0.9+0.25*(lv-1));
  var COLS=['#FF6B6B','#FFD36B','#57C4A6','#7FC4F2','#B6A8EE','#FF9FC6','#FFA657'];
  function hud(){gScore('❤️'+lives+'  🎈'+got+'/'+GOAL);}
- function newTarget(){target=pick(pool);document.getElementById('blAsk').textContent=showWord?'Buscá: 🔊':'Buscá: '+target.es;say(target.en);}
+ function newTarget(){target=pickR(pool);document.getElementById('blAsk').textContent=showWord?'Buscá: 🔊':'Buscá: '+target.es;say(target.en);}
  document.getElementById('blSay').onclick=function(){if(target)say(target.en);};
  function spawn(){var hasT=balloons.some(function(b){return b.w===target;});
-  var w=(!hasT&&Math.random()<0.55)?target:pick(pool);
-  var el=document.createElement('button');el.className='bl';el.style.background=pick(COLS);
+  var w=(!hasT&&Math.random()<0.55)?target:pickR(pool);
+  var el=document.createElement('button');el.className='bl';el.style.background=pickR(COLS);
   el.innerHTML='<span'+(showWord?' class="bw"':'')+'>'+(showWord?w.en:w.e)+'</span><i></i>';
   var W=area.clientWidth, x=10+Math.random()*Math.max(10,W-100);
   el.style.left=x+'px';area.appendChild(el);
@@ -1028,7 +1028,7 @@ function startSort(u,lv){
  lv=lv||1; var host=gSetup('🗂️ Ordená · Nivel '+lv);
  var us=Array.isArray(u)?u.slice():[u];
  us=us.filter(function(i){return !UNITS[i].isP;});
- if(us.length<2){var oth=[];for(var i=0;i<12;i++)if(us.indexOf(i)<0&&!UNITS[i].isP)oth.push(i);us.push(pick(oth));}
+ if(us.length<2){var oth=[];for(var i=0;i<12;i++)if(us.indexOf(i)<0&&!UNITS[i].isP)oth.push(i);us.push(pickR(oth));}
  us=shuffle(us).slice(0,2);
  var A=UNITS[us[0]],B=UNITS[us[1]], items=shuffle(A.w.map(function(w){return {w:w,s:0};}).concat(B.w.map(function(w){return {w:w,s:1};})));
  var GOAL=Math.min(items.length,10+lv), n=0, ok=0, lives=3, speed=Math.min(3.2,1.1+0.3*(lv-1));
@@ -1058,7 +1058,7 @@ function startTF(u,lv){
   +'<div class="mo-time"><i id="tfT"></i></div><div class="tf-btns"><button class="tf-b no" id="tfN">✖</button><button class="tf-b si" id="tfY">✔</button></div></div>';
  var cur=null,t0=0;
  function next(){ if(!GAME.on)return; if(r>=R){finishGameNode('✅ ¡Rapidísima!','Acertaste '+ok+' de '+R+' · mejor racha 🔥'+best);return;}
-  var a=pick(pool), match=Math.random()<0.5, b=match?a:pick(pool.filter(function(x){return x!==a;}));
+  var a=pickR(pool), match=Math.random()<0.5, b=match?a:pickR(pool.filter(function(x){return x!==a;}));
   cur={a:a,b:b,match:match}; t0=Date.now();
   document.getElementById('tfE').textContent=a.e;
   document.getElementById('tfW').textContent=listen?'🔊':b.en; document.getElementById('tfC').className='tf-card in';
