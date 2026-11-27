@@ -45,6 +45,10 @@ le acepte la voz a la nena.
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
+- 🆕 Juegos 27/11: 🔠 Sopa de letras (grilla 6→8, 4-6 palabras, diagonales nivel 3+, al revés nivel 4+, palabras ocultas
+  nivel 3+; al encontrar dice inglés+castellano), ❓ Adivinanzas (RIDDLES: 30 con 3 pistas en inglés; menos pistas = más
+  puntos), 🔢 ¿Cuántos hay? ("How many apples?" → "There are seven apples!", números hasta 20, sin incontables).
+  Rotan en GROT (12 tipos).
 - ⏱️ Equilibrio (psicología del aprendizaje): cuenta minutos activos del día (S.play). Cada 20 min (configurable
   15/20/30) → descanso activo de 5 min al volver al camino/casa/sala (nunca corta una actividad): "Simon says" en
   inglés con voz (moverse, mirar lejos, tomar agua) y +5💎 al completarlo. Si nota cansancio (≥8 min y <45% de
