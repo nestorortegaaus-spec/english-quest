@@ -1628,7 +1628,7 @@ function petScale(p){ return p.stage===0?STAGES[0].sc:Math.round((0.55+0.45*Math
 function petStage(p){ for(var i=3;i>=1;i--)if(p.care>=STAGE_AT[i])return i; return 1; }
 function friendById(id){return FRIENDS.find(function(f){return f.id===id;})||FRIENDS[0];}
 /* ===== POSES (arte por etapa): img/pet/<id>_<etapa>_<pose>.png  poses: idle, closed, open, happy ===== */
-var POSE_SETS={kitty:{1:1,2:1,3:1},fox:{1:1,2:1,3:1},puppy:{1:1,2:1,3:1},bunny:{1:1,2:1,3:1}}; /* ej: kitty:{1:1} cuando existe img/pet/kitty_1_idle.png ... */
+var POSE_SETS={kitty:{1:1,2:1,3:1},fox:{1:1,2:1,3:1},puppy:{1:1,2:1,3:1},bunny:{1:1,2:1,3:1},penguin:{1:1}}; /* ej: kitty:{1:1} cuando existe img/pet/kitty_1_idle.png ... */
 var POSE_SC={1:[.74,.86],2:[.84,.95],3:[.95,1.02]};
 function petArt(id,st){ return POSE_SETS[id]&&POSE_SETS[id][st]?'img/pet/'+id+'_'+st:null; }
 function petScale2(id,p){ var art=petArt(id,p.stage); if(!art)return petScale(p); var r=POSE_SC[p.stage]||[1,1], lo=STAGE_AT[p.stage]||0, hi=STAGE_AT[p.stage+1]||STAGE_AT[3]+30;
