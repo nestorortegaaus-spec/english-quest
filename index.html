@@ -1403,7 +1403,7 @@ function startKart(){
       var kw=sc*roadW*W/2*0.55; if(kw>Math.min(W*0.34,170)*1.05||n<2)return; drawKart(k.ch,kx,ky,kw,sg2.clip); });
    }
    // jugador
-   var bounce=(P.sp>0?Math.sin(t0*25)*1.2:0), pw=Math.min(W*0.34,170);
+   var bounce=(P.sp>0?Math.sin(t0*25)*1.2:0), pw=KART_IMG[me.id]?Math.min(W*0.42,200):Math.min(W*0.34,170);
    c.save();c.translate(W/2,H-28+bounce);c.rotate(P.steer*0.06);drawKart(me,0,0,pw,null);c.restore();
    if(P.boost>0){c.fillStyle='rgba(255,170,40,.75)';c.beginPath();c.moveTo(W/2-pw*0.25,H-30);c.lineTo(W/2,H-4+Math.random()*10);c.lineTo(W/2+pw*0.25,H-30);c.fill();}
    // velocímetro
