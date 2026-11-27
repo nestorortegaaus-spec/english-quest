@@ -931,7 +931,7 @@ var WTHEMES=[
  {id:'farm',ic:'🐄',n:'La granja',bg:['#DDF2FF','#E8F7DA','#D8EDC0'],road:['#B08A5C','#EED7AE'],fx:'petal',deco:['🐄','🐖','🐑','🐓','🚜','🌽','🏡','🐴','🥕','🌻','🐐','🦆']}
 ];
 /* fondos de ChatGPT que ya están subidos (img/world_<id>.jpg) */
-var WIMG={meadow:1,nature:1};
+var WIMG={meadow:1,city:1,nature:1};
 function rng(seed){return function(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};}
 function worldInfo(w){
  if(w<=4)return WORLDS[w];
@@ -946,7 +946,7 @@ function worldInfo(w){
 /* efecto que flota sobre el camino según el tema */
 var WFX={petal:{e:['🌸','🌼'],m:'fall'},leaf:{e:['🍃','🍂'],m:'fall'},snow:{e:['❄️','•'],m:'fall'},bubble:{e:['🫧','○'],m:'rise'},note:{e:['🎵','🎶'],m:'rise'},heart:{e:['💗','✨'],m:'rise'},star:{e:['✨','⭐'],m:'twinkle'},spark:{e:['✨'],m:'twinkle'},cloud:{e:['☁️'],m:'drift'}};
 function worldFX(WI){ var sec=document.getElementById('s-path'), old=sec.querySelector('.pfx'); if(old)old.remove();
- var f=WFX[WI.fx]; if(!f)return; var psc=document.getElementById('pathScroll'), L=document.createElement('div'); L.className='pfx m-'+f.m+(WI.dark?' dark':'');
+ var f=WFX[WI.fx]; if(!f||(f.m==='drift'&&WIMG[WI.id]))return; var psc=document.getElementById('pathScroll'), L=document.createElement('div'); L.className='pfx m-'+f.m+(WI.dark?' dark':'');
  L.style.top=psc.offsetTop+'px'; var n=f.m==='drift'?4:f.m==='twinkle'?12:10, h='';
  for(var i=0;i<n;i++){ var e=f.e[i%f.e.length], d=(f.m==='drift'?28:f.m==='twinkle'?2.5:10)+(i*37%9)*(f.m==='drift'?2:.7);
   h+='<i style="left:'+((i*61+7)%95)+'%;top:'+(f.m==='twinkle'||f.m==='drift'?((i*43+11)%88)+'%':'')+';font-size:'+(f.m==='drift'?34+(i%3)*10:14+(i*7)%12)+'px;animation-duration:'+d.toFixed(1)+'s;animation-delay:-'+((i*1.7)%d).toFixed(1)+'s">'+e+'</i>'; }
