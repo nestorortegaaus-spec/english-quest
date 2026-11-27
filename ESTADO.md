@@ -150,3 +150,6 @@ le acepte la voz a la nena.
 2. commit + push después de cada cambio (nunca push --force)
 3. Trabajar SOLO en english-quest; no tocar mox-gestion, mox-comercial, mox-stock
 4. Repo público: ninguna clave/token en el código
+- ✅ HECHO (27/11): en ¡Hablá! no aparece el narrador (GAME.quiet), porque se mezclaba con el micrófono. Voz: say() espera 150 ms después de cortar
+  otra frase (en Android hablar justo después de cancel se perdía) y sayBoth dice el castellano después del inglés. Kart: la consigna dice solo
+  la palabra y espera a que termine la palabra anterior en inglés + castellano.
