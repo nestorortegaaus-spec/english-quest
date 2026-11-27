@@ -437,6 +437,16 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
     linear-gradient(180deg,#DCEEFF 0,#E3F5E3 260px,#D9F0D4 100%);}
 #pathNodes{position:relative;margin:0 auto;width:100%;}
 .proad{position:absolute;left:50%;top:0;margin-left:-160px;width:320px;pointer-events:none;z-index:0;overflow:visible;}
+.pfx{position:absolute;left:0;right:0;bottom:0;z-index:3;pointer-events:none;overflow:hidden;opacity:.75;}
+.pfx i{position:absolute;font-style:normal;line-height:1;animation:pfxFall 12s linear infinite;color:#fff;}
+.pfx.m-fall i{top:-30px;animation-name:pfxFall;} .pfx.m-rise i{top:auto;bottom:-30px;animation-name:pfxRise;color:#9fdcff;}
+.pfx.m-twinkle i{animation-name:pfxTw;animation-timing-function:ease-in-out;} .pfx.m-drift i{animation-name:pfxDrift;opacity:.8;}
+@keyframes pfxFall{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(28px,50vh) rotate(160deg)}100%{transform:translate(-10px,100vh) rotate(320deg)}}
+@keyframes pfxRise{0%{transform:translate(0,0);opacity:0}10%{opacity:1}50%{transform:translate(-18px,-45vh)}100%{transform:translate(12px,-90vh);opacity:0}}
+@keyframes pfxTw{0%,100%{opacity:.1;transform:scale(.6)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes pfxDrift{0%{transform:translateX(-60vw)}100%{transform:translateX(110vw)}}
+@media (prefers-reduced-motion:reduce){.pfx{display:none;}}
+.path-scroll.dark .pdeco{filter:drop-shadow(0 0 6px rgba(255,255,255,.35));}
 .pdeco{position:absolute;z-index:0;pointer-events:none;line-height:1;filter:drop-shadow(0 3px 2px rgba(60,90,60,.15));}
 .pnode-wrap{position:absolute;z-index:2;width:80px;height:80px;margin-left:-40px;margin-top:-40px;display:flex;align-items:center;justify-content:center;}
 .pnode{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer;position:relative;
@@ -898,14 +908,30 @@ var NODES_W1=[
  {t:'lesson',u:10},{t:'lesson',u:11},{t:'chest'}
 ];
 
+/* TEMAS DE LOS MUNDOS: colores, camino, decoración, efecto que flota (fx) e imagen de fondo de ChatGPT (img/world_<id>.jpg cuando está en WIMG) */
 var WORLDS=[
  null,
- {n:'La pradera',bg:['#DCEEFF','#E3F5E3','#D9F0D4'],deco:['🌳','🌷','🌲','🍄','🌼','🦋','🌻','🪨','🌿','🐞','🏡','🌸','🐰']},
- {n:'La ciudad',u:[13,14,16,22],p:[25],s:1,bg:['#E4E9F7','#ECEFF5','#DDE3EE'],deco:['🏢','🏠','🚦','🌳','🏪','🚗','🛴','🏬','🌷','🐦','🚏','🏫']},
- {n:'La naturaleza',u:[15,17,20,21],p:[27],s:2,bg:['#D7F1FF','#DDF5E8','#CDEBD0'],deco:['🌲','🍄','🦋','🌻','🐿️','🌊','🐸','🌾','🦔','🍀','🌴','🐝']},
- {n:'Gran aventura',u:[18,19,23,24],p:[26,12],s:3,bg:['#FFE9D6','#FFF3E3','#F5E6D3'],deco:['🏰','⛰️','🌋','🏕️','⛺','🗺️','🦅','🌵','🐉','💎','🧭','🪵']}
+ {id:'meadow',ic:'🌼',n:'La pradera',bg:['#DCEEFF','#E3F5E3','#D9F0D4'],road:['#C9B48A','#F3E3BF'],fx:'petal',deco:['🌳','🌷','🌲','🍄','🌼','🦋','🌻','🪨','🌿','🐞','🏡','🌸','🐰']},
+ {id:'city',ic:'🏙️',n:'La ciudad',u:[13,14,16,22],p:[25],s:1,bg:['#E4E9F7','#ECEFF5','#DDE3EE'],road:['#9AA3B2','#DDE2EA'],fx:'cloud',deco:['🏢','🏠','🚦','🌳','🏪','🚗','🛴','🏬','🌷','🐦','🚏','🏫']},
+ {id:'nature',ic:'🌲',n:'La naturaleza',u:[15,17,20,21],p:[27],s:2,bg:['#D7F1FF','#DDF5E8','#CDEBD0'],road:['#B39B6E','#EBDDB8'],fx:'leaf',deco:['🌲','🍄','🦋','🌻','🐿️','🌊','🐸','🌾','🦔','🍀','🌴','🐝']},
+ {id:'adventure',ic:'🏰',n:'Gran aventura',u:[18,19,23,24],p:[26,12],s:3,bg:['#FFE9D6','#FFF3E3','#F5E6D3'],road:['#B88A5A','#F0D7B0'],fx:'spark',deco:['🏰','⛰️','🌋','🏕️','⛺','🗺️','🦅','🌵','🐉','💎','🧭','🪵']}
 ];
-var SPACE_DECO=['🪐','⭐','🌙','🚀','☄️','🛸','🌟','👽','🌌','✨','🛰️','🌠'];
+var WTHEMES=[
+ {id:'beach',ic:'🏖️',n:'La playa',bg:['#BFE9FF','#FFF1C9','#F7DFA6'],road:['#E0B870','#FFF0CC'],fx:'bubble',deco:['🏖️','🌴','🐚','🦀','⛱️','🐠','🌊','🏄','🪸','🐬','⛵','🍉']},
+ {id:'snow',ic:'❄️',n:'El polo',bg:['#DDF0FF','#EEF7FF','#E3EEF8'],road:['#A9C6E0','#FFFFFF'],fx:'snow',deco:['⛄','🐧','🦭','🏔️','🎿','🧊','🐻‍❄️','⛸️','🌨️','🦌','🧣','❄️']},
+ {id:'space',ic:'🚀',n:'El espacio',dark:1,bg:['#2B2A5A','#3D3480','#1E1C45'],road:['#7B6FD6','#B9B0FF'],fx:'star',deco:['🪐','⭐','🌙','🚀','☄️','🛸','🌟','👽','🌌','✨','🛰️','🌠']},
+ {id:'sea',ic:'🐠',n:'Bajo el mar',bg:['#8CDAF3','#5DBCE4','#3796C6'],road:['#D9B977','#F6E2AE'],fx:'bubble',deco:['🐠','🐙','🐚','🦀','🐡','🪸','🐳','🦈','🪼','🐢','🫧','⚓']},
+ {id:'jungle',ic:'🐒',n:'La selva',bg:['#CFF2C9','#B8E6B0','#9ED69A'],road:['#A8805A','#D8B48A'],fx:'leaf',deco:['🌴','🐒','🦜','🐍','🐆','🌺','🦎','🍌','🐸','🌿','🦥','🐘']},
+ {id:'candy',ic:'🍭',n:'Tierra de golosinas',bg:['#FFE0F0','#FFEAF5','#FFD6EC'],road:['#F59AC5','#FFE3F1'],fx:'heart',deco:['🍭','🍬','🧁','🍩','🍫','🍪','🎂','🍰','🍦','🍡','🍓','🧸']},
+ {id:'desert',ic:'🌵',n:'El desierto',bg:['#FFE9C4','#FFE0B0','#F5CF94'],road:['#C79A5C','#F2D9A8'],fx:'spark',deco:['🌵','🐪','🏜️','🦂','🐍','☀️','🦎','🌴','🏺','🪨','🦅','⛺']},
+ {id:'dino',ic:'🦕',n:'Valle de dinosaurios',bg:['#E2F5D0','#D3EDBE','#C2E2A8'],road:['#9C7B54','#D9BE8E'],fx:'leaf',deco:['🦕','🦖','🌋','🥚','🌿','🪨','🦴','🌴','🐊','🦎','🍃','🌾']},
+ {id:'fairy',ic:'🧚',n:'Bosque de hadas',bg:['#EDE2FF','#E3F3E8','#D8EBDD'],road:['#B9A5E6','#F1EAFF'],fx:'spark',deco:['🧚','🍄','🌸','🦋','✨','🌙','🦄','🪄','🌷','🐞','🌈','🏡']},
+ {id:'sky',ic:'☁️',n:'Islas en las nubes',bg:['#BEE3FF','#E2F2FF','#F5FAFF'],road:['#B7C9DA','#FFFFFF'],fx:'cloud',deco:['☁️','🎈','🪁','🦅','🌈','🛩️','🐦','☀️','🕊️','🏝️','🪂','🌤️']},
+ {id:'music',ic:'🎵',n:'Ciudad de la música',bg:['#FFF0D6','#FFE6E6','#F0E2FF'],road:['#7E6BD6','#E6DFFF'],fx:'note',deco:['🎸','🎹','🥁','🎺','🎻','🎷','🎤','🎧','🎵','🎶','📻','🪗']},
+ {id:'farm',ic:'🐄',n:'La granja',bg:['#DDF2FF','#E8F7DA','#D8EDC0'],road:['#B08A5C','#EED7AE'],fx:'petal',deco:['🐄','🐖','🐑','🐓','🚜','🌽','🏡','🐴','🥕','🌻','🐐','🦆']}
+];
+/* fondos de ChatGPT que ya están subidos (img/world_<id>.jpg) */
+var WIMG={};
 function rng(seed){return function(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};}
 function worldInfo(w){
  if(w<=4)return WORLDS[w];
@@ -914,8 +940,17 @@ function worldInfo(w){
  all.sort(function(){return r()-0.5;}); ph.sort(function(){return r()-0.5;});
  var u=NEWU.slice(6+k*6,12+k*6), pp=NEWP.slice(k*2,k*2+2);
  all.forEach(function(x){if(u.length<6&&u.indexOf(x)<0)u.push(x);}); ph.forEach(function(x){if(pp.length<2&&pp.indexOf(x)<0)pp.push(x);});
- return {n:'Galaxia '+(w-4),u:u,p:pp,s:(w-5)%STORIES.length,bg:['#E6E0FF','#EEE8FF','#E2DAF7'],deco:SPACE_DECO};
+ var T=WTHEMES[k%WTHEMES.length], lap=Math.floor(k/WTHEMES.length);
+ return Object.assign({},T,{n:T.n+(lap?' '+['','II','III','IV','V'][Math.min(4,lap)]:''),u:u,p:pp,s:k%STORIES.length});
 }
+/* efecto que flota sobre el camino según el tema */
+var WFX={petal:{e:['🌸','🌼'],m:'fall'},leaf:{e:['🍃','🍂'],m:'fall'},snow:{e:['❄️','•'],m:'fall'},bubble:{e:['🫧','○'],m:'rise'},note:{e:['🎵','🎶'],m:'rise'},heart:{e:['💗','✨'],m:'rise'},star:{e:['✨','⭐'],m:'twinkle'},spark:{e:['✨'],m:'twinkle'},cloud:{e:['☁️'],m:'drift'}};
+function worldFX(WI){ var sec=document.getElementById('s-path'), old=sec.querySelector('.pfx'); if(old)old.remove();
+ var f=WFX[WI.fx]; if(!f)return; var psc=document.getElementById('pathScroll'), L=document.createElement('div'); L.className='pfx m-'+f.m+(WI.dark?' dark':'');
+ L.style.top=psc.offsetTop+'px'; var n=f.m==='drift'?4:f.m==='twinkle'?12:10, h='';
+ for(var i=0;i<n;i++){ var e=f.e[i%f.e.length], d=(f.m==='drift'?28:f.m==='twinkle'?2.5:10)+(i*37%9)*(f.m==='drift'?2:.7);
+  h+='<i style="left:'+((i*61+7)%95)+'%;top:'+(f.m==='twinkle'||f.m==='drift'?((i*43+11)%88)+'%':'')+';font-size:'+(f.m==='drift'?34+(i%3)*10:14+(i*7)%12)+'px;animation-duration:'+d.toFixed(1)+'s;animation-delay:-'+((i*1.7)%d).toFixed(1)+'s">'+e+'</i>'; }
+ L.innerHTML=h; sec.appendChild(L); }
 function buildWorld(w){
  if(w===1)return NODES_W1;
  var wi=worldInfo(w), U=wi.u, P=wi.p, out=[], lv=w, gi=w*5;
@@ -965,8 +1000,8 @@ function renderPath(){
  document.getElementById('hStars').textContent=S.stars;
  document.getElementById('hLvl').textContent=lvl();
  document.getElementById('hGems').textContent=S.gems; document.getElementById('hDaily').innerHTML=dailyHTML(); document.getElementById('hCrys').textContent=(S.crys||0)+'/'+crysMax(); document.getElementById('hHome').classList.toggle('alert',homeNeedsAttention()); document.getElementById('hArc').style.display=S.arcadeOff?'none':'';
- var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! 🌍 Mundo '+S.world+' · '+WI.n;
- var psc=document.getElementById('pathScroll');psc.style.background='radial-gradient(circle at 15% 8%,rgba(255,255,255,.55) 0 40px,transparent 41px),linear-gradient(180deg,'+WI.bg[0]+' 0,'+WI.bg[1]+' 260px,'+WI.bg[2]+' 100%)';
+ var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! '+(WI.ic||'🌍')+' Mundo '+S.world+' · '+WI.n;
+ var psc=document.getElementById('pathScroll');psc.classList.toggle('dark',!!WI.dark); var grad='linear-gradient(180deg,'+WI.bg[0]+' 0,'+WI.bg[1]+' 260px,'+WI.bg[2]+' 100%)'; psc.style.background=WIMG[WI.id]?'linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12)),url(img/world_'+WI.id+'.jpg) center/cover no-repeat,'+grad:(WI.dark?'radial-gradient(circle at 20% 10%,rgba(255,255,255,.18) 0 2px,transparent 3px) 0 0/90px 70px,radial-gradient(circle at 70% 60%,rgba(255,255,255,.14) 0 1.5px,transparent 2.5px) 0 0/130px 110px,':'radial-gradient(circle at 15% 8%,rgba(255,255,255,.55) 0 40px,transparent 41px),')+grad;
  var box=document.getElementById('pathNodes');box.innerHTML='';
  var GAP=118, TOP=70, AMP=70, N=NODES.length;
  function px(i){return Math.round(Math.sin(i*0.95)*AMP);}
@@ -977,8 +1012,8 @@ function renderPath(){
  var all='',done='';
  for(var k=0;k<N-1;k++){all+=seg(k)+' ';if(k<S.prog)done+=seg(k)+' ';}
  var svg='<svg class="proad" height="'+H+'" viewBox="0 0 320 '+H+'">'
-   +'<path d="'+all+'" fill="none" stroke="#C9B48A" stroke-width="34" stroke-linecap="round"/>'
-   +'<path d="'+all+'" fill="none" stroke="#F3E3BF" stroke-width="26" stroke-linecap="round"/>'
+   +'<path d="'+all+'" fill="none" stroke="'+(WI.road||['#C9B48A'])[0]+'" stroke-width="34" stroke-linecap="round"/>'
+   +'<path d="'+all+'" fill="none" stroke="'+(WI.road||[0,'#F3E3BF'])[1]+'" stroke-width="26" stroke-linecap="round"/>'
    +(done?'<path d="'+done+'" fill="none" stroke="#9EDFC6" stroke-width="26" stroke-linecap="round"/>':'')
    +'<path d="'+all+'" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round" opacity=".9"/>'
    +'</svg>';
@@ -1022,7 +1057,7 @@ function renderPath(){
    wrap.appendChild(el);box.appendChild(wrap);
  });
  var goal=document.createElement('div');goal.className='pbanner';goal.style.top=(H-55)+'px';goal.textContent='🏁 Fin del Mundo '+S.world+' → ¡Mundo '+(S.world+1)+'!';box.appendChild(goal);
- setTimeout(function(){var cur=box.querySelector('.cur');if(cur)cur.scrollIntoView({block:'center'});},60);
+ setTimeout(function(){var cur=box.querySelector('.cur');if(cur)cur.scrollIntoView({block:'center'});worldFX(WI);},60);
 }
 var activeIdx=0;
 function openNode(i){
@@ -1156,7 +1191,7 @@ function afterReward(){ sTap();
    b0.innerHTML='<div class="chest">🔥</div><h2>¡Meta del día cumplida!</h2><p>Llevás <b>'+curStreak()+(curStreak()===1?' día':' días')+' seguidos</b> jugando 🎉<br>¡Volvé mañana para que siga creciendo!</p><div class="rewpill">💎 +20 y 🔮 +2 de regalo</div><button class="btn sun" onclick="afterReward()">¡Genial! →</button>';
    show('s-reward');sWin();burst(160);return;}
  if(NEW_WORLD){NEW_WORLD=false;var wi=worldInfo(S.world),b=document.getElementById('rewBody');
-   b.innerHTML='<div class="chest">🌍</div><h2>¡Mundo '+S.world+'!</h2><p>Terminaste un mundo entero 🎉<br>Ahora: <b>'+wi.n+'</b>, con palabras nuevas y juegos más difíciles.</p><button class="btn teal" onclick="afterReward()">¡Vamos! →</button>';
+   b.innerHTML='<div class="chest">'+(wi.ic||'🌍')+'</div><h2>¡Mundo '+S.world+'!</h2><p>Terminaste un mundo entero 🎉<br>Ahora: <b>'+wi.n+'</b>, con palabras nuevas y juegos más difíciles.</p><button class="btn teal" onclick="afterReward()">¡Vamos! →</button>';
    show('s-reward');sWin();burst(200);return;}
  renderPath(); show('s-path'); }
 
