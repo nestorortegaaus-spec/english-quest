@@ -37,6 +37,11 @@ le acepte la voz a la nena.
   pelota más rápida, bloques más cerca, paleta más chica); Memotest (6 → 8 → 10 pares, se tapan más rápido);
   Isla (más larga, más rápida, más pozos y cangrejos, cangrejos que caminan desde nivel 3);
   Escuchá (6 opciones y más rondas desde nivel 2).
+- Juegos nuevos (inspirados en mecánicas de Lingokids, Duolingo ABC, Studycat, Monkey Junior y Gus on the Go):
+  🔤 Deletreá (armar la palabra letra por letra), 🎈 Globos (reventar el que dice la voz antes de que se escape),
+  👾 Monstruo (darle de comer lo que pide, con frases "I want a/some..."), 🗂️ Ordená (cada cosa a su caja),
+  ✅ ¿Sí o no? (rápido, con rachas 🔥). Todos con niveles.
+- En los mundos 2+ los juegos rotan (9 tipos), así cada mundo tiene una mezcla distinta.
 - Ideas: más cuentos con ilustraciones de ChatGPT (hoy los nuevos usan emojis).
 
 ## Estado de features (funcionando)
