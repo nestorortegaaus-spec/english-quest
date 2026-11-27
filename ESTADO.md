@@ -80,6 +80,11 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE PRIORITARIO (pedido 27/11): MUCHO más vocabulario, progresivo. Hoy hay ~29 temas x 8 palabras (~230)
+  y los juegos repiten. Meta: que la app permita aprender MILES de palabras. Que cada nivel/mundo sume palabras nuevas
+  y más difíciles (ej.: Números 1-10 → 11-20 → decenas → cientos → miles; colores básicos → tonos; etc.).
+  Rotación que priorice palabras no vistas o que le cuestan (usar S.hist), y repaso espaciado de las ya aprendidas.
+  Probablemente conviene un archivo aparte de vocabulario (words.json) con niveles, cargado por la app.
 - ⏭️ PENDIENTE PRIORITARIO (pedido 27/11): pasar de palabras sueltas a FRASES. Los próximos juegos tienen que hacerla
   combinar palabras para decir algo: primero ve/oye las palabras sueltas y después las usa para armar frases.
   Inspiración: método Kumon (pasos chicos y progresivos, repetición, patrones que cambian de a una palabra:
