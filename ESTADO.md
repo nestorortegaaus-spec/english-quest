@@ -127,7 +127,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): uso para las ⭐. Pestaña ⭐ Estrellas en la tienda (también al tocar ⭐ arriba): 10 trofeos por estrellas
   juntadas en total (STAR_GOALS, de 25 a 2000, cada uno regala 💎 al abrirlo; S.sgot), cambio de 20 ⭐ por 1 🔮 una vez por día
   (S.scrys) y 8 accesorios de ropa mágica que solo se compran con estrellas (ACC con st). Gastar estrellas no baja el nivel (S.spent).
-- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy ~1115 palabras y frases (base + vocab.js con 100 temas, lv 1-5,
+- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy ~1320 palabras y frases (base + vocab.js con 124 temas, lv 1-5,
   números generados 11-20 → decenas → 21-99 → cientos → miles/millón, ordinales, hora, países, pasado...).
   Mundos 2-4 traen al final 2 temas nuevos cada uno (NEWU[0..5]) + parada 🔁 Repaso del mundo anterior.
   Galaxias (mundo 5+) usan NEWU desde el 7º, 6 temas por galaxia en orden de dificultad (~10 galaxias de contenido nuevo).
@@ -135,6 +135,9 @@ le acepte la voz a la nena.
   en index.html. Las tandas nuevas (b:2+) NO cambian los mundos 2-4 (NEWU[0..5] queda fijo): se mezclan por dificultad desde las
   Galaxias. Tanda 2 (27/11): 24 temas, 222 palabras/frases (playa, bebés animales, formas, casa, estaciones, cuerpo, plaza, bebidas,
   cocinar, arte, moverse, cómo es, tecnología, trabajos, viajes, sentimientos, opuestos, dónde, cuándo, pedir, pasado, planeta, futuro, comparar).
+  Tanda 3 (27/11): 24 temas, 206 palabras/frases (mar, insectos, juegos de plaza, mi cuarto, colores, granja, frutas, comidas argentinas,
+  baño, instrumentos, emociones, acciones, naturaleza, animales salvajes, deportes, auto, hospital, cielo, verbos útiles, me presento,
+  tiempo libre, palabras largas, pasado, contar una historia).
 - 🔄 EN CURSO: FRASES estilo Kumon. Juego 🧩 Frases con 36 patrones (PHR, lv1-5, desde "I like…" hasta "If it rains,
   I will…", "When I grow up I want to be a…", y uno de dos huecos "My best friend likes…, but I like…").
   Pasos: mirar/escuchar → completar → ordenar → cambiar una palabra → escuchar y elegir → frase larga (une dos frases
