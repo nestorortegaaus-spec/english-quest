@@ -44,7 +44,7 @@ le acepte la voz a la nena.
 - 🚀 ¡Hablá!: decir la palabra en voz alta con el micrófono hace subir el cohete hasta la Luna
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
-- 📸 Safari: 72 animales (SAFARI con f vuela/tierra y d dificultad 1-3); safariPool elige ~70% que nunca fotografió o le cuestan + ~30% conocidos, con voladores y de tierra.
+- 📸 Safari: 5 paisajes que rotan (SAFARI_SCENES: Bosque, Granja, Selva, Sabana, Nieve; arte ChatGPT img/safari_*.jpg, con posición de arbustos), cada uno prioriza ~65% sus animales (SAFARI_TAGS). 76 animales (SAFARI con f vuela/tierra y d dificultad 1-3); safariPool elige ~70% que nunca fotografió o le cuestan + ~30% conocidos, con voladores y de tierra.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
 - 🆕 Juegos 27/11: 🔠 Sopa de letras (grilla 6→8, 4-6 palabras, diagonales nivel 3+, al revés nivel 4+, palabras ocultas
   nivel 3+; al encontrar dice inglés+castellano), ❓ Adivinanzas (RIDDLES: 30 con 3 pistas en inglés; menos pistas = más
