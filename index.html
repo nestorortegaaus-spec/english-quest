@@ -111,14 +111,19 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .dl-fire{background:#FFE7D6;color:#E06E58;border-radius:10px;padding:2px 8px;} .dl-fire.off{background:#EEF1F5;color:#A9B4C2;}
 .dl-goal{color:var(--muted);} .dl-bar{display:flex;gap:3px;} .dl-bar i{width:14px;height:8px;border-radius:4px;background:#E3E9F0;display:block;} .dl-bar i.on{background:#FF9C87;}
 .foxguide img{width:100%;height:100%;object-fit:contain;display:block;}
-.foxguide .acc,.sh-fox .acc{position:absolute;left:50%;transform:translateX(-50%);line-height:1;pointer-events:none;}
-.foxguide .acc.head{top:-14px;font-size:26px;} .foxguide .acc.eyes{top:14px;font-size:22px;} .foxguide .acc.ears{top:0px;font-size:34px;left:46%;}
+/* accesorios combinables: capa sobre el dibujo, posiciones en % de la imagen */
+.pa{position:relative;height:100%;max-width:100%;margin:0 auto;container-type:inline-size;}
+.pa>img{width:100%;height:100%;object-fit:contain;display:block;}
+.pa .acc{position:absolute;line-height:1;pointer-events:none;transform:translate(-50%,-50%);z-index:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18));}
+.pa .acc.head{transform:translate(-50%,-66%);} .pa .acc.neck{transform:translate(-50%,-22%);} .pa .acc.hand{transform:translate(-50%,-50%) rotate(-12deg);}
 .sh-tabs{display:flex;gap:8px;padding:0 14px 8px;}
 .sh-tab{flex:1;border:none;border-radius:14px;padding:10px;font-weight:900;font-size:15px;background:#fff;color:var(--muted);font-family:inherit;box-shadow:0 3px 0 rgba(120,140,170,.18);cursor:pointer;}
 .sh-tab.on{background:var(--teal);color:#fff;box-shadow:0 3px 0 var(--teal-d);}
 .sh-body{flex:1;overflow-y:auto;padding:6px 14px 24px;width:100%;max-width:480px;margin:0 auto;}
 .sh-fox{position:relative;width:150px;height:150px;margin:8px auto 4px;} .sh-fox img{width:100%;height:100%;object-fit:contain;}
-.sh-fox .acc.head{top:-18px;font-size:56px;} .sh-fox .acc.eyes{top:32px;font-size:46px;} .sh-fox .acc.ears{top:2px;font-size:78px;left:46%;}
+.sh-mini{width:110px;height:110px;margin:0 auto 4px;}
+.sh-slot{font-weight:900;font-size:15px;color:var(--ink);margin:14px 0 6px;} .sh-slot small{color:var(--muted);font-weight:800;font-size:12px;}
+.sh-item.on{border-color:var(--teal);background:#E9FAF4;} .sh-item.sel{border-color:#FF9A3C;}
 .sh-hint{text-align:center;font-weight:800;font-size:12px;color:var(--muted);margin-bottom:8px;}
 .sh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
 .sh-item{border:3px solid transparent;background:#fff;border-radius:16px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;font-family:inherit;box-shadow:0 4px 0 rgba(120,140,170,.18);}
@@ -271,8 +276,8 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .hm-friend{position:relative;z-index:2;width:190px;height:190px;display:flex;align-items:center;justify-content:center;animation:bob 2.2s ease-in-out infinite;}
 .hm-friend img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 8px rgba(0,0,0,.18));} .hm-friend .fe{font-size:140px;line-height:1;}
 .hm-friend.happy{animation:hmhappy .7s;} @keyframes hmhappy{30%{transform:translateY(-26px) scale(1.06)}60%{transform:translateY(0) scale(.96,1.04)}}
-.hm-friend .acc{position:absolute;left:50%;transform:translateX(-50%);line-height:1;pointer-events:none;}
-.hm-friend .acc.head{top:-16px;font-size:58px;} .hm-friend .acc.eyes{top:52px;font-size:54px;} .hm-friend .acc.ears{top:4px;font-size:110px;}
+.dr-prev{width:150px;height:150px;margin:0 auto 4px;} .dr-tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;} .dr-tab{border:none;border-radius:12px;padding:6px 10px;font-weight:900;font-family:inherit;background:#F1F4F8;color:var(--muted);cursor:pointer;font-size:13px;} .dr-tab.on{background:var(--teal);color:#fff;}
+.pk-box .hm-items{max-height:34vh;overflow-y:auto;}
 .hm-name{font-weight:900;font-size:20px;color:var(--ink);background:rgba(255,255,255,.85);border-radius:12px;padding:2px 12px;margin-top:4px;} .hm-name small{color:var(--muted);font-size:13px;}
 .hm-hearts{display:flex;gap:4px;margin-top:6px;background:rgba(255,255,255,.88);border-radius:14px;padding:3px 10px;} .hm-hearts i{font-style:normal;font-size:22px;filter:grayscale(1);opacity:.35;} .hm-hearts i.on{filter:none;opacity:1;}
 .hm-acts{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px;} .hm-acts .hm-act span{font-size:11px;} .hm-acts .hm-act b{font-size:28px;}
@@ -643,7 +648,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
   <!-- SHOP -->
   <section class="screen" id="s-shop">
     <div class="hud"><button class="lx" onclick="closeShop()">✕</button><div class="pill" style="color:#C98A1C">🏪 Tienda</div><div class="grow"></div><div class="pill gem">💎 <span id="shGems">0</span></div></div>
-    <div class="sh-tabs"><button class="sh-tab" id="shTabFox" onclick="SHOP_TAB='fox';SHOP_SEL=null;sTap();renderShop()">🦊 Zorrito</button><button class="sh-tab" id="shTabAlb" onclick="SHOP_TAB='alb';sTap();renderShop()">📒 Álbum</button></div>
+    <div class="sh-tabs"><button class="sh-tab" id="shTabFox" onclick="SHOP_TAB='fox';SHOP_SEL=null;sTap();renderShop()">👒 Ropa</button><button class="sh-tab" id="shTabAlb" onclick="SHOP_TAB='alb';sTap();renderShop()">📒 Álbum</button></div>
     <div class="sh-body" id="shBody"></div>
   </section>
 
@@ -1410,13 +1415,51 @@ function moreTime(){ var a=3+((Math.random()*7)|0), b=4+((Math.random()*6)|0); v
 function markWord(w,ok){ if(!w||!w.en)return; try{noteAnswer(ok);}catch(e){} if(!S.hist)S.hist={}; var h=S.hist[w.en]||[0,0]; h[ok?0:1]++; S.hist[w.en]=h; }
 
 /* ===== TIENDA Y ÁLBUM ===== */
+var ACC_SLOTS=[{k:'head',n:'Cabeza',e:'👒'},{k:'eyes',n:'Cara',e:'🕶️'},{k:'neck',n:'Cuello',e:'📿'},{k:'hand',n:'En la mano',e:'🎈'}];
 var ACC=[
  {id:'cap',e:'🧢',en:'cap',es:'gorra',p:90,pos:'head'},{id:'bow',e:'🎀',en:'bow',es:'moño',p:90,pos:'head'},
- {id:'flower',e:'🌸',en:'flower',es:'flor',p:120,pos:'head'},{id:'glasses',e:'🕶️',en:'sunglasses',es:'anteojos de sol',p:150,pos:'eyes'},
- {id:'tophat',e:'🎩',en:'top hat',es:'galera',p:180,pos:'head'},{id:'headphones',e:'🎧',en:'headphones',es:'auriculares',p:210,pos:'ears'},
+ {id:'flower',e:'🌸',en:'flower',es:'flor',p:120,pos:'head'},{id:'sunflower',e:'🌻',en:'sunflower',es:'girasol',p:120,pos:'head'},
+ {id:'butterfly',e:'🦋',en:'butterfly clip',es:'hebilla de mariposa',p:150,pos:'head'},{id:'sunhat',e:'👒',en:'sun hat',es:'capelina',p:180,pos:'head'},
+ {id:'tophat',e:'🎩',en:'top hat',es:'galera',p:180,pos:'head'},{id:'headphones',e:'🎧',en:'headphones',es:'auriculares',p:210,pos:'head'},
+ {id:'gradcap',e:'🎓',en:'graduation cap',es:'birrete',p:220,pos:'head'},{id:'helmet',e:'⛑️',en:'helmet',es:'casco',p:220,pos:'head'},
  {id:'star',e:'⭐',en:'star',es:'estrella',p:240,pos:'head'},{id:'party',e:'🎉',en:'party',es:'fiesta',p:270,pos:'head'},
- {id:'rainbow',e:'🌈',en:'rainbow',es:'arcoíris',p:300,pos:'head'},{id:'crown',e:'👑',en:'crown',es:'corona',p:450,pos:'head'}
+ {id:'rainbow',e:'🌈',en:'rainbow',es:'arcoíris',p:300,pos:'head'},{id:'crown',e:'👑',en:'crown',es:'corona',p:450,pos:'head'},
+ {id:'glasses',e:'🕶️',en:'sunglasses',es:'anteojos de sol',p:150,pos:'eyes'},{id:'specs',e:'👓',en:'glasses',es:'anteojos',p:130,pos:'eyes'},
+ {id:'goggles',e:'🥽',en:'goggles',es:'antiparras',p:200,pos:'eyes'},{id:'mask',e:'🎭',en:'mask',es:'máscara',p:260,pos:'eyes'},
+ {id:'scarf',e:'🧣',en:'scarf',es:'bufanda',p:140,pos:'neck'},{id:'necklace',e:'📿',en:'necklace',es:'collar',p:160,pos:'neck'},
+ {id:'bell',e:'🔔',en:'bell',es:'campanita',p:110,pos:'neck'},{id:'ribbon',e:'🎗️',en:'ribbon',es:'cinta',p:120,pos:'neck'},
+ {id:'medal',e:'🏅',en:'medal',es:'medalla',p:250,pos:'neck'},{id:'gold',e:'🥇',en:'gold medal',es:'medalla de oro',p:400,pos:'neck'},
+ {id:'balloon',e:'🎈',en:'balloon',es:'globo',p:100,pos:'hand'},{id:'lollipop',e:'🍭',en:'lollipop',es:'chupetín',p:100,pos:'hand'},
+ {id:'rose',e:'🌹',en:'rose',es:'rosa',p:120,pos:'hand'},{id:'teddy',e:'🧸',en:'teddy bear',es:'osito de peluche',p:160,pos:'hand'},
+ {id:'umbrella',e:'☂️',en:'umbrella',es:'paraguas',p:170,pos:'hand'},{id:'icecream',e:'🍦',en:'ice cream',es:'helado',p:130,pos:'hand'},
+ {id:'wand',e:'🪄',en:'magic wand',es:'varita mágica',p:280,pos:'hand'},{id:'guitar',e:'🎸',en:'guitar',es:'guitarra',p:320,pos:'hand'},
+ {id:'bouquet',e:'💐',en:'bouquet',es:'ramo de flores',p:200,pos:'hand'},{id:'trophy',e:'🏆',en:'trophy',es:'trofeo',p:480,pos:'hand'}
 ];
+/* dónde va cada cosa en cada dibujo: [centro x, arriba de la cabeza, ojos, cuello, ancho de la cabeza] en proporción de la imagen */
+var ACC_AN={fox_1:[.45,.12,.43,.69,.7],fox_2:[.40,.10,.35,.56,.55],fox_3:[.35,.06,.24,.41,.4],
+ kitty_1:[.45,.06,.40,.69,.75],kitty_2:[.43,.04,.32,.56,.6],kitty_3:[.37,.06,.25,.43,.4],
+ puppy_1:[.49,.09,.35,.63,.55],puppy_2:[.48,.06,.29,.50,.45],puppy_3:[.43,.06,.22,.41,.35],
+ bunny_1:[.51,.09,.34,.57,.55],bunny_2:[.50,.06,.28,.49,.4],bunny_3:[.48,.04,.21,.41,.3],
+ penguin_1:[.50,.10,.44,.63,.75],penguin_2:[.49,.09,.35,.48,.6],penguin_3:[.50,.07,.28,.44,.5],
+ panda_1:[.50,.05,.37,.58,.7],panda_2:[.52,.04,.29,.48,.55],panda_3:[.50,.03,.21,.36,.45],
+ unicorn_1:[.50,.15,.41,.62,.75],unicorn_2:[.60,.15,.34,.52,.5],unicorn_3:[.63,.12,.26,.46,.35],
+ dragon_1:[.50,.12,.34,.52,.6],dragon_2:[.53,.08,.28,.42,.5],dragon_3:[.50,.09,.22,.34,.3]};
+var ACC_DIM={bunny_1:[360,392],bunny_2:[360,442],bunny_3:[360,492],dragon_1:[360,392],dragon_2:[360,386],dragon_3:[360,348],fox_1:[360,438],fox_2:[360,518],fox_3:[360,493],kitty_1:[360,443],kitty_2:[360,530],kitty_3:[360,519],panda_1:[360,402],panda_2:[360,439],panda_3:[360,424],penguin_1:[360,516],penguin_2:[360,534],penguin_3:[360,582],puppy_1:[360,415],puppy_2:[360,471],puppy_3:[360,522],unicorn_1:[360,477],unicorn_2:[360,462],unicorn_3:[360,500]};
+var ACC_GEN=[.5,.14,.40,.66,.6];
+/* lo que tiene puesto cada amigo: {head:id, eyes:id, neck:id, hand:id} (antes era un solo accesorio) */
+function wearOf(id){ if(!S.home)S.home={own:['fox'],cur:'fox',wear:{},day:'',done:{},gift:''}; var W=S.home.wear||(S.home.wear={}), w=W[id];
+ if(typeof w==='string'){ var a=accById(w); w={}; if(a)w[a.pos]=a.id; W[id]=w; }
+ if(!w&&id==='fox'&&S.wear){ var a2=accById(S.wear); w={}; if(a2)w[a2.pos]=a2.id; W[id]=w; S.wear=null; }
+ if(!w){w={};W[id]=w;} return w; }
+function wearCount(w){ return ACC_SLOTS.filter(function(sl){return w&&w[sl.k];}).length; }
+function accLayer(key,w){ var an=ACC_AN[key]||ACC_GEN, x=an[0], hw=an[4], o='';
+ ACC_SLOTS.forEach(function(sl){ var a=w&&w[sl.k]&&accById(w[sl.k]); if(!a)return; var L=x*100,T,F;
+  if(sl.k==='head'){T=an[1]*100+3;F=hw*60;} else if(sl.k==='eyes'){T=an[2]*100;F=hw*70;} else if(sl.k==='neck'){T=an[3]*100-1;F=hw*34;}
+  else {L=Math.min(86,(x+hw*.62)*100);T=Math.min(80,(an[3]+.12)*100);F=Math.max(22,hw*48);}
+  o+='<span class="acc '+sl.k+'" style="left:'+L.toFixed(1)+'%;top:'+T.toFixed(1)+'%;font-size:'+F.toFixed(1)+'cqw">'+a.e+'</span>'; });
+ return o; }
+function dressWrap(key,img,w){ var d=ACC_DIM[key]||[1,1]; return '<div class="pa" style="aspect-ratio:'+d[0]+'/'+d[1]+'">'+img+accLayer(key,w)+'</div>'; }
+function petKey(id){ var p=S.home&&S.home.pets&&S.home.pets[id]; return p&&window.petArt&&petArt(id,p.stage)?id+'_'+p.stage:null; }
 var ALBUM=[
  {n:'Animales',s:[['🦄','unicorn','unicornio'],['🦋','butterfly','mariposa'],['🐬','dolphin','delfín'],['🦉','owl','búho'],['🐼','panda','panda'],['🦊','fox','zorro'],['🐨','koala','koala'],['🦩','flamingo','flamenco'],['🐢','turtle','tortuga'],['🦔','hedgehog','erizo'],['🐙','octopus','pulpo'],['🐝','bee','abeja']]},
  {n:'Golosinas',s:[['🍕','pizza','pizza'],['🍔','hamburger','hamburguesa'],['🍦','ice cream','helado'],['🍩','donut','dona'],['🧁','cupcake','cupcake'],['🍪','cookie','galletita'],['🍫','chocolate','chocolate'],['🥞','pancakes','panqueques'],['🍿','popcorn','pochoclo'],['🍭','lollipop','chupetín'],['🥤','soda','gaseosa'],['🍰','cake','torta']]},
@@ -1434,9 +1477,8 @@ function accById(id){return ACC.find(function(a){return a.id===id;});}
 function buddyId(){ try{var h=S.home; if(h&&h.buddy&&h.own.indexOf(h.buddy)>=0&&h.pets&&h.pets[h.buddy]&&h.pets[h.buddy].stage>0)return h.buddy;}catch(e){} return 'fox'; }
 function buddyImg(pose){ var id=buddyId(), p=S.home&&S.home.pets&&S.home.pets[id]; var art=p&&window.petArt?petArt(id,p.stage):null;
  if(art)return art+'_'+(pose||'idle')+'.webp'; return id==='fox'?IMG.fox:'img/friend_'+id+'.png'; }
-function buddyAcc(){ var id=buddyId(), w=S.home&&S.home.wear&&S.home.wear[id]; if(w)return accById(w); return id==='fox'&&S.wear?accById(S.wear):null; }
-function foxHTML(cls){var a=buddyAcc();
- return '<div class="'+cls+'"><img src="'+buddyImg('idle')+'" alt="" onerror="this.style.display=\'none\'">'+(a?'<span class="acc '+a.pos+'">'+a.e+'</span>':'')+'</div>';}
+function foxHTML(cls,tryOn){ var id=buddyId(), w=Object.assign({},wearOf(id)); if(tryOn){var t=accById(tryOn); if(t)w[t.pos]=t.id;}
+ return '<div class="'+cls+'">'+dressWrap(petKey(id)||'gen','<img src="'+buddyImg('idle')+'" alt="" onerror="this.style.display=\'none\'">',w)+'</div>';}
 var SHOP_TAB='fox', SHOP_SEL=null, SHOP_PREV='s-path';
 function openShop(tab){sTap();var on=document.querySelector('.screen.on');SHOP_PREV=on&&on.id!=='s-shop'?on.id:'s-path';SHOP_TAB=tab||'fox';SHOP_SEL=null;renderShop();show('s-shop');}
 function closeShop(){sTap();renderPath();show('s-path');}
@@ -1446,10 +1488,14 @@ function renderShop(){
  document.getElementById('shTabAlb').className='sh-tab'+(SHOP_TAB==='alb'?' on':'');
  var b=document.getElementById('shBody'); if(!S.owned)S.owned=[]; if(!S.stk)S.stk={};
  if(SHOP_TAB==='fox'){
-  var h=foxHTML('sh-fox')+'<div class="sh-hint">Tocá un accesorio para verlo y comprarlo</div><div class="sh-grid">';
-  ACC.forEach(function(a){var own=S.owned.indexOf(a.id)>=0, on=S.wear===a.id;
-   h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+a.e+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':a.p+' 💎')+'</span></button>';});
-  h+='</div>'; if(S.wear)h+='<button class="btn ghost" style="margin-top:10px" onclick="S.wear=null;save();renderShop();">Sacar accesorio</button>';
+  var bw=wearOf(buddyId()), bf=friendById(buddyId());
+  var h=foxHTML('sh-fox',SHOP_SEL)+'<div class="sh-hint">Tocá un accesorio para probárselo a '+(bf?bf.n:'tu amigo')+'. ¡Podés combinar uno de cada lugar!</div>';
+  ACC_SLOTS.forEach(function(sl){ var its=ACC.filter(function(a){return a.pos===sl.k;}), n=its.filter(function(a){return S.owned.indexOf(a.id)>=0;}).length;
+   h+='<div class="sh-slot">'+sl.e+' '+sl.n+' <small>'+n+'/'+its.length+'</small></div><div class="sh-grid">';
+   its.forEach(function(a){var own=S.owned.indexOf(a.id)>=0, on=bw[sl.k]===a.id;
+    h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+a.e+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':a.p+' 💎')+'</span></button>';});
+   h+='</div>'; });
+  if(wearCount(bw))h+='<button class="btn ghost" style="margin-top:12px" onclick="S.home.wear[buddyId()]={};save();renderShop();">Sacar todo</button>';
   b.innerHTML=h;
  } else {
   var all=allStickers(), got=all.filter(function(x){return S.stk[x.k];}).length;
@@ -1463,13 +1509,13 @@ function renderShop(){
  }
 }
 function shopPick(id){var a=accById(id); say(a.en); if(!S.owned)S.owned=[];
- if(S.owned.indexOf(id)>=0){S.wear=(S.wear===id?null:id);save();sGood();renderShop();return;}
+ if(S.owned.indexOf(id)>=0){var w=wearOf(buddyId()); if(w[a.pos]===id)delete w[a.pos]; else w[a.pos]=id; SHOP_SEL=null;save();sGood();renderShop();return;}
  if(SHOP_SEL!==id){SHOP_SEL=id;renderShop();
    var bar=document.createElement('div');bar.className='sh-buy';
-   bar.innerHTML=S.gems>=a.p?'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<button class="btn teal" onclick="shopBuy(\''+id+'\')">Comprar · '+a.p+' 💎</button>':'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<div class="sh-need">Te faltan '+(a.p-S.gems)+' 💎. ¡Jugá para juntar más!</div>';
+   bar.innerHTML=foxHTML('sh-mini',id)+(S.gems>=a.p?'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<button class="btn teal" onclick="shopBuy(\''+id+'\')">Comprar · '+a.p+' 💎</button>':'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<div class="sh-need">Te faltan '+(a.p-S.gems)+' 💎. ¡Jugá para juntar más!</div>');
    document.getElementById('shBody').appendChild(bar);bar.scrollIntoView({block:'nearest'});return;}
 }
-function shopBuy(id){var a=accById(id); if(S.gems<a.p)return; S.gems-=a.p; S.owned.push(id); S.wear=id; SHOP_SEL=null; save(); sWin(); burst(80); renderShop();}
+function shopBuy(id){var a=accById(id); if(S.gems<a.p)return; S.gems-=a.p; S.owned.push(id); wearOf(buddyId())[a.pos]=id; SHOP_SEL=null; save(); sWin(); burst(80); renderShop();}
 function openPack(){ var pp=packPrice(); if(S.gems<pp)return; S.gems-=pp; if(!S.stk)S.stk={};
  var all=allStickers(), got=[], refund=0;
  var three=shuffle(all).slice(0,3);for(var i=0;i<3;i++){var x=three[i]; var dup=!!S.stk[x.k]; if(dup)refund+=2; S.stk[x.k]=1; got.push({x:x,dup:dup});}
@@ -1773,8 +1819,8 @@ function mouthFlap(n){ var im=document.querySelector('.hm-friend img[data-art]')
 function blinkLoop(){ clearTimeout(window._blinkT); window._blinkT=setTimeout(function(){ if(!document.getElementById('s-home').classList.contains('on'))return;
   if(Date.now()>=POSE_HOLD&&!HOME_BUSY){ setPose('closed',140); } blinkLoop(); },2400+Math.random()*2600); }
 
-function friendHTML(f,cls){ var h=hData(), a=h.wear[f.id]?accById(h.wear[f.id]):null;
- return '<div class="'+cls+'"><img src="img/friend_'+f.id+'.png" alt="" onerror="this.outerHTML=\'<b class=fe>'+f.e+'</b>\'">'+(a?'<span class="acc '+a.pos+'">'+a.e+'</span>':'')+'</div>'; }
+function friendHTML(f,cls){ var h=hData(), w=wearOf(f.id);
+ return '<div class="'+cls+'">'+dressWrap('gen','<img src="img/friend_'+f.id+'.png" alt="" onerror="this.outerHTML=\'<b class=fe>'+f.e+'</b>\'">',w)+'</div>'; }
 function homeNeedsAttention(){ try{var h=hData(); return h.own.some(function(id){var p=h.pets[id];petTick(p);return p.stage===0||petMood(p)!=='happy'||petReady(p);});}catch(e){return false;} }
 function openHome(){ sTap(); unlockSpeech(); HOME_SEL=null; blinkLoop(); Object.keys(POSE_SETS).forEach(function(id){Object.keys(POSE_SETS[id]).forEach(function(st){preloadPoses('img/pet/'+id+'_'+st);});}); var h=hData(); h.own.forEach(function(id){petTick(h.pets[id]);}); save(); renderHome(); show('s-home');
  var f=friendById(h.cur), p=pet(), m=petMood(p); setTimeout(function(){ if(petReady(p)&&m==='happy')homeSay('I am big now! I want to play with other friends!','¡Ya soy grande! ¡Quiero ir a jugar con otros amigos!'); else petTalk('need',m); },350); setTimeout(maybePostcard,2500);
@@ -1795,7 +1841,7 @@ function renderHome(){
  var html='<div class="hm-room'+(HOME_SEL==='sleep-on'?' dark':'')+'"><div class="hm-bub" id="hmBub"></div>'
   +'<div class="hm-mood">'+face+'</div>'
   +(p.sick&&p.stage>0?'<span class="hm-therm">🌡️</span>':'')+(p.stage===0?'<div class="hm-friend egg" onclick="petHatch()"><b class="fe">🥚</b></div>'
-   :(petArt(f.id,p.stage)?'<div class="hm-friend art m-'+mood+'" style="--sc:'+petScale2(f.id,p)+'" onclick="petPet()"><img data-art="'+petArt(f.id,p.stage)+'" src="'+petArt(f.id,p.stage)+'_idle.webp" alt="">'+(h.wear[f.id]?'<span class="acc '+accById(h.wear[f.id]).pos+'">'+accById(h.wear[f.id]).e+'</span>':'')+'</div>'
+   :(petArt(f.id,p.stage)?'<div class="hm-friend art m-'+mood+'" style="--sc:'+petScale2(f.id,p)+'" onclick="petPet()">'+dressWrap(f.id+'_'+p.stage,'<img data-art="'+petArt(f.id,p.stage)+'" src="'+petArt(f.id,p.stage)+'_idle.webp" alt="">',wearOf(f.id))+'</div>'
    :'<div class="hm-friend m-'+mood+'" style="--sc:'+petScale(p)+'" onclick="petPet()">'+friendHTML(f,'hm-in').replace(/^<div class="hm-in">|<\/div>$/g,'')+(p.stage===1?'<span class="hm-baby">🍼</span>':'')+'</div>'))
   +'<div class="hm-poops">'+Array.apply(null,Array(p.poop||0)).map(function(_,i){return '<button class="hm-poop" onclick="petClean('+i+')">💩</button>';}).join('')+'</div>'
   +'<div class="hm-name">'+f.n+' <small>('+f.en+') · '+STAGES[p.stage].n+'</small></div>'
@@ -1992,14 +2038,23 @@ function homePick(id){ if(HOME_BUSY)return; var h=hData(), x=friendById(id);
  if(S.gems<x.p){ sBad(); toast('Te faltan '+(x.p-S.gems)+' 💎 para '+x.n); say(x.en); return; }
  if(!confirm('¿Adoptar a '+x.n+' por '+x.p+' 💎? '+(x.egg?'Llega como un huevito 🥚':'Llega como un bebé chiquito 🍼')))return;
  S.gems-=x.p; h.own.push(id); h.pets[id]={stage:x.egg?0:1,care:0,nd:{food:60,fun:60,clean:80,energy:80,love:60},t:Date.now(),poop:0}; h.cur=id; save(); sWin(); burst(160); renderHome(); if(x.egg)homeSay('Tap the egg!'); else {petAnim('a-hatch',1500); homeSay('Hello! I am a baby '+x.en+'!');} }
-function homeDress(){ var h=hData(), f=friendById(h.cur), own=(S.owned||[]);
+var DRESS_SLOT='head';
+function homeDress(){ var h=hData(), f=friendById(h.cur), own=(S.owned||[]), w=wearOf(f.id), p=h.pets[f.id];
  var ov=document.createElement('div'); ov.className='pk-ov';
- ov.innerHTML='<div class="pk-box"><h2>👒 Vestir a '+f.n+'</h2>'+(own.length?'<div class="hm-items">'+own.map(function(id){var a=accById(id);return '<button class="hm-it'+(h.wear[f.id]===id?' on':'')+'" data-id="'+id+'"><b>'+a.e+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>':'<p>Todavía no compraste accesorios. ¡Conseguilos en la tienda 💎!</p>')
-  +'<div style="display:flex;gap:8px"><button class="btn ghost" id="hmNone">Sin accesorio</button><button class="btn teal" id="hmOk">Listo</button></div></div>';
- document.body.appendChild(ov);
- ov.querySelectorAll('.hm-it').forEach(function(b){b.onclick=function(){h.wear[f.id]=b.dataset.id;save();say(accById(b.dataset.id).en);ov.querySelectorAll('.hm-it').forEach(function(x){x.classList.toggle('on',x===b);});};});
- document.getElementById('hmNone').onclick=function(){delete h.wear[f.id];save();ov.remove();renderHome();};
- document.getElementById('hmOk').onclick=function(){ov.remove();sTap();renderHome();petAnim('a-wiggle',900);homeSay('Do you like my look?');};
+ function prev(){ var key=p&&petArt(f.id,p.stage)?f.id+'_'+p.stage:'gen', img=key!=='gen'?'<img src="'+petArt(f.id,p.stage)+'_idle.webp" alt="">':'<img src="img/friend_'+f.id+'.png" alt="">'; return dressWrap(key,img,w); }
+ function draw(){ var its=ACC.filter(function(a){return a.pos===DRESS_SLOT&&own.indexOf(a.id)>=0;});
+  ov.innerHTML='<div class="pk-box"><h2>👒 Vestir a '+f.n+'</h2><div class="dr-prev">'+prev()+'</div>'
+   +'<div class="dr-tabs">'+ACC_SLOTS.map(function(sl){return '<button class="dr-tab'+(sl.k===DRESS_SLOT?' on':'')+'" data-s="'+sl.k+'">'+sl.e+' '+sl.n+(w[sl.k]?' ✓':'')+'</button>';}).join('')+'</div>'
+   +(its.length?'<div class="hm-items">'+its.map(function(a){return '<button class="hm-it'+(w[a.pos]===a.id?' on':'')+'" data-id="'+a.id+'"><b>'+a.e+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>'
+     :'<p>Todavía no tenés nada para '+ACC_SLOTS.find(function(x){return x.k===DRESS_SLOT;}).n.toLowerCase()+'. ¡Conseguilo en la tienda 💎!</p><button class="btn sun" id="hmShop">🏪 Ir a la tienda</button>')
+   +'<div style="display:flex;gap:8px"><button class="btn ghost" id="hmNone">Sacar todo</button><button class="btn teal" id="hmOk">Listo</button></div></div>';
+  ov.querySelectorAll('.dr-tab').forEach(function(b){b.onclick=function(){DRESS_SLOT=b.dataset.s;sTap();draw();};});
+  ov.querySelectorAll('.hm-it').forEach(function(b){b.onclick=function(){var a=accById(b.dataset.id); if(w[a.pos]===a.id)delete w[a.pos]; else {w[a.pos]=a.id; sayBoth(a.en,a.es);} save(); tone(700,.05,'sine',.12,0); draw();};});
+  var sh=document.getElementById('hmShop'); if(sh)sh.onclick=function(){ov.remove();openShop('fox');};
+  document.getElementById('hmNone').onclick=function(){S.home.wear[f.id]={};w=S.home.wear[f.id];save();draw();};
+  document.getElementById('hmOk').onclick=function(){ov.remove();sTap();renderHome();petAnim('a-wiggle',900);homeSay(wearCount(w)>=3?'I look amazing!':wearCount(w)?'Do you like my look?':'I am ready!');};
+ }
+ document.body.appendChild(ov); draw();
 }
 
 /* ===== JUEGOS NUEVOS ===== */

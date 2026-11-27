@@ -79,7 +79,7 @@ le acepte la voz a la nena.
   (hambre, diversión, limpieza, energía, cariño; S.home.pets[id].nd) y caca 💩 cada 4 h para limpiar. Pide atención con voz
   y "!" en el botón del camino. Acciones animadas: comer (la comida vuela a la boca, mastica, migas), jugar (juguete
   rebota y salta), baño (burbujas), dormir (luz baja, Zzz), mimos al tocarla (corazones; cuentan para crecer 3 por día).
-  4 acciones al día = +15 💎. Se viste con accesorios de la tienda.
+  4 acciones al día = +15 💎. Se viste combinando accesorios de la tienda: uno por lugar (cabeza, cara, cuello, en la mano). Las posiciones están medidas para cada amigo y etapa (ACC_AN).
   POSES (arte nuevo por etapa): img/pet/<id>_<etapa>_<idle|closed|open|happy>.webp, cortadas de una hoja 2x2 de ChatGPT
   con scratchpad sheet.py (alineadas por los pies). Activar en POSE_SETS. Hecho: los 8 amigos completos (1-2-3). Parpadea, mueve la boca
   al hablar, boca abierta al morder, ojos cerrados al dormir, pose feliz en mimos/juego. Arte ChatGPT: img/friend_<id>.png y img/home_bg.jpg.
@@ -96,7 +96,7 @@ le acepte la voz a la nena.
 - 🎨 Pintá: "Color the star yellow": elegir el color y tocar el dibujo (32 dibujos, 12 colores que rotan: salen primero los que menos vio, guardado en S.pnt; nivel 3+: solo escuchando). Al final de cada mundo y alternado con ¡Hablá! desde el mundo 3.
 - 👨‍👩‍👧 Panel para padres: link "Para padres" en el inicio, protegido con una multiplicación. Muestra mundo y parada, racha, % de aciertos, gráfico de 14 días, palabras que más le cuestan (con audio), palabras dominadas, meta diaria (3/5/8/10) y empezar de cero.
 - 🔥 Racha diaria: meta de 5 paradas por día; al cumplirla suma un día de racha y regala 20 💎 (si saltea un día, vuelve a 0).
-- 🏪 Tienda (botón 💎 del camino): accesorios para el zorrito (se ven en el camino) y 📒 álbum de 48 figuritas en sobres de 3 (25 💎), cada una con su palabra en inglés; las repetidas devuelven 5 💎.
+- 🏪 Tienda (botón 💎 del camino): pestaña 👒 Ropa con 34 accesorios en 4 lugares, que se prueban y se ponen al compañero (se ven en el camino y en la casa) y 📒 álbum de 48 figuritas en sobres de 3 (25 💎), cada una con su palabra en inglés; las repetidas devuelven 5 💎.
 - Se guarda qué palabras acierta y erra (S.hist) para el panel de padres.
 - En los mundos 2+ los juegos rotan (9 tipos), así cada mundo tiene una mezcla distinta.
 - Ideas: más cuentos con ilustraciones de ChatGPT (hoy los nuevos usan emojis).
@@ -136,10 +136,7 @@ le acepte la voz a la nena.
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
-- ⏭️ PENDIENTE (pedido 27/11): Tienda/Vestir — hay muy pocos accesorios (10 en ACC, uno solo puesto a la vez).
-  Agregar mucha más variedad de ropa y accesorios (sombreros, anteojos, collares, remeras/buzos, capas, mochilas,
-  disfraces…) y poder combinar varios a la vez (uno por lugar: cabeza, cara, cuello, cuerpo). Ideal con arte de ChatGPT
-  para que combine con los amigos 3D de la Casa de Amigos.
+- ✅ HECHO (27/11): Vestir combinable con 34 accesorios (cabeza, cara, cuello y mano), posicionados por amigo y etapa. Queda como idea: arte de ChatGPT (remeras, capas, mochilas) en vez de emojis.
 - ✅ HECHO (27/11): Pintá ahora tiene 32 dibujos y 12 colores (suma negro, blanco, gris y celeste). Rotan priorizando los menos vistos.
 - Segundo cuento
 - "Modo desafío" en el juego de la Isla (palabra en español → agarrar la manzana en inglés correcta)
