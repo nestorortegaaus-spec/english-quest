@@ -45,6 +45,8 @@ le acepte la voz a la nena.
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
+- 🏝️ Isla: al agarrar cada manzana la voz dice la palabra en inglés y después en castellano (sayBoth, voz es-AR);
+  cartel grande arriba con dibujo + inglés + castellano; mezcla palabras del tema con muchas nuevas de otros temas.
 - 🏡 Casa de Amigos (zona de descanso, botón naranja del camino): 8 amigos para adoptar con 💎 (Zorrito gratis; 150 a 1100 💎).
   Se los cuida en inglés (Comer/Jugar/Bañar/Dormir eligiendo cosas en inglés; responden con voz) y se los viste con los
   accesorios de la tienda. 4 cuidados al día a un amigo = +15 💎 (una vez por día). Arte (ChatGPT, completo): img/friend_<id>.png y img/home_bg.jpg.
@@ -82,10 +84,6 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
-- ⏭️ PENDIENTE (pedido 27/11): Isla (zorrito que salta) — se concentra en jugar y no mira las palabras de arriba.
-  Al agarrar una manzana, la voz tiene que decir la palabra en inglés Y su significado en castellano (ej.: "dog… perro"),
-  para aprender escuchando. Y que la Isla use muchas palabras nuevas (más manzanas/palabras distintas, de todos los temas,
-  priorizando las nuevas).
 - ⏭️ PENDIENTE (pedido 27/11): cada nivel/mundo con una TEMÁTICA nueva y mejores gráficos: ambientaciones hechas con
   ChatGPT (fondo del camino, decoración y colores propios por mundo/galaxia, en el estilo 3D de Kart Quest/Casa de Amigos).
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
