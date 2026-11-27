@@ -121,7 +121,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): tema propio por mundo. Mundos 1-4 (pradera, ciudad, naturaleza, aventura) y del 5 en adelante 12 temas
   que rotan (WTHEMES: playa, polo, espacio, bajo el mar, selva, golosinas, desierto, dinosaurios, hadas, nubes, música, granja; al
   terminar la vuelta se repiten con "II"). Cada uno con colores, camino, decoración y un efecto que flota (pétalos, nieve, burbujas,
-  estrellas, notas, nubes; WFX). Fondo de ChatGPT opcional: subir img/world_<id>.jpg (vertical 9:16, <300 KB) y poner WIMG.<id>=1.
+  estrellas, notas, nubes; WFX). Fondos de ChatGPT: los 16 hechos (img/world_<id>.jpg, 720 px de ancho, en WIMG; un valor <1 pone un velo blanco más fuerte, ej. music:.3). Los caminos de playa, mar, desierto, polo, nubes y espacio tienen colores con más contraste para que se vean sobre el fondo.
 - ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
   Darles uso: por ejemplo canjear estrellas por premios especiales, desbloquear cosas que no se compran con gemas,
   o convertir estrellas en gemas/cristales.
