@@ -145,7 +145,9 @@ le acepte la voz a la nena.
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
 - ✅ HECHO (27/11): Vestir combinable con 34 accesorios (cabeza, cara, cuello y mano), posicionados por amigo y etapa. Queda como idea: arte de ChatGPT (remeras, capas, mochilas) en vez de emojis.
 - ✅ HECHO (27/11): Pintá ahora tiene 32 dibujos y 12 colores (suma negro, blanco, gris y celeste). Rotan priorizando los menos vistos.
-- "Modo desafío" en el juego de la Isla (palabra en español → agarrar la manzana en inglés correcta)
+- ✅ HECHO (27/11): 🎯 Modo desafío de la Isla (nivel 3+): arriba dice una palabra en castellano (con dibujo hasta nivel 4, sin dibujo en
+  nivel 5) y la voz la dice en castellano; vienen pares de manzanas (una abajo, otra arriba para saltar) y hay que agarrar la de esa palabra
+  en inglés. Acertar suma y dice inglés + castellano; equivocarse no saca vida, muestra cuál era y la marca para repasar.
 - Más lecciones y contenido
 
 ## Cómo seguir desde Claude Code + GitHub
