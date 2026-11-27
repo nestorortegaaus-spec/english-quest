@@ -215,7 +215,10 @@ le acepte la voz a la nena.
   (lib/three.min.js, MIT, guardado local para funcionar offline). Arte ChatGPT en img/run/ (zorrito de espaldas 4 poses, valla, tronco, arco con
   cartel, carrito, estrella, 4 poderes, arco de palabras, horizonte, 4 decorados). Deslizar ←→ carril, ↑ saltar, ↓ agacharse. Puertas de palabras
   cada 7 filas (emoji + voz en inglés → pasar por la puerta con esa palabra, +10 ⭐). Poderes: imán, súper salto, escudo, x2. 3 vidas, velocidad
-  sube de a poco. Premio: 💎 = estrellas/5 + 3 por palabra; récord en S.run.best. Próximo: más paisajes y que corran los otros amigos.
+  sube de a poco. Premio: 💎 = estrellas/5 + 3 por palabra; récord en S.run.best. 27/11 v2: 🛝 rampas 3D de madera (vuelo con
+  arco de estrellas), ⚡ plataforma turbo (4,5 s: muy rápido, invencible, solo estrellas, líneas de velocidad) y 🚃 trencitos de vagones 3D
+  (con o sin rampa adelante) para correr por arriba; chocarlos de frente saca vida. Modelos hechos con código (ExtrudeGeometry/Box/Cylinder).
+  Próximo: más paisajes y que corran los otros amigos.
 - ✅ HECHO (27/11): 🏪 La Tienda (startStore, en GROT): ella atiende un negocio (rotan: frutería, panadería, juguetería, librería, ropa, kiosco)
   y los amigos de la Casa le piden cosas en inglés ("Can I have…, please?", "I want…", "I would like…"). Nivel 1 con traducción y voz en
   castellano; nivel 3+ piden cantidades (two apples → tocar 2 veces + "Here you are!"); nivel 4+ estante sin nombres.
