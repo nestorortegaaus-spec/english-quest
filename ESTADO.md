@@ -80,6 +80,10 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Tienda/Vestir — hay muy pocos accesorios (10 en ACC, uno solo puesto a la vez).
+  Agregar mucha más variedad de ropa y accesorios (sombreros, anteojos, collares, remeras/buzos, capas, mochilas,
+  disfraces…) y poder combinar varios a la vez (uno por lugar: cabeza, cara, cuello, cuerpo). Ideal con arte de ChatGPT
+  para que combine con los amigos 3D de la Casa de Amigos.
 - ⏭️ PENDIENTE (pedido 27/11): Pintá — siempre salen los mismos objetos y colores (hoy 10 dibujos en PAINT_OBJ y
   8 colores en PAINT_COL; el nivel 1 usa solo los 4 primeros colores). Agregar muchos más dibujos y colores
   (white, black, gray, light blue…) y que roten entre partidas, priorizando los que menos vio.
