@@ -84,6 +84,9 @@ le acepte la voz a la nena.
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
+- ⏭️ PENDIENTE (pedido 27/11): Kart Quest — portones de palabras: se repiten mucho. Hoy son 4 portones por vuelta
+  (los mismos en las 3 vueltas) y salen de pocos temas (los del mundo actual + Animales/Comida). Quiero más carteles
+  por vuelta, palabras distintas en cada vuelta y de todos los temas, priorizando palabras nuevas o que le cuestan.
 - ⏭️ PENDIENTE (pedido 27/11): Kart Quest — choques reales. Hoy al chocar un rival el kart lo "traspasa", el rival
   titila/desaparece (por el recorte de sprites cercanos) y solo suena un ruidito. Quiero: el rival NO desaparece,
   ambos rebotan/se desplazan de costado, el rival se desestabiliza (gira/tambalea y pierde velocidad un momento),
