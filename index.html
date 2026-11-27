@@ -435,6 +435,19 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .br-body.sleep .pa-link{color:#C9C3FF;}
 /* SOPA / ADIVINANZAS / CONTAR */
 .ws-grid{display:grid;gap:4px;width:100%;max-width:380px;}
+.cw{gap:10px;} .cw-grid{display:grid;gap:3px;justify-content:center;margin:2px auto;}
+.cw-c{position:relative;background:#fff;border-radius:7px;box-shadow:0 2px 0 rgba(120,140,170,.25);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--ink);}
+.cw-c i{position:absolute;top:1px;left:3px;font-style:normal;font-size:10px;font-weight:900;color:#8C7BD6;line-height:1;}
+.cw-c.on{background:#FFF1C2;box-shadow:0 2px 0 #E0A82E;} .cw-c.got{background:#D9F6E3;color:var(--teal-d);}
+.cw-clues{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;width:100%;}
+.cw-q{border:3px solid transparent;border-radius:14px;background:#fff;padding:3px 8px;display:flex;align-items:center;gap:4px;font-family:inherit;cursor:pointer;box-shadow:0 3px 0 rgba(120,140,170,.2);}
+.cw-q i{font-style:normal;font-weight:900;font-size:12px;color:#8C7BD6;} .cw-q b{font-size:26px;line-height:1.1;} .cw-q small{font-weight:900;font-size:13px;color:var(--muted);}
+.cw-q.on{border-color:#FFD36B;background:#FFF8E1;} .cw-q.got{background:#D9F6E3;} .cw-q.got small{color:var(--teal-d);font-size:15px;}
+.cw-act{display:flex;align-items:center;gap:10px;justify-content:center;min-height:50px;} .cw-big{font-size:44px;line-height:1;} .cw-hint{font-weight:900;font-size:18px;color:var(--ink);}
+.cw-act .ls-spk{width:46px;height:46px;font-size:20px;} .cw-help{border:none;background:#fff;border-radius:50%;width:42px;height:42px;font-size:20px;box-shadow:0 3px 0 rgba(120,140,170,.2);cursor:pointer;}
+.cw-bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:380px;}
+.cw-k{width:50px;height:54px;border:none;border-radius:14px;background:linear-gradient(180deg,#FFE48A,#FFD36B);box-shadow:0 5px 0 #E0A82E;font-family:inherit;font-weight:900;font-size:26px;color:#6b4a00;cursor:pointer;}
+.cw-k.used{visibility:hidden;} .cw-k.no{animation:lsshake .35s;}
 .ws-c{aspect-ratio:1/1;border:none;border-radius:8px;background:#fff;font-weight:900;font-size:19px;text-transform:uppercase;color:var(--ink);box-shadow:0 2px 0 rgba(120,140,170,.2);cursor:pointer;font-family:inherit;padding:0;}
 .ws-c.sel{background:#FF9C87;color:#fff;transform:scale(1.1);} .ws-c.no{animation:lsshake .35s;} .ws-c.got{color:#3a3a3a;}
 .ws-list{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;} .ws-list span{background:#fff;border-radius:12px;padding:4px 10px;font-weight:900;font-size:15px;display:flex;gap:4px;align-items:center;box-shadow:0 2px 0 rgba(120,140,170,.2);}
@@ -1015,8 +1028,8 @@ function buildWorld(w){
  out.push({t:'chest'});
  return out;
 }
-var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen'];
-var GINFO={blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
+var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross'];
+var GINFO={cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
 function wordsOf(u){var us=Array.isArray(u)?u:[u],out=[];us.forEach(function(i){out=out.concat(UNITS[i].w);});return out;}
 
 /* ===== STATE ===== */
@@ -1106,7 +1119,7 @@ function openNode(i){
  if(nd.t==='lesson')startLesson(nd.u);
  else if(nd.t==='story')openStory(nd.s);
  else if(nd.t==='chest')openChest();
- else if(nd.t==='game'){ var lv=nd.lv||1; var F={search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
+ else if(nd.t==='game'){ var lv=nd.lv||1; var F={cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
  else if(nd.t==='dance')startDance();
 }
 function advance(){ countActivity(); S.prog=Math.max(S.prog, activeIdx+1); if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);NEW_WORLD=true;} save(); }
@@ -2773,6 +2786,72 @@ function startPhrase(u,lv){
    say(sent(it)); return; }
  }
  next();
+}
+
+/* ✏️ CRUCIGRAMA CON DIBUJOS: elegir una pista (dibujo) y armar la palabra en inglés con las letras de abajo */
+function crossBuild(words,NW){
+ for(var at=0;at<40;at++){
+  var ws=shuffle(words.slice()).sort(function(a,b){return b.en.length-a.en.length;}).slice(0,NW+4), G={}, P=[];
+  function get(r,c){return G[r+','+c];}
+  function can(w,r,c,d){ var s=w.en.toLowerCase(), dr=d?1:0, dc=d?0:1, cross=0;
+   if(get(r-dr,c-dc)||get(r+dr*s.length,c+dc*s.length))return -1;
+   for(var i=0;i<s.length;i++){ var rr=r+dr*i, cc=c+dc*i, g=get(rr,cc);
+    if(g){ if(g!==s[i])return -1; cross++; }
+    else { if(get(rr+dc,cc+dr)||get(rr-dc,cc-dr))return -1; } }
+   return cross; }
+  function put(w,r,c,d){ var s=w.en.toLowerCase(); for(var i=0;i<s.length;i++)G[(r+(d?i:0))+','+(c+(d?0:i))]=s[i]; P.push({w:w,s:s,r:r,c:c,d:d}); }
+  put(ws[0],0,0,0);
+  for(var k=1;k<ws.length&&P.length<NW;k++){ var w=ws[k], s=w.en.toLowerCase(), opts=[];
+   if(P.some(function(q){return q.s===s;}))continue;
+   Object.keys(G).forEach(function(key){ var rc=key.split(',').map(Number), L=G[key];
+    for(var j=0;j<s.length;j++){ if(s[j]!==L)continue; [0,1].forEach(function(d){ var r=rc[0]-(d?j:0), c=rc[1]-(d?0:j), x=can(w,r,c,d); if(x>0)opts.push([r,c,d]); }); } });
+   if(opts.length){ var o=opts[(Math.random()*opts.length)|0]; put(w,o[0],o[1],o[2]); } }
+  if(P.length<NW)continue;
+  var r0=1e9,c0=1e9,r1=-1e9,c1=-1e9; Object.keys(G).forEach(function(k){var a=k.split(',').map(Number);r0=Math.min(r0,a[0]);r1=Math.max(r1,a[0]);c0=Math.min(c0,a[1]);c1=Math.max(c1,a[1]);});
+  if(c1-c0+1>9||r1-r0+1>9)continue;
+  P.forEach(function(q){q.r-=r0;q.c-=c0;});
+  return {P:P,R:r1-r0+1,C:c1-c0+1}; }
+ return null; }
+function startCross(u,lv){
+ lv=lv||1; var host=gSetup('✏️ Crucigrama · Nivel '+lv);
+ var NW=Math.min(6,3+Math.ceil(lv/2)), showEs=lv<3, extra=lv>=2?2:0;
+ var pool=prioW(uniqEmo(singleWords(u)).filter(function(w){return w.en.length>=3&&w.en.length<=7;}));
+ if(pool.length<NW+3)pool=pool.concat(shuffle(uniqEmo(singleWords([0,1,2,3,7])).filter(function(w){return w.en.length>=3&&w.en.length<=7&&pool.indexOf(w)<0;})));
+ var B=crossBuild(pool.slice(0,18),NW)||crossBuild(pool,Math.max(3,NW-1))||crossBuild(uniqEmo(singleWords([0,1,2,7])),3);
+ var P=B.P, R=B.R, C=B.C, cell={}, cur=null, done=0, miss=0;
+ P.sort(function(a,b){return a.r-b.r||a.c-b.c;}); P.forEach(function(q,i){q.n=i+1;q.got=false;});
+ var avail=Math.min(innerWidth,460)-52, cs=Math.floor(Math.min(46,(avail-3*(C-1))/C));
+ host.innerHTML='<div class="g2 cw"><div class="g2-sub">Tocá un dibujo y armá la palabra en inglés 👇</div>'
+  +'<div class="cw-grid" id="cwG" style="grid-template-columns:repeat('+C+','+cs+'px);grid-template-rows:repeat('+R+','+cs+'px)"></div>'
+  +'<div class="cw-clues" id="cwL"></div><div class="cw-act" id="cwA"></div><div class="cw-bank" id="cwB"></div></div>';
+ var g=document.getElementById('cwG');
+ P.forEach(function(q){ for(var i=0;i<q.s.length;i++){ var r=q.r+(q.d?i:0), c=q.c+(q.d?0:i), k=r+','+c;
+   if(!cell[k]){ var e=document.createElement('div'); e.className='cw-c'; e.style.gridRow=(r+1); e.style.gridColumn=(c+1); e.style.fontSize=Math.round(cs*0.55)+'px'; g.appendChild(e); cell[k]={el:e,ch:q.s[i],val:'',ws:[]}; }
+   cell[k].ws.push(q); if(i===0){ var n=document.createElement('i'); n.textContent=q.n; cell[k].el.appendChild(n); } } });
+ function cellsOf(q){ var o=[]; for(var i=0;i<q.s.length;i++)o.push(cell[(q.r+(q.d?i:0))+','+(q.c+(q.d?0:i))]); return o; }
+ function clues(){ document.getElementById('cwL').innerHTML=P.map(function(q,i){ return '<button class="cw-q'+(q===cur?' on':'')+(q.got?' got':'')+'" data-i="'+i+'"><i>'+q.n+(q.d?'↓':'→')+'</i><b>'+q.w.e+'</b>'+(showEs||q.got?'<small>'+(q.got?q.w.en:q.w.es)+'</small>':'')+'</button>'; }).join('');
+  document.querySelectorAll('.cw-q').forEach(function(b){ b.onclick=function(){ pick(P[+b.dataset.i]); }; }); }
+ function paint(){ Object.keys(cell).forEach(function(k){ var c=cell[k]; c.el.classList.toggle('on',!!cur&&c.ws.indexOf(cur)>=0); c.el.classList.toggle('got',c.ws.some(function(q){return q.got;}));
+   var t=c.el.querySelector('span'); if(!t){t=document.createElement('span');c.el.appendChild(t);} t.textContent=c.val.toUpperCase(); }); }
+ function nextIdx(q){ var cc=cellsOf(q); for(var i=0;i<cc.length;i++)if(!cc[i].val)return i; return -1; }
+ function bank(){ var b=document.getElementById('cwB'), a=document.getElementById('cwA'); if(!cur||cur.got){b.innerHTML='';a.innerHTML='';return;}
+  a.innerHTML='<span class="cw-big">'+cur.w.e+'</span><span class="cw-hint">'+(showEs?cur.w.es+' → en inglés':'¿Cómo se dice en inglés?')+'</span><button class="ls-spk slow" id="cwS">🔊</button><button class="cw-help" id="cwH">💡</button>';
+  var need=cur.s.split('').filter(function(ch,i){return !cellsOf(cur)[i].val;}), AB='abcdefghijklmnopqrstuvwxyz';
+  for(var x=0;x<extra;x++)need.push(AB[(Math.random()*26)|0]);
+  b.innerHTML=shuffle(need).map(function(ch){return '<button class="cw-k">'+ch.toUpperCase()+'</button>';}).join('');
+  b.querySelectorAll('.cw-k').forEach(function(k){ k.onclick=function(){ letter(k); }; });
+  document.getElementById('cwS').onclick=function(){ say(cur.w.en,0.7); };
+  document.getElementById('cwH').onclick=function(){ var i=nextIdx(cur); if(i<0)return; miss++; var ch=cur.s[i]; var k=[].find.call(b.querySelectorAll('.cw-k:not(.used)'),function(x){return x.textContent.toLowerCase()===ch;}); if(k)letter(k,true); }; }
+ function letter(k,hint){ if(!GAME.on||!cur||k.classList.contains('used'))return; var i=nextIdx(cur); if(i<0)return; var ch=cur.s[i];
+  if(k.textContent.toLowerCase()!==ch){ miss++; sBad(); k.classList.add('no'); setTimeout(function(){k.classList.remove('no');},350); return; }
+  k.classList.add('used'); cellsOf(cur)[i].val=ch; tone(520+i*60,.06,'triangle',.14,0); paint();
+  if(nextIdx(cur)<0){ var q=cur; q.got=true; done++; markWord(q.w,true); sGood(); burst(16); sayBoth(q.w.en,q.w.es); gScore(done+'/'+P.length);
+   P.forEach(function(o){ if(!o.got&&nextIdx(o)<0){ o.got=true; done++; markWord(o.w,true); } });
+   clues(); paint(); bank();
+   if(done>=P.length){ GAME.timer=setTimeout(function(){ finishGameNode('✏️ ¡Crucigrama completo!','Escribiste '+P.length+' palabras en inglés'+(miss?'':' ¡sin errores!')+' ✍️'); },1700); return; }
+   GAME.timer=setTimeout(function(){ var nx=P.find(function(o){return !o.got;}); if(nx)pick(nx); },1500); } }
+ function pick(q){ if(q.got){ sayBoth(q.w.en,q.w.es); return; } cur=q; sTap(); clues(); paint(); bank(); if(!showEs)say(q.w.en,0.8); }
+ gScore('0/'+P.length); clues(); paint(); pick(P[0]);
 }
 
 /* 🔠 SOPA DE LETRAS */

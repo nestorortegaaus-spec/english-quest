@@ -177,3 +177,6 @@ le acepte la voz a la nena.
   van un poquito más rápido en cada una. Fondos img/kart_bg_<id>.jpg recortados del arte de los mundos (parte de arriba, en espejo para repetir).
 - ✅ HECHO (27/11): Isla: se puede pisar al cangrejo (cae desde arriba → lo aplasta, rebota, +1 y dice crab / cangrejo); chocarlo de costado sigue
   sacando vida. Corre el amigo que la acompaña en la aventura (sus poses y su ropa); si no tiene dibujo, el zorrito de siempre.
+- ✅ HECHO (27/11): ✏️ Crucigrama con dibujos (startCross, en la rotación GROT): grilla armada sola con 4-6 palabras que se cruzan; se toca
+  un dibujo y se arma la palabra en inglés con letras (nivel 1-2 muestra la palabra en castellano; desde nivel 3 solo el dibujo y la voz en inglés;
+  desde nivel 2 hay 2 letras de más). Botón 💡 pone la letra siguiente. Al completar cada palabra la dice en inglés y castellano.
