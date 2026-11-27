@@ -99,7 +99,9 @@ le acepte la voz a la nena.
 - 🏪 Tienda (botón 💎 del camino): pestaña 👒 Ropa con 34 accesorios en 4 lugares, que se prueban y se ponen al compañero (se ven en el camino y en la casa) y 📒 álbum de 48 figuritas en sobres de 3 (25 💎), cada una con su palabra en inglés; las repetidas devuelven 5 💎.
 - Se guarda qué palabras acierta y erra (S.hist) para el panel de padres.
 - En los mundos 2+ los juegos rotan (9 tipos), así cada mundo tiene una mezcla distinta.
-- Ideas: más cuentos con ilustraciones de ChatGPT (hoy los nuevos usan emojis).
+- 📖 Cuentos: 8. Los 4 nuevos (27/11: La Fiesta en la Playa, El Pingüino y la Nieve, El Dragón y las Estrellas, El Picnic en el Bosque) tienen
+  escenas ARMADAS por código (sc en cada página: fondo img/world_<id>.jpg + amigos con poses/ropa + objetos animados; storyScene()), sin ChatGPT.
+  Se leen en las Galaxias (mundo 5+). Para sumar más: agregar cuentos con sc a STORIES.
 
 ## Estado de features (funcionando)
 - Camino con niveles, estrellas, vidas (corazones)
