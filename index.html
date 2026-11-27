@@ -195,7 +195,6 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
       <div class="pill s">⭐ <span id="hStars">0</span></div>
       <div class="pill g">🌱 Nv.<span id="hLvl">1</span></div>
       <div class="grow"></div>
-      <button class="pill" onclick="unlockAll()" style="cursor:pointer;border:none;background:#FFF3D6;color:#C98A1C;font-weight:900;" title="Probar todo">🔓 Probar</button>
       <div class="pill h">❤️ <span id="hHearts">5</span></div>
     </div>
     <div style="padding:0 14px 4px;color:var(--muted);font-weight:800;font-size:13px;" id="hHello">¡Hola!</div>
@@ -339,7 +338,6 @@ function show(id){document.querySelectorAll('.screen').forEach(function(s){s.cla
 function lvl(){return Math.floor(S.stars/9)+1;}
 
 function startGame(){var n=document.getElementById('nameIn').value.trim();S.name=n||'Explorador';save();unlockSpeech();sTap();renderPath();show('s-path');}
-function unlockAll(){ S.prog=NODES.length; S.stars=Math.max(S.stars,30); save(); sWin(); renderPath(); }
 
 /* ===== PATH ===== */
 function renderPath(){
