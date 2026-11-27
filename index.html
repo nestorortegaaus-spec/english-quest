@@ -1191,14 +1191,14 @@ function micListen(id,target,onOk,onFail){
    if(all.some(function(a){a=a.replace(/[?.!,']/g,'');return a.indexOf(tgt)>=0||sim(a,tgt);})){done=true;micStop();micSet(id,'ok','Dijiste "'+target+'"');onOk&&onOk();return;}
    if(e.results[e.results.length-1].isFinal){done=true;micStop();micSet(id,'retry','Escuché "'+heard+'". Tocá 🎤 y decilo de nuevo');onFail&&onFail(heard);}
    else micSet(id,'hear','"'+heard+'"'); };
- rec.onerror=function(ev){ if(done)return; var er=ev&&ev.error; if(er==='aborted')return; done=true; micStop();
+ rec.onerror=function(ev){ if(done)return; var er=ev&&ev.error; if(er==='aborted'){done=true;return;} done=true; micStop();
    if(er==='not-allowed'||er==='service-not-allowed'){var app=window.matchMedia&&matchMedia('(display-mode: standalone)').matches;
      micSet(id,'off',app?'Pedile a un adulto: Chrome → ⋮ → Configuración → Configuración de sitios → Micrófono → permitir. Mientras, tocá "Ya lo dije ✓".':'Tocá el 🔒 al lado de la dirección → Micrófono → Permitir. Mientras, tocá "Ya lo dije ✓".');
      try{navigator.mediaDevices.getUserMedia({audio:true}).then(function(s){s.getTracks().forEach(function(t){t.stop();});micSet(id,'idle','¡Listo! Ya podés tocar 🎤');}).catch(function(){});}catch(e){} onFail&&onFail(null,'blocked'); }
    else if(er==='no-speech'){micSet(id,'retry','No te escuché. Tocá 🎤 y hablá fuerte');onFail&&onFail('');}
    else if(er==='network'){micSet(id,'off','Necesito internet para escucharte');onFail&&onFail(null,'net');}
    else {micSet(id,'retry','Tocá 🎤 y probá otra vez');onFail&&onFail('');} };
- rec.onend=function(){ if(!done){done=true;MIC_REC=null;document.body.classList.remove('mic-on');micSet(id,'retry',heard?'Escuché "'+heard+'". Tocá 🎤 de nuevo':'No te escuché. Tocá 🎤 y hablá fuerte');onFail&&onFail(heard);} };
+ rec.onend=function(){ if(!done&&MIC_REC===rec){done=true;MIC_REC=null;document.body.classList.remove('mic-on');micSet(id,'retry',heard?'Escuché "'+heard+'". Tocá 🎤 de nuevo':'No te escuché. Tocá 🎤 y hablá fuerte');onFail&&onFail(heard);} };
  setTimeout(function(){ if(MIC_REC!==rec)return; try{rec.start();}catch(e){micSet(id,'retry','Tocá 🎤 de nuevo');} },60);
  setTimeout(function(){ if(!done&&MIC_REC===rec)open(); },1200);
 }
@@ -1498,10 +1498,10 @@ function openBreak(){ var p=playD(); show('s-break'); var host=document.getEleme
  /* --- actividades --- */
  function greet(nx){ act(''); anim('hap',800); pose('happy'); talk('Hi '+nm+'! Time for a little break!','¡Hola '+nm+'! ¡Es hora de un descansito!',function(){ talk('Let\'s move and play together!','¡Movámonos y juguemos juntos!',nx); }); }
  function simon(nx){ var e=sim[si++%sim.length]; act('<div class="br-card"><b>'+e[2]+'</b><span>'+e[0]+'</span><small>'+e[1]+'</small></div><button class="btn sun" id="brOk">¡Listo! ✓</button>');
-  anim('wig'); var ok=false, t;
-  function fin(){ if(ok)return; ok=true; clearTimeout(t); anim('hap',800); pose('happy'); sGood(); talk(pickR(['Great job!','Well done!','Super!','You did it!']),pickR(['¡Muy bien!','¡Genial!','¡Bárbaro!','¡Lo hiciste!']),nx); }
+  anim('wig'); var ok=false, t, my=actTok;
+  function fin(){ if(ok||my!==actTok)return; ok=true; clearTimeout(t); anim('hap',800); pose('happy'); sGood(); talk(pickR(['Great job!','Well done!','Super!','You did it!']),pickR(['¡Muy bien!','¡Genial!','¡Bárbaro!','¡Lo hiciste!']),nx); }
   document.getElementById('brOk').onclick=fin;
-  talk('Simon says: '+e[0],'Simón dice: '+e[1],function(){ t=setTimeout(function(){ if(alive())fin(); },9000); }); }
+  t=setTimeout(function(){ if(alive())fin(); },16000); talk('Simon says: '+e[0],'Simón dice: '+e[1],null); }
  function breathe(nx){ act('<div class="br-breath" id="brB"></div><div class="br-step" id="brStep"></div>'); var n=0;
   talk('Let\'s breathe slowly with me.','Respiremos despacito conmigo.',function(){ (function one(){ if(!alive())return; if(n>=3){ talk('Very good! You are calm now.','¡Muy bien! Ahora estás tranquila.',nx); return; } n++;
    var B=document.getElementById('brB'), st=document.getElementById('brStep'); B.className='br-breath in'; st.textContent='Breathe in… · Inhalá…'; anim('big'); say('Breathe in');
@@ -1509,19 +1509,21 @@ function openBreak(){ var p=playD(); show('s-break'); var host=document.getEleme
  function eyes(nx){ act('<div class="br-count" id="brC">😌</div>');
   talk('Close your eyes and count with me.','Cerrá los ojos y contá conmigo.',function(){ pose('closed'); var k=0, N=['One','Two','Three','Four','Five'];
    (function c(){ if(!alive())return; if(k>=5){ pose('happy'); anim('hap',800); talk('Open your eyes!','¡Abrí los ojos!',nx); return; } var el=document.getElementById('brC'); if(el){el.textContent=k+1;el.classList.remove('on');void el.offsetWidth;el.classList.add('on');} say(N[k]); talking=true; k++; wait(1500,function(){ talking=false; pose('closed'); c(); }); })(); }); }
- function word(nx){ var w=words[wi++%words.length]; if(!w){nx();return;} var tries=0, fin=false;
+ function word(nx){ var w=words[wi++%words.length]; if(!w){nx();return;} var tries=0, fin=false, my=actTok;
   act('<div class="br-word"><b>'+w.e+'</b><span>'+w.en+'</span><small>'+w.es+'</small></div>'+micWidgetHTML('brMic')+'<button class="sk-skip" id="brSkip" style="visibility:hidden">Ya lo dije ✓</button>');
-  function good(){ if(fin)return; fin=true; micStop(); anim('hap',800); pose('happy'); sGood(); burst(30); markWord(w,true); talk('Yes! '+w.en+'! Great!','¡Sí! '+w.es+'. ¡Genial!',nx); }
-  function bad(){ tries++; if(tries>=2){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } talk(tries>=2?'Good try! Listen: '+w.en:'Try again: '+w.en,tries>=2?'¡Buen intento! Escuchá.':'Probá otra vez.',null); }
+  function good(){ if(fin||my!==actTok)return; fin=true; micStop(); anim('hap',800); pose('happy'); sGood(); burst(30); markWord(w,true); talk('Yes! '+w.en+'! Great!','¡Sí! '+w.es+'. ¡Genial!',nx); }
+  function bad(){ if(fin||my!==actTok)return; tries++; if(tries>=2){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } talk(tries>=2?'Good try! Listen: '+w.en:'Try again: '+w.en,tries>=2?'¡Buen intento! Escuchá.':'Probá otra vez.',null); }
   document.getElementById('brSkip').onclick=good;
   document.querySelector('#brMic .mic-b').onclick=function(){ micListen('brMic',w.en,good,bad); };
-  talk('Can you say '+w.en+'?','¿Podés decir '+w.es+' en inglés?',function(){ say(w.en,0.75); micSet('brMic','idle','Tocá 🎤 y decí: "'+w.en+'"'); wait(14000,function(){ if(!fin){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } }); }); }
+  talk('Can you say '+w.en+'?','¿Podés decir '+w.es+' en inglés?',function(){ if(fin||my!==actTok)return; say(w.en,0.75); micSet('brMic','idle','Tocá 🎤 y decí: "'+w.en+'"'); wait(14000,function(){ if(!fin){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } }); }); }
  function fact(nx){ var x=facts[fi++%facts.length]; act('<div class="br-card fact"><b>'+x[2]+'</b><small>¿Sabías que…?</small></div>'); anim('wig');
   talk('Did you know? '+x[0],'¿Sabías que… '+x[1].replace(/^¡/,''),function(){ pose('happy'); talk('Wow!','¡Guau!',nx); },x[2]); }
+ var actTok=0, lastStep=Date.now();
  var PLAN=[greet,simon,breathe,word,simon,eyes,fact,word,simon,breathe,word,fact,simon,eyes,word], pi=0;
- function next(){ if(!alive())return; var fn=PLAN[pi%PLAN.length]; pi++; if(pi>PLAN.length&&fn===greet){fn=simon;} fn(next); }
+ function next(){ if(!alive())return; actTok++; lastStep=Date.now(); try{micStop();}catch(e){} var fn=PLAN[pi%PLAN.length]; pi++; if(pi>PLAN.length&&fn===greet){fn=simon;} fn(next); }
  function tick(){ var left=Math.max(0,(p.breakUntil||0)-Date.now()), t=document.getElementById('brTime'); if(!t||tok!==BR_TOK){clearInterval(BREAK_IV);return;}
   var m=Math.floor(left/60000), sec=Math.floor(left%60000/1000); t.textContent='⏳ '+m+':'+('0'+sec).slice(-2);
+  if(left>0&&Date.now()-lastStep>45000){ next(); }
   if(left<=0){ clearInterval(BREAK_IV); BR_TOK++; micStop(); clearInterval(flapT); clearTimeout(blinkT); p.sess=0; p.fatigue=0; p.recent=[]; p.breakUntil=0; S.gems+=5; save(); sWin(); burst(80);
    host.innerHTML='<div class="br-pet hap">'+dressWrap(key,'<img src="'+buddyImg('happy')+'" alt="">',wearOf(id))+'</div><h2>¡Listo! Ready!</h2><p class="br-sub">Descansaste muy bien con '+f.n+'. Ganaste 💎 +5</p><button class="btn teal" onclick="sTap();renderPath();show(\'s-path\')">¡A seguir! →</button>';
    sayBoth('Great break, '+nm+'! Let\'s go!','¡Qué lindo descanso! ¡Vamos!'); } }

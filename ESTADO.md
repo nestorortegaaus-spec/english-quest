@@ -163,3 +163,6 @@ le acepte la voz a la nena.
   corrigen con ACC_PF; accPose() reacomoda la ropa cada vez que cambia la imagen. Casa: la comida, esponja, juguete… se ARRASTRAN hasta la
   mascota (tocar solo muestra una pista); la habitación con el globito queda fija arriba al bajar. Palabras en inglés más grandes en
   Ladrillos, Adivinanzas, Ordená, Memotest, Deletreá, ¿Cuántos hay?, lecciones, Globos, Isla y Kart.
+- ✅ ARREGLADO (27/11): el descanso se trababa en "Try again": al cortar el micrófono (Ya lo dije ✓), Chrome avisaba tarde "no te escuché" y esa
+  frase pisaba la que hacía avanzar. micListen ignora el aviso después de un corte, cada actividad del descanso tiene su turno (actTok) y hay un
+  seguro: si nada avanza en 45 s pasa a la siguiente actividad.
