@@ -47,12 +47,14 @@ le acepte la voz a la nena.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
 - 🏡 Casa de Amigos (zona de descanso, botón naranja del camino): 8 amigos para adoptar con 💎 (Zorrito gratis; 150 a 1100 💎).
   Se los cuida en inglés (Comer/Jugar/Bañar/Dormir eligiendo cosas en inglés; responden con voz) y se los viste con los
-  accesorios de la tienda. 4 cuidados al día a un amigo = +15 💎 (una vez por día). Arte: img/friend_<id>.png y img/home_bg.jpg.
+  accesorios de la tienda. 4 cuidados al día a un amigo = +15 💎 (una vez por día). Arte (ChatGPT, completo): img/friend_<id>.png y img/home_bg.jpg.
 - 🕹️ Sala de Juegos (botón violeta del camino): juegos de premio que se compran con 💎 (Kart Quest 400; próximos 900/1600/2500)
   y se juegan gastando 🔮 cristales. 🔮 solo se ganan estudiando: 1 cada 3 paradas + 2 al cumplir la meta del día; máx. 5
   (configurable o apagable desde el panel de padres).
 - 🏎️ Kart Quest: carrera pseudo-3D de 3 vueltas contra 5 rivales, 6 pilotos, 4 pistas (Playa, Ciudad, Nieve, Galaxia;
   se desbloquean saliendo 1°-3°). Portones con palabras: la voz dice "Go through the apple!" y pasar por el correcto da turbo.
+  Portones: 8 por vuelta, palabras distintas en cada vuelta, de todos los temas hasta el nivel del mundo (prioriza nuevas/difíciles).
+  Choques: rebote lateral de ambos, el rival tambalea/gira y frena, sacudón de cámara, chispas y sonido de golpe.
   Arte (ChatGPT, completo): img/kart_<piloto>.png (fox, panda, koala, lion, bunny, robot; sin fondo, 360 px)
   y img/kart_bg_<pista>.jpg (beach, city, snow, space; panorama 1400 px).
 - 🎨 Pintá: "Color the star yellow": elegir el color y tocar el dibujo (10 dibujos, 8 colores; nivel 3+: solo escuchando). Al final de cada mundo y alternado con ¡Hablá! desde el mundo 3.
@@ -98,13 +100,6 @@ le acepte la voz a la nena.
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
-- ⏭️ PENDIENTE (pedido 27/11): Kart Quest — portones de palabras: se repiten mucho. Hoy son 4 portones por vuelta
-  (los mismos en las 3 vueltas) y salen de pocos temas (los del mundo actual + Animales/Comida). Quiero más carteles
-  por vuelta, palabras distintas en cada vuelta y de todos los temas, priorizando palabras nuevas o que le cuestan.
-- ⏭️ PENDIENTE (pedido 27/11): Kart Quest — choques reales. Hoy al chocar un rival el kart lo "traspasa", el rival
-  titila/desaparece (por el recorte de sprites cercanos) y solo suena un ruidito. Quiero: el rival NO desaparece,
-  ambos rebotan/se desplazan de costado, el rival se desestabiliza (gira/tambalea y pierde velocidad un momento),
-  chispas de choque y sonido de golpe más real.
 - ⏭️ PENDIENTE (pedido 27/11): Tienda/Vestir — hay muy pocos accesorios (10 en ACC, uno solo puesto a la vez).
   Agregar mucha más variedad de ropa y accesorios (sombreros, anteojos, collares, remeras/buzos, capas, mochilas,
   disfraces…) y poder combinar varios a la vez (uno por lugar: cabeza, cara, cuello, cuerpo). Ideal con arte de ChatGPT
