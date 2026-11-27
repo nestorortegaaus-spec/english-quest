@@ -125,11 +125,14 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): uso para las ⭐. Pestaña ⭐ Estrellas en la tienda (también al tocar ⭐ arriba): 10 trofeos por estrellas
   juntadas en total (STAR_GOALS, de 25 a 2000, cada uno regala 💎 al abrirlo; S.sgot), cambio de 20 ⭐ por 1 🔮 una vez por día
   (S.scrys) y 8 accesorios de ropa mágica que solo se compran con estrellas (ACC con st). Gastar estrellas no baja el nivel (S.spent).
-- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy 933 palabras (232 base + vocab.js con 76 temas, lv 1-5,
+- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy ~1115 palabras y frases (base + vocab.js con 100 temas, lv 1-5,
   números generados 11-20 → decenas → 21-99 → cientos → miles/millón, ordinales, hora, países, pasado...).
   Mundos 2-4 traen al final 2 temas nuevos cada uno (NEWU[0..5]) + parada 🔁 Repaso del mundo anterior.
   Galaxias (mundo 5+) usan NEWU desde el 7º, 6 temas por galaxia en orden de dificultad (~10 galaxias de contenido nuevo).
-  prioW() prioriza palabras no vistas o difíciles (S.hist). Para sumar: agregar temas en vocab.js y subir ?v= en index.html.
+  prioW() prioriza palabras no vistas o difíciles (S.hist). Para sumar: agregar temas en vocab.js con b:3 (tanda nueva) y subir ?v=
+  en index.html. Las tandas nuevas (b:2+) NO cambian los mundos 2-4 (NEWU[0..5] queda fijo): se mezclan por dificultad desde las
+  Galaxias. Tanda 2 (27/11): 24 temas, 222 palabras/frases (playa, bebés animales, formas, casa, estaciones, cuerpo, plaza, bebidas,
+  cocinar, arte, moverse, cómo es, tecnología, trabajos, viajes, sentimientos, opuestos, dónde, cuándo, pedir, pasado, planeta, futuro, comparar).
 - 🔄 EN CURSO: FRASES estilo Kumon. Juego 🧩 Frases con 36 patrones (PHR, lv1-5, desde "I like…" hasta "If it rains,
   I will…", "When I grow up I want to be a…", y uno de dos huecos "My best friend likes…, but I like…").
   Pasos: mirar/escuchar → completar → ordenar → cambiar una palabra → escuchar y elegir → frase larga (une dos frases
@@ -140,10 +143,8 @@ le acepte la voz a la nena.
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
 - ✅ HECHO (27/11): Vestir combinable con 34 accesorios (cabeza, cara, cuello y mano), posicionados por amigo y etapa. Queda como idea: arte de ChatGPT (remeras, capas, mochilas) en vez de emojis.
 - ✅ HECHO (27/11): Pintá ahora tiene 32 dibujos y 12 colores (suma negro, blanco, gris y celeste). Rotan priorizando los menos vistos.
-- Segundo cuento
 - "Modo desafío" en el juego de la Isla (palabra en español → agarrar la manzana en inglés correcta)
 - Más lecciones y contenido
-- Llegar a 10 juegos
 
 ## Cómo seguir desde Claude Code + GitHub
 1. git pull antes de tocar nada

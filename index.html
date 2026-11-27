@@ -741,7 +741,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
   <div class="wtip" id="wtip"></div>
 </div>
 
-<script src="vocab.js?v=2"></script>
+<script src="vocab.js?v=3"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -921,9 +921,11 @@ var NEWU=[], NEWP=[];
 (window.VOCAB||[]).forEach(function(v){ var ws;
  if(v.num)ws=v.num.map(function(n){return {en:numEn(n),es:numEs(n),e:n>=1000?n.toLocaleString('es-AR'):String(n)};});
  else ws=v.w.split(';').map(function(x){var a=x.split('|');return {en:a[0],es:a[1],e:a[2]};});
- UNITS.push({n:v.n,isP:!!v.isP,w:ws,lv:v.lv,nu:true}); (v.isP?NEWP:NEWU).push(UNITS.length-1); });
+ UNITS.push({n:v.n,isP:!!v.isP,w:ws,lv:v.lv,nu:true,b:v.b||1}); (v.isP?NEWP:NEWU).push(UNITS.length-1); });
 function byLv(a){return a.slice().sort(function(x,y){return (UNITS[x].lv-UNITS[y].lv)||(x-y);});}
-NEWU=byLv(NEWU); NEWP=byLv(NEWP);
+/* los mundos 2-4 usan NEWU[0..5]: quedan fijos; las tandas nuevas (b:2…) se mezclan por dificultad desde las Galaxias */
+(function(){ function fix(a,keep){ var old=byLv(a.filter(function(i){return UNITS[i].b===1;})), nw=a.filter(function(i){return UNITS[i].b!==1;}); return old.slice(0,keep).concat(byLv(old.slice(keep).concat(nw))); }
+ NEWU=fix(NEWU,6); NEWP=fix(NEWP,0); })();
 /* palabras nuevas o difíciles primero (para rotar) */
 function prioW(ws){ var h=(S&&S.hist)||{}; return shuffle(ws).map(function(w,i){var x=h[w.en],k=!x?0:(x[1]>=x[0]?1:2);return {w:w,k:k,i:i};}).sort(function(a,b){return a.k-b.k||a.i-b.i;}).map(function(o){return o.w;}); }
 
