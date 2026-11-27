@@ -130,6 +130,15 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .sh-item b{font-size:34px;line-height:1.15;} .sh-item small{font-weight:900;font-size:12px;color:var(--ink);} .sh-item span{font-weight:900;font-size:12px;color:#C98A1C;}
 .sh-item.on{border-color:var(--teal);background:#E9FAF4;} .sh-item.sel{border-color:var(--sun);}
 .sh-buy{margin-top:12px;background:#fff;border-radius:16px;padding:12px;text-align:center;font-weight:800;display:flex;flex-direction:column;gap:8px;box-shadow:0 4px 0 rgba(120,140,170,.18);}
+.st-top{background:linear-gradient(160deg,#FFF4CF,#FFE7A3);border-radius:18px;padding:14px;text-align:center;font-weight:800;color:#8A6410;display:flex;flex-direction:column;gap:2px;box-shadow:0 4px 0 #EBC567;}
+.st-top small{font-weight:700;color:#9C7A2C;} .st-big{font-size:40px;font-weight:900;color:#E09B12;line-height:1.1;}
+.st-title{margin-top:6px;background:#fff;border-radius:12px;padding:4px 12px;align-self:center;font-weight:900;color:#C98A1C;}
+.st-next{font-weight:800;font-size:13px;color:var(--ink);margin-bottom:8px;} .st-bar{height:12px;border-radius:8px;background:#EEF1F5;overflow:hidden;margin-top:4px;} .st-bar i{display:block;height:100%;background:linear-gradient(90deg,#FFD36B,#F2A33C);border-radius:8px;}
+.st-goals{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+.st-goal{border:3px solid transparent;border-radius:14px;background:#F3F5F9;padding:6px 2px;display:flex;flex-direction:column;align-items:center;font-family:inherit;cursor:pointer;}
+.st-goal b{font-size:26px;line-height:1.15;} .st-goal small{font-weight:900;font-size:10px;color:var(--ink);text-align:center;line-height:1.1;} .st-goal span{font-weight:900;font-size:10px;color:var(--muted);}
+.st-goal.ok{background:#FFF6DA;border-color:#FFD36B;animation:stPulse 1.4s ease-in-out infinite;} @keyframes stPulse{50%{transform:scale(1.07)}} .st-goal.ok span{color:#C98A1C;} .st-goal.got{animation:none;background:#E9FAF4;border-color:var(--teal);} .st-goal.got span{color:var(--teal-d);}
+.st-swap{display:flex;gap:10px;align-items:center;background:#fff;border-radius:16px;padding:10px 12px;font-weight:800;box-shadow:0 4px 0 rgba(120,140,170,.18);} .st-swap>div{flex:1;} .st-swap small{color:var(--muted);font-weight:700;} .st-swap .btn{width:auto;padding:10px 14px;} .st-swap .btn:disabled{filter:grayscale(1);opacity:.55;}
 .sh-need{color:#E06E58;font-weight:900;}
 .al-top{display:flex;flex-direction:column;gap:8px;align-items:center;font-weight:800;margin:4px 0 10px;text-align:center;}
 .al-top .btn[disabled]{opacity:.45;}
@@ -607,7 +616,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
   <!-- PATH -->
   <section class="screen" id="s-path">
     <div class="hud">
-      <div class="pill s">⭐ <span id="hStars">0</span></div>
+      <button class="pill s" onclick="openShop('star')" style="border:none;cursor:pointer;font-family:inherit;">⭐ <span id="hStars">0</span></button>
       <div class="pill g">🌱 Nv.<span id="hLvl">1</span></div>
       <div class="grow"></div>
       <button class="pill" onclick="openVoice()" style="cursor:pointer;border:none;color:#8C7BD6;font-family:inherit;">🎙️ Voz</button>
@@ -658,7 +667,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
   <!-- SHOP -->
   <section class="screen" id="s-shop">
     <div class="hud"><button class="lx" onclick="closeShop()">✕</button><div class="pill" style="color:#C98A1C">🏪 Tienda</div><div class="grow"></div><div class="pill gem">💎 <span id="shGems">0</span></div></div>
-    <div class="sh-tabs"><button class="sh-tab" id="shTabFox" onclick="SHOP_TAB='fox';SHOP_SEL=null;sTap();renderShop()">👒 Ropa</button><button class="sh-tab" id="shTabAlb" onclick="SHOP_TAB='alb';sTap();renderShop()">📒 Álbum</button></div>
+    <div class="sh-tabs"><button class="sh-tab" id="shTabFox" onclick="SHOP_TAB='fox';SHOP_SEL=null;sTap();renderShop()">👒 Ropa</button><button class="sh-tab" id="shTabStar" onclick="SHOP_TAB='star';SHOP_SEL=null;sTap();renderShop()">⭐ Estrellas</button><button class="sh-tab" id="shTabAlb" onclick="SHOP_TAB='alb';sTap();renderShop()">📒 Álbum</button></div>
     <div class="sh-body" id="shBody"></div>
   </section>
 
@@ -1468,8 +1477,24 @@ var ACC=[
  {id:'rose',e:'🌹',en:'rose',es:'rosa',p:120,pos:'hand'},{id:'teddy',e:'🧸',en:'teddy bear',es:'osito de peluche',p:160,pos:'hand'},
  {id:'umbrella',e:'☂️',en:'umbrella',es:'paraguas',p:170,pos:'hand'},{id:'icecream',e:'🍦',en:'ice cream',es:'helado',p:130,pos:'hand'},
  {id:'wand',e:'🪄',en:'magic wand',es:'varita mágica',p:280,pos:'hand'},{id:'guitar',e:'🎸',en:'guitar',es:'guitarra',p:320,pos:'hand'},
- {id:'bouquet',e:'💐',en:'bouquet',es:'ramo de flores',p:200,pos:'hand'},{id:'trophy',e:'🏆',en:'trophy',es:'trofeo',p:480,pos:'hand'}
+ {id:'bouquet',e:'💐',en:'bouquet',es:'ramo de flores',p:200,pos:'hand'},{id:'trophy',e:'🏆',en:'trophy',es:'trofeo',p:480,pos:'hand'},
+ /* ✨ ropa mágica: solo con estrellas (st) */
+ {id:'sparkles',e:'✨',en:'sparkles',es:'brillitos',st:30,pos:'head'},{id:'moon',e:'🌙',en:'moon',es:'luna',st:45,pos:'head'},
+ {id:'shooting',e:'💫',en:'shooting star',es:'estrella fugaz',st:60,pos:'head'},{id:'rosette',e:'🏵️',en:'rosette',es:'escarapela',st:50,pos:'neck'},
+ {id:'diamond',e:'💎',en:'diamond',es:'diamante',st:90,pos:'neck'},{id:'sparkler',e:'🎇',en:'sparkler',es:'bengalita',st:50,pos:'hand'},
+ {id:'crystalball',e:'🔮',en:'crystal ball',es:'bola de cristal',st:70,pos:'hand'},{id:'glowstar',e:'🌟',en:'glowing star',es:'estrella brillante',st:100,pos:'hand'}
 ];
+/* ⭐ trofeos por estrellas juntadas (las gastadas también cuentan) */
+var STAR_GOALS=[{n:25,t:'Estrellita',e:'⭐',g:20},{n:50,t:'Brillante',e:'🌟',g:30},{n:100,t:'Súper Estrella',e:'💫',g:50},{n:200,t:'Cometa',e:'☄️',g:80},
+ {n:350,t:'Constelación',e:'✨',g:120},{n:500,t:'Galaxia',e:'🌌',g:160},{n:750,t:'Supernova',e:'🎆',g:220},{n:1000,t:'Leyenda de las Estrellas',e:'👑',g:300},
+ {n:1500,t:'Universo',e:'🪐',g:400},{n:2000,t:'Infinito',e:'♾️',g:500}];
+var STAR_CRYS=20;
+function starsTotal(){return (S.stars||0)+(S.spent||0);}
+function starTitle(){var t=null;STAR_GOALS.forEach(function(g){if(starsTotal()>=g.n)t=g;});return t;}
+function spendStars(n){ if((S.stars||0)<n)return false; S.stars-=n; S.spent=(S.spent||0)+n; return true; }
+function priceTxt(a){return a.st?a.st+' ⭐':a.p+' 💎';}
+function canPay(a){return a.st?(S.stars||0)>=a.st:S.gems>=a.p;}
+function missTxt(a){return a.st?'Te faltan '+(a.st-(S.stars||0))+' ⭐. ¡Estudiá para ganar más!':'Te faltan '+(a.p-S.gems)+' 💎. ¡Jugá para juntar más!';}
 /* dónde va cada cosa en cada dibujo: [centro x, arriba de la cabeza, ojos, cuello, ancho de la cabeza] en proporción de la imagen */
 var ACC_AN={fox_1:[.45,.12,.43,.69,.7],fox_2:[.40,.10,.35,.56,.55],fox_3:[.35,.06,.24,.41,.4],
  kitty_1:[.45,.06,.40,.69,.75],kitty_2:[.43,.04,.32,.56,.6],kitty_3:[.37,.06,.25,.43,.4],
@@ -1520,15 +1545,16 @@ function closeShop(){sTap();renderPath();show('s-path');}
 function renderShop(){
  document.getElementById('shGems').textContent=S.gems;
  document.getElementById('shTabFox').className='sh-tab'+(SHOP_TAB==='fox'?' on':'');
- document.getElementById('shTabAlb').className='sh-tab'+(SHOP_TAB==='alb'?' on':'');
+ document.getElementById('shTabAlb').className='sh-tab'+(SHOP_TAB==='alb'?' on':''); document.getElementById('shTabStar').className='sh-tab'+(SHOP_TAB==='star'?' on':'');
  var b=document.getElementById('shBody'); if(!S.owned)S.owned=[]; if(!S.stk)S.stk={};
+ if(SHOP_TAB==='star'){ b.innerHTML=starTabHTML(); return; }
  if(SHOP_TAB==='fox'){
   var bw=wearOf(buddyId()), bf=friendById(buddyId());
   var h=foxHTML('sh-fox',SHOP_SEL)+'<div class="sh-hint">Tocá un accesorio para probárselo a '+(bf?bf.n:'tu amigo')+'. ¡Podés combinar uno de cada lugar!</div>';
   ACC_SLOTS.forEach(function(sl){ var its=ACC.filter(function(a){return a.pos===sl.k;}), n=its.filter(function(a){return S.owned.indexOf(a.id)>=0;}).length;
    h+='<div class="sh-slot">'+sl.e+' '+sl.n+' <small>'+n+'/'+its.length+'</small></div><div class="sh-grid">';
    its.forEach(function(a){var own=S.owned.indexOf(a.id)>=0, on=bw[sl.k]===a.id;
-    h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+a.e+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':a.p+' 💎')+'</span></button>';});
+    h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+a.e+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
    h+='</div>'; });
   if(wearCount(bw))h+='<button class="btn ghost" style="margin-top:12px" onclick="S.home.wear[buddyId()]={};save();renderShop();">Sacar todo</button>';
   b.innerHTML=h;
@@ -1543,14 +1569,39 @@ function renderShop(){
   b.innerHTML=h;
  }
 }
+function starTabHTML(){ var T=starsTotal(), cur=starTitle(), nx=STAR_GOALS.find(function(g){return T<g.n;}), prev=cur?cur.n:0;
+ if(!S.sgot)S.sgot={};
+ var h='<div class="st-top"><div class="st-big">⭐ '+(S.stars||0)+'</div><div>estrellas para gastar</div><small>Se ganan estudiando en el camino. Gastarlas <b>no</b> te baja el nivel 🌱.</small>'
+  +(cur?'<div class="st-title">'+cur.e+' '+cur.t+'</div>':'')+'</div>';
+ // trofeos
+ h+='<div class="sh-slot">🏆 Trofeos de estrellas <small>juntaste '+T+' ⭐ en total</small></div>';
+ if(nx)h+='<div class="st-next">Próximo: '+nx.e+' <b>'+nx.t+'</b> ('+T+'/'+nx.n+')<div class="st-bar"><i style="width:'+Math.min(100,Math.round((T-prev)/(nx.n-prev)*100))+'%"></i></div></div>';
+ h+='<div class="st-goals">'+STAR_GOALS.map(function(g){var ok=T>=g.n, got=S.sgot[g.n];
+   return '<button class="st-goal'+(ok?' ok':'')+(got?' got':'')+'" onclick="starClaim('+g.n+')"><b>'+(ok?g.e:'🔒')+'</b><small>'+g.t+'</small><span>'+(got?'✓':ok?'¡Abrir! +'+g.g+'💎':g.n+' ⭐')+'</span></button>';}).join('')+'</div>';
+ // cristal
+ var today=S.scrys===dkey(), full=(S.crys||0)>=crysMax();
+ h+='<div class="sh-slot">🔮 Cambiar por cristal <small>1 por día</small></div><div class="st-swap"><div><b>'+STAR_CRYS+' ⭐ → 1 🔮</b><br><small>Los cristales sirven para la 🕹️ Sala de Juegos. Tenés '+(S.crys||0)+'/'+crysMax()+'.</small></div>'
+  +'<button class="btn sun" onclick="starCrys()"'+(today||full||(S.stars||0)<STAR_CRYS?' disabled':'')+'>'+(today?'Mañana otro':full?'Lleno':'Cambiar')+'</button></div>';
+ // ropa mágica
+ var bw=wearOf(buddyId()), its=ACC.filter(function(a){return a.st;});
+ h+='<div class="sh-slot">✨ Ropa mágica <small>solo con estrellas</small></div><div class="sh-grid">';
+ its.forEach(function(a){var own=(S.owned||[]).indexOf(a.id)>=0, on=bw[a.pos]===a.id;
+  h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+a.e+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
+ h+='</div><div class="sh-hint" style="margin-top:10px">🍓 En la 🏡 Casa de Amigos también podés usar estrellas para darles comidas ricas a tus amigos.</div>';
+ return h; }
+function starClaim(n){ var g=STAR_GOALS.find(function(x){return x.n===n;}); if(!S.sgot)S.sgot={};
+ if(starsTotal()<n){ sBad(); toast('Te faltan '+(n-starsTotal())+' ⭐ para '+g.t); return; }
+ if(S.sgot[n]){ sTap(); say('You are a star!'); return; }
+ S.sgot[n]=1; S.gems+=g.g; save(); sWin(); burst(160); sayBoth('Amazing! You are a star!','¡Sos una '+g.t+'!'); toast(g.e+' ¡'+g.t+'! +'+g.g+' 💎'); renderShop(); }
+function starCrys(){ if(S.scrys===dkey()||(S.crys||0)>=crysMax()||!spendStars(STAR_CRYS))return; addCrys(1); S.scrys=dkey(); save(); sWin(); burst(60); toast('🔮 ¡Un cristal nuevo!'); renderShop(); }
 function shopPick(id){var a=accById(id); say(a.en); if(!S.owned)S.owned=[];
  if(S.owned.indexOf(id)>=0){var w=wearOf(buddyId()); if(w[a.pos]===id)delete w[a.pos]; else w[a.pos]=id; SHOP_SEL=null;save();sGood();renderShop();return;}
  if(SHOP_SEL!==id){SHOP_SEL=id;renderShop();
    var bar=document.createElement('div');bar.className='sh-buy';
-   bar.innerHTML=foxHTML('sh-mini',id)+(S.gems>=a.p?'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<button class="btn teal" onclick="shopBuy(\''+id+'\')">Comprar · '+a.p+' 💎</button>':'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<div class="sh-need">Te faltan '+(a.p-S.gems)+' 💎. ¡Jugá para juntar más!</div>');
+   bar.innerHTML=foxHTML('sh-mini',id)+(canPay(a)?'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<button class="btn '+(a.st?'sun':'teal')+'" onclick="shopBuy(\''+id+'\')">Comprar · '+priceTxt(a)+'</button>':'<b>'+a.e+' '+a.en+'</b> = '+a.es+'<div class="sh-need">'+missTxt(a)+'</div>');
    document.getElementById('shBody').appendChild(bar);bar.scrollIntoView({block:'nearest'});return;}
 }
-function shopBuy(id){var a=accById(id); if(S.gems<a.p)return; S.gems-=a.p; S.owned.push(id); wearOf(buddyId())[a.pos]=id; SHOP_SEL=null; save(); sWin(); burst(80); renderShop();}
+function shopBuy(id){var a=accById(id); if(!canPay(a))return; if(a.st)spendStars(a.st); else S.gems-=a.p; S.owned.push(id); wearOf(buddyId())[a.pos]=id; SHOP_SEL=null; save(); sWin(); burst(80); renderShop();}
 function openPack(){ var pp=packPrice(); if(S.gems<pp)return; S.gems-=pp; if(!S.stk)S.stk={};
  var all=allStickers(), got=[], refund=0;
  var three=shuffle(all).slice(0,3);for(var i=0;i<3;i++){var x=three[i]; var dup=!!S.stk[x.k]; if(dup)refund+=2; S.stk[x.k]=1; got.push({x:x,dup:dup});}

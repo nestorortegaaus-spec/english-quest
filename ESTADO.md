@@ -122,9 +122,9 @@ le acepte la voz a la nena.
   que rotan (WTHEMES: playa, polo, espacio, bajo el mar, selva, golosinas, desierto, dinosaurios, hadas, nubes, música, granja; al
   terminar la vuelta se repiten con "II"). Cada uno con colores, camino, decoración y un efecto que flota (pétalos, nieve, burbujas,
   estrellas, notas, nubes; WFX). Fondos de ChatGPT: los 16 hechos (img/world_<id>.jpg, 720 px de ancho, en WIMG; un valor <1 pone un velo blanco más fuerte, ej. music:.3). Los caminos de playa, mar, desierto, polo, nubes y espacio tienen colores con más contraste para que se vean sobre el fondo.
-- ⏭️ PENDIENTE (pedido 27/11): las ⭐ estrellas se acumulan pero no sirven para nada (solo suben el nivel 🌱).
-  Darles uso: por ejemplo canjear estrellas por premios especiales, desbloquear cosas que no se compran con gemas,
-  o convertir estrellas en gemas/cristales.
+- ✅ HECHO (27/11): uso para las ⭐. Pestaña ⭐ Estrellas en la tienda (también al tocar ⭐ arriba): 10 trofeos por estrellas
+  juntadas en total (STAR_GOALS, de 25 a 2000, cada uno regala 💎 al abrirlo; S.sgot), cambio de 20 ⭐ por 1 🔮 una vez por día
+  (S.scrys) y 8 accesorios de ropa mágica que solo se compran con estrellas (ACC con st). Gastar estrellas no baja el nivel (S.spent).
 - 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy 933 palabras (232 base + vocab.js con 76 temas, lv 1-5,
   números generados 11-20 → decenas → 21-99 → cientos → miles/millón, ordinales, hora, países, pasado...).
   Mundos 2-4 traen al final 2 temas nuevos cada uno (NEWU[0..5]) + parada 🔁 Repaso del mundo anterior.
