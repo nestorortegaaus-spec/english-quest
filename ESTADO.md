@@ -200,3 +200,6 @@ le acepte la voz a la nena.
   botones segmentados.
 - ✅ HECHO (27/11): acceso de padres con CLAVE de 4 números (teclado con puntitos), también para "dar más tiempo". En el código solo está la huella
   SHA-256 (PIN_H0), nunca la clave. Se puede cambiar desde el panel (S.pinH, solo en ese teléfono; "Empezar de cero" vuelve a la clave original).
+- ✅ HECHO (27/11): Isla con 9 paisajes que rotan cada partida (ISL_SCN, S.islScn): Isla clásica, Selva, Desierto, Nieve, Golosinas, Luna,
+  Bosque de hadas, Valle Dino, Ciudad Musical. Fondo = img/kart_bg_<id>.jpg con parallax, piso y líquido de colores propios, y un bichito
+  distinto para pisar (snake, scorpion, penguin, snail, alien, ladybug, dinosaur, mouse) que dice su nombre en inglés y castellano.
