@@ -153,7 +153,9 @@ le acepte la voz a la nena.
   Se ven en la casa, el camino, la tienda, el descanso, los cuentos y la Isla (canvas: accImg). Tanda 2 (27/11): mochilas (escuela, estrella, osito, cohete), púas de dino, escudo,
   sombreros pirata/vaquera/vikingo, orejitas de gato y conejo, vincha ninja, parche, antifaz, escoba y espada (dx = cuánto asoman al costado).
   🎭 14 DISFRACES (COSTUMES): conjuntos que se compran juntos con 20% menos y se ponen de una (tienda y pestaña Disfraces del vestidor).
-  Total 70 accesorios en 5 lugares.
+  Tanda 3: sombrero de princesa, casco de bombera, casco de astronauta (big), gorro de Papá Noel, gorro de lana, orejeras, collar de
+  perlas, medalla de héroe, cola de sirena + caracol, matafuego, regalo, copo de nieve, bandera. +7 disfraces (Sirena, Princesa, Bombera,
+  Astronauta en el espacio, Navidad, Invierno, Abrigadita). Total 84 accesorios y 21 disfraces.
 - ✅ HECHO (27/11): Pintá ahora tiene 32 dibujos y 12 colores (suma negro, blanco, gris y celeste). Rotan priorizando los menos vistos.
 - ✅ HECHO (27/11): 🎯 Modo desafío de la Isla (nivel 3+): arriba dice una palabra en castellano (con dibujo hasta nivel 4, sin dibujo en
   nivel 5) y la voz la dice en castellano; vienen pares de manzanas (una abajo, otra arriba para saltar) y hay que agarrar la de esa palabra
