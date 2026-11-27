@@ -80,6 +80,9 @@ le acepte la voz a la nena.
 - Instalable como app con logo, offline
 
 ## Backlog (ideas que quedaron para más adelante)
+- ⏭️ PENDIENTE (pedido 27/11): Pintá — siempre salen los mismos objetos y colores (hoy 10 dibujos en PAINT_OBJ y
+  8 colores en PAINT_COL; el nivel 1 usa solo los 4 primeros colores). Agregar muchos más dibujos y colores
+  (white, black, gray, light blue…) y que roten entre partidas, priorizando los que menos vio.
 - ⏭️ PENDIENTE (pedido 27/11): Safari de fotos — los animales se repiten siempre (hoy hay 16 en la lista SAFARI y
   cada partida usa 6-9). Agregar muchos más animales (voladores y de tierra) y que roten entre partidas/niveles
   para que aprenda animales nuevos (por ejemplo, priorizar los que todavía no fotografió).
