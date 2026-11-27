@@ -188,3 +188,5 @@ le acepte la voz a la nena.
   anillo de avance del mundo, 4 indicadores, "Hoy" (anillo de meta + tiempo vs límite), barras de 14 días con línea de meta, minutos y aciertos
   por día (S.dlog, se guarda desde el 27/11, 60 días), aciertos totales + temas más practicados, palabras para practicar con barra, ajustes en
   botones segmentados.
+- ✅ HECHO (27/11): acceso de padres con CLAVE de 4 números (teclado con puntitos), también para "dar más tiempo". En el código solo está la huella
+  SHA-256 (PIN_H0), nunca la clave. Se puede cambiar desde el panel (S.pinH, solo en ese teléfono; "Empezar de cero" vuelve a la clave original).
