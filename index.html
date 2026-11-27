@@ -1690,9 +1690,26 @@ PET_LINES.need={
  poop:[['Oops! Clean up, please!','¡Ups! Limpiá, por favor!'],['It smells bad!','¡Huele feo!'],['Help! Clean it up!','¡Ayuda! ¡Limpialo!']],
  happy:[['Hi! I missed you!','¡Hola! ¡Te extrañé!'],['Hello, my friend!','¡Hola, amiga!'],['I am so happy to see you!','¡Qué feliz estoy de verte!'],['Let\'s have fun today!','¡Divirtámonos hoy!']],
  egg:[['Tap the egg!','¡Tocá el huevo!']]};
-var PET_LAST={};
-function pline(k,ph,it){ var arr=(PET_LINES[k]||{})[ph]||[['Hi!','¡Hola!']], key=k+ph, i, tries=0;
- do{ i=(Math.random()*arr.length)|0; tries++; }while(arr.length>1&&PET_LAST[key]===i&&tries<10); PET_LAST[key]=i;
+/* frases propias de cada comida */
+var FOOD_LINES={
+ apple:[['Crunchy apple!','¡Manzana crocante!'],['An apple a day is good for me!','¡Una manzana por día me hace bien!'],['This apple is red and sweet!','¡Esta manzana es roja y dulce!']],
+ banana:[['Bananas are yummy!','¡Las bananas son riquísimas!'],['Monkeys love bananas too!','¡A los monos también les encantan las bananas!'],['This banana is so sweet!','¡Esta banana es re dulce!'],['A yellow banana for me!','¡Una banana amarilla para mí!'],['Bananas make me strong!','¡Las bananas me hacen fuerte!']],
+ cookie:[['Chocolate chips!','¡Chispitas de chocolate!'],['Cookies are my favorite!','¡Las galletitas son mis favoritas!'],['Just one more cookie?','¿Solo una galletita más?']],
+ pizza:[['Pizza with cheese!','¡Pizza con queso!'],['Pizza is the best!','¡La pizza es lo mejor!'],['It is hot and yummy!','¡Está calentita y rica!']],
+ carrot:[['Crunchy carrot!','¡Zanahoria crocante!'],['Carrots are good for my eyes!','¡Las zanahorias son buenas para los ojos!'],['Orange and yummy!','¡Naranja y rica!']],
+ strawberry:[['Sweet strawberry!','¡Frutilla dulce!'],['Red and juicy!','¡Roja y jugosa!'],['I love strawberries!','¡Me encantan las frutillas!']],
+ cheese:[['I like cheese!','¡Me gusta el queso!'],['Mice love cheese too!','¡A los ratones también les gusta el queso!'],['Yummy yellow cheese!','¡Rico queso amarillo!']],
+ milk:[['Milk makes me strong!','¡La leche me hace fuerte!'],['Cold milk, yum!','¡Leche fría, qué rico!'],['A milk mustache!','¡Bigotes de leche!']]};
+PET_LINES.eat.mid=PET_LINES.eat.mid.concat([['Mmm, mmm!','¡Mmm, mmm!'],['So yummy!','¡Riquísimo!'],['Nom nom nom!','¡Ñom ñom ñom!']]);
+PET_LINES.eat.end=PET_LINES.eat.end.concat([['That was delicious!','¡Estuvo delicioso!'],['I want more tomorrow!','¡Quiero más mañana!']]);
+/* rotación tipo mazo: usa todas antes de repetir; a veces repasa una ya dicha (se guarda en S) */
+function pline(k,ph,it){ var arr=((PET_LINES[k]||{})[ph]||[['Hi!','¡Hola!']]).slice(), food=k==='eat'&&it&&ph!=='start'?FOOD_LINES[it[1]]:null;
+ if(food)arr=arr.concat(food,food);
+ var key=k+'.'+ph+(food?'.'+it[1]:''); if(!S.pdeck)S.pdeck={}; var d=S.pdeck[key]||(S.pdeck[key]={q:[],seen:[],last:-1});
+ var i=null;
+ if(d.seen.length>=3&&Math.random()<0.18){ var old=d.seen.filter(function(x){return x!==d.last&&x<arr.length;}); if(old.length)i=old[(Math.random()*old.length)|0]; }
+ if(i==null){ d.q=d.q.filter(function(x){return x<arr.length;}); if(!d.q.length){ d.q=shuffle(arr.map(function(_,j){return j;})); if(d.q.length>1&&d.q[0]===d.last)d.q.push(d.q.shift()); } i=d.q.shift(); }
+ d.last=i; if(d.seen.indexOf(i)<0)d.seen.push(i); save();
  var en=arr[i][0], es=arr[i][1];
  if(it){ var nm=it[1], art=/s$/.test(nm)?'':(/^[aeiou]/i.test(nm)?'an ':'a '); en=en.replace('{x}',art+nm).replace('{n}',nm); es=es.replace('{y}',(ES_ITEM[nm]||nm)); }
  return [en,es]; }
