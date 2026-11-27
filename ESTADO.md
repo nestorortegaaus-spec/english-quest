@@ -44,6 +44,9 @@ le acepte la voz a la nena.
 - 🚀 ¡Hablá!: decir la palabra en voz alta con el micrófono hace subir el cohete hasta la Luna
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
+- 🔥 Racha diaria: meta de 5 paradas por día; al cumplirla suma un día de racha y regala 20 💎 (si saltea un día, vuelve a 0).
+- 🏪 Tienda (botón 💎 del camino): accesorios para el zorrito (se ven en el camino) y 📒 álbum de 48 figuritas en sobres de 3 (25 💎), cada una con su palabra en inglés; las repetidas devuelven 5 💎.
+- Se guarda qué palabras acierta y erra (S.hist) para el panel de padres.
 - En los mundos 2+ los juegos rotan (9 tipos), así cada mundo tiene una mezcla distinta.
 - Ideas: más cuentos con ilustraciones de ChatGPT (hoy los nuevos usan emojis).
 
