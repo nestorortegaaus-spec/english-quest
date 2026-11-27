@@ -45,6 +45,9 @@ le acepte la voz a la nena.
   (nivel 3+: se muestra en español y hay que decirla en inglés). Al final de cada mundo y, desde el mundo 3, en cada par de temas.
 - Reconocimiento de voz más permisivo (acepta pronunciaciones aproximadas, por ejemplo "cut" por "cat"), también en las lecciones.
 - 📸 Safari de fotos (juego original del estilo "tocar lo que aparece"): la voz pide "Take a picture of the parrot!" y hay que sacarle la foto al animal que vuela o se asoma de los arbustos; las fotos quedan en un rollo. Rollo limitado. Fondo opcional img/safari_bg.jpg (window.SAFARI_BG).
+- 🏡 Casa de Amigos (zona de descanso, botón naranja del camino): 8 amigos para adoptar con 💎 (Zorrito gratis; 150 a 1100 💎).
+  Se los cuida en inglés (Comer/Jugar/Bañar/Dormir eligiendo cosas en inglés; responden con voz) y se los viste con los
+  accesorios de la tienda. 4 cuidados al día a un amigo = +15 💎 (una vez por día). Arte: img/friend_<id>.png y img/home_bg.jpg.
 - 🕹️ Sala de Juegos (botón violeta del camino): juegos de premio que se compran con 💎 (Kart Quest 400; próximos 900/1600/2500)
   y se juegan gastando 🔮 cristales. 🔮 solo se ganan estudiando: 1 cada 3 paradas + 2 al cumplir la meta del día; máx. 5
   (configurable o apagable desde el panel de padres).
@@ -80,9 +83,6 @@ le acepte la voz a la nena.
 - ⏭️ PENDIENTE (pedido 27/11): Safari de fotos — los animales se repiten siempre (hoy hay 16 en la lista SAFARI y
   cada partida usa 6-9). Agregar muchos más animales (voladores y de tierra) y que roten entre partidas/niveles
   para que aprenda animales nuevos (por ejemplo, priorizar los que todavía no fotografió).
-- ⏭️ PRÓXIMO (pedido 27/11, después de terminar Kart Quest): "zona de descanso" tipo tienda pero más grande:
-  más personajes para desbloquear con gemas, cada uno con accesorios/ropa, para entretenerse entre juegos.
-  Con gráficos lindos hechos con ChatGPT (estilo render 3D como los pilotos de Kart Quest).
 - Segundo cuento
 - "Modo desafío" en el juego de la Isla (palabra en español → agarrar la manzana en inglés correcta)
 - Más lecciones y contenido
