@@ -153,9 +153,9 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): en ¡Hablá! no aparece el narrador (GAME.quiet), porque se mezclaba con el micrófono. Voz: say() espera 150 ms después de cortar
   otra frase (en Android hablar justo después de cancel se perdía) y sayBoth dice el castellano después del inglés. Kart: la consigna dice solo
   la palabra y espera a que termine la palabra anterior en inglés + castellano.
-- ⏭️ PENDIENTE (pedido 27/11, idea tipo Buddy.ai): en el descanso de 5 minutos, el amigo compañero aparece grande y animado (poses
-  idle/closed/open/happy, boca que se mueve al hablar, parpadeo) y guía el descanso hablando: la saluda por su nombre, hace "Simon says"
-  con movimientos y le pide repetir palabras con el micrófono. Guion fijo (sin IA paga), funciona sin internet.
+- ✅ HECHO (27/11, idea tipo Buddy.ai): descanso guiado (openBreak). El amigo compañero aparece grande, con su ropa, mueve la boca al hablar,
+  parpadea y festeja. Le habla por su nombre en inglés y castellano y va rotando actividades (PLAN): Simon says (botón ¡Listo!), respirar con un círculo,
+  cerrar los ojos y contar hasta 5, repetir palabras que ya vio con el micrófono, y datos curiosos (BR_FACTS). Al terminar los 5 minutos: 💎 +5.
 - ✅ HECHO (27/11): Sopa de letras más fácil (diagonal desde nivel 4, al revés desde nivel 5, menos palabras) y la lista muestra ícono + inglés +
   castellano; tocar una palabra la dice en inglés y castellano y hace titilar su primera letra como pista. Frases: la frase en castellano a armar va
   grande en un recuadro (ph-goal).

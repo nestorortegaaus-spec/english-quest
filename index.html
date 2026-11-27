@@ -406,6 +406,21 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .br-body.sleep{background:linear-gradient(180deg,#2B2F6B,#5A4F9B);color:#fff;} .br-body.sleep .br-sub,.br-body.sleep .br-note{color:#DCD9FF;}
 .br-body h2{font-size:28px;} .br-sub{font-weight:800;color:var(--muted);max-width:330px;}
 .br-buddy{width:150px;height:160px;object-fit:contain;animation:bob 2s ease-in-out infinite;} .br-buddy.sl{animation:sleepy 3s ease-in-out infinite;filter:brightness(.85);}
+.br-top{width:100%;max-width:400px;display:flex;justify-content:space-between;align-items:center;font-weight:900;color:var(--teal-d);} .br-top b{font-size:20px;}
+.br-say{position:relative;max-width:340px;min-height:64px;background:#fff;border-radius:20px;padding:10px 16px;box-shadow:0 5px 0 rgba(120,140,170,.2);display:flex;flex-direction:column;align-items:center;opacity:0;}
+.br-say.on{opacity:1;animation:lspop .35s;} .br-say::after{content:'';position:absolute;bottom:-12px;left:50%;margin-left:-12px;border:12px solid transparent;border-top-color:#fff;border-bottom:0;}
+.br-say b{font-size:20px;font-weight:900;color:var(--ink);line-height:1.2;} .br-say small{font-weight:800;color:#7A8499;font-size:14px;} .br-say i{font-style:normal;font-size:30px;}
+.br-pet{width:210px;height:220px;animation:bob 2.2s ease-in-out infinite;transition:transform 3.2s ease-in-out;} .br-pet img{filter:drop-shadow(0 8px 8px rgba(0,0,0,.18));}
+.br-pet.wig{animation:brWig .5s ease-in-out 3;} @keyframes brWig{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.br-pet.hap{animation:hmhappy .7s;} .br-pet.big{animation:none;transform:scale(1.15);}
+.br-act{display:flex;flex-direction:column;align-items:center;gap:8px;min-height:150px;width:100%;max-width:360px;}
+.br-card{background:#fff;border-radius:22px;padding:10px 22px;box-shadow:0 6px 0 rgba(120,140,170,.2);display:flex;flex-direction:column;align-items:center;animation:lspop .4s;} .br-card b{font-size:52px;line-height:1.1;} .br-card span{font-size:22px;font-weight:900;color:#E06E58;} .br-card small{font-weight:800;color:var(--muted);}
+.br-card.fact b{font-size:70px;}
+.br-word{display:flex;flex-direction:column;align-items:center;background:#fff;border-radius:22px;padding:8px 24px;box-shadow:0 6px 0 rgba(120,140,170,.2);} .br-word b{font-size:54px;line-height:1.1;} .br-word span{font-size:28px;font-weight:900;color:var(--ink);} .br-word small{font-weight:800;color:var(--muted);}
+#brBody{justify-content:flex-start;padding-top:56px;}
+.br-breath{margin:34px 0 0;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,#9EDFC6,#57C4A6);transition:transform 3.4s ease-in-out;} .br-breath.in{transform:scale(1.9);} .br-breath.out{transform:scale(1);}
+.br-step{font-weight:900;font-size:20px;color:var(--teal-d);margin-top:24px;}
+.br-count{font-size:80px;font-weight:900;color:#8C7BD6;line-height:1;} .br-count.on{animation:lspop .5s;}
 .br-ex{background:#fff;border-radius:22px;padding:14px 22px;box-shadow:0 6px 0 rgba(120,140,170,.2);display:flex;flex-direction:column;align-items:center;min-width:250px;}
 .br-ex.on{animation:lspop .5s;} .br-ex b{font-size:56px;line-height:1.1;} .br-ex span{font-size:24px;font-weight:900;color:#E06E58;} .br-ex small{font-weight:800;color:var(--muted);}
 .br-time{font-size:30px;font-weight:900;color:var(--teal-d);} .br-note{font-size:13px;font-weight:800;color:var(--muted);}
@@ -1446,16 +1461,65 @@ function checkRest(id){ if(['s-path','s-home','s-arcade','s-start'].indexOf(id)<
  if(REST_PENDING&&id!=='s-start'){ REST_PENDING=false; p.breakUntil=Date.now()+5*60000; save(); setTimeout(openBreak,30); return true; }
  return false; }
 var BREAK_IV=null;
-function openBreak(){ var p=playD(); show('s-break'); var host=document.getElementById('brBody'), i=0, ex=shuffle(SIMON);
- host.innerHTML='<img class="br-buddy" src="'+buddyImg('happy')+'" alt=""><h2>¡Descanso!</h2><p class="br-sub">Jugaste un buen rato. Descansar ayuda a que el cerebro guarde lo que aprendiste 🧠</p>'
-  +'<div class="br-ex" id="brEx"></div><div class="br-time" id="brTime"></div><div class="br-note">Si descansás todo el tiempo ganás 💎 +5</div>';
- function step(){ var e=ex[i%ex.length]; i++; var el=document.getElementById('brEx'); if(!el)return; el.innerHTML='<b>'+e[2]+'</b><span>'+e[0]+'</span><small>'+e[1]+'</small>'; el.classList.remove('on');void el.offsetWidth;el.classList.add('on'); sayBoth(e[0],e[1]); }
- function tick(){ var left=Math.max(0,(p.breakUntil||0)-Date.now()), t=document.getElementById('brTime'); if(!t){clearInterval(BREAK_IV);return;}
-  var m=Math.floor(left/60000), s=Math.floor(left%60000/1000); t.textContent='⏳ '+m+':'+('0'+s).slice(-2);
-  if(left<=0){ clearInterval(BREAK_IV); p.sess=0; p.fatigue=0; p.recent=[]; p.breakUntil=0; S.gems+=5; save(); sWin(); burst(80);
-   host.innerHTML='<img class="br-buddy" src="'+buddyImg('happy')+'" alt=""><h2>¡Listo! Ready!</h2><p class="br-sub">Descansaste muy bien. Ganaste 💎 +5</p><button class="btn teal" onclick="sTap();renderPath();show(\'s-path\')">¡A seguir! →</button>';
-   sayBoth('Great! Let\'s go!','¡Genial! ¡Vamos!'); } }
- clearInterval(BREAK_IV); step(); tick(); BREAK_IV=setInterval(function(){ tick(); if(Math.floor((p.breakUntil-Date.now())/1000)%25===0)step(); },1000); }
+/* ===== DESCANSO GUIADO: el amigo compañero, grande y animado, habla e interactúa con ella ===== */
+var BR_FACTS=[['Elephants cannot jump!','¡Los elefantes no pueden saltar!','🐘'],['A snail can sleep for three years!','¡Un caracol puede dormir tres años!','🐌'],
+ ['Octopuses have three hearts!','¡Los pulpos tienen tres corazones!','🐙'],['Cats sleep a lot: about sixteen hours a day!','¡Los gatos duermen mucho: unas dieciséis horas por día!','🐱'],
+ ['Bananas are berries!','¡Las bananas son bayas!','🍌'],['Honey never goes bad!','¡La miel nunca se echa a perder!','🍯'],['A giraffe has a blue tongue!','¡La jirafa tiene la lengua azul!','🦒'],
+ ['Penguins cannot fly, but they swim very fast!','¡Los pingüinos no vuelan, pero nadan muy rápido!','🐧'],['The sun is a star!','¡El sol es una estrella!','☀️'],['Butterflies taste with their feet!','¡Las mariposas sienten el sabor con las patas!','🦋']];
+var BR_TOK=0;
+function brWords(){ var out=[], seen={}; UNITS.forEach(function(U){ if(U.isP)return; U.w.forEach(function(w){ if(!w.e||!w.en||w.en.split(' ').length>2||seen[w.en])return; seen[w.en]=1; if(S.hist&&S.hist[w.en])out.push(w); }); });
+ if(out.length<4)UNITS.slice(0,6).forEach(function(U){U.w.forEach(function(w){if(w.e&&!seen[w.en+'#']){seen[w.en+'#']=1;out.push(w);}});}); return shuffle(out); }
+function openBreak(){ var p=playD(); show('s-break'); var host=document.getElementById('brBody'), tok=++BR_TOK, id=buddyId(), f=friendById(id)||{n:'Zorrito',en:'fox'};
+ var nm=(S.name||'').split(' ')[0]||'friend', key=petKey(id)||'gen', words=brWords(), wi=0, sim=shuffle(SIMON), si=0, facts=shuffle(BR_FACTS), fi=0, flapT=0, blinkT=0, talking=false;
+ host.innerHTML='<div class="br-top"><span>☕ Descanso con '+f.n+'</span><b id="brTime"></b></div>'
+  +'<div class="br-say" id="brSay"></div><div class="br-pet" id="brPet">'+dressWrap(key,'<img id="brImg" src="'+buddyImg('idle')+'" alt="">',wearOf(id))+'</div>'
+  +'<div class="br-act" id="brAct"></div><div class="br-note">Si descansás todo el tiempo ganás 💎 +5</div>';
+ function alive(){ return tok===BR_TOK && document.getElementById('brPet'); }
+ function pose(n){ var im=document.getElementById('brImg'); if(im)im.src=buddyImg(n); }
+ function anim(c,ms){ var e=document.getElementById('brPet'); if(!e)return; e.classList.remove('wig','hap','brv','big'); void e.offsetWidth; e.classList.add(c); if(ms)setTimeout(function(){e.classList.remove(c);},ms); }
+ function flap(on){ talking=on; clearInterval(flapT); if(!on){pose('idle');return;} var o=false; flapT=setInterval(function(){ if(!alive()){clearInterval(flapT);return;} o=!o; pose(o?'open':'idle'); },150); }
+ function blink(){ clearTimeout(blinkT); blinkT=setTimeout(function(){ if(!alive())return; if(!talking){pose('closed');setTimeout(function(){if(!talking&&alive())pose('idle');},160);} blink(); },2600+Math.random()*2500); }
+ function bubble(en,es,big){ var b=document.getElementById('brSay'); if(!b)return; b.innerHTML=(big?'<i>'+big+'</i>':'')+'<b>'+en+'</b><small>'+es+'</small>'; b.classList.remove('on'); void b.offsetWidth; b.classList.add('on'); }
+ /* habla inglés y castellano con la boca moviéndose; cb cuando termina */
+ var talkId=0;
+ function talk(en,es,cb,big){ if(!alive())return; bubble(en,es,big); flap(true); var done=false, my=++talkId;
+  function end(){ if(done)return; done=true; if(my!==talkId)return; flap(false); if(alive()&&cb)setTimeout(function(){ if(alive()&&my===talkId)cb(); },350); }
+  var est=900+(en.length+(es||'').length)*75; setTimeout(end,est+2500);
+  if(muted){ setTimeout(end,est); return; }
+  say(en,0,function(){ if(!es){ setTimeout(end,est); return; } try{ var u=new SpeechSynthesisUtterance(es); var v=esVoice(); u.lang=v?v.lang:'es-AR'; if(v)u.voice=v; u.onend=end; speechSynthesis.speak(u); }catch(e){ setTimeout(end,est); } }); }
+ function act(h){ var a=document.getElementById('brAct'); if(a)a.innerHTML=h; return a; }
+ function wait(ms,cb){ setTimeout(function(){ if(alive())cb(); },ms); }
+ /* --- actividades --- */
+ function greet(nx){ act(''); anim('hap',800); pose('happy'); talk('Hi '+nm+'! Time for a little break!','¡Hola '+nm+'! ¡Es hora de un descansito!',function(){ talk('Let\'s move and play together!','¡Movámonos y juguemos juntos!',nx); }); }
+ function simon(nx){ var e=sim[si++%sim.length]; act('<div class="br-card"><b>'+e[2]+'</b><span>'+e[0]+'</span><small>'+e[1]+'</small></div><button class="btn sun" id="brOk">¡Listo! ✓</button>');
+  anim('wig'); var ok=false, t;
+  function fin(){ if(ok)return; ok=true; clearTimeout(t); anim('hap',800); pose('happy'); sGood(); talk(pickR(['Great job!','Well done!','Super!','You did it!']),pickR(['¡Muy bien!','¡Genial!','¡Bárbaro!','¡Lo hiciste!']),nx); }
+  document.getElementById('brOk').onclick=fin;
+  talk('Simon says: '+e[0],'Simón dice: '+e[1],function(){ t=setTimeout(function(){ if(alive())fin(); },9000); }); }
+ function breathe(nx){ act('<div class="br-breath" id="brB"></div><div class="br-step" id="brStep"></div>'); var n=0;
+  talk('Let\'s breathe slowly with me.','Respiremos despacito conmigo.',function(){ (function one(){ if(!alive())return; if(n>=3){ talk('Very good! You are calm now.','¡Muy bien! Ahora estás tranquila.',nx); return; } n++;
+   var B=document.getElementById('brB'), st=document.getElementById('brStep'); B.className='br-breath in'; st.textContent='Breathe in… · Inhalá…'; anim('big'); say('Breathe in');
+   wait(3500,function(){ B.className='br-breath out'; st.textContent='Breathe out… · Exhalá…'; var e=document.getElementById('brPet'); if(e)e.classList.remove('big'); say('Breathe out'); wait(3500,one); }); })(); }); }
+ function eyes(nx){ act('<div class="br-count" id="brC">😌</div>');
+  talk('Close your eyes and count with me.','Cerrá los ojos y contá conmigo.',function(){ pose('closed'); var k=0, N=['One','Two','Three','Four','Five'];
+   (function c(){ if(!alive())return; if(k>=5){ pose('happy'); anim('hap',800); talk('Open your eyes!','¡Abrí los ojos!',nx); return; } var el=document.getElementById('brC'); if(el){el.textContent=k+1;el.classList.remove('on');void el.offsetWidth;el.classList.add('on');} say(N[k]); talking=true; k++; wait(1500,function(){ talking=false; pose('closed'); c(); }); })(); }); }
+ function word(nx){ var w=words[wi++%words.length]; if(!w){nx();return;} var tries=0, fin=false;
+  act('<div class="br-word"><b>'+w.e+'</b><span>'+w.en+'</span><small>'+w.es+'</small></div>'+micWidgetHTML('brMic')+'<button class="sk-skip" id="brSkip" style="visibility:hidden">Ya lo dije ✓</button>');
+  function good(){ if(fin)return; fin=true; micStop(); anim('hap',800); pose('happy'); sGood(); burst(30); markWord(w,true); talk('Yes! '+w.en+'! Great!','¡Sí! '+w.es+'. ¡Genial!',nx); }
+  function bad(){ tries++; if(tries>=2){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } talk(tries>=2?'Good try! Listen: '+w.en:'Try again: '+w.en,tries>=2?'¡Buen intento! Escuchá.':'Probá otra vez.',null); }
+  document.getElementById('brSkip').onclick=good;
+  document.querySelector('#brMic .mic-b').onclick=function(){ micListen('brMic',w.en,good,bad); };
+  talk('Can you say '+w.en+'?','¿Podés decir '+w.es+' en inglés?',function(){ say(w.en,0.75); micSet('brMic','idle','Tocá 🎤 y decí: "'+w.en+'"'); wait(14000,function(){ if(!fin){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } }); }); }
+ function fact(nx){ var x=facts[fi++%facts.length]; act('<div class="br-card fact"><b>'+x[2]+'</b><small>¿Sabías que…?</small></div>'); anim('wig');
+  talk('Did you know? '+x[0],'¿Sabías que… '+x[1].replace(/^¡/,''),function(){ pose('happy'); talk('Wow!','¡Guau!',nx); },x[2]); }
+ var PLAN=[greet,simon,breathe,word,simon,eyes,fact,word,simon,breathe,word,fact,simon,eyes,word], pi=0;
+ function next(){ if(!alive())return; var fn=PLAN[pi%PLAN.length]; pi++; if(pi>PLAN.length&&fn===greet){fn=simon;} fn(next); }
+ function tick(){ var left=Math.max(0,(p.breakUntil||0)-Date.now()), t=document.getElementById('brTime'); if(!t||tok!==BR_TOK){clearInterval(BREAK_IV);return;}
+  var m=Math.floor(left/60000), sec=Math.floor(left%60000/1000); t.textContent='⏳ '+m+':'+('0'+sec).slice(-2);
+  if(left<=0){ clearInterval(BREAK_IV); BR_TOK++; micStop(); clearInterval(flapT); clearTimeout(blinkT); p.sess=0; p.fatigue=0; p.recent=[]; p.breakUntil=0; S.gems+=5; save(); sWin(); burst(80);
+   host.innerHTML='<div class="br-pet hap">'+dressWrap(key,'<img src="'+buddyImg('happy')+'" alt="">',wearOf(id))+'</div><h2>¡Listo! Ready!</h2><p class="br-sub">Descansaste muy bien con '+f.n+'. Ganaste 💎 +5</p><button class="btn teal" onclick="sTap();renderPath();show(\'s-path\')">¡A seguir! →</button>';
+   sayBoth('Great break, '+nm+'! Let\'s go!','¡Qué lindo descanso! ¡Vamos!'); } }
+ clearInterval(BREAK_IV); tick(); BREAK_IV=setInterval(tick,1000); blink(); wait(400,next); }
 function openSleep(){ var p=playD(); show('s-sleep'); var host=document.getElementById('slBody'), earned=(S.stars+(S.spent||0))-(p.st0||0);
  var now=new Date(), mid=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1), h=Math.floor((mid-now)/3600000), m=Math.floor((mid-now)%3600000/60000);
  host.innerHTML='<img class="br-buddy sl" src="'+buddyImg('closed')+'" alt=""><div class="sl-z">💤</div><h2>¡Muy bien por hoy!</h2><p class="br-sub">Great job today! See you tomorrow!</p>'
