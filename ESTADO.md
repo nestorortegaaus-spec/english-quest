@@ -325,3 +325,5 @@ le acepte la voz a la nena.
 - (28/11, pedido del dueño) se QUITÓ del inicio la tarjeta de meta de ahorro (sobrecargaba el home). El código sigue en balance.js sin usarse.
 - ✅ HECHO (28/11, pedido del dueño): el Repaso ya no es botón del inicio: es una parada del camino ('rev', 🔁) en todos los mundos (cerca
   del final, antes del Memotest; en el mundo 1 antes del último cofre). Usa las palabras difíciles y completa con las del mundo si hay pocas.
+- ✅ ARREGLADO (28/11): la app se reiniciaba sola (al alimentar en la Casa) por la auto-actualización: recargaba también en Casa/Sala
+  y al cambiar el service worker en cualquier pantalla. Ahora recarga SOLO en inicio o camino y sin ventanas abiertas.

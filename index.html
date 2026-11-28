@@ -4157,15 +4157,17 @@ try{if(sessionStorage.getItem('eqUpd')&&S.name){sessionStorage.removeItem('eqUpd
    }).catch(function(){});
  }
  function tryReload(){ if(!pending)return; var on=document.querySelector('.screen.on'); var id=on?on.id:'';
-   if(id==='s-start'||id==='s-path'||id==='s-arcade'||id==='s-home'){pending=false;try{sessionStorage.setItem('eqUpd','1');}catch(e){}location.reload();} }
+   /* solo en inicio o camino, y nunca con una ventana abierta: así no corta lo que está haciendo (ej. alimentar en la Casa) */
+   if((id==='s-start'||id==='s-path')&&!document.querySelector('.pk-ov')){pending=false;try{sessionStorage.setItem('eqUpd','1');}catch(e){}location.reload();} }
  window.addEventListener('load',function(){setTimeout(check,1500);});
  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')check();});
  setInterval(function(){ if(document.visibilityState==='visible')check(); },120000);
- var _show=show; show=function(id){_show(id); if(id==='s-path'||id==='s-start'||id==='s-arcade'||id==='s-home')setTimeout(tryReload,50);};
+ var _show=show; show=function(id){_show(id); if(id==='s-path'||id==='s-start')setTimeout(tryReload,50);};
+ window.eqUpdatePending=function(){ pending=true; tryReload(); };
 })();
 if('serviceWorker' in navigator){
  var hadSW=!!navigator.serviceWorker.controller, swReloaded=false;
- navigator.serviceWorker.addEventListener('controllerchange',function(){ if(hadSW&&!swReloaded){swReloaded=true;location.reload();} });
+ navigator.serviceWorker.addEventListener('controllerchange',function(){ if(hadSW&&!swReloaded){swReloaded=true; if(window.eqUpdatePending)eqUpdatePending(); } }); /* recarga recién al volver al camino */
  window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(r){r.update();}).catch(function(){});});
  document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible'){navigator.serviceWorker.getRegistration().then(function(r){if(r)r.update();});} });
 }
