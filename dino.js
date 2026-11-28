@@ -12,15 +12,15 @@ function dinoWords(){ var out=[], seen={};
  return prioW(out); }
 /* 🗺️ mundos: horizonte y decorados (arte de la Carrera Mágica), colores del pasto, la arena y el agua */
 var DW=[
- {id:'valley',foe:'e_beetle',n:'Valle Dino',e:'🦖',seed:5,bg:'bg_dino.jpg',sky:'#0098FD',hz:0.8,fog:0xA6DA84,grass:'#6CC24A',sand:'#EAD59B',rock:'#A89F91',water:'#38C3EA',en:'🪲',
+ {id:'valley',foe:'e_beetle',fn:['beetle','escarabajo'],n:'Valle Dino',e:'🦖',seed:5,bg:'bg_dino.jpg',sky:'#0098FD',hz:0.8,fog:0xA6DA84,grass:'#6CC24A',sand:'#EAD59B',rock:'#A89F91',water:'#38C3EA',en:'🪲',
   deco:[['dn_fern',2.6],['dn_fern',2.6],['dn_brachio',4.2],['dn_nest',1.5],['dn_trice',2.2]]},
- {id:'jungle',foe:'e_beetle',n:'Selva Escondida',e:'🐒',seed:17,bg:'bg_jungle.jpg',sky:'#2B9BE0',hz:0.82,fog:0x7CBF6A,grass:'#4FA83A',sand:'#D9C08A',rock:'#8F8A7A',water:'#2FB8C8',en:'🐍',
+ {id:'jungle',foe:'e_beetle',fn:['beetle','escarabajo'],n:'Selva Escondida',e:'🐒',seed:17,bg:'bg_jungle.jpg',sky:'#2B9BE0',hz:0.82,fog:0x7CBF6A,grass:'#4FA83A',sand:'#D9C08A',rock:'#8F8A7A',water:'#2FB8C8',en:'🐍',
   deco:[['j_palm',5.2],['j_palm',5.2],['j_plant',2.6],['j_statue',2.8],['j_toucan',2.4]]},
- {id:'desert',foe:'e_crab',n:'Oasis de Arena',e:'🐪',seed:29,bg:'bg_desert.jpg',sky:'#0590FE',hz:0.8,fog:0xF2C66A,grass:'#F2C14E',sand:'#F6D58A',rock:'#C9764A',water:'#35C6E0',en:'🦂',
+ {id:'desert',foe:'e_crab',fn:['crab','cangrejo'],n:'Oasis de Arena',e:'🐪',seed:29,bg:'bg_desert.jpg',sky:'#0590FE',hz:0.8,fog:0xF2C66A,grass:'#F2C14E',sand:'#F6D58A',rock:'#C9764A',water:'#35C6E0',en:'🦂',
   deco:[['de_cactus',3.2],['de_cactus',3.2],['de_palm',4.6],['de_arch',3.4],['de_camel',2.6]]},
- {id:'snow',foe:'e_snowman',n:'Montaña Nevada',e:'❄️',seed:41,bg:'bg_snow.jpg',sky:'#0086FD',hz:0.8,fog:0xE4F1FF,grass:'#F4F9FF',sand:'#DCE9F7',rock:'#9FB3C8',water:'#8FD3F5',en:'⛄',
+ {id:'snow',foe:'e_snowman',fn:['snowman','muñeco de nieve'],n:'Montaña Nevada',e:'❄️',seed:41,bg:'bg_snow.jpg',sky:'#0086FD',hz:0.8,fog:0xE4F1FF,grass:'#F4F9FF',sand:'#DCE9F7',rock:'#9FB3C8',water:'#8FD3F5',en:'⛄',
   deco:[['s_pine',4.6],['s_pine',4.6],['s_snowman',2.4],['s_sled',2],['s_igloo',3]]},
- {id:'space',foe:'e_alien',n:'Planeta Cristal',e:'🚀',seed:53,stars:1,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,grass:'#9A5FE0',sand:'#7E4CC4',rock:'#5B4A9A',water:'#3A2C8E',en:'👾',
+ {id:'space',foe:'e_alien',fn:['alien','extraterrestre'],n:'Planeta Cristal',e:'🚀',seed:53,stars:1,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,grass:'#9A5FE0',sand:'#7E4CC4',rock:'#5B4A9A',water:'#3A2C8E',en:'👾',
   deco:[['sp_crystal',2.6],['sp_crystal',2.6],['sp_rocket',3.4],['sp_alien',2],['sp_dish',2.8]]}
 ];
 
@@ -32,7 +32,7 @@ window.startDino=function(){
   +'<div class="rn-howto"><span><b>🕹️</b>mové el dino con el círculo de la izquierda</span><span><b>⬆️ 💥</b>saltá y embestí con los botones</span>'
   +'<span><b>🥚</b>encontrá los 5 huevos: ¡cada dino bebé te pregunta una palabra!</span><span><b>💎 🌀</b>juntá gemas y entrá al portal</span></div>'
   +'<div class="bg-tracks">'+DW.map(function(w,i){ var lock=i>=S.dino.unl, ok=S.dino.done[w.id];
-    return '<button class="bg-tr'+(lock?' lock':'')+(S.dino.sel===i?' on':'')+'" data-i="'+i+'" style="background-image:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.45)),url(img/run/'+w.bg+')"><b>'+(lock?'🔒':w.e)+'</b><span>'+w.n+'</span><small>'+(lock?'Terminá el mundo anterior':ok?'✅ 💎 '+ok:'¡Nuevo!')+'</small></button>'; }).join('')+'</div>'
+    return '<button class="bg-tr'+(lock?' lock':'')+(S.dino.sel===i?' on':'')+'" data-i="'+i+'" style="background-image:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.45)),url(img/run/'+w.bg+')"><b>'+(lock?'🔒':w.e)+'</b><span>'+w.n+'</span><small>'+(lock?'Terminá el mundo anterior':ok?'🏆 récord: '+ok+' 💎':'¡Nuevo!')+'</small></button>'; }).join('')+'</div>'
   +(S.dino.eggs?'<div class="rn-best">🥚 Huevos encontrados: '+S.dino.eggs+'</div>':'')
   +'<button class="btn teal" id="dnGo">¡A explorar! · 1 🔮</button><button class="btn ghost" onclick="openArcade()">← Volver</button></div>';
  var hero=new Image(); hero.onload=function(){ var h=host.querySelector('.dn-hero'); if(h)h.innerHTML='<img src="'+DIMG+'run1.webp" alt="">'; }; hero.src=DIMG+'run1.webp';
@@ -65,7 +65,7 @@ function play(host){
   if(!TX.enemy){ TX.enemy=emojiTex(WD.en,128); IM.enemy={width:1,height:1}; }
   S.crys--; save(); gScore('🔮'+S.crys); document.getElementById('gTitle').textContent=WD.e+' Dino Aventura · '+WD.n;
   host.innerHTML='<div class="rn-wrap dn-wrap" id="dnW"><div class="rn-hud dn-hud"><span id="dnHp">❤️❤️❤️</span><span id="dnEgg">🥚 0/5</span><span id="dnGem">💎 0</span></div>'
-   +'<div class="dn-arrow" id="dnArr"><i>⬆</i><small id="dnArrL">🥚</small></div>'
+   +'<div class="dn-mis" id="dnMis"></div><div class="dn-arrow" id="dnArr"><i>⬆</i><small id="dnArrL">🥚</small></div>'
    +'<div class="rn-big" id="dnBig"></div><div class="rn-hitfx" id="dnHit"></div>'
    +'<div class="dn-joy" id="dnJoy"><div class="dn-knob" id="dnKnob"></div></div>'
    +'<button class="dn-btn jump" id="dnJump">⬆️</button><button class="dn-btn dash" id="dnDash">💥</button><div class="dn-quiz" id="dnQ"></div></div>';
@@ -116,9 +116,9 @@ function play(host){
    var dd=WD.deco[(rnd()*WD.deco.length)|0]; if(!TX[dd[0]])continue; var s=spr(dd[0],dd[1]*(0.85+rnd()*0.3)); s.position.set(dx,th(dx,dz)-0.05,dz); COL.push({x:dx,z:dz,r:Math.min(1.4,dd[1]*0.22),s:s,w:dd[1]}); }
 
   /* --- gemas 3D --- */
-  var GEMC=[0xFF4D6D,0x37D67A,0x3FA9F5,0xFFC83D,0xB36BFF], gemGeo=new T.OctahedronGeometry(0.42,0), gems=[], gemsGot=0;
+  var GEMC=[0xFF4D6D,0x37D67A,0x3FA9F5,0xFFC83D,0xB36BFF], GEMN=[['red','rojas','🔴'],['green','verdes','🟢'],['blue','azules','🔵'],['yellow','amarillas','🟡'],['purple','violetas','🟣']], gemGeo=new T.OctahedronGeometry(0.42,0), gems=[], gemsGot=0;
   function gem(x,z,y){ var c=GEMC[gems.length%5], m=new T.Mesh(gemGeo,new T.MeshLambertMaterial({color:c,emissive:c,emissiveIntensity:0.35}));
-   m.scale.set(1,1.45,1); var gy=(y!=null?y:th(x,z))+0.9; m.position.set(x,gy,z); scene.add(m); gems.push({m:m,y:gy,ph:gems.length*0.7}); }
+   m.scale.set(1,1.45,1); var gy=(y!=null?y:th(x,z))+0.9; m.position.set(x,gy,z); scene.add(m); gems.push({m:m,y:gy,ph:gems.length*0.7,ci:gems.length%5}); }
   function ring(cx,cz,cy,r,n){ for(var i=0;i<n;i++){ var a=i/n*Math.PI*2; gem(cx+Math.cos(a)*r,cz+Math.sin(a)*r,cy==null?null:cy); } }
   for(var g1=0;g1<9;g1++){ var gz=34-g1*3.2; gem(Math.sin(g1*0.6)*2,gz); }
   path.forEach(function(p){ gem(p.x,p.z,p.top); }); steps.forEach(function(p){ gem(p.x,p.z,p.top); });
@@ -183,6 +183,7 @@ function play(host){
   function dust(p,n){ for(var i=0;i<n;i++){ var s=new T.Sprite(new T.SpriteMaterial({map:dustTex,transparent:true,depthWrite:false})); s.scale.set(1,1,1); s.position.set(p.x+(Math.random()-.5)*1.2,(p.y||0)+0.3,p.z+(Math.random()-.5)*1.2); scene.add(s); fx.push({s:s,vx:(Math.random()-.5)*2.5,vy:1+Math.random()*1.5,vz:(Math.random()-.5)*2.5,life:0.7,g:1,grow:1}); } }
   function sparkle(p){ var s=new T.Sprite(new T.SpriteMaterial({map:sparkTex,transparent:true,depthWrite:false})); s.scale.set(1.2,1.2,1); s.position.set(p.x,p.y,p.z); scene.add(s); fx.push({s:s,vx:0,vy:2.5,vz:0,life:0.6,g:0,grow:1}); }
   function big(txt,ms){ var b=document.getElementById('dnBig'); if(!b)return; b.innerHTML=txt; b.classList.remove('on'); void b.offsetWidth; b.classList.add('on'); clearTimeout(b._t); b._t=setTimeout(function(){b.classList.remove('on');},ms||1400); }
+  var MIS=null; function misHud(){ var m=document.getElementById('dnMis'); if(!m||!MIS)return; m.innerHTML=MIS.done?'🦕 ✓':'🦕 '+GEMN[MIS.ci][2]+' '+MIS.n+'/3'; m.classList.toggle('ok',!!MIS.done); }
   function hud(){ document.getElementById('dnHp').textContent='❤️'.repeat(Math.max(0,me.hp))+'🤍'.repeat(Math.max(0,3-me.hp)); document.getElementById('dnEgg').textContent='🥚 '+eggsGot+'/5'; document.getElementById('dnGem').textContent='💎 '+gemsGot; }
 
   /* --- golpe: sale despedido, mareo, temblor y destello (sin titilar) --- */
@@ -190,7 +191,7 @@ function play(host){
    SFX.hit(); cam.userData.shake=0.5; dz.visible=true; me.dz=1.6; for(var q=0;q<8;q++)burstAt(me,0xFFE07A); var fl=document.getElementById('dnHit'); if(fl){fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');}
    if(navigator.vibrate)try{navigator.vibrate([60,40,90]);}catch(e){} hud(); if(me.hp<=0)setTimeout(function(){ end(false); },900); else big('💥 ¡Uy!',800); }
   function beat(f){ f.dead=true; f.fly=1.2; var dx=f.x-me.x, dzz=f.z-me.z, d=Math.hypot(dx,dzz)||1; f.vx=dx/d*14; f.vz=dzz/d*14; f.vy=9; SFX.land(); tone(880,.08,'square',.1,0); cam.userData.shake=0.25;
-   for(var q=0;q<12;q++)burstAt({x:f.x,y:f.s.position.y,z:f.z}); setTimeout(function(){ if(!GAME.on)return; gem(f.x,f.z,groundAt(f.x,f.z,99)); GEMS_N++; },700); }
+   for(var q=0;q<12;q++)burstAt({x:f.x,y:f.s.position.y,z:f.z}); if(WD.fn){ big('💥 '+WD.fn[0]+'!<br><small>'+WD.fn[1]+'</small>',1100); if(!window._dnFn||Date.now()-window._dnFn>4000){ window._dnFn=Date.now(); sayBoth(WD.fn[0],WD.fn[1]); } } setTimeout(function(){ if(!GAME.on)return; gem(f.x,f.z,groundAt(f.x,f.z,99)); GEMS_N++; },700); }
 
   /* --- huevo: nace el dino bebé y pregunta una palabra --- */
   var pool=dinoWords(), wi=0, words=0;
@@ -208,11 +209,11 @@ function play(host){
   window.__dino={me:me,eggs:eggs,gems:gems,foes:foes,PL:PL,keys:keys,joy:joy,jump:jump,dash:dash,th:th,hatch:hatch,portal:{x:PX,z:PZ},st:function(){return {eggs:eggsGot,gems:gemsGot,hp:me.hp,ended:ended,paused:paused,portal:portalOn};}};
 
   function end(win){ if(ended)return; ended=true; var bonus=win?20:0, got=gemsGot+eggsGot*5+bonus; S.gems+=got; var wi2=DW.indexOf(WD), nw=null;
-   if(win){ var best=S.dino.done[WD.id]||0; if(gemsGot>best)S.dino.done[WD.id]=gemsGot; if(wi2+1>=S.dino.unl&&wi2+1<DW.length){ S.dino.unl=wi2+2; nw=DW[wi2+1]; } sWin(); burst(200); say('You did it!'); } else say('Oh no!');
+   var recNew=false; if(win){ var best=S.dino.done[WD.id]||0; if(gemsGot>best){ S.dino.done[WD.id]=gemsGot; recNew=best>0; } if(wi2+1>=S.dino.unl&&wi2+1<DW.length){ S.dino.unl=wi2+2; nw=DW[wi2+1]; } sWin(); burst(200); say('You did it!'); } else say('Oh no!');
    save();
    setTimeout(function(){ if(!GAME.on)return; GAME.stop(); var b=document.getElementById('rewBody');
     b.innerHTML='<div class="chest">'+(win?'🏆':'🦖')+'</div><h2>'+(win?'¡Terminaste '+WD.n+'!':'¡Te quedaste sin corazones!')+'</h2>'
-     +(nw?'<p>🔓 ¡Nuevo mundo: '+nw.e+' '+nw.n+'!</p>':win?'':'<p>Encontrá los 5 huevos y entrá al portal para pasar de mundo</p>')
+     +(recNew?'<p>🏆 ¡Nuevo récord en '+WD.n+': '+gemsGot+' gemas!</p>':win&&S.dino.done[WD.id]?'<p>🏆 Récord de '+WD.n+': '+S.dino.done[WD.id]+' gemas</p>':'')+(nw?'<p>🔓 ¡Nuevo mundo: '+nw.e+' '+nw.n+'!</p>':win?'':'<p>Encontrá los 5 huevos y entrá al portal para pasar de mundo</p>')
      +'<div class="rn-res"><div><b>'+gemsGot+'/'+GEMS_N+'</b><span>gemas</span></div><div><b>'+eggsGot+'/5</b><span>huevos</span></div><div><b>'+words+'</b><span>palabras</span></div></div><div class="rewpill">💎 +'+got+' · 🔮 te quedan '+(S.crys||0)+'</div>'
      +((S.crys||0)>0?'<button class="btn teal" onclick="startDino()">Jugar otra vez · 1 🔮</button><div style="height:8px"></div>':'<p style="font-size:13px">Estudiá para ganar más 🔮</p>')
      +'<button class="btn ghost" onclick="openArcade()">Volver a la Sala de Juegos</button>';
@@ -250,7 +251,7 @@ function play(host){
    /* se cae al agua: chapuzón y vuelve a la orilla */
    if(me.y<-0.35){ for(var q=0;q<10;q++)burstAt(me,0xBFEFFF); tone(300,.2,'sine',.12,0); tone(200,.25,'sine',.1,.08); me.x=me.safe.x; me.z=me.safe.z; me.y=th(me.x,me.z)+3; me.vy=0; me.sp=0; big('💦 ¡Splash!',900); }
    /* gemas */
-   gems.forEach(function(g){ if(g.got)return; var p=g.m.position; if(Math.abs(p.x-me.x)<1.3&&Math.abs(p.z-me.z)<1.3&&Math.abs(p.y-0.9-me.y)<1.6){ g.got=true; scene.remove(g.m); gemsGot++; SFX.star(); sparkle(p); hud(); } });
+   gems.forEach(function(g){ if(g.got)return; var p=g.m.position; if(Math.abs(p.x-me.x)<1.3&&Math.abs(p.z-me.z)<1.3&&Math.abs(p.y-0.9-me.y)<1.6){ g.got=true; scene.remove(g.m); gemsGot++; if(MIS&&!MIS.done&&g.ci===MIS.ci){ MIS.n++; misHud(); if(MIS.n>=3){ MIS.done=true; S.gems+=15; SFX.power(); for(var q3=0;q3<20;q3++)burstAt(me); big('🦕 Thank you!<br><small>¡Misión cumplida! +15 💎</small>',2000); sayBoth('Thank you! You found three '+GEMN[MIS.ci][0]+' gems!','¡Gracias! ¡Encontraste tres gemas '+GEMN[MIS.ci][1]+'!'); } } SFX.star(); sparkle(p); hud(); } });
    /* huevos */
    eggs.forEach(function(e){ if(e.got)return; if(Math.hypot(e.x-me.x,e.z-me.z)<1.6&&Math.abs(e.y-me.y)<1.8)hatch(e); });
    /* portal */
@@ -296,7 +297,9 @@ function play(host){
   function loop(ts){ if(!GAME.on){ cleanup(); return; } var dt=Math.min(0.05,last?(ts-last)/1000:0.016); last=ts; update(dt); R.render(scene,cam); GAME.raf=requestAnimationFrame(loop); }
   function cleanup(){ window.removeEventListener('keydown',onKey); window.removeEventListener('keyup',onKey); try{ R.dispose(); R.forceContextLoss(); }catch(e){} CLEAN=null; }
   CLEAN=cleanup; hud();
+  MIS={ci:(Math.random()*5)|0,n:0,done:false}; misHud();
   big('🥚 ¡Encontrá los 5 huevos!',2200); sayBoth('Find the five eggs!','¡Encontrá los cinco huevos!');
+  setTimeout(function(){ if(!GAME.on||ended)return; big('🦕 Find three '+GEMN[MIS.ci][0]+' gems!<br><small>¡Encontrá tres gemas '+GEMN[MIS.ci][1]+'!</small>',3000); sayBoth('Find three '+GEMN[MIS.ci][0]+' gems!','Un dino amigo te pide: ¡encontrá tres gemas '+GEMN[MIS.ci][1]+'!'); },4200);
   GAME.raf=requestAnimationFrame(loop);
  }
 }
