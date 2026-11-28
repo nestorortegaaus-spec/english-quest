@@ -19,7 +19,9 @@ var BTRK=[
  {id:'candy',n:'Ruta Dulce',e:'🍭',seed:48,amp:120,bg:'bg_candy.jpg',sky:'#1297FC',hz:0.8,fog:0xFFC2DD,road:['#D99A5B','#E84A4A','#FFFFFF'],ground:['#FFB3D4','#FF9EC6','#FFC8E0'],
   deco:[['c_lolli',4.6],['c_cupcake',2.8],['c_cane',3.2],['c_house',3.6]]},
  {id:'jungle',n:'Selva Salvaje',e:'🐒',seed:63,amp:125,bg:'bg_jungle.jpg',sky:'#2B9BE0',hz:0.82,fog:0x7CBF6A,road:['#B98A5A','#FFD36B','#5A3A22'],ground:['#4FA83A','#3E9530','#62BC48'],
-  deco:[['j_palm',5.2],['j_palm',5.2],['j_plant',3],['j_statue',3],['j_toucan',2.8],['o_barrel',1.2]]}
+  deco:[['j_palm',5.2],['j_palm',5.2],['j_plant',3],['j_statue',3],['j_toucan',2.8],['o_barrel',1.2]]},
+ {id:'desert',n:'Dunas del Oasis',e:'🐪',seed:77,amp:130,bg:'bg_desert.jpg',sky:'#0590FE',hz:0.8,fog:0xF2C66A,road:['#C98A5A','#E84A4A','#FFFFFF'],ground:['#F2C14E','#E5AE3A','#F8D06A'],
+  deco:[['de_cactus',4.4],['de_cactus',4.4],['de_palm',5],['de_arch',4],['de_camel',3.2],['o_barrel',1.2]]}
 ];
 var PWN={banana:['banana','banana'],bubble:['bubble','burbuja'],rocket:['rocket','cohete'],wave:['wave','ola']};
 
