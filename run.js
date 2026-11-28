@@ -37,7 +37,7 @@ window.startRun=function(){
  var host=gSetup('🦊 Carrera Mágica'); GAME.quiet=true; ARCADE_RET=true;
  if(!S.run)S.run={best:0,stars:0}; gScore('🔮'+(S.crys||0));
  var ch=runner(), mates=FRIENDS.filter(function(f){return RUNNERS.indexOf(f.id)>=0&&runOwned(f.id);}); if(mates.length<2)mates=[];
- host.innerHTML='<div class="rn-start"><img id="rnHero" src="'+IMG+ch+'_run1.webp" alt=""><h2>Carrera Mágica</h2>'
+ host.innerHTML='<div class="rn-start"><div class="gs-cover" style="background-image:url(img/ui/cover_run.webp)"><h2>Carrera Mágica</h2></div><img id="rnHero" src="'+IMG+ch+'_run1.webp" alt="">'
   +(mates.length?'<div class="rn-mates">'+mates.map(function(f){ var own=runOwned(f.id); return '<button class="rn-mate'+(own?'':' lock')+(f.id===ch?' on':'')+'" data-id="'+f.id+'"><img src="'+IMG+f.id+'_run1.webp" alt=""><span>'+(own?f.n:'🔒 '+f.n)+'</span></button>'; }).join('')+'</div>':'')
   +'<div class="rn-howto"><span><b>👈 👉</b>deslizá para cambiar de carril</span><span><b>👆</b>deslizá hacia arriba para saltar</span><span><b>👇</b>deslizá hacia abajo para agacharte</span><span><b>🌸</b>pasá por la puerta de la palabra que escuchás</span></div>'
   +(S.run.best?'<div class="rn-best">🏆 Tu récord: '+S.run.best+' m</div>':'')

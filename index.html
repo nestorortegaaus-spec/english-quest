@@ -906,6 +906,34 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 #s-story .srow .btn{height:58px;border-radius:22px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:21px;}
 #s-story .srow .btn.ghost{width:58px!important;padding:0;font-size:24px;background:#fff;box-shadow:0 4px 0 rgba(120,150,190,.3);}
 
+
+/* ===================== 🕹️ VIDEOJUEGOS DE LA SALA: inicio, selección y paneles con el estilo nuevo ===================== */
+.gs-cover{position:relative;flex:0 0 auto;width:100%;height:176px;border-radius:28px;border:5px solid #fff;background-size:cover;background-position:center 30%;box-shadow:0 8px 18px rgba(40,90,150,.22);margin-bottom:20px;}
+.gs-cover h2{position:absolute!important;left:50%;bottom:-20px;transform:translateX(-50%);margin:0!important;background:#fff;border-radius:22px;padding:4px 22px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:28px!important;color:#1F3E86!important;white-space:nowrap;box-shadow:0 4px 10px rgba(40,90,150,.2);}
+#s-game.mg .rn-start{max-width:440px;align-self:stretch;margin:0 auto;overflow-y:auto;gap:12px;padding:8px 14px 20px;font-family:'EQ Nunito',sans-serif;}
+#s-game.mg .rn-start>img{display:none;}
+#s-game.mg .rn-howto span{background:rgba(255,255,255,.95);border-radius:20px;font-size:15px;color:#24345C;box-shadow:0 4px 10px rgba(40,90,150,.14);}
+#s-game.mg .rn-howto span b{font-size:26px;}
+#s-game.mg .rn-best{background:#fff;border-radius:16px;padding:4px 14px;box-shadow:0 3px 8px rgba(40,90,150,.14);font-family:'EQ Baloo',sans-serif;}
+#s-game.mg .rn-start .btn,#s-game.mg .kq-sel>.btn{flex:0 0 auto;width:100%;height:58px;border-radius:22px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:21px;}
+#s-game.mg .rn-start .btn.ghost{height:48px;font-size:17px;background:rgba(255,255,255,.9);}
+#s-game.mg .bg-tracks{display:flex;overflow-x:auto;gap:10px;padding:2px 2px 8px;scrollbar-width:none;flex:0 0 auto;} #s-game.mg .bg-tracks::-webkit-scrollbar{display:none;}
+#s-game.mg .bg-tr{flex:0 0 132px;min-height:104px;border-radius:20px;border:4px solid #fff;box-shadow:0 5px 12px rgba(40,90,150,.2);}
+#s-game.mg .bg-tr.on{border-color:#2FCB72;box-shadow:0 0 0 3px #2FCB72,0 5px 12px rgba(40,90,150,.2);}
+#s-game.mg .rn-mates .rn-mate{border-radius:18px;box-shadow:0 4px 10px rgba(40,90,150,.15);} #s-game.mg .rn-mate.on{border-color:#2FCB72;}
+#s-game.mg .kq-sel{font-family:'EQ Nunito',sans-serif;}
+#s-game.mg .kq-sel h2.kq-sub,#s-game.mg .kq-sel>h2{align-self:center;background:#fff;border-radius:20px;padding:5px 18px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:22px;box-shadow:0 4px 10px rgba(40,90,150,.16);}
+#s-game.mg .kq-ch{border-radius:22px;box-shadow:0 6px 0 var(--c),0 8px 14px rgba(40,90,150,.15);} #s-game.mg .kq-ch.on{border-color:#2FCB72;background:#EFFCF4;}
+#s-game.mg .kq-ch span{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:16px;}
+#s-game.mg .kq-tr{border-radius:22px;border:4px solid #fff;box-shadow:0 5px 12px rgba(40,90,150,.2);font-family:'EQ Baloo',sans-serif;}
+#s-game.mg .kg-car{border-radius:22px;box-shadow:0 6px 0 var(--c),0 8px 14px rgba(40,90,150,.15);} #s-game.mg .kg-have{background:#fff;border-radius:16px;padding:4px 12px;align-self:center;}
+/* paneles durante la carrera */
+.rn-hud span,.kq-hud span{height:42px;display:flex;align-items:center;background:rgba(255,255,255,.95)!important;color:#24345C!important;border-radius:21px!important;padding:0 14px!important;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:20px!important;box-shadow:0 3px 8px rgba(0,0,0,.18)!important;}
+.kq-dash{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);width:40%;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;}
+.kq-wd{display:none;background:rgba(255,255,255,.95);border-radius:18px;padding:4px 12px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:18px;color:#24345C;white-space:nowrap;box-shadow:0 3px 8px rgba(0,0,0,.2);} .kq-wd b{color:#E06E58;}
+.kq-spd{width:100%;height:14px;border-radius:8px;background:rgba(255,255,255,.6);overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.2);} .kq-spd i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,#5BE07E,#FFC23D,#FF6B4A);transition:width .15s;}
+.kq-dash small{font-weight:900;font-size:11px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5);}
+
 /* ===================== 🎨 REDISEÑO (referencia: design/ref_rediseno_principal.webp) ===================== */
 @font-face{font-family:'EQ Baloo';src:url(fonts/baloo2-latin.woff2) format('woff2');font-weight:400 800;font-display:swap;}
 @font-face{font-family:'EQ Nunito';src:url(fonts/nunito-latin.woff2) format('woff2');font-weight:200 1000;font-display:swap;}
@@ -1132,11 +1160,11 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 </div>
 
 <script src="vocab.js?v=6"></script>
-<script src="run.js?v=20" defer></script>
-<script src="buggy.js?v=11" defer></script>
+<script src="run.js?v=21" defer></script>
+<script src="buggy.js?v=12" defer></script>
 <script src="chat.js?v=1"></script>
 <script src="simon.js?v=1"></script>
-<script src="dino.js?v=6"></script>
+<script src="dino.js?v=7"></script>
 <script src="review.js?v=5"></script>
 <script>
 /* ===== FOX ===== */
@@ -2514,7 +2542,7 @@ function startKart(){
  var sel={c:S.kart.ch||'fox',t:0}; if(!kOk({id:sel.c}))sel.c='fox'; musicStart(); if(sel.c.indexOf('car_')===0&&(S.kart.cars||[]).indexOf(sel.c.slice(4))<0)sel.c='fox';
  if(!S.kart.cars)S.kart.cars=[];
  function pickChar(){ var pil=KCHARS.filter(function(c){return !c.car&&kOk(c);});
-  host.innerHTML='<div class="kq-sel"><h2>Elegí tu piloto</h2><div class="kq-grid">'+pil.map(function(c){return '<button class="kq-ch'+(sel.c===c.id?' on':'')+'" data-id="'+c.id+'" style="--c:'+c.c+'"><img src="img/kart_'+c.id+'.png" alt="" onerror="this.outerHTML=\'<b>'+c.e+'</b>\'"><span>'+c.n+'</span></button>';}).join('')+'</div>'+garageHTML()+'<button class="btn teal" id="kqNext">Elegir pista →</button></div>';
+  host.innerHTML='<div class="kq-sel"><div class="gs-cover" style="background-image:url(img/ui/cover_kart.webp)"><h2>Kart Quest</h2></div><h2 class="kq-sub">Elegí tu piloto</h2><div class="kq-grid">'+pil.map(function(c){return '<button class="kq-ch'+(sel.c===c.id?' on':'')+'" data-id="'+c.id+'" style="--c:'+c.c+'"><img src="img/kart_'+c.id+'.png" alt="" onerror="this.outerHTML=\'<b>'+c.e+'</b>\'"><span>'+c.n+'</span></button>';}).join('')+'</div>'+garageHTML()+'<button class="btn teal" id="kqNext">Elegir pista →</button></div>';
   host.querySelectorAll('.kq-ch').forEach(function(b){b.onclick=function(){sel.c=b.dataset.id;sTap();pickChar();};});
   host.querySelectorAll('.kg-car').forEach(function(b){b.onclick=function(){ var k=KCARS.find(function(x){return x.id===b.dataset.k;}); if(S.kart.cars.indexOf(k.id)>=0){ sel.c='car_'+k.id; sTap(); pickChar(); return; } carBuy(k); };});
   document.getElementById('kqNext').onclick=function(){S.kart.ch=sel.c;save();sTap();pickTrack();}; }
@@ -2528,7 +2556,7 @@ function startKart(){
   document.body.appendChild(ov);
   function buy(byStars){ if(byStars){ if(!spendStars(k.st))return; } else { if(S.gems<k.g)return; S.gems-=k.g; } S.kart.cars.push(k.id); sel.c='car_'+k.id; S.kart.ch=sel.c; save(); ov.remove(); sWin(); burst(160); toast('🏎️ ¡'+k.n+' es tuyo!'); pickChar(); }
   document.getElementById('kgS').onclick=function(){buy(true);}; document.getElementById('kgG').onclick=function(){buy(false);}; document.getElementById('kgX').onclick=function(){ov.remove();sTap();}; }
- function pickTrack(){ host.innerHTML='<div class="kq-sel"><h2>Elegí la pista</h2><div class="kq-tracks">'+KTRACKS.map(function(t,i){var lock=i>=S.kart.unl, cup=S.kart.cup[t.id];
+ function pickTrack(){ host.innerHTML='<div class="kq-sel"><h2 class="kq-sub">Elegí la pista</h2><div class="kq-tracks">'+KTRACKS.map(function(t,i){var lock=i>=S.kart.unl, cup=S.kart.cup[t.id];
    return '<button class="kq-tr'+(lock?' lock':'')+'" data-i="'+i+'" style="background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.38)),url(img/kart_bg_'+t.id+'.jpg) center/cover,linear-gradient(160deg,'+t.sky[0]+','+t.g[0]+')"><b>'+(lock?'🔒':t.e)+'</b><span>'+t.n+'</span><small>'+(lock?'Salí 1°, 2° o 3° en la anterior':cup?['','🥇','🥈','🥉'][cup]||'🏁':'¡Nueva!')+'</small></button>';}).join('')
    +'</div><button class="btn ghost" id="kqBack">← Cambiar piloto</button></div>';
   host.querySelectorAll('.kq-tr').forEach(function(b){b.onclick=function(){var i=+b.dataset.i; if(i>=S.kart.unl){sBad();return;} sel.t=i; race();};});
@@ -2540,7 +2568,7 @@ function startKart(){
   var T=KTRACKS[sel.t], me=KCHARS.find(function(c){return c.id===sel.c;});
   host.innerHTML='<div class="kq-wrap"><canvas id="kqC"></canvas><div class="kq-hud"><span id="kqLap">Vuelta 1/3</span><span id="kqPos">6°</span></div>'
    +'<div class="kq-ask" id="kqAsk"></div><div class="kq-big" id="kqBig"></div>'
-   +'<button class="kq-btn l" id="kqL">◀</button><button class="kq-btn r" id="kqR">▶</button></div>';
+   +'<button class="kq-btn l" id="kqL">◀</button><button class="kq-btn r" id="kqR">▶</button><div class="kq-dash"><div class="kq-wd" id="kqWd">🏁 ¡Vamos!</div><div class="kq-spd"><i id="kqSpd"></i></div><small>velocidad</small></div></div>';
   var cvs=document.getElementById('kqC'), wrap=cvs.parentNode, W=wrap.clientWidth, H=wrap.clientHeight, dpr=Math.min(2,window.devicePixelRatio||1);
   cvs.width=W*dpr; cvs.height=H*dpr; cvs.style.width=W+'px'; cvs.style.height=H+'px'; var c=cvs.getContext('2d'); c.scale(dpr,dpr);
   // ---- pista ----
@@ -2635,7 +2663,7 @@ function startKart(){
       var gg=g; setTimeout(function(){fillGate(gg);},1500); } });
    // puesto
    var pd=dist(P), op=place; place=1+cars.filter(function(k){return dist(k)>pd;}).length; if(started&&place<op&&t0>4)narr('pass');
-   document.getElementById('kqLap').textContent='Vuelta '+Math.min(LAPS,P.lap+1)+'/'+LAPS; document.getElementById('kqPos').textContent=place+'°';
+   document.getElementById('kqLap').textContent='Vuelta '+Math.min(LAPS,P.lap+1)+'/'+LAPS; document.getElementById('kqPos').textContent=place+'°'; var sd=document.getElementById('kqSpd'); if(sd)sd.style.width=Math.max(0,Math.min(100,P.sp/(maxSp*CS*1.35)*100))+'%'; var wd=document.getElementById('kqWd'); if(wd){ var on=ask.className.indexOf('on')>=0, h=on?ask.innerHTML:'🏁 ¡A toda velocidad!'; if(wd._h!==h){wd._h=h;wd.innerHTML=h;} }
    skyOff+=pseg.curve*spPct*dt*0.6;
   }
   function render(){

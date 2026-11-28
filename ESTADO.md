@@ -299,3 +299,6 @@ le acepte la voz a la nena.
   Ahora talk() espera a que termine el castellano (margen según el largo) y el castellano se dice un poco más rápido (rate 1.12, también en sayBoth).
 - ✅ HECHO (28/11): cuentos por dentro con el estilo nuevo (marco blanco en la escena, texto en tarjeta, letra nueva). Toda la app
   queda con el rediseño salvo los videojuegos de la Sala y la Isla (juegos aparte).
+- ✅ HECHO (28/11): videojuegos de la Sala con el estilo nuevo por fuera: inicio con portada (.gs-cover, img/ui/cover_*), instrucciones
+  en tarjetas, pistas/mundos en fila deslizable, selección de piloto/pista del Kart en tarjetas, paneles de carrera grandes, barra de
+  velocidad en el Kart (.kq-dash) y portal de Dino como arco de piedra con 🔒 hasta abrirse.

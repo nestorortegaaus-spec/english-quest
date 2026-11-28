@@ -33,7 +33,7 @@ window.startBuggy=function(){
  if(CLEAN){ try{CLEAN();}catch(e){} CLEAN=null; }
  var host=gSetup('🏖️ Buggy Splash'); GAME.quiet=true; ARCADE_RET=true;
  if(!S.bug)S.bug={best:0,wins:0}; if(!S.bug.unl)S.bug.unl=1; if(!S.bug.cup)S.bug.cup={}; if(S.bug.sel==null)S.bug.sel=0; gScore('🔮'+(S.crys||0));
- host.innerHTML='<div class="rn-start bg-start"><img src="'+IMG+'fox.webp" alt=""><h2>Buggy Splash</h2>'
+ host.innerHTML='<div class="rn-start bg-start"><div class="gs-cover" style="background-image:url(img/ui/cover_buggy.webp)"><h2>Buggy Splash</h2></div>'
   +'<div class="rn-howto"><span><b>👈 👉</b>mantené apretado un costado para doblar</span><span><b>🎁</b>agarrá la caja de la palabra que escuchás</span>'
   +'<span><img src="'+IMG+'p_banana.webp"><img src="'+IMG+'p_bubble.webp">tirá poderes a los rivales</span><span><b>🏁</b>3 vueltas: ¡llegá primero!</span></div>'
   +'<div class="bg-tracks">'+BTRK.map(function(tk,i){ var lock=i>=S.bug.unl, cup=S.bug.cup[tk.id];

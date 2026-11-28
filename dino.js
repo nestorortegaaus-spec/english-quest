@@ -28,7 +28,7 @@ window.startDino=function(){
  if(CLEAN){ try{CLEAN();}catch(e){} CLEAN=null; }
  var host=gSetup('🦖 Dino Aventura'); GAME.quiet=true; ARCADE_RET=true;
  if(!S.dino)S.dino={unl:1,done:{},sel:0,eggs:0}; if(!S.dino.done)S.dino.done={}; gScore('🔮'+(S.crys||0));
- host.innerHTML='<div class="rn-start bg-start dn-start"><div class="dn-hero">🦖</div><h2>Dino Aventura</h2>'
+ host.innerHTML='<div class="rn-start bg-start dn-start"><div class="gs-cover" style="background-image:url(img/ui/cover_dino.webp)"><h2>Dino Aventura</h2></div>'
   +'<div class="rn-howto"><span><b>🕹️</b>mové el dino con el círculo de la izquierda</span><span><b>⬆️ 💥</b>saltá y embestí con los botones</span>'
   +'<span><b>🥚</b>encontrá los 5 huevos: ¡cada dino bebé te pregunta una palabra!</span><span><b>💎 🌀</b>juntá gemas y entrá al portal</span></div>'
   +'<div class="bg-tracks">'+DW.map(function(w,i){ var lock=i>=S.dino.unl, ok=S.dino.done[w.id];
@@ -140,9 +140,12 @@ function play(host){
 
   /* --- portal: se abre con los 5 huevos --- */
   var PX=0, PZ=30, py0=th(PX,PZ), portal=new T.Group();
-  var pring=new T.Mesh(new T.TorusGeometry(2.1,0.32,12,40),new T.MeshLambertMaterial({color:0x9A8F80}));
+  var pring=new T.Mesh(new T.TorusGeometry(2.1,0.42,10,40),new T.MeshLambertMaterial({color:0xB3A488}));
   var pin=new T.Mesh(new T.CircleGeometry(1.9,32),new T.MeshBasicMaterial({color:0x7FE0FF,transparent:true,opacity:0.0,side:T.DoubleSide}));
-  portal.add(pring); portal.add(pin); portal.position.set(PX,py0+2.4,PZ); scene.add(portal); var portalOn=false;
+  portal.add(pring); portal.add(pin);
+  /* arco de piedra: dos columnas que sostienen el aro + candado mientras está cerrado */
+  [-2.3,2.3].forEach(function(px){ var col=new T.Mesh(new T.CylinderGeometry(0.42,0.55,2.6,10),new T.MeshLambertMaterial({color:0xA89A82})); col.position.set(px,-1.3,0); portal.add(col); });
+  var lock=new T.Sprite(new T.SpriteMaterial({map:emojiTex('🔒',128),transparent:true})); lock.scale.set(1.5,1.5,1); portal.add(lock); portal.position.set(PX,py0+2.4,PZ); scene.add(portal); var portalOn=false;
 
   /* --- bichitos gruñones --- */
   var foes=[]; for(var fI=0;fI<40&&foes.length<7;fI++){ var fx=(rnd()-.5)*2*(RAD-14), fz=(rnd()-.5)*2*(RAD-14); if(!freeSpot(fx,fz,2)||Math.hypot(fx,fz-40)<16)continue;
@@ -200,7 +203,7 @@ function play(host){
     if(o===w){ b.classList.add('ok'); if(!tries){ words++; } markWord(w,!tries); sGood(); sayBoth(w.en,w.es); Q.querySelector('.dn-qb').innerHTML='<b>Yes! '+w.e+' '+w.en+'!</b><small>¡Sí! '+w.es+' · ¡Gracias! 💛</small>'; Q.querySelectorAll('.dn-qo button').forEach(function(x){x.disabled=true;});
      setTimeout(function(){ Q.classList.remove('on'); paused=false; last=0; if(eggsGot>=5)openPortal(); else big('🥚 '+eggsGot+'/5',1100); },2100); }
     else { tries++; b.disabled=true; b.classList.add('no'); sBad(); say(o.en); } }; }); }
-  function openPortal(){ portalOn=true; pring.material.color.set(0xFFD36B); pring.material.emissive=new T.Color(0xFF9A3C); pring.material.emissiveIntensity=0.5; pin.material.opacity=0.75; SFX.gate(); big('🌀 ¡Se abrió el portal!<br><small>Volvé al principio</small>',2200); sayBoth('The portal is open!','¡Se abrió el portal!'); }
+  function openPortal(){ portalOn=true; lock.visible=false; pring.material.color.set(0xFFD36B); pring.material.emissive=new T.Color(0xFF9A3C); pring.material.emissiveIntensity=0.5; pin.material.opacity=0.75; SFX.gate(); big('🌀 ¡Se abrió el portal!<br><small>Volvé al principio</small>',2200); sayBoth('The portal is open!','¡Se abrió el portal!'); }
 
   window.__dino={me:me,eggs:eggs,gems:gems,foes:foes,PL:PL,keys:keys,joy:joy,jump:jump,dash:dash,th:th,hatch:hatch,portal:{x:PX,z:PZ},st:function(){return {eggs:eggsGot,gems:gemsGot,hp:me.hp,ended:ended,paused:paused,portal:portalOn};}};
 
