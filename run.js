@@ -29,7 +29,7 @@ function runWords(){ var out=[], seen={}, maxU=UNITS.length;
  return prioW(out); }
 
 /* 🏃 corredores: amigos de la Casa con su hoja de espaldas (img/run/<id>_run1, _run2, _jump, _slide.webp) */
-var RUNNERS=['fox','kitty','puppy','bunny'], RUNW={fox:0.9,kitty:0.8,puppy:0.8,bunny:0.86}; /* RUNW: ancho del sprite para que todos midan parecido */
+var RUNNERS=['fox','kitty','puppy','bunny','penguin'], RUNW={fox:0.9,kitty:0.8,puppy:0.8,bunny:0.86,penguin:0.8}; /* RUNW: ancho del sprite para que todos midan parecido */
 function runOwned(id){ try{ return id==='fox'||(S.home&&S.home.own&&S.home.own.indexOf(id)>=0); }catch(e){ return id==='fox'; } }
 function runner(){ var c=S.run&&S.run.ch; return c&&RUNNERS.indexOf(c)>=0&&runOwned(c)?c:'fox'; }
 window.startRun=function(){
