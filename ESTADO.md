@@ -151,6 +151,9 @@ le acepte la voz a la nena.
   p. ej. "I have a…", "Where is my…?", "It is time to…", "Let's … together!", "I have never seen a…", "I am happy because…",
   "If I had a…, I would…". Tanda 3: +20 patrones (80 en total): "I want to…", "Please, …", "We are…", "What time is…?",
   "I always … before bed", "Can you help me…?", "When I was little, I…", "My dream is to…", "Yesterday it was…, but today it is…".
+  Tanda 4 (28/11): +20 patrones (100 en total): "I hear a…", "Give me the…, please", "I am … now", "Is it a…?", "Don't…!", "Who wants…?",
+  "I have to … today", "Have you ever seen a…?", "It smells like…", "I have been … for an hour", "I like … more than …", "You should…",
+  "While I was…, it started to rain", "I can't wait to…!".
 - ⏭️ PENDIENTE (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke, tienda, charla, Simón dice): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
