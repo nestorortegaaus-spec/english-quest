@@ -258,5 +258,5 @@ le acepte la voz a la nena.
   nace un dino bebé que pregunta una palabra en inglés con 3 opciones), bichitos gruñones (embestirlos o caerles encima; si te tocan: golpe
   sin titilar, 3 ❤️), flecha al huevo más cercano, chapuzón si cae al agua. Con los 5 huevos se abre el 🌀 portal → mundo siguiente.
   5 mundos en cadena (S.dino.unl): Valle Dino, Selva Escondida, Oasis de Arena, Montaña Nevada, Planeta Cristal (reusa horizontes y decorados).
-  Arte ChatGPT: bichitos img/dino/e_beetle (Valle, Selva), e_crab (Oasis), e_snowman (Nieve) y huevo img/dino/egg.webp (campo foe en DW).
-  Falta: bichito del Planeta Cristal (hoy emoji 👾). Idea: pasar el dino a modelo 3D .glb animado (Meshy/Tripo) si el dueño lo consigue.
+  Arte ChatGPT: bichitos img/dino/e_beetle (Valle, Selva), e_crab (Oasis), e_snowman (Nieve), e_alien (Planeta Cristal) y huevo img/dino/egg.webp (campo foe en DW).
+  Los decorados entre la cámara y el dino se vuelven transparentes. Idea: pasar el dino a modelo 3D .glb animado (Meshy/Tripo) si el dueño lo consigue.

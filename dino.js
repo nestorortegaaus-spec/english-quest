@@ -20,7 +20,7 @@ var DW=[
   deco:[['de_cactus',3.2],['de_cactus',3.2],['de_palm',4.6],['de_arch',3.4],['de_camel',2.6]]},
  {id:'snow',foe:'e_snowman',n:'Montaña Nevada',e:'❄️',seed:41,bg:'bg_snow.jpg',sky:'#0086FD',hz:0.8,fog:0xE4F1FF,grass:'#F4F9FF',sand:'#DCE9F7',rock:'#9FB3C8',water:'#8FD3F5',en:'⛄',
   deco:[['s_pine',4.6],['s_pine',4.6],['s_snowman',2.4],['s_sled',2],['s_igloo',3]]},
- {id:'space',n:'Planeta Cristal',e:'🚀',seed:53,stars:1,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,grass:'#9A5FE0',sand:'#7E4CC4',rock:'#5B4A9A',water:'#3A2C8E',en:'👾',
+ {id:'space',foe:'e_alien',n:'Planeta Cristal',e:'🚀',seed:53,stars:1,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,grass:'#9A5FE0',sand:'#7E4CC4',rock:'#5B4A9A',water:'#3A2C8E',en:'👾',
   deco:[['sp_crystal',2.6],['sp_crystal',2.6],['sp_rocket',3.4],['sp_alien',2],['sp_dish',2.8]]}
 ];
 
@@ -113,7 +113,7 @@ function play(host){
   var COL=[];
   function freeSpot(x,z,minD){ if(th(x,z)<0.25)return false; if(Math.sqrt(x*x+z*z)>RAD-10)return false; for(var i=0;i<PL.length;i++){ var p=PL[i]; if(Math.hypot(x-p.x,z-p.z)<p.r+minD)return false; } if(Math.hypot(x,z-40)<7)return false; return true; }
   for(var dI=0;dI<70;dI++){ var dx=(rnd()-.5)*2*RAD, dz=(rnd()-.5)*2*RAD; if(!freeSpot(dx,dz,2.5))continue; if(COL.some(function(c){return Math.hypot(c.x-dx,c.z-dz)<4;}))continue;
-   var dd=WD.deco[(rnd()*WD.deco.length)|0]; if(!TX[dd[0]])continue; var s=spr(dd[0],dd[1]*(0.85+rnd()*0.3)); s.position.set(dx,th(dx,dz)-0.05,dz); COL.push({x:dx,z:dz,r:Math.min(1.4,dd[1]*0.22)}); }
+   var dd=WD.deco[(rnd()*WD.deco.length)|0]; if(!TX[dd[0]])continue; var s=spr(dd[0],dd[1]*(0.85+rnd()*0.3)); s.position.set(dx,th(dx,dz)-0.05,dz); COL.push({x:dx,z:dz,r:Math.min(1.4,dd[1]*0.22),s:s,w:dd[1]}); }
 
   /* --- gemas 3D --- */
   var GEMC=[0xFF4D6D,0x37D67A,0x3FA9F5,0xFFC83D,0xB36BFF], gemGeo=new T.OctahedronGeometry(0.42,0), gems=[], gemsGot=0;
@@ -275,9 +275,13 @@ function play(host){
    var dy=me.yaw-camYaw; while(dy>Math.PI)dy-=2*Math.PI; while(dy<-Math.PI)dy+=2*Math.PI; camYaw+=dy*Math.min(1,dt*5);
    var sh=cam.userData.shake||0; if(sh>0)cam.userData.shake=Math.max(0,sh-dt);
    var cf=new T.Vector3(-Math.sin(camYaw),0,-Math.cos(camYaw)), camY=Math.max(me.y,th(me.x,me.z))+3.9;
-   cam.position.set(me.x-cf.x*8.6+(sh?(Math.random()-.5)*sh:0),camY,me.z-cf.z*7.5);
+   cam.position.set(me.x-cf.x*8.6+(sh?(Math.random()-.5)*sh:0),camY,me.z-cf.z*8.6);
    var cg=th(cam.position.x,cam.position.z)+1.2; if(cam.position.y<cg)cam.position.y=cg;
    cam.lookAt(me.x+cf.x*5,me.y+1.3,me.z+cf.z*5);
+   /* los decorados que quedan entre la cámara y el dino se vuelven transparentes */
+   var cx=cam.position.x, cz=cam.position.z, sx=me.x-cx, sz=me.z-cz, sl=sx*sx+sz*sz||1;
+   COL.forEach(function(c){ var u=((c.x-cx)*sx+(c.z-cz)*sz)/sl, op=1; if(u>-0.15&&u<1.05){ var qx=cx+sx*u-c.x, qz=cz+sz*u-c.z; if(qx*qx+qz*qz<(c.w*0.45+0.8)*(c.w*0.45+0.8))op=0.22; }
+    var m=c.s.material; m.opacity+=(op-m.opacity)*Math.min(1,dt*10); m.alphaTest=m.opacity<0.9?0.01:0.04; });
    /* horizonte de fondo: gira con la cámara */
    var bgx=(camYaw/(Math.PI*2))*tileW; V.set(cam.position.x+cf.x*300,0,cam.position.z+cf.z*300); V.project(cam); var hy=(1-V.y)/2*H;
    wrap.style.backgroundSize=tileW+'px '+tileH+'px, 100% 100%'; wrap.style.backgroundPosition=bgx+'px '+(hy-tileH*WD.hz)+'px, 0 0';
