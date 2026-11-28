@@ -108,6 +108,7 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 /* RACHA / TIENDA / ÁLBUM */
 .pill.gem{border:none;color:#3DA98C;cursor:pointer;font-family:inherit;}
 .dl{display:flex;align-items:center;gap:8px;padding:2px 14px 6px;font-weight:900;font-size:12px;cursor:pointer;flex-wrap:wrap;}
+.dl-cnt{background:#fff;border-radius:16px;padding:4px 12px;font-weight:900;box-shadow:0 2px 6px rgba(40,90,150,.12);color:#24345C;white-space:nowrap;} .dl-cnt b{color:#F08A12;font-family:'EQ Baloo',sans-serif;font-size:1.15em;} .dl-cnt.done{background:linear-gradient(180deg,#FFE38A,#FFC23D);color:#5A3300;} .dl-cnt.done b{color:#5A3300;}
 .dl-fire{background:#FFE7D6;color:#E06E58;border-radius:10px;padding:2px 8px;} .dl-fire.off{background:#EEF1F5;color:#A9B4C2;}
 .dl-goal{color:var(--muted);} .dl-bar{display:flex;gap:3px;} .dl-bar i{width:14px;height:8px;border-radius:4px;background:#E3E9F0;display:block;} .dl-bar i.on{background:#FF9C87;}
 .foxguide img{width:100%;height:100%;object-fit:contain;display:block;}
@@ -847,7 +848,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 
 /* ===================== 🏠 MENÚ DEL INICIO (referencia: design/ref_rediseno_inicio.webp) ===================== */
 #s-path.pt{font-family:'EQ Nunito','Nunito',system-ui,sans-serif;}
-#s-path.pt .hud{padding:10px 10px 4px 10px;gap:5px;} #s-path.pt .hud .grow{flex:0 0 0;}
+#s-path.pt .hud{padding:10px 10px 4px 10px;gap:5px;} #s-path.pt .hud .grow{display:none;} #s-path.pt .hud>.pill{flex:1 1 auto;justify-content:center;}
 #s-path.pt .hud .pill{height:38px;border-radius:19px;padding:0 7px;gap:2px;white-space:nowrap;flex-wrap:nowrap;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:15px;box-shadow:0 3px 8px rgba(40,90,150,.18);}
 #s-path.pt #hHello{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:17px!important;color:#24345C!important;padding:0 14px 2px!important;}
 #s-path.pt .dl{font-size:14px;padding:2px 12px 8px;gap:6px;flex-wrap:nowrap;white-space:nowrap;} #s-path.pt .dl-fire{background:#fff;border-radius:16px;padding:4px 12px;box-shadow:0 2px 6px rgba(40,90,150,.12);}
@@ -2012,7 +2013,8 @@ function countActivity(){
 }
 function dailyHTML(){ var n=Math.min(todayCount(),DAILY_GOAL), st=curStreak(), bar='';
  for(var i=0;i<DAILY_GOAL;i++)bar+='<i class="'+(i<n?'on':'')+'"></i>';
- return '<span class="dl-fire'+(st?'':' off')+'">🔥 '+st+(st===1?' día':' días')+'</span><span class="dl-goal">'+(n>=DAILY_GOAL?'¡Meta de hoy cumplida! ✅':'Meta de hoy '+n+'/'+DAILY_GOAL)+'</span><span class="dl-bar">'+bar+'</span>'; }
+ var cheer=n>=DAILY_GOAL?['🏆','¡Cumplida!']:n===0?['🚀','¡A empezar!']:n>=DAILY_GOAL-1?['🔥','¡Falta una!']:n*2>=DAILY_GOAL?['💪','¡Vas genial!']:['⭐','¡Bien ahí!'];
+ return '<span class="dl-fire'+(st?'':' off')+'">🔥 '+st+(st===1?' día':' días')+'</span><span class="dl-goal">Meta de hoy</span><span class="dl-cnt'+(n>=DAILY_GOAL?' done':'')+'"><b>'+n+'/'+DAILY_GOAL+'</b> '+cheer[0]+' '+cheer[1]+'</span>'; }
 
 /* ===== SEGUIMIENTO (para el panel) ===== */
 /* ===== EQUILIBRIO: sesiones con descanso activo, cansancio y límite diario ===== */
