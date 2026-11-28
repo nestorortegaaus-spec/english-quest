@@ -288,3 +288,6 @@ le acepte la voz a la nena.
   Casa y Sala) con la misma línea del rediseño. Referencia del dueño: design/ref_rediseno_inicio.webp (copiar tal cual): pastillas blancas
   arriba, Desafío/Repaso como botones gruesos con ícono 3D a la izquierda y la info en una cápsula a la derecha, Casa y Sala con ícono 3D
   grande (casita, joystick amarillo). Falta de ChatGPT: íconos 3D (calendario, flechas de repaso, casita, joystick).
+- ✅ HECHO (28/11): la LECCIÓN con el estilo de los minijuegos (fondo, barra grande, consigna en globo, tarjeta blanca, opciones con volumen,
+  zorrito guía y cartel de resultado con el zorrito festejando/triste + dibujo + 🔊). Todos los minijuegos usan el sistema (salvo la Isla,
+  que es un juego aparte). Textos sueltos van en recuadro blanco. Memotest con 🐾. Fondos: MG_BGS rota en cada juego; faltan más fondos ChatGPT.

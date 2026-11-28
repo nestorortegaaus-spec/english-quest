@@ -808,6 +808,33 @@ body.mgon .mute{top:62px;right:12px;width:44px;height:44px;border-radius:50%;}
 #s-game.mg .rv-fb:empty{display:none;}
 #s-game.mg .mem-card{border-radius:16px;background:linear-gradient(160deg,#B48CFF,#8A5CF0);box-shadow:0 5px 0 #6A3FCC;}
 
+
+/* ===================== 📘 LECCIÓN con el estilo de los minijuegos ===================== */
+#s-lesson{background:url(img/ui/game_bg.webp) center bottom/cover,#8FD86A;font-family:'EQ Nunito','Nunito',system-ui,sans-serif;}
+#s-lesson .les{position:relative;z-index:2;padding:10px 12px 120px;}
+#s-lesson .lbar{gap:8px;margin-bottom:10px;padding-right:50px;}
+body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-radius:50%;}
+#s-lesson .lx{width:44px;height:44px;border-radius:50%;font-size:20px;color:#2E5AA8;box-shadow:0 3px 8px rgba(40,90,150,.22);}
+#s-lesson .lpr{height:18px;border-radius:10px;background:rgba(255,255,255,.88);}
+#s-lesson .lpr i{background:linear-gradient(180deg,#5BE07E,#22B456);border-radius:10px;}
+#s-lesson .lhp{height:44px;padding:0 12px;border-radius:22px;background:#fff;display:flex;align-items:center;gap:3px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:20px;color:#F2546B;box-shadow:0 3px 8px rgba(40,90,150,.22);}
+#s-lesson .qt{align-self:center;background:#fff;border-radius:22px;padding:8px 20px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:22px;letter-spacing:0;text-transform:none;color:#24345C;box-shadow:0 5px 12px rgba(40,90,150,.18);margin:4px 0 12px;}
+#s-lesson .qstage{flex:0 0 auto;min-height:220px;background:#fff;border-radius:28px;padding:16px;box-shadow:0 6px 0 rgba(120,150,190,.25),0 10px 20px rgba(40,90,150,.15);}
+#s-lesson .bigemoji{font-size:120px;}
+#s-lesson .qsub{font-size:17px;color:#5A6A8A;}
+#s-lesson .spk{background:linear-gradient(180deg,#A98BFF,#7C5CF0);box-shadow:0 6px 0 #5B3FC4;}
+#s-lesson .opts{gap:12px;margin-top:14px;}
+#s-lesson .opt{border:none;border-radius:20px;min-height:68px;font-size:24px;color:#24345C;box-shadow:0 6px 0 rgba(120,150,190,.28),0 8px 14px rgba(40,90,150,.12);}
+#s-lesson .opt.emoji{font-size:46px;}
+#s-lesson .opt.ok{box-shadow:0 0 0 4px #2FCB72,0 6px 0 #17853F;background:#EFFCF4;color:#17853F;}
+#s-lesson .opt.no{box-shadow:0 0 0 4px #F2665A,0 6px 0 #C2473D;background:#FFF0EE;color:#C2473D;}
+.ls-guide{position:absolute;left:-4px;bottom:-6px;z-index:1;pointer-events:none;} .ls-guide img{width:120px;filter:drop-shadow(0 6px 6px rgba(0,0,0,.2));}
+#s-lesson .fbin{position:relative;border-radius:28px 28px 0 0;padding:16px 16px 18px 128px;min-height:150px;}
+.fb-fox{position:absolute;left:4px;bottom:8px;width:116px;}
+#s-lesson .fbmsg{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:28px;line-height:1;}
+#s-lesson .fbsub{font-size:18px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
+.fb-e{font-size:34px;} .fb-spk{border:none;background:#fff;border-radius:50%;width:38px;height:38px;font-size:18px;box-shadow:0 2px 6px rgba(0,0,0,.15);cursor:pointer;}
+
 /* ===================== 🎨 REDISEÑO (referencia: design/ref_rediseno_principal.webp) ===================== */
 @font-face{font-family:'EQ Baloo';src:url(fonts/baloo2-latin.woff2) format('woff2');font-weight:400 800;font-display:swap;}
 @font-face{font-family:'EQ Nunito';src:url(fonts/nunito-latin.woff2) format('woff2');font-weight:200 1000;font-display:swap;}
@@ -944,6 +971,7 @@ body.mgon .mute{top:62px;right:12px;width:44px;height:44px;border-radius:50%;}
 
   <!-- LESSON -->
   <section class="screen" id="s-lesson">
+    <div class="ls-guide"><img id="lsGi" src="img/guide/fox_point.webp" alt=""></div>
     <div class="les">
       <div class="lbar"><button class="lx" onclick="quitLesson()">✕</button><div class="lpr"><i id="lpr"></i></div><div class="lhp">❤️<span id="lhp">5</span></div></div>
       <div class="qcard">
@@ -952,7 +980,7 @@ body.mgon .mute{top:62px;right:12px;width:44px;height:44px;border-radius:50%;}
         <div class="opts" id="qopts"></div>
       </div>
     </div>
-    <div class="fb" id="fb"><div class="fbin"><div class="fbmsg" id="fbmsg"></div><div class="fbsub" id="fbsub"></div><button class="btn teal" id="fbbtn" onclick="nextQ()">Seguir →</button></div></div>
+    <div class="fb" id="fb"><div class="fbin"><img class="fb-fox" id="fbFox" src="img/guide/fox_cheer.webp" alt=""><div class="fbmsg" id="fbmsg"></div><div class="fbsub" id="fbsub"></div><button class="btn teal" id="fbbtn" onclick="nextQ()">Seguir →</button></div></div>
   </section>
 
   <!-- REWARD -->
@@ -1513,9 +1541,9 @@ function buildQ(ui){
  ws.forEach(function(w,idx){out.push({w:w,u:u,type:types[idx%types.length]});});
  return out;
 }
-function startLesson(ui){sTap();unlockSpeech();L={ui:ui,qs:buildQ(ui),i:0,ok:0,hearts:5};show('s-lesson');renderQ();}
+function startLesson(ui){sTap();unlockSpeech();L={ui:ui,qs:buildQ(ui),i:0,ok:0,hearts:5};show('s-lesson'); var sl=document.getElementById('s-lesson'); S.mgBg=((S.mgBg||0)+1)%MG_BGS.length; sl.style.backgroundImage='url(img/ui/'+MG_BGS[S.mgBg]+'.webp)'; renderQ();}
 function renderQ(){
- answered=false;
+ answered=false; var gi=document.getElementById('lsGi'); if(gi)gi.src='img/guide/fox_'+(L.i===0?'wave':'point')+'.webp';
  var q=L.qs[L.i],w=q.w,u=q.u;
  document.getElementById('lpr').style.width=(L.i/L.qs.length*100)+'%';
  document.getElementById('lhp').textContent=L.hearts;
@@ -1603,7 +1631,7 @@ function sim(said,tgt){ var tw=tgt.split(' '),sw=said.split(/\s+/),hit=0;
  return hit/tw.length>=0.6; }
 function good(w,b){ if(answered)return; answered=true; markWord(w,true); if(b)b.classList.add('ok'); L.ok++; sGood(); say(w.en); setFox('foxStart','happy'); burst(14); fb(true,w); }
 function wrong(w,fromMic){ if(answered)return; answered=true; markWord(w,false); sBad(); L.hearts--; document.getElementById('lhp').textContent=L.hearts; setFox('foxStart','sad'); fb(false,w); if(L.hearts<=0)document.getElementById('fbbtn').textContent='↻ Reintentar'; }
-function fb(ok,w){ var el=document.getElementById('fb');el.className='fb on '+(ok?'ok':'no'); var pr=['¡Excelente!','¡Muy bien!','¡Genial!','¡Crack!','¡Perfecto!']; document.getElementById('fbmsg').textContent = ok?pr[Math.floor(Math.random()*pr.length)]:'¡Casi!'; document.getElementById('fbsub').innerHTML='<b>'+w.en+'</b> = '+w.es; }
+function fb(ok,w){ var el=document.getElementById('fb');el.className='fb on '+(ok?'ok':'no'); var pr=['¡Excelente!','¡Muy bien!','¡Genial!','¡Crack!','¡Perfecto!']; document.getElementById('fbmsg').textContent = ok?pr[Math.floor(Math.random()*pr.length)]:'¡Casi!'; document.getElementById('fbsub').innerHTML=(w.e?'<span class="fb-e">'+w.e+'</span>':'')+'<b>'+w.en+'</b> = '+w.es+' <button class="fb-spk" onclick="say(\''+String(w.en).replace(/'/g,'')+'\',0.8)">🔊</button>'; var fx=document.getElementById('fbFox'); if(fx)fx.src='img/guide/fox_'+(ok?'cheer':'sad')+'.webp'; var gi=document.getElementById('lsGi'); if(gi)gi.src='img/guide/fox_'+(ok?'cheer':'sad')+'.webp'; }
 function nextQ(){ micStop(); var el=document.getElementById('fb');el.classList.remove('on'); if(L.hearts<=0){ startLesson(L.ui); return; } L.i++; if(L.i>=L.qs.length){ finishLesson(); return; } setTimeout(renderQ,160); }
 function quitLesson(){ if(confirm('¿Salir? Perdés el avance de esta parada.')){ sTap();renderPath();show('s-path'); } }
 function finishLesson(){
