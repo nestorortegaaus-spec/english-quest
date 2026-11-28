@@ -329,3 +329,6 @@ le acepte la voz a la nena.
   y al cambiar el service worker en cualquier pantalla. Ahora recarga SOLO en inicio o camino y sin ventanas abiertas.
 - ✅ HECHO (28/11, pedido del dueño): frases del descanso en brk.js (saludos, ánimo, respiración, ojos, pedir palabra, 30 datos curiosos,
   asombro), rotan como mazo (S.brdeck). REGLA: seguir sumando frases nuevas en brk.js constantemente.
+- ✅ HECHO (28/11, pedido del dueño): las mascotas hablan según su nivel (petLv: mundo 1 → 1, mundos 2-3 → 2, mundo 4+ → 3), suman frases
+  más largas por nivel (CHAT_LV, PET_CHAT2) y ~30% de las veces usan palabras que ella YA aprendió (S.hist) con plantillas por nivel (WORD_T).
+  REGLA: seguir sumando frases en pets.js.

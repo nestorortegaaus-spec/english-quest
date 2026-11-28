@@ -28,13 +28,45 @@ var PET_CHAT={
  dragon:[['Roar! I am a little dragon!','¡Rugido! ¡Soy un dragoncito!'],['Look at my wings!','¡Mirá mis alas!'],['I want to fly high!','¡Quiero volar alto!'],['I can make warm air!','¡Puedo echar aire calentito!'],['Dragons love treasure!','¡A los dragones nos encanta el tesoro!'],['I am brave and strong!','¡Soy valiente y fuerte!'],['I live in a castle.','Vivo en un castillo.'],['My scales are shiny!','¡Mis escamas brillan!'],['Let\'s go to the clouds!','¡Vamos a las nubes!'],['I am not scary, I am friendly!','¡No doy miedo, soy amigable!'],['I love hot chocolate!','¡Me encanta el chocolate caliente!'],['One day I will be very big!','¡Algún día voy a ser muy grande!']]
 };
 var CHAT_ALL=[['Do you know a new word today?','¿Sabés una palabra nueva hoy?'],['English is fun!','¡El inglés es divertido!'],['What is your favorite color?','¿Cuál es tu color favorito?'],['I like spending time with you!','¡Me gusta pasar tiempo con vos!'],['How was school today?','¿Cómo te fue hoy en la escuela?'],['Let\'s learn together!','¡Aprendamos juntos!'],['You are very smart!','¡Sos muy inteligente!'],['I had a funny dream last night!','¡Anoche tuve un sueño gracioso!'],['What do you want to do today?','¿Qué querés hacer hoy?'],['Thank you for taking care of me!','¡Gracias por cuidarme!']];
+
+/* 📈 FRASES QUE CRECEN CON ELLA: nivel 1 (mundo 1), 2 (mundos 2-3), 3 (mundo 4 en adelante). Cada nivel suma frases más largas;
+   las anteriores siguen saliendo. PARA SUMAR: agregar pares en CHAT_LV[1|2|3] o en PET_CHAT2 (por amigo, nivel 2+). */
+var CHAT_LV={
+ 1:[['Hello!','¡Hola!'],['I am happy!','¡Estoy feliz!'],['You are my friend!','¡Sos mi amiga!'],['Look at me!','¡Mirame!'],['I like you!','¡Me caés bien!'],['Let\'s play!','¡Juguemos!'],['Yes! Yes! Yes!','¡Sí! ¡Sí! ¡Sí!'],['Hi, how are you?','Hola, ¿cómo estás?']],
+ 2:[['I like to play with you every day.','Me gusta jugar con vos todos los días.'],['What did you learn today?','¿Qué aprendiste hoy?'],['Can you tell me a new word?','¿Me decís una palabra nueva?'],['My favorite place is this house.','Mi lugar favorito es esta casa.'],['When it rains, I like to stay inside.','Cuando llueve, me gusta quedarme adentro.'],['I want to go to the park with you.','Quiero ir a la plaza con vos.'],['Do you have a lot of homework?','¿Tenés mucha tarea?'],['I am learning English with you!','¡Estoy aprendiendo inglés con vos!'],['What is your favorite food?','¿Cuál es tu comida favorita?'],['I feel happy when you visit me.','Me siento feliz cuando me visitás.']],
+ 3:[['Yesterday I had a dream about a big castle.','Ayer soñé con un castillo enorme.'],['If I could fly, I would visit the clouds.','Si pudiera volar, visitaría las nubes.'],['I think you are getting better at English every day.','Creo que cada día estás mejor en inglés.'],['Tomorrow I am going to practice new words with you.','Mañana voy a practicar palabras nuevas con vos.'],['Can you tell me about your best friend?','¿Me contás de tu mejor amiga?'],['I would like to travel around the world one day.','Algún día me gustaría viajar por el mundo.'],['When I grow up, I want to be as smart as you.','Cuando sea grande, quiero ser tan inteligente como vos.'],['Have you ever seen a shooting star?','¿Alguna vez viste una estrella fugaz?'],['I was a little bored, but now I am happy because you are here.','Estaba un poco aburrido, pero ahora estoy feliz porque estás acá.'],['Which do you like more, summer or winter?','¿Qué te gusta más, el verano o el invierno?']]
+};
+var PET_CHAT2={
+ fox:[['Yesterday I ran through the forest and found a river.','Ayer corrí por el bosque y encontré un río.'],['Do you want to explore the mountains with me tomorrow?','¿Querés explorar las montañas conmigo mañana?'],['Foxes are clever because they listen carefully.','Los zorros somos listos porque escuchamos con atención.']],
+ kitty:[['I slept in the sun all morning, and now I am full of energy!','¡Dormí al sol toda la mañana y ahora tengo un montón de energía!'],['If I find a box, I will play with it all day.','Si encuentro una caja, voy a jugar con ella todo el día.'],['Cats are quiet, but we understand everything.','Los gatos somos callados, pero entendemos todo.']],
+ puppy:[['When you come home, my tail wags very fast!','¡Cuando llegás a casa, muevo la cola re rápido!'],['I hid my bone, but now I cannot remember where.','Escondí mi hueso, pero ahora no me acuerdo dónde.'],['Can we go for a long walk after you study?','¿Podemos salir a pasear un rato largo después de que estudies?']],
+ bunny:[['I planted a carrot, and now I am waiting for it to grow.','Planté una zanahoria y ahora estoy esperando que crezca.'],['My ears are long so I can hear you from far away.','Tengo las orejas largas para escucharte desde lejos.'],['In spring, the garden is full of flowers and butterflies.','En primavera, el jardín se llena de flores y mariposas.']],
+ penguin:[['I slid on the ice so fast that I fell in the water!','¡Me deslicé tan rápido en el hielo que me caí al agua!'],['Penguins cannot fly, but we are excellent swimmers.','Los pingüinos no volamos, pero nadamos re bien.'],['Would you like to build a snow castle with me?','¿Te gustaría hacer un castillo de nieve conmigo?']],
+ panda:[['I ate so much bamboo that now I need a nap.','Comí tanto bambú que ahora necesito una siesta.'],['Pandas are calm because we take things slowly.','Los pandas somos tranquilos porque nos tomamos las cosas con calma.'],['If you are tired, you can rest with me.','Si estás cansada, podés descansar conmigo.']],
+ unicorn:[['Last night I followed a rainbow to the end of the sky.','Anoche seguí un arcoíris hasta el final del cielo.'],['Every word you learn makes my horn shine brighter!','¡Cada palabra que aprendés hace brillar más mi cuerno!'],['If you could make a wish, what would it be?','Si pudieras pedir un deseo, ¿cuál sería?']],
+ dragon:[['One day I will fly over the mountains and the sea.','Algún día voy a volar sobre las montañas y el mar.'],['I am small now, but I am getting stronger every day.','Ahora soy chiquito, pero cada día me pongo más fuerte.'],['My treasure is not gold, it is our friendship.','Mi tesoro no es el oro, es nuestra amistad.']]
+};
+/* frases con palabras que ella YA aprendió (S.hist), según su nivel */
+var WORD_T={
+ 1:[['{E} {w}! I know this word!','¡{E} {es}! ¡Conozco esta palabra!'],['Look! {E} {w}!','¡Mirá! {E} ¡{es}!'],['{w}! {w}! {E}','¡{w}! ¡{w}! {E} ({es})']],
+ 2:[['Do you remember? {E} {w}!','¿Te acordás? {E} ¡{es}!'],['You taught me a word: {w}! {E}','Me enseñaste una palabra: ¡{w}! {E} ({es})'],['I am thinking about… {w}! {E}','Estoy pensando en… ¡{es}! {E}'],['Can you say {w}? I can! {E}','¿Sabés decir "{w}"? ¡Yo sí! {E} ({es})']],
+ 3:[['Yesterday I dreamed about {w}, and it was so funny! {E}','Ayer soñé con: {es}, ¡y fue re gracioso! {E}'],['Do you know what {w} means? It means "{es}"! {E}','¿Sabés qué significa "{w}"? ¡Significa "{es}"! {E}'],['My favorite word today is {w}. What is yours? {E}','Mi palabra favorita de hoy es "{w}". ¿Y la tuya? {E}'],['If I could have anything, I would choose {w}! {E}','Si pudiera tener cualquier cosa, elegiría: ¡{es}! {E}']]
+};
+function petLv(){ var w=S.world||1; return w>=4?3:w>=2?2:1; }
+function learned(){ var h=S.hist||{}, out=[]; try{ UNITS.forEach(function(U){ if(U.isP)return; U.w.forEach(function(w){ var x=h[w.en]; if(x&&x[0]>0&&w.e&&/^[a-z ]+$/i.test(w.en)&&w.en.split(' ').length<=2)out.push(w); }); }); }catch(e){} return out; }
+var LASTW='';
+function wordLine(){ var ws=learned().filter(function(w){return w.en!==LASTW;}); if(ws.length<3)return null; var w=ws[(Math.random()*ws.length)|0]; LASTW=w.en;
+ var lv=petLv(), T=[]; for(var i=1;i<=lv;i++)T=T.concat(WORD_T[i]); if(!S.pdeck)S.pdeck={}; var d=S.pdeck['wordT'+lv]||(S.pdeck['wordT'+lv]={q:[]});
+ if(!d.q.length)d.q=shuffle(T.map(function(_,j){return j;})); var t=T[d.q.shift()%T.length];
+ function f(x){ return x.replace(/\{w\}/g,w.en).replace(/\{es\}/g,w.es).replace(/\{E\}/g,w.e); } return [f(t[0]),f(t[1])]; }
+
 var ADDED=false;
 function addLines(){
  if(ADDED||!window.PET_LINES)return; ADDED=true;
  Object.keys(NEED_MORE).forEach(function(k){ PET_LINES['nd_'+k]={lo:NEED_MORE[k].lo.concat(PET_LINES.need[k]||[]),vlo:NEED_MORE[k].vlo}; });
- Object.keys(PET_CHAT).forEach(function(id){ PET_LINES['chat_'+id]={say:PET_CHAT[id].concat(PET_CHAT[id],CHAT_ALL)}; }); /* sus frases propias salen el doble que las generales */
+ [1,2,3].forEach(function(lv){ Object.keys(PET_CHAT).forEach(function(id){ var L=PET_CHAT[id].concat(PET_CHAT[id],CHAT_ALL); if(lv>=2)L=L.concat(PET_CHAT2[id]||[],PET_CHAT2[id]||[]); for(var i=1;i<=lv;i++)L=L.concat(CHAT_LV[i]); PET_LINES['chat_'+id+'_'+lv]={say:L}; }); }); /* sus frases propias salen más seguido; cada nivel suma frases más complejas */
 }
-window.PET_CHAT=PET_CHAT;
+window.PET_CHAT=PET_CHAT; window.petLv=petLv; window.petWordLine=wordLine;
 var NEXT=0;
 /* se llama cada 2,6 s desde petIdle; habla cuando toca */
 window.petProactive=function(){ try{ addLines();
@@ -45,7 +77,8 @@ window.petProactive=function(){ try{ addLines();
  if(p.poop){ petTalk('need','poop'); NEXT=now+14000+Math.random()*5000; return; }
  var low=NEEDS.filter(function(n){return p.nd[n.k]<35&&PET_LINES['nd_'+n.k];}).sort(function(a,b){return p.nd[a.k]-p.nd[b.k];});
  if(low.length){ var n=low.length>1&&Math.random()<0.35?low[1]:low[0]; /* casi siempre la más urgente, a veces la otra */ petTalk('nd_'+n.k,p.nd[n.k]<18?'vlo':'lo'); try{petAnim(p.nd[n.k]<18?'a-shake':'a-wiggle',700);}catch(e){} NEXT=now+13000+Math.random()*6000; return; }
- if(PET_LINES['chat_'+id]){ petTalk('chat_'+id,'say'); try{petAnim('a-jump',800);}catch(e){} }
+ var wl=Math.random()<0.3?wordLine():null; if(wl){ homeSay(wl[0],wl[1]); try{petAnim('a-jump',800);}catch(e){} }
+ else if(PET_LINES['chat_'+id+'_'+petLv()]){ petTalk('chat_'+id+'_'+petLv(),'say'); try{petAnim('a-jump',800);}catch(e){} }
  NEXT=now+16000+Math.random()*8000;
 }catch(e){} };
 window.petProactiveReset=function(d){ NEXT=Date.now()+(d==null?6000:d); };
