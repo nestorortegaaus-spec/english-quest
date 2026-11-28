@@ -340,3 +340,5 @@ le acepte la voz a la nena.
   desafíos); se quitaron las de juegos de la Sala (huevos, podios, Buggy, Carrera) y las de compras. Tarjetas: ícono + nombre + barrita.
 - ✅ HECHO (28/11, pedido del dueño): jerarquía visual única en minijuegos y lección (CSS "JERARQUÍA VISUAL"): instrucción = cinta violeta,
   inglés = tarjeta blanca grande azul, castellano = texto chico celeste en itálica (sin bandera), respuestas = botones con borde y sombra de color.
+- ✅ HECHO (28/11, pedido del dueño): la mascota compañera invita a charlar en la Casa ("Do you want to talk with me?") con botón
+  "💬 ¡Sí, charlemos!" que dura 15 s (cada ~1,5 min si hoy no charló, cada ~4 min si ya charló). Panel: invitaciones aceptadas (S.chatInv/chatInvA).

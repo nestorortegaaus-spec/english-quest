@@ -1052,6 +1052,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 #s-home .hm-mood{top:118px;right:12px;width:48px;height:48px;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.15);}
 .hm-love{position:absolute;top:170px;right:10px;z-index:4;display:flex;flex-direction:column;align-items:center;font-size:16px;}
 .hm-love span{width:42px;height:7px;background:rgba(255,255,255,.85);border-radius:6px;overflow:hidden;} .hm-love span i{display:block;height:100%;background:#FF6B8B;}
+.hm-inv{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);z-index:7;border:none;border-radius:22px;padding:12px 20px;background:linear-gradient(180deg,#FFDA4D,#FFB717);box-shadow:0 5px 0 #D98E0B,0 8px 14px rgba(200,120,0,.3);font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:20px;color:#3A2400;white-space:nowrap;cursor:pointer;animation:invPop .5s, invPulse 1.4s ease-in-out .5s infinite;} @keyframes invPop{from{transform:translateX(-50%) scale(.3);opacity:0}} @keyframes invPulse{50%{transform:translateX(-50%) scale(1.07)}}
 .hm-dressb{position:absolute;right:12px;bottom:70px;z-index:5;width:48px;height:48px;border-radius:50%;border:none;background:#fff;font-size:24px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.18);}
 #s-home .hm-poops{bottom:66px;left:14px;z-index:5;}
 #s-home .hm-grow{width:auto;margin:12px 4px 0;background:#fff;border-radius:22px;padding:8px 18px 10px;box-shadow:0 4px 10px rgba(40,90,150,.14);}
@@ -1228,7 +1229,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="review.js?v=8"></script>
 <script src="ach.js?v=5"></script>
 <script src="games2.js?v=1"></script>
-<script src="pets.js?v=5"></script>
+<script src="pets.js?v=6"></script>
 <script src="balance.js?v=2"></script>
 <script src="brk.js?v=1"></script>
 <script>
@@ -2533,7 +2534,7 @@ function renderParents(){
  var ctot=(cs.said||0)+(cs.tap||0), cpc=ctot?Math.round((cs.said||0)/ctot*100):0;
  out+='<div class="pa-card"><div class="pa-h">🗣️ Charla con su mascota <small>se cuenta desde el 28/11</small></div><div class="pa-wk">'
   +'<div><b>'+cw+'</b><span>charlas esta semana</span></div><div><b>'+(cs.n||0)+'</b><span>charlas en total</span></div>'
-  +'<div><b>'+(cs.said||0)+'</b><span>respuestas dichas en voz alta 🎤'+(ctot?' ('+cpc+'%)':'')+'</span></div><div><b>'+(cs.tap||0)+'</b><span>respuestas tocadas 👆</span></div></div>'
+  +'<div><b>'+(S.chatInvA||0)+' de '+(S.chatInv||0)+'</b><span>invitaciones de su mascota que aceptó 💬</span></div><div><b>'+(cs.said||0)+'</b><span>respuestas dichas en voz alta 🎤'+(ctot?' ('+cpc+'%)':'')+'</span></div><div><b>'+(cs.tap||0)+'</b><span>respuestas tocadas 👆</span></div></div>'
   +'<div class="pa-note" style="margin-top:8px">'+(cs.last?'Última charla: '+cs.last.split('-').reverse().join('/'):'Todavía no charló con su mascota. El botón está en la 🏡 Casa de Amigos.')+(ctot&&cpc<30?' · Animala a responder hablando con el micrófono 🎤: es lo que más ayuda a la pronunciación.':'')+'</div></div>';
  out+='<div class="pa-card"><div class="pa-h">🏆 Medallas <small>'+(window.ACH?ACH.filter(function(a){return S.ach&&S.ach[a.id];}).length+' de '+ACH.length:'')+'</small></div>'+(window.achGrid?achGrid():'')+'</div>';
  out+='<div class="pa-card"><div class="pa-h">Palabras para practicar juntos <small>tocá para escucharla</small></div>'+(hard.length?'<div class="pa-list">'+hard.map(function(k){var w=wordInfo(k),t=h[k][0]+h[k][1],pc=Math.round(h[k][0]/t*100);

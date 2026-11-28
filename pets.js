@@ -67,7 +67,14 @@ function addLines(){
  [1,2,3].forEach(function(lv){ Object.keys(PET_CHAT).forEach(function(id){ var L=PET_CHAT[id].concat(PET_CHAT[id],CHAT_ALL); if(lv>=2)L=L.concat(PET_CHAT2[id]||[],PET_CHAT2[id]||[]); for(var i=1;i<=lv;i++)L=L.concat(CHAT_LV[i]); PET_LINES['chat_'+id+'_'+lv]={say:L}; }); }); /* sus frases propias salen más seguido; cada nivel suma frases más complejas */
 }
 window.PET_CHAT=PET_CHAT; window.petLv=petLv; window.petWordLine=wordLine;
-var NEXT=0;
+var NEXT=0, INV_T=0;
+var INVITE=[['Do you want to talk with me?','¿Querés charlar conmigo?'],['Let\'s talk in English!','¡Charlemos en inglés!'],['Can I ask you a question?','¿Te puedo hacer una pregunta?'],['I want to know more about you!','¡Quiero saber más de vos!'],['Talk with me, please!','¡Charlá conmigo, por favor!'],['I have a question for you!','¡Tengo una pregunta para vos!']];
+function petInvite(){ if(!PET_LINES.invite)PET_LINES.invite={say:INVITE}; petTalk('invite','say'); try{petAnim('a-jump',900);}catch(e){}
+ var room=document.querySelector('.hm-room'); if(!room||room.querySelector('.hm-inv'))return;
+ var b=document.createElement('button'); b.className='hm-inv'; b.innerHTML='💬 ¡Sí, charlemos!'; room.appendChild(b);
+ b.onclick=function(e){ e.stopPropagation(); b.remove(); try{ S.chatInvA=(S.chatInvA||0)+1; save(); startChat(0,Math.min(3,(S.world||1))); }catch(x){} };
+ S.chatInv=(S.chatInv||0)+1; try{save();}catch(e){}
+ setTimeout(function(){ if(b.parentNode)b.remove(); },15000); }
 /* se llama cada 2,6 s desde petIdle; habla cuando toca */
 window.petProactive=function(){ try{ addLines();
  if(HOME_BUSY||HOME_SEL)return; var scr=document.getElementById('s-home'); if(!scr||!scr.classList.contains('on'))return;
@@ -77,6 +84,8 @@ window.petProactive=function(){ try{ addLines();
  if(p.poop){ petTalk('need','poop'); NEXT=now+14000+Math.random()*5000; return; }
  var low=NEEDS.filter(function(n){return p.nd[n.k]<35&&PET_LINES['nd_'+n.k];}).sort(function(a,b){return p.nd[a.k]-p.nd[b.k];});
  if(low.length){ var n=low.length>1&&Math.random()<0.35?low[1]:low[0]; /* casi siempre la más urgente, a veces la otra */ petTalk('nd_'+n.k,p.nd[n.k]<18?'vlo':'lo'); try{petAnim(p.nd[n.k]<18?'a-shake':'a-wiggle',700);}catch(e){} NEXT=now+13000+Math.random()*6000; return; }
+ /* 💬 invitación a charlar: si es su compañero, cada tanto la invita (más seguido si hoy todavía no charló) */
+ if(id===buddyId()&&now-INV_T>(S.chatSt&&S.chatSt.last===dkey()?240000:90000)&&Math.random()<0.5){ INV_T=now; petInvite(); NEXT=now+20000; return; }
  var wl=Math.random()<0.3?wordLine():null; if(wl){ homeSay(wl[0],wl[1]); try{petAnim('a-jump',800);}catch(e){} }
  else if(PET_LINES['chat_'+id+'_'+petLv()]){ petTalk('chat_'+id+'_'+petLv(),'say'); try{petAnim('a-jump',800);}catch(e){} }
  NEXT=now+16000+Math.random()*8000;
