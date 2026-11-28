@@ -295,3 +295,5 @@ le acepte la voz a la nena.
   que es un juego aparte). Textos sueltos van en recuadro blanco. Memotest con 🐾. Fondos: MG_BGS rota en cada juego; faltan más fondos ChatGPT.
 - ✅ HECHO (28/11): pantalla de premio (fondo que rota + tarjeta blanca + Zorrito festejando), panel de padres, elegir voz y vestidor
   (íconos 3D, pestañas grandes) con el estilo nuevo (CSS "PREMIO, PADRES, VOZ Y VESTIDOR").
+- ✅ HECHO (28/11, pedido del dueño): en el descanso el castellano se cortaba (el siguiente texto arrancaba antes y cancelaba la voz).
+  Ahora talk() espera a que termine el castellano (margen según el largo) y el castellano se dice un poco más rápido (rate 1.12, también en sayBoth).

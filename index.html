@@ -1239,7 +1239,7 @@ function usVoices(){var vs=enVoices().filter(function(v){return /en[-_]US/i.test
  vs.sort(function(a,b){function sc(v){return /natural|neural|enhanced|premium/i.test(v.name)?0:/google/i.test(v.name)?1:2;}return sc(a)-sc(b);});return vs;}
 function curVoice(){if(vChar().raw)return null;var vs=usVoices();if(!vs.length)return enVoice;var i=VCHARS.indexOf(vChar())-1;return vs[Math.max(0,i)%vs.length];}
 function esVoice(){try{var vs=speechSynthesis.getVoices();return vs.find(function(v){return /es[-_](AR|419|US|MX)/i.test(v.lang);})||vs.find(function(v){return /^es/i.test(v.lang);})||null;}catch(e){return null;}}
-function sayBoth(en,es){ if(muted)return; say(en,0,function(){ try{ var u=new SpeechSynthesisUtterance(es.replace(/\s*\(.*?\)\s*/g,' ')); var v=esVoice(); u.lang=v?v.lang:'es-AR'; if(v)u.voice=v; u.rate=1.0; speechSynthesis.speak(u); }catch(e){} }); }
+function sayBoth(en,es){ if(muted)return; say(en,0,function(){ try{ var u=new SpeechSynthesisUtterance(es.replace(/\s*\(.*?\)\s*/g,' ')); var v=esVoice(); u.lang=v?v.lang:'es-AR'; if(v)u.voice=v; u.rate=1.12; speechSynthesis.speak(u); }catch(e){} }); }
 function speechBusy(){ try{return speechSynthesis.speaking||speechSynthesis.pending||Date.now()-LAST_SAY<250;}catch(e){return false;} }
 var SAY_TOK=0;
 function say(t,rate,after){if(muted)return;LAST_SAY=Date.now();try{var tok=++SAY_TOK, busy=speechSynthesis.speaking||speechSynthesis.pending; if(busy)speechSynthesis.cancel(); speechSynthesis.resume();var c=vChar();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=Math.min(2,(rate||0.85)*c.r);u.pitch=c.p;var v=curVoice();if(v){try{u.voice=v;u.lang=v.lang;}catch(e){}}
@@ -1993,9 +1993,9 @@ function openBreak(){ var p=playD(); show('s-break'); var host=document.getEleme
  var talkId=0;
  function talk(en,es,cb,big){ if(!alive())return; bubble(en,es,big); flap(true); var done=false, my=++talkId;
   function end(){ if(done)return; done=true; if(my!==talkId)return; flap(false); if(alive()&&cb)setTimeout(function(){ if(alive()&&my===talkId)cb(); },350); }
-  var est=900+(en.length+(es||'').length)*75; setTimeout(end,est+2500);
+  var est=900+(en.length+(es||'').length)*75; setTimeout(end,2500+en.length*120+(es||'').length*95); /* margen para que el castellano no se corte */
   if(muted){ setTimeout(end,est); return; }
-  say(en,0,function(){ if(!es){ setTimeout(end,est); return; } try{ var u=new SpeechSynthesisUtterance(es); var v=esVoice(); u.lang=v?v.lang:'es-AR'; if(v)u.voice=v; u.onend=end; speechSynthesis.speak(u); }catch(e){ setTimeout(end,est); } }); }
+  say(en,0,function(){ if(!es){ setTimeout(end,est); return; } try{ var u=new SpeechSynthesisUtterance(es); var v=esVoice(); u.lang=v?v.lang:'es-AR'; if(v)u.voice=v; u.rate=1.12; u.onend=end; speechSynthesis.speak(u); }catch(e){ setTimeout(end,est); } }); }
  function act(h){ var a=document.getElementById('brAct'); if(a)a.innerHTML=h; return a; }
  function wait(ms,cb){ setTimeout(function(){ if(alive())cb(); },ms); }
  /* --- actividades --- */
