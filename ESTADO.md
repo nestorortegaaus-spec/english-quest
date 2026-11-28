@@ -148,7 +148,7 @@ le acepte la voz a la nena.
   p. ej. "I have a…", "Where is my…?", "It is time to…", "Let's … together!", "I have never seen a…", "I am happy because…",
   "If I had a…, I would…". Tanda 3: +20 patrones (80 en total): "I want to…", "Please, …", "We are…", "What time is…?",
   "I always … before bed", "Can you help me…?", "When I was little, I…", "My dream is to…", "Yesterday it was…, but today it is…".
-- ⏭️ PENDIENTE (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
+- ⏭️ PENDIENTE (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke, tienda, charla, Simón dice): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
@@ -243,3 +243,6 @@ le acepte la voz a la nena.
   respuestas (tocar o decir con micrófono), el amigo contesta con voz, boca animada y pose feliz. 📅 Desafío del día (openDaily, botón en el
   camino): 3 palabras nuevas por día (ver/escuchar, elegir, decir) → 💎25 ⭐3, racha S.dstreak. 📊 Resumen semanal en el panel de padres
   (días, minutos, palabras nuevas por S.hfirst, aciertos, comparación con la semana anterior, botón Compartir).
+- ✅ HECHO (28/11, simon.js): 🙋 Simón dice (startSimon, en GROT): el amigo compañero da órdenes en inglés (36 acciones: touch your nose, clap your hands,
+  hop like a frog…) y ella toca la tarjeta. Nivel 1 siempre "Simon says" + castellano; nivel 2+ órdenes trampa (sin "Simon says") → botón
+  "🙅 ¡Simón no dijo!"; nivel 3+ sin castellano ni nombres; nivel 4+ dos órdenes seguidas ("… and …") y el texto aparece después de escuchar.
