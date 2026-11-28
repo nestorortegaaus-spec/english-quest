@@ -972,6 +972,11 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 .ar-prof{cursor:pointer;}
 
 
+/* 🔡 Letra que falta · 🕐 ¿Qué va primero? */
+.ms-slots span{width:44px;height:54px;font-size:30px;} .ms-slots span.ms-gap{background:#FFF6D6;border-color:#FFB717;animation:invPulse2 1s ease-in-out infinite;} .ms-slots span.ms-gap2{background:#F1F4F9;} @keyframes invPulse2{50%{transform:scale(1.08)}}
+.ms-opts{display:flex;gap:12px;justify-content:center;} .ms-o{width:76px;height:76px;aspect-ratio:1!important;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:40px;color:#24345C;}
+.sq-line{display:flex;gap:8px;justify-content:center;} .sq-slot{width:62px;height:62px;border-radius:18px;background:rgba(255,255,255,.7);border:3px dashed #9FB2CC;display:flex;align-items:center;justify-content:center;font:800 22px 'EQ Baloo',sans-serif;color:#7C8AA5;} .sq-slot.ok{background:#E6FAEE;border:3px solid #3CC47C;animation:lspop .3s;} .sq-slot b{font-size:34px;}
+.sq-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;} .sq-o{aspect-ratio:auto!important;flex-direction:column;padding:10px 6px;gap:2px;} .sq-o b{font-size:40px;line-height:1.1;} .sq-o span{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:18px;color:#24345C;line-height:1.1;text-align:center;} .sq-o small{font-size:12px;font-weight:900;color:#7C8AA5;} .sq-o.used{opacity:.45;}
 /* ✍️ Dictado y ↔️ Opuestos */
 .dt-slow{border:none;background:#fff;border-radius:16px;padding:5px 12px;font-family:inherit;font-weight:900;font-size:14px;color:#5A6A8A;box-shadow:0 3px 8px rgba(40,90,150,.15);cursor:pointer;}
 .dt-pic{font-size:64px;line-height:1.1;min-height:70px;background:#fff;border-radius:24px;padding:4px 22px;box-shadow:0 5px 12px rgba(40,90,150,.15);}
@@ -1223,7 +1228,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
   <div class="wtip" id="wtip"></div>
 </div>
 
-<script src="vocab.js?v=7"></script>
+<script src="vocab.js?v=8"></script>
 <script src="run.js?v=23" defer></script>
 <script src="buggy.js?v=14" defer></script>
 <script src="chat.js?v=7"></script>
@@ -1232,9 +1237,10 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="review.js?v=9"></script>
 <script src="ach.js?v=6"></script>
 <script src="games2.js?v=1"></script>
-<script src="pets.js?v=7"></script>
+<script src="games3.js?v=1"></script>
+<script src="pets.js?v=8"></script>
 <script src="balance.js?v=2"></script>
-<script src="brk.js?v=1"></script>
+<script src="brk.js?v=2"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -1603,8 +1609,8 @@ function buildWorld(w){
  out.push({t:'chest'});
  return out;
 }
-var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross','sing','store','chat','simon','dict','opp'];
-var GINFO={rev:{i:'🔁',n:'Repaso'},dict:{i:'✍️',n:'Dictado'},opp:{i:'↔️',n:'Opuestos'},simon:{i:'🙋',n:'Simón dice'},chat:{i:'🗣️',n:'Charla'},store:{i:'🏪',n:'La Tienda'},sing:{i:'🎤',n:'Karaoke'},cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
+var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross','sing','store','chat','simon','dict','opp','miss','rhyme','seq'];
+var GINFO={miss:{i:'🔡',n:'Letra que falta'},rhyme:{i:'🎵',n:'Rimas'},seq:{i:'🕐',n:'¿Qué va primero?'},rev:{i:'🔁',n:'Repaso'},dict:{i:'✍️',n:'Dictado'},opp:{i:'↔️',n:'Opuestos'},simon:{i:'🙋',n:'Simón dice'},chat:{i:'🗣️',n:'Charla'},store:{i:'🏪',n:'La Tienda'},sing:{i:'🎤',n:'Karaoke'},cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
 function wordsOf(u){var us=Array.isArray(u)?u:[u],out=[];us.forEach(function(i){out=out.concat(UNITS[i].w);});return out;}
 
 /* ===== STATE ===== */
@@ -1694,7 +1700,7 @@ function openNode(i){
  if(nd.t==='lesson')startLesson(nd.u);
  else if(nd.t==='story')openStory(nd.s);
  else if(nd.t==='chest')openChest();
- else if(nd.t==='game'){ var lv=nd.lv||1; var F={rev:function(u,lv){openReview(u,true);},dict:function(u,lv){startDictation(u,lv);},opp:function(u,lv){startOpposites(u,lv);},simon:function(u,lv){startSimon(u,lv);},chat:function(u,lv){startChat(u,lv);},store:startStore,sing:startSing,cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
+ else if(nd.t==='game'){ var lv=nd.lv||1; var F={miss:function(u,lv){startMissing(u,lv);},rhyme:function(u,lv){startRhymes(u,lv);},seq:function(u,lv){startSequence(u,lv);},rev:function(u,lv){openReview(u,true);},dict:function(u,lv){startDictation(u,lv);},opp:function(u,lv){startOpposites(u,lv);},simon:function(u,lv){startSimon(u,lv);},chat:function(u,lv){startChat(u,lv);},store:startStore,sing:startSing,cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
  else if(nd.t==='dance')startDance();
 }
 function advance(){ countActivity(); S.prog=Math.max(S.prog, activeIdx+1); if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);NEW_WORLD=true;} save(); }
@@ -3126,8 +3132,8 @@ function gSetup(title){ if(title.indexOf('Kart')<0)ARCADE_RET=false;sTap();unloc
 function gScore(t){document.getElementById('gScore').textContent=t; var m=/(\d+)\s*\/\s*(\d+)/.exec(String(t)), w=document.getElementById('gProgW');
  if(w){ if(m&&+m[2]>0){ w.classList.add('on'); document.getElementById('gProg').style.width=Math.min(100,Math.round(+m[1]/+m[2]*100))+'%'; } else w.classList.remove('on'); } }
 /* 🦊 sistema de minijuegos (referencia design/ref_rediseno_minijuegos.webp): fondo, barra de progreso y zorrito guía */
-var MG_GUIDE=['Adivinanzas','¿Cuántos','Memotest','Deletreá','Frases','Sopa','¿Sí o no?','Escuchá','Monstruo','Karaoke','Desafío del','Repaso','Dictado','Opuestos'];
-var MG_HELLO={'Adivinanzas':['Guess what it is!','¡Adiviná qué es!'],'¿Cuántos':['Count with me!','¡Contá conmigo!'],'Memotest':['Find the pairs!','¡Buscá los pares!'],'Deletreá':['Spell the word!','¡Armá la palabra!'],
+var MG_GUIDE=['Adivinanzas','¿Cuántos','Memotest','Deletreá','Frases','Sopa','¿Sí o no?','Escuchá','Monstruo','Karaoke','Desafío del','Repaso','Dictado','Opuestos','Qué letra','Rimas','En orden'];
+var MG_HELLO={'Qué letra':['Find the missing letter!','¡Buscá la letra que falta!'],'Rimas':['Find the rhyme!','¡Buscá la rima!'],'En orden':['What comes first?','¿Qué va primero?'],'Adivinanzas':['Guess what it is!','¡Adiviná qué es!'],'¿Cuántos':['Count with me!','¡Contá conmigo!'],'Memotest':['Find the pairs!','¡Buscá los pares!'],'Deletreá':['Spell the word!','¡Armá la palabra!'],
  'Frases':['Let\'s make sentences!','¡Armemos frases!'],'Sopa':['Find the words!','¡Buscá las palabras!'],'Crucigrama':['Complete the crossword!','¡Completá el crucigrama!'],'¿Sí o no?':['Yes or no?','¿Sí o no?'],
  'Ordená':['Put them in order!','¡Ordenalas!'],'Escuchá':['Listen carefully!','¡Escuchá bien!'],'Monstruo':['Feed the monster!','¡Dale de comer al monstruo!'],'Hablá':['Say it out loud!','¡Decilo en voz alta!'],
  'Karaoke':['Let\'s sing!','¡A cantar!'],'Dictado':['Listen and write!','¡Escuchá y escribí!'],'Opuestos':['Find the opposite!','¡Buscá el contrario!'],'Desafío del':['Three new words!','¡Tres palabras nuevas!'],'Repaso':['Let\'s practice!','¡A repasar!'],'Globos':['Pop the balloons!','¡Reventá los globos!']};
@@ -3632,6 +3638,26 @@ var PHR=[
  {lv:5,en:'If I could fly, I would {}.',s:[['visit the clouds','Si pudiera volar, visitaría las nubes.','☁️'],['go to the moon','Si pudiera volar, iría a la luna.','🌙'],['see my house from above','Si pudiera volar, vería mi casa desde arriba.','🏠'],['travel the world','Si pudiera volar, viajaría por el mundo.','🌍']]},
  {lv:5,en:'I have already {}.',s:[['finished my homework','Ya terminé mi tarea.','📝'],['eaten my lunch','Ya comí mi almuerzo.','🍽️'],['brushed my teeth','Ya me lavé los dientes.','🪥'],['read this book','Ya leí este libro.','📖']]},
  {lv:5,en:'The {} is bigger than the {}.',two:1,s:[['elephant','El elefante es más grande que el ratón.','🐘🐭','mouse'],['sun','El sol es más grande que la luna.','☀️🌙','moon'],['house','La casa es más grande que el auto.','🏠🚗','car'],['whale','La ballena es más grande que el pez.','🐳🐟','fish']]},
+ {lv:1,en:'I have a big {}.',s:[['dog','Tengo un perro grande.','🐶'],['house','Tengo una casa grande.','🏠'],['ball','Tengo una pelota grande.','⚽'],['bed','Tengo una cama grande.','🛏️'],['box','Tengo una caja grande.','📦'],['bag','Tengo una bolsa grande.','👜']]},
+ {lv:1,en:'The {} is small.',s:[['mouse','El ratón es chico.','🐭'],['ant','La hormiga es chica.','🐜'],['bird','El pájaro es chico.','🐦'],['cup','La taza es chica.','☕'],['ring','El anillo es chico.','💍'],['frog','La rana es chica.','🐸']]},
+ {lv:1,en:'I drink {}.',s:[['water','Tomo agua.','💧'],['milk','Tomo leche.','🥛'],['juice','Tomo jugo.','🧃'],['tea','Tomo té.','🍵'],['hot chocolate','Tomo chocolatada caliente.','☕']]},
+ {lv:2,en:'My {} is under the table.',s:[['cat','Mi gato está abajo de la mesa.','🐱'],['shoe','Mi zapato está abajo de la mesa.','👟'],['ball','Mi pelota está abajo de la mesa.','⚽'],['book','Mi libro está abajo de la mesa.','📖'],['doll','Mi muñeca está abajo de la mesa.','🪆']]},
+ {lv:2,en:'I like to eat {}.',s:[['apples','Me gusta comer manzanas.','🍎'],['pasta','Me gusta comer fideos.','🍝'],['cheese','Me gusta comer queso.','🧀'],['chicken','Me gusta comer pollo.','🍗'],['cookies','Me gusta comer galletitas.','🍪'],['empanadas','Me gusta comer empanadas.','🥟']]},
+ {lv:2,en:'The {} says hello.',s:[['dog','El perro dice hola.','🐶'],['teacher','La maestra dice hola.','👩‍🏫'],['robot','El robot dice hola.','🤖'],['baby','El bebé dice hola.','👶'],['clown','El payaso dice hola.','🤡']]},
+ {lv:2,en:'We play {} at school.',s:[['football','Jugamos al fútbol en la escuela.','⚽'],['tag','Jugamos a la mancha en la escuela.','🏃'],['hide and seek','Jugamos a las escondidas en la escuela.','🙈'],['basketball','Jugamos al básquet en la escuela.','🏀'],['hopscotch','Jugamos a la rayuela en la escuela.','🔢']]},
+ {lv:3,en:'There is a {} in my backpack.',s:[['pencil case','Hay una cartuchera en mi mochila.','✏️'],['sandwich','Hay un sándwich en mi mochila.','🥪'],['frog','¡Hay una rana en mi mochila!','🐸'],['notebook','Hay un cuaderno en mi mochila.','📓'],['banana','Hay una banana en mi mochila.','🍌']]},
+ {lv:3,en:'My cat likes to {}.',s:[['sleep','A mi gato le gusta dormir.','😴'],['play with yarn','A mi gato le gusta jugar con lana.','🧶'],['climb trees','A mi gato le gusta trepar árboles.','🌳'],['eat fish','A mi gato le gusta comer pescado.','🐟'],['sit in boxes','A mi gato le gusta sentarse en cajas.','📦']]},
+ {lv:3,en:'In winter, I wear a {}.',s:[['scarf','En invierno uso bufanda.','🧣'],['coat','En invierno uso campera.','🧥'],['hat','En invierno uso gorro.','🧢'],['sweater','En invierno uso pulóver.','🧶'],['pair of gloves','En invierno uso guantes.','🧤']]},
+ {lv:3,en:'Can we go to the {}?',s:[['park','¿Podemos ir a la plaza?','🛝'],['beach','¿Podemos ir a la playa?','🏖️'],['zoo','¿Podemos ir al zoológico?','🦁'],['cinema','¿Podemos ir al cine?','🎬'],['pool','¿Podemos ir a la pileta?','🏊']]},
+ {lv:3,en:'I am afraid of {}.',s:[['spiders','Les tengo miedo a las arañas.','🕷️'],['the dark','Le tengo miedo a la oscuridad.','🌑'],['thunder','Le tengo miedo a los truenos.','🌩️'],['big dogs','Les tengo miedo a los perros grandes.','🐕'],['monsters','Les tengo miedo a los monstruos.','👹']]},
+ {lv:4,en:'My grandma always {}.',s:[['makes cakes','Mi abuela siempre hace tortas.','🎂'],['tells stories','Mi abuela siempre cuenta cuentos.','📖'],['gives me hugs','Mi abuela siempre me da abrazos.','🤗'],['waters the plants','Mi abuela siempre riega las plantas.','🪴'],['sings songs','Mi abuela siempre canta canciones.','🎶']]},
+ {lv:4,en:'It is fun to {}.',s:[['ride a bike','Es divertido andar en bici.','🚲'],['jump on the bed','Es divertido saltar en la cama.','🛏️'],['build a sandcastle','Es divertido hacer un castillo de arena.','🏰'],['play in the rain','Es divertido jugar bajo la lluvia.','🌧️'],['paint with my hands','Es divertido pintar con las manos.','🖐️']]},
+ {lv:4,en:'Did you {} yesterday?',s:[['go to school','¿Fuiste a la escuela ayer?','🏫'],['see the movie','¿Viste la película ayer?','🎬'],['eat pizza','¿Comiste pizza ayer?','🍕'],['play outside','¿Jugaste afuera ayer?','🌳'],['call grandma','¿Llamaste a la abuela ayer?','📞']]},
+ {lv:4,en:'I am {} than my brother.',s:[['taller','Soy más alta que mi hermano.','📏'],['faster','Soy más rápida que mi hermano.','🏃'],['younger','Soy más chica que mi hermano.','👶'],['older','Soy más grande que mi hermano.','🎂'],['funnier','Soy más divertida que mi hermano.','😂']]},
+ {lv:5,en:'If I were a {}, I would {}.',two:1,s:[['bird','Si fuera un pájaro, volaría.','🐦🪽','fly'],['fish','Si fuera un pez, nadaría todo el día.','🐟🌊','swim all day'],['teacher','Si fuera maestra, enseñaría inglés.','👩‍🏫📚','teach English'],['giant','Si fuera un gigante, tocaría las nubes.','🧌☁️','touch the clouds']]},
+ {lv:5,en:'I have been learning English for {}.',s:[['a year','Estoy aprendiendo inglés hace un año.','📅'],['two months','Estoy aprendiendo inglés hace dos meses.','🗓️'],['a long time','Estoy aprendiendo inglés hace mucho tiempo.','⏳'],['three weeks','Estoy aprendiendo inglés hace tres semanas.','📆']]},
+ {lv:5,en:'The best thing about {} is {}.',two:1,s:[['summer','Lo mejor del verano es la playa.','☀️🏖️','the beach'],['school','Lo mejor de la escuela son mis amigos.','🏫👭','my friends'],['weekends','Lo mejor de los fines de semana es dormir mucho.','📅😴','sleeping a lot'],['birthdays','Lo mejor de los cumpleaños es la torta.','🎂🎉','the cake']]},
+ {lv:5,en:'I would rather {} than {}.',two:1,s:[['read','Prefiero leer que mirar tele.','📖📺','watch TV'],['swim','Prefiero nadar que correr.','🏊🏃','run'],['draw','Prefiero dibujar que cantar.','🎨🎤','sing'],['play outside','Prefiero jugar afuera que quedarme adentro.','🌳🏠','stay inside']]},
  {lv:5,en:'Before I go to bed, I {}.',s:[['brush my teeth','Antes de acostarme, me lavo los dientes.','🪥'],['put on my pajamas','Antes de acostarme, me pongo el pijama.','👚'],['read a story','Antes de acostarme, leo un cuento.','📖'],['say good night','Antes de acostarme, digo buenas noches.','🌙']]}
 ];
 function startPhrase(u,lv){

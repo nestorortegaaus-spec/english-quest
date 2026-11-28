@@ -345,3 +345,13 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): 📅 desafíos semanales (ach.js, lista WCH): 3 por semana elegidos según la semana, se renuevan cada lunes,
   💎30 cada uno; se ven arriba en 🏆 Mis medallas. Las medallas NO se resetean nunca (solo "Empezar de cero").
 - ✅ HECHO (28/11): la invitación a charlar de la mascota ahora es un ícono 💬 chico a la derecha y solo aparece si pasaron 24 hs sin charlar (S.chatSt.lastT).
+- ✅ HECHO (28/11): 3 juegos nuevos en games3.js, rotan en el camino (GROT: 'miss','rhyme','seq'):
+  🔡 ¿Qué letra? (dibujo + palabra con hueco, 2 huecos desde nivel 4), 🎵 Rimas (24 grupos en RHY), 🕐 En orden (16 secuencias en SEQ:
+  rutinas, ciclos de vida, recetas, un cuento). Para sumar: agregar grupos en RHY o secuencias en SEQ.
+- ✅ HECHO (28/11): vocabulario Tanda 7 (b:7): 22 temas, 196 palabras/frases sin repetir (cocina, aves, animales del mundo, partes de
+  animales, escuela, bajo el agua, castillos, granja, panadería, campamento, arte, verbos de la casa y del corazón, frases del parque,
+  adverbios, inventos, cuidar la naturaleza, frases para comprar y de emergencia, pasado 7, futuro, palabras largas). Total ~2090.
+- ✅ HECHO (28/11): Frases estilo Kumon Tanda 5: +20 patrones (136 en total), p. ej. "I drink…", "I am afraid of…", "Did you … yesterday?",
+  "If I were a…, I would…", "I would rather … than …", "The best thing about … is …".
+- ✅ HECHO (28/11): tanda 2 de frases de mascotas (pets.js: +6 por amigo, +8 generales, +6 por nivel) y del descanso (brk.js: +10 datos
+  curiosos y más saludos, elogios, respiraciones y despedidas).
