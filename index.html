@@ -960,6 +960,9 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 .ach-box{text-align:center;} .ach-medal{font-size:84px;line-height:1.1;animation:pop .5s;filter:drop-shadow(0 6px 8px rgba(240,160,20,.45));}
 .ach-box small{font-weight:900;color:#F08A12;font-size:15px;} .ach-box h2{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:28px;margin:2px 0;color:#1F3E86;} .ach-box p{font-weight:800;color:#5A6A8A;}
 .ach-list{max-height:86vh;overflow-y:auto;} .ach-list h2{font-family:'EQ Baloo',sans-serif;font-weight:800;text-align:center;margin:0;} .ach-cnt{text-align:center;font-weight:900;color:#F08A12;margin-bottom:8px;}
+.wk-h{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:19px;color:#24345C;margin:6px 0 8px;text-align:left;} .wk-h small{font-family:'EQ Nunito',sans-serif;font-size:12px;font-weight:800;color:#7C8AA5;margin-left:4px;white-space:nowrap;}
+.wk-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;} .wk{display:flex;align-items:center;gap:10px;background:#F4F7FB;border-radius:16px;padding:8px 12px;text-align:left;} .wk b{font-size:28px;} .wk>div{flex:1;min-width:0;} .wk span{display:block;font-weight:900;font-size:14px;color:#24345C;}
+.wk i{display:block;height:8px;border-radius:5px;background:#E2E8F0;overflow:hidden;margin-top:4px;} .wk i u{display:block;height:100%;background:#5BB8F5;} .wk em{font-style:normal;font-weight:900;font-size:14px;color:#5A6A8A;} .wk.ok{background:linear-gradient(180deg,#E6FAEE,#CFF3DD);} .wk.ok em{color:#17853F;font-size:20px;}
 .ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
 .ach{background:#F4F7FB;border-radius:18px;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1px;}
 .ach b{font-size:36px;line-height:1.1;filter:grayscale(1);opacity:.35;} .ach span{font-weight:900;font-size:12px;color:#24345C;line-height:1.1;} .ach small{font-size:11px;font-weight:700;color:#7C8AA5;line-height:1.15;}
@@ -1223,11 +1226,11 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="vocab.js?v=7"></script>
 <script src="run.js?v=23" defer></script>
 <script src="buggy.js?v=14" defer></script>
-<script src="chat.js?v=5"></script>
+<script src="chat.js?v=6"></script>
 <script src="simon.js?v=1"></script>
 <script src="dino.js?v=9"></script>
-<script src="review.js?v=8"></script>
-<script src="ach.js?v=5"></script>
+<script src="review.js?v=9"></script>
+<script src="ach.js?v=6"></script>
 <script src="games2.js?v=1"></script>
 <script src="pets.js?v=6"></script>
 <script src="balance.js?v=2"></script>
@@ -1802,7 +1805,7 @@ function quitLesson(){ if(confirm('¿Salir? Perdés el avance de esta parada.'))
 function finishLesson(){
  var acc=L.ok/L.qs.length, stars=acc>=1?3:acc>=.75?2:1;
  var ui=L.ui; if(!window._us)window._us={};
- S.stars += stars; S.gems += 5+stars*5; advance(); /* 10/15/20: siempre hay premio por el esfuerzo */
+ S.stars += stars; S.gems += 5+stars*5; if(stars===3&&window.wkInc)wkInc('perf'); advance(); /* 10/15/20: siempre hay premio por el esfuerzo */
  // reward screen
  var b=document.getElementById('rewBody');
  b.innerHTML='<div class="chest">🌟</div><h2>'+(stars===3?'¡Parada perfecta!':'¡Parada completada!')+'</h2>'
@@ -2040,7 +2043,7 @@ function dkey(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1
 function yesterdayKey(){var d=new Date();d.setDate(d.getDate()-1);return dkey(d);}
 function todayCount(){return (S.days&&S.days[dkey()])||0;}
 function curStreak(){ if(!S.streak)return 0; if(window.streakAlive)return streakAlive()?S.streak:0; return (S.lastGoal===dkey()||S.lastGoal===yesterdayKey())?S.streak:0; }
-function countActivity(){
+function countActivity(){ if(window.wkInc)wkInc('stops');
  if(!S.days)S.days={}; var k=dkey(); S.days[k]=(S.days[k]||0)+1;
  S.crysAcc=(S.crysAcc||0)+1; if(S.crysAcc>=3){S.crysAcc=0;addCrys(1);}
  var ks=Object.keys(S.days).sort(); while(ks.length>90){delete S.days[ks.shift()];}
@@ -2160,7 +2163,7 @@ function openSleep(){ var p=playD(); show('s-sleep'); var host=document.getEleme
  sayBoth('Great job today! See you tomorrow!','¡Muy bien por hoy! ¡Nos vemos mañana!'); }
 function moreTime(){ askPin('Dar más tiempo',function(){ var p=playD(); p.extra=(p.extra||0)+30; p.warned=0; save(); toast('+30 minutos para hoy'); renderPath(); show('s-path'); }); }
 
-function markWord(w,ok){ if(!w||!w.en)return; try{noteAnswer(ok);}catch(e){} if(!S.hist)S.hist={}; if(!S.hfirst)S.hfirst={}; if(!S.hist[w.en]&&!S.hfirst[w.en])S.hfirst[w.en]=dkey(); var h=S.hist[w.en]||[0,0]; h[ok?0:1]++; S.hist[w.en]=h; }
+function markWord(w,ok){ if(!w||!w.en)return; if(ok&&window.wkInc)wkInc('ok'); try{noteAnswer(ok);}catch(e){} if(!S.hist)S.hist={}; if(!S.hfirst)S.hfirst={}; if(!S.hist[w.en]&&!S.hfirst[w.en])S.hfirst[w.en]=dkey(); var h=S.hist[w.en]||[0,0]; h[ok?0:1]++; S.hist[w.en]=h; }
 
 /* ===== TIENDA Y ÁLBUM ===== */
 var ACC_SLOTS=[{k:'head',n:'Cabeza',e:'👒'},{k:'eyes',n:'Cara',e:'🕶️'},{k:'neck',n:'Cuello',e:'📿'},{k:'hand',n:'En la mano',e:'🎈'},{k:'back',n:'Espalda',e:'🦸'}];
@@ -2536,7 +2539,7 @@ function renderParents(){
   +'<div><b>'+cw+'</b><span>charlas esta semana</span></div><div><b>'+(cs.n||0)+'</b><span>charlas en total</span></div>'
   +'<div><b>'+(S.chatInvA||0)+' de '+(S.chatInv||0)+'</b><span>invitaciones de su mascota que aceptó 💬</span></div><div><b>'+(cs.said||0)+'</b><span>respuestas dichas en voz alta 🎤'+(ctot?' ('+cpc+'%)':'')+'</span></div><div><b>'+(cs.tap||0)+'</b><span>respuestas tocadas 👆</span></div></div>'
   +'<div class="pa-note" style="margin-top:8px">'+(cs.last?'Última charla: '+cs.last.split('-').reverse().join('/'):'Todavía no charló con su mascota. El botón está en la 🏡 Casa de Amigos.')+(ctot&&cpc<30?' · Animala a responder hablando con el micrófono 🎤: es lo que más ayuda a la pronunciación.':'')+'</div></div>';
- out+='<div class="pa-card"><div class="pa-h">🏆 Medallas <small>'+(window.ACH?ACH.filter(function(a){return S.ach&&S.ach[a.id];}).length+' de '+ACH.length:'')+'</small></div>'+(window.achGrid?achGrid():'')+'</div>';
+ out+='<div class="pa-card"><div class="pa-h">🏆 Medallas <small>'+(window.ACH?ACH.filter(function(a){return S.ach&&S.ach[a.id];}).length+' de '+ACH.length:'')+'</small></div>'+(window.achGrid?achGrid():'')+(window.wkHTML?wkHTML():'')+'</div>';
  out+='<div class="pa-card"><div class="pa-h">Palabras para practicar juntos <small>tocá para escucharla</small></div>'+(hard.length?'<div class="pa-list">'+hard.map(function(k){var w=wordInfo(k),t=h[k][0]+h[k][1],pc=Math.round(h[k][0]/t*100);
    return '<button class="pa-w" onclick="say(\''+k.replace(/'/g,'')+'\')"><b>'+w.e+'</b><span><strong>'+k+'</strong><small>'+w.es+'</small></span><div class="pa-mini"><div class="pa-meter"><i style="width:'+pc+'%;background:'+(pc>=60?'#E8B04B':'#E07A6A')+'"></i></div><em>'+h[k][0]+' de '+t+'</em></div></button>';}).join('')+'</div>':'<div class="pa-note">Todavía no hay errores registrados. ¡Vamos bien! 💚</div>')+'</div>';
  if(mast.length)out+='<div class="pa-card"><div class="pa-h">Palabras que ya domina <small>'+mast.length+'</small></div><div class="pa-tags">'+mast.slice(0,30).map(function(k){return '<span>'+wordInfo(k).e+' '+k+'</span>';}).join('')+(mast.length>30?'<span class="more">+'+(mast.length-30)+'</span>':'')+'</div></div>';

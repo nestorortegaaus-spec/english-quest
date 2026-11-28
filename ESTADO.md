@@ -342,3 +342,5 @@ le acepte la voz a la nena.
   inglés = tarjeta blanca grande azul, castellano = texto chico celeste en itálica (sin bandera), respuestas = botones con borde y sombra de color.
 - ✅ HECHO (28/11, pedido del dueño): la mascota compañera invita a charlar en la Casa ("Do you want to talk with me?") con botón
   "💬 ¡Sí, charlemos!" que dura 15 s (cada ~1,5 min si hoy no charló, cada ~4 min si ya charló). Panel: invitaciones aceptadas (S.chatInv/chatInvA).
+- ✅ HECHO (28/11): 📅 desafíos semanales (ach.js, lista WCH): 3 por semana elegidos según la semana, se renuevan cada lunes,
+  💎30 cada uno; se ven arriba en 🏆 Mis medallas. Las medallas NO se resetean nunca (solo "Empezar de cero").
