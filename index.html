@@ -2571,7 +2571,7 @@ var KART_IMG={}, KART_BG=null, KART_BGS={};
 function kartBg(id){ if(KART_BGS[id]!==undefined)return; KART_BGS[id]=null; var im=new Image(); im.onload=function(){KART_BGS[id]=im;}; im.src='img/kart_bg_'+id+'.jpg'; }
 function kartImgs(){ KTRACKS.forEach(function(t){kartBg(t.id);}); KCHARS.forEach(function(c){ if(KART_IMG[c.id])return; var im=new Image(); im.onload=function(){KART_IMG[c.id]=im;}; im.src=c.img||'img/kart_'+c.id+'.png'; }); }
 function startKart(){
- var host=gSetup('🏎️ Kart Quest'); kartImgs(); if(!S.kart)S.kart={unl:1,cup:{}}; KTRACKS.forEach(function(t,i){ var c=S.kart.cup&&S.kart.cup[t.id]; if(c&&c<=3&&S.kart.unl<i+2&&i+1<KTRACKS.length)S.kart.unl=i+2; }); gScore('🔮'+(S.crys||0));
+ var host=gSetup('🏎️ Kart Quest'); kartImgs(); if(!S.kart)S.kart={unl:1,cup:{}}; KTRACKS.forEach(function(t,i){ var c=S.kart.cup&&S.kart.cup[t.id]; if(c===1&&S.kart.unl<i+2&&i+1<KTRACKS.length)S.kart.unl=i+2; /* solo el 1° destraba la siguiente */ }); gScore('🔮'+(S.crys||0));
  var sel={c:S.kart.ch||'fox',t:0}; if(!kOk({id:sel.c}))sel.c='fox'; musicStart(); if(sel.c.indexOf('car_')===0&&(S.kart.cars||[]).indexOf(sel.c.slice(4))<0)sel.c='fox';
  if(!S.kart.cars)S.kart.cars=[];
  function pickChar(){ var pil=KCHARS.filter(function(c){return !c.car&&kOk(c);});
@@ -2590,7 +2590,7 @@ function startKart(){
   function buy(byStars){ if(byStars){ if(!spendStars(k.st))return; } else { if(S.gems<k.g)return; S.gems-=k.g; } S.kart.cars.push(k.id); sel.c='car_'+k.id; S.kart.ch=sel.c; save(); ov.remove(); sWin(); burst(160); toast('🏎️ ¡'+k.n+' es tuyo!'); pickChar(); }
   document.getElementById('kgS').onclick=function(){buy(true);}; document.getElementById('kgG').onclick=function(){buy(false);}; document.getElementById('kgX').onclick=function(){ov.remove();sTap();}; }
  function pickTrack(){ host.innerHTML='<div class="kq-sel"><h2 class="kq-sub">Elegí la pista</h2><div class="kq-tracks">'+KTRACKS.map(function(t,i){var lock=i>=S.kart.unl, cup=S.kart.cup[t.id];
-   return '<button class="kq-tr'+(lock?' lock':'')+'" data-i="'+i+'" style="background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.38)),url(img/kart_bg_'+t.id+'.jpg) center/cover,linear-gradient(160deg,'+t.sky[0]+','+t.g[0]+')"><b>'+(lock?'🔒':t.e)+'</b><span>'+t.n+'</span><small>'+(lock?'Salí 1°, 2° o 3° en la anterior':cup?['','🥇','🥈','🥉'][cup]||'🏁':'¡Nueva!')+'</small></button>';}).join('')
+   return '<button class="kq-tr'+(lock?' lock':'')+'" data-i="'+i+'" style="background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.38)),url(img/kart_bg_'+t.id+'.jpg) center/cover,linear-gradient(160deg,'+t.sky[0]+','+t.g[0]+')"><b>'+(lock?'🔒':t.e)+'</b><span>'+t.n+'</span><small>'+(lock?'Salí 1° en la anterior':cup?['','🥇','🥈','🥉'][cup]||'🏁':'¡Nueva!')+'</small></button>';}).join('')
    +'</div><button class="btn ghost" id="kqBack">← Cambiar piloto</button></div>';
   host.querySelectorAll('.kq-tr').forEach(function(b){b.onclick=function(){var i=+b.dataset.i; if(i>=S.kart.unl){sBad();return;} sel.t=i; race();};});
   document.getElementById('kqBack').onclick=function(){sTap();pickChar();}; }
@@ -2735,11 +2735,11 @@ function startKart(){
    c.fillStyle='rgba(0,0,0,.35)';roundRect(c,12,H-22,110,10,5);c.fill();c.fillStyle=P.boost>0?'#FFB43C':'#57C4A6';roundRect(c,12,H-22,110*Math.min(1,P.sp/(maxSp*1.35)),10,5);c.fill();
   }
   function finish(){ finished=true; GAME.stop(); var cup=place<=3?place:0;
-   if(cup&&sel.t+1>=S.kart.unl&&sel.t+1<KTRACKS.length)S.kart.unl=sel.t+2;
+   var newT=false; if(place===1&&sel.t+1>=S.kart.unl&&sel.t+1<KTRACKS.length){ S.kart.unl=sel.t+2; newT=true; } /* pista nueva solo saliendo 1° */
    if(cup&&(!S.kart.cup[T.id]||cup<S.kart.cup[T.id]))S.kart.cup[T.id]=cup; save();
    say(place===1?'You win!':'Finish!'); if(place<=3){sWin();burst(200);}else sBad();
    var b=document.getElementById('rewBody');
-   b.innerHTML='<div class="chest">'+(['','🥇','🥈','🥉'][place]||'🏁')+'</div><h2>'+(place===1?'¡Ganaste la carrera!':place<=3?'¡Llegaste '+place+'°! ¡Al podio!':'Llegaste '+place+'°')+'</h2><p>'+T.n+(cup&&sel.t+1<KTRACKS.length&&S.kart.unl>sel.t+1?'<br>🔓 ¡Nueva pista desbloqueada!':place>3?'<br>Salí entre los 3 primeros para desbloquear la próxima pista':'')+'</p>'
+   b.innerHTML='<div class="chest">'+(['','🥇','🥈','🥉'][place]||'🏁')+'</div><h2>'+(place===1?'¡Ganaste la carrera!':place<=3?'¡Llegaste '+place+'°! ¡Al podio!':'Llegaste '+place+'°')+'</h2><p>'+T.n+(newT?'<br>🔓 ¡Nueva pista desbloqueada!':place>1&&sel.t+1<KTRACKS.length&&S.kart.unl<=sel.t+1?'<br>🏁 Salí 1° para desbloquear la próxima pista':'')+'</p>'
     +'<div class="rewpill">🔮 Te quedan '+(S.crys||0)+'</div>'
     +((S.crys||0)>0?'<button class="btn teal" onclick="startKart()">Otra carrera · 1 🔮</button><div style="height:8px"></div>':'<p style="font-size:13px">Estudiá para ganar más 🔮</p>')
     +'<button class="btn ghost" onclick="openArcade()">Volver a la Sala de Juegos</button>';

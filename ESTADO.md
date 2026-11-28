@@ -315,3 +315,5 @@ le acepte la voz a la nena.
   amigo, 12 c/u + 10 generales). Rotan como mazo. REGLA: seguir sumando frases a PET_CHAT / NEED_MORE en pets.js.
 - ✅ HECHO (28/11, pedido del dueño): precios de los amigos de la Casa: Gatita y Perrito 2000 💎, Conejita, Pingüino y Panda 2500 💎,
   Unicornio y Dragoncito 3000 💎.
+- ✅ HECHO (28/11, pedido del dueño): Kart no da gemas (su premio son pistas nuevas) y ahora la pista siguiente se destraba SOLO saliendo 1°
+  (antes 1°, 2° o 3°). Las pistas ya destrabadas se conservan.
