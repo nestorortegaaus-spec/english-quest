@@ -339,6 +339,7 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .rn-big{position:absolute;top:34%;left:0;right:0;text-align:center;font-size:30px;font-weight:900;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 12px rgba(0,0,0,.25);opacity:0;transform:scale(.6);transition:all .2s;pointer-events:none;padding:0 12px;line-height:1.25;} .rn-big.on{opacity:1;transform:scale(1);} .rn-big img{width:40px;height:40px;vertical-align:middle;} .rn-big b{color:#FFE07A;}
 .rn-tip{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.45);color:#fff;font-weight:900;font-size:15px;border-radius:14px;padding:8px 14px;white-space:nowrap;transition:opacity .6s;pointer-events:none;} .rn-tip.off{opacity:0;}
 .rn-res{display:flex;gap:10px;justify-content:center;margin:6px 0 10px;} .rn-res div{background:#fff;border-radius:16px;padding:8px 12px;display:flex;flex-direction:column;align-items:center;box-shadow:0 4px 0 rgba(120,140,170,.18);} .rn-res b{font-size:22px;color:var(--ink);} .rn-res span{font-size:12px;font-weight:800;color:var(--muted);}
+.kg-have{text-align:center;font-weight:800;color:var(--muted);font-size:15px;margin:-4px 0 6px;} .kg-have b{color:var(--ink);}
 .kg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
 .kg-car{position:relative;border:4px solid transparent;border-radius:18px;background:linear-gradient(180deg,#fff,#F3F6FA);padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-family:inherit;box-shadow:0 5px 0 var(--c);}
 .kg-car img{width:82%;aspect-ratio:1/1;object-fit:contain;} .kg-car b{font-size:17px;color:var(--ink);} .kg-sp{font-size:13px;letter-spacing:-2px;} .kg-car em{font-style:normal;font-weight:900;font-size:13px;color:var(--teal-d);} .kg-car em.pr{color:#C98A1C;}
@@ -846,13 +847,13 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
 
   <!-- SALA DE JUEGOS -->
   <section class="screen" id="s-arcade">
-    <div class="hud"><button class="lx" onclick="sTap();renderPath();show('s-path')">✕</button><div class="pill" style="color:#6B4FD8">🕹️ Sala de Juegos</div><div class="grow"></div><div class="pill" style="color:#8C5BE0">🔮 <span id="arCrys">0</span></div><div class="pill gem">💎 <span id="arGems">0</span></div></div>
+    <div class="hud"><button class="lx" onclick="sTap();renderPath();show('s-path')">✕</button><div class="pill" style="color:#6B4FD8;white-space:nowrap">🕹️ Juegos</div><div class="grow"></div><div class="pill" style="color:#8C5BE0">🔮 <span id="arCrys">0</span></div><div class="pill s">⭐ <span id="arStars">0</span></div><div class="pill gem">💎 <span id="arGems">0</span></div></div>
     <div class="ar-body" id="arBody"></div>
   </section>
 
   <!-- SHOP -->
   <section class="screen" id="s-shop">
-    <div class="hud"><button class="lx" onclick="closeShop()">✕</button><div class="pill" style="color:#C98A1C">🏪 Tienda</div><div class="grow"></div><div class="pill gem">💎 <span id="shGems">0</span></div></div>
+    <div class="hud"><button class="lx" onclick="closeShop()">✕</button><div class="pill" style="color:#C98A1C">🏪 Tienda</div><div class="grow"></div><div class="pill s">⭐ <span id="shStars">0</span></div><div class="pill gem">💎 <span id="shGems">0</span></div></div>
     <div class="sh-tabs"><button class="sh-tab" id="shTabFox" onclick="SHOP_TAB='fox';SHOP_SEL=null;sTap();renderShop()">👒 Ropa</button><button class="sh-tab" id="shTabStar" onclick="SHOP_TAB='star';SHOP_SEL=null;sTap();renderShop()">⭐ Estrellas</button><button class="sh-tab" id="shTabAlb" onclick="SHOP_TAB='alb';sTap();renderShop()">📒 Álbum</button></div>
     <div class="sh-body" id="shBody"></div>
   </section>
@@ -2006,7 +2007,7 @@ var SHOP_TAB='fox', SHOP_SEL=null, SHOP_PREV='s-path';
 function openShop(tab){sTap();var on=document.querySelector('.screen.on');SHOP_PREV=on&&on.id!=='s-shop'?on.id:'s-path';SHOP_TAB=tab||'fox';SHOP_SEL=null;renderShop();show('s-shop');}
 function closeShop(){sTap();renderPath();show('s-path');}
 function renderShop(){
- document.getElementById('shGems').textContent=S.gems;
+ document.getElementById('shGems').textContent=S.gems; document.getElementById('shStars').textContent=S.stars||0;
  document.getElementById('shTabFox').className='sh-tab'+(SHOP_TAB==='fox'?' on':'');
  document.getElementById('shTabAlb').className='sh-tab'+(SHOP_TAB==='alb'?' on':''); document.getElementById('shTabStar').className='sh-tab'+(SHOP_TAB==='star'?' on':'');
  var b=document.getElementById('shBody'); if(!S.owned)S.owned=[]; if(!S.stk)S.stk={};
@@ -2215,7 +2216,7 @@ function openArcade(){ sTap(); if(todayCount()<2){ toast('🧠 Primero aprendé 
 function renderArcade(){
  if(!S.carts)S.carts=[];
  document.getElementById('arCrys').textContent=(S.crys||0)+'/'+crysMax();
- document.getElementById('arGems').textContent=S.gems;
+ document.getElementById('arGems').textContent=S.gems; document.getElementById('arStars').textContent=S.stars||0;
  var h='<div class="ar-info"><b>🔮 Cristales de energía</b><span>Cada partida gasta 1 🔮. Los ganás <b>solo estudiando</b>: 1 cada 3 paradas del camino y 2 más al cumplir la meta del día. Guardás hasta '+crysMax()+'.</span>'
   +'<div class="ar-crys">'+Array.apply(null,Array(crysMax())).map(function(_,i){return '<i class="'+(i<(S.crys||0)?'on':'')+'">🔮</i>';}).join('')+'</div>'
   +'<small>Próximo cristal: '+(S.crysAcc||0)+'/3 paradas</small></div><div class="ar-h">🗄️ Tu colección de juegos</div><div class="ar-shelf">';
@@ -2275,12 +2276,12 @@ function startKart(){
   host.querySelectorAll('.kq-ch').forEach(function(b){b.onclick=function(){sel.c=b.dataset.id;sTap();pickChar();};});
   host.querySelectorAll('.kg-car').forEach(function(b){b.onclick=function(){ var k=KCARS.find(function(x){return x.id===b.dataset.k;}); if(S.kart.cars.indexOf(k.id)>=0){ sel.c='car_'+k.id; sTap(); pickChar(); return; } carBuy(k); };});
   document.getElementById('kqNext').onclick=function(){S.kart.ch=sel.c;save();sTap();pickTrack();}; }
- function garageHTML(){ return '<h2 style="margin-top:6px">🏁 Garaje <small style="font-size:14px;color:var(--muted)">autos más rápidos</small></h2><div class="kg-grid">'+KCARS.map(function(k,i){ var own=S.kart.cars.indexOf(k.id)>=0, on=sel.c==='car_'+k.id;
+ function garageHTML(){ return '<h2 style="margin-top:6px">🏁 Garaje <small style="font-size:14px;color:var(--muted)">autos más rápidos</small></h2><div class="kg-have">Tenés <b>⭐ '+(S.stars||0)+'</b> y <b>💎 '+(S.gems||0)+'</b></div><div class="kg-grid">'+KCARS.map(function(k,i){ var own=S.kart.cars.indexOf(k.id)>=0, on=sel.c==='car_'+k.id;
    return '<button class="kg-car'+(own?' own':'')+(on?' on':'')+'" data-k="'+k.id+'" style="--c:'+k.c+'"><img src="img/kcar_'+k.id+'.png" alt=""><b>'+k.n+'</b><span class="kg-sp">'+'⚡'.repeat(i+1)+'</span>'+(own?'<em>'+(on?'Elegido ✓':'Usar')+'</em>':'<em class="pr">⭐ '+k.st+' · 💎 '+k.g+'</em>')+'</button>'; }).join('')+'</div>'; }
  function carBuy(k){ sayBoth(k.n,'');
   var ov=document.createElement('div'); ov.className='pk-ov'; var okS=(S.stars||0)>=k.st, okG=(S.gems||0)>=k.g;
-  ov.innerHTML='<div class="pk-box"><img src="img/kcar_'+k.id+'.png" style="width:160px;display:block;margin:0 auto"><h2>'+k.n+'</h2><p>Más rápido: '+'⚡'.repeat(KCARS.indexOf(k)+1)+'</p>'
-   +'<button class="btn sun" id="kgS"'+(okS?'':' disabled')+'>Comprar con ⭐ '+k.st+'</button><button class="btn teal" id="kgG"'+(okG?'':' disabled')+'>Comprar con 💎 '+k.g+'</button>'
+  ov.innerHTML='<div class="pk-box"><img src="img/kcar_'+k.id+'.png" style="width:160px;display:block;margin:0 auto"><h2>'+k.n+'</h2><p>Más rápido: '+'⚡'.repeat(KCARS.indexOf(k)+1)+'</p><div class="kg-have">Tenés <b>⭐ '+(S.stars||0)+'</b> y <b>💎 '+(S.gems||0)+'</b></div>'
+   +'<button class="btn sun" id="kgS"'+(okS?'':' disabled')+'>Comprar con ⭐ '+k.st+(okS?'':' · te faltan '+(k.st-(S.stars||0)))+'</button><button class="btn teal" id="kgG"'+(okG?'':' disabled')+'>Comprar con 💎 '+k.g+(okG?'':' · te faltan '+(k.g-(S.gems||0)))+'</button>'
    +(!okS&&!okG?'<p class="sh-need">Te faltan ⭐ o 💎. ¡Estudiá y jugá para juntar más!</p>':'')+'<button class="btn ghost" id="kgX">Cerrar</button></div>';
   document.body.appendChild(ov);
   function buy(byStars){ if(byStars){ if(!spendStars(k.st))return; } else { if(S.gems<k.g)return; S.gems-=k.g; } S.kart.cars.push(k.id); sel.c='car_'+k.id; S.kart.ch=sel.c; save(); ov.remove(); sWin(); burst(160); toast('🏎️ ¡'+k.n+' es tuyo!'); pickChar(); }

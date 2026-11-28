@@ -269,4 +269,5 @@ le acepte la voz a la nena.
   difíciles (S.hist: errores > 0 y aciertos < errores+2). Elige hasta 6 de las más falladas, las muestra para escuchar, y pregunta cada una
   de 2 formas (escuchar→dibujo, dibujo→palabra, inglés→castellano, castellano→inglés; las frases sin dibujo, solo texto). Si erra, la palabra
   vuelve al final. Las que hace perfectas dejan de ser difíciles. Premio 💎15 ⭐2 la primera vez del día, 💎5 las siguientes (S.rev).
-- ⏭️ EN COLA (pedido 28/11): mostrar las ⭐ disponibles donde se compra con estrellas (ej. garaje del Kart muestra 💎 pero no ⭐).
+- ✅ HECHO (28/11): las ⭐ disponibles se ven donde se compra: arriba en la Tienda y la Sala de Juegos (junto a 💎), en el garaje del Kart
+  ("Tenés ⭐ X y 💎 Y") y en la ventana de compra del auto ("te faltan N" en cada botón). La Casa y el camino ya las mostraban.
