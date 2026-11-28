@@ -154,7 +154,7 @@ le acepte la voz a la nena.
   Tanda 4 (28/11): +20 patrones (100 en total): "I hear a…", "Give me the…, please", "I am … now", "Is it a…?", "Don't…!", "Who wants…?",
   "I have to … today", "Have you ever seen a…?", "It smells like…", "I have been … for an hour", "I like … more than …", "You should…",
   "While I was…, it started to rain", "I can't wait to…!".
-- 🔄 EN CURSO (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke, tienda, charla, Simón dice, dictado, opuestos, letra que falta, rimas, en orden): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
+- 🔄 EN CURSO (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke, tienda, charla, Simón dice, dictado, opuestos, letra que falta, rimas, en orden, mi monstruo, preguntas, bingo): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
@@ -360,3 +360,11 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): 3 fondos nuevos de minijuegos de ChatGPT (espacio, bajo el mar, ciudad): img/ui/game_bg_space|sea|city.webp; MG_BGS rota 8 fondos.
 - ✅ HECHO (28/11): 3 paisajes nuevos de ChatGPT para la Carrera Mágica y el Buggy Splash: 🍂 Bosque de Otoño (au_*), 🏰 Reino del
   Castillo (ca_*), 🌃 Ciudad de Noche (nt_*). Fondos img/run/bg_autumn|castle|night.jpg. La Carrera rota 12 paisajes y el Buggy tiene 12 pistas.
+- ✅ HECHO (28/11): 3 juegos nuevos en games4.js (GROT: 'mon','qa','bingo'): 👾 Mi monstruo (sigue instrucciones en inglés y arma un
+  monstruo SVG: color, ojos, patas, nariz, cuernos, brazos, boca), 💬 Preguntas (el zorrito pregunta y ella elige la respuesta; 28 en QA,
+  nivel 1-5) y 🎱 Bingo (escucha y marca en su cartón 3x3, 4x4 desde nivel 3; líneas = ¡Bingo!).
+- ✅ HECHO (28/11): vocabulario Tanda 8 (b:8): 21 temas, ~160 palabras/frases sin repetir (casa, ropa, premios, oficios, la calle, lugares,
+  monstruos simpáticos, útiles, paisajes, verbos de la escuela y el deporte, frases para jugar y de la mesa, sabores, en el médico,
+  conectores, pasado 8, opinar, emociones, insectos, espacio). Total ~2250. Frases Kumon Tanda 6: +20 patrones (156 en total).
+  Frases de mascotas y descanso: tanda 3 (+4 por amigo, +6 generales, +4 por nivel, +8 datos curiosos).
+

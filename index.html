@@ -972,6 +972,16 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 .ar-prof{cursor:pointer;}
 
 
+/* 👾 Monstruo · 💬 Pregunta y respuesta · 🎱 Bingo */
+.mo-stage{background:#fff;border-radius:28px;padding:6px 18px;box-shadow:0 6px 0 rgba(120,150,190,.25),0 8px 16px rgba(40,90,150,.15);} .mo-svg{width:190px;height:200px;display:block;}
+.mo-ins{display:flex;align-items:center;gap:10px;background:#fff;border-radius:20px;padding:8px 14px;box-shadow:0 4px 10px rgba(40,90,150,.15);} .mo-ins b{display:block;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:22px;color:#1F3E86;line-height:1.1;} .mo-ins small{font-weight:900;color:#7C8AA5;font-size:14px;}
+.mo-opts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;width:100%;} .mo-o{width:84px;aspect-ratio:auto!important;flex-direction:column;padding:8px 4px;gap:2px;} .mo-o b{font-family:'EQ Baloo',sans-serif;font-size:34px;line-height:1.1;color:#24345C;} .mo-o span{font-weight:900;font-size:14px;color:#5A6A8A;} .mo-sw{display:block;width:40px;height:40px;border-radius:50%;border:3px solid #2A2A40;}
+.qa-q{display:flex;align-items:flex-end;gap:6px;width:100%;} .qa-q img{width:96px;height:auto;flex:none;} .qa-bub{position:relative;flex:1;background:#fff;border-radius:22px 22px 22px 6px;padding:12px 14px;box-shadow:0 5px 12px rgba(40,90,150,.18);} .qa-bub b{display:block;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:23px;color:#1F3E86;line-height:1.15;} .qa-bub small{display:block;font-weight:900;color:#7C8AA5;font-size:14px;margin-top:2px;} .qa-bub .ls-spk{position:absolute;right:-6px;top:-14px;}
+.qa-opts{width:100%;}
+.bn-call{display:flex;align-items:center;gap:12px;background:#fff;border-radius:22px;padding:8px 18px;box-shadow:0 4px 10px rgba(40,90,150,.15);font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:20px;color:#24345C;}
+.bn-card{display:grid;gap:8px;width:100%;max-width:360px;background:linear-gradient(180deg,#8B6CF5,#6B4FD8);padding:10px;border-radius:24px;box-shadow:0 6px 0 #4E36B0;} .bn-c{position:relative;aspect-ratio:1;border:none;border-radius:16px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;} .bn-c b{font-size:38px;line-height:1.1;} .bn-c small{font-weight:900;font-size:12px;color:#5A6A8A;}
+.bn-c.ok{background:#E6FAEE;} .bn-c.ok::after{content:'';position:absolute;inset:10%;border-radius:50%;background:rgba(255,90,90,.55);border:4px solid #F2665A;animation:lspop .3s;} .bn-c.no{animation:bnShake .4s;} @keyframes bnShake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.bn-lines{font-weight:900;color:#fff;background:rgba(36,52,92,.55);border-radius:999px;padding:4px 14px;}
 /* 🔡 Letra que falta · 🕐 ¿Qué va primero? */
 .ms-slots span{width:44px;height:54px;font-size:30px;} .ms-slots span.ms-gap{background:#FFF6D6;border-color:#FFB717;animation:invPulse2 1s ease-in-out infinite;} .ms-slots span.ms-gap2{background:#F1F4F9;} @keyframes invPulse2{50%{transform:scale(1.08)}}
 .ms-opts{display:flex;gap:12px;justify-content:center;} .ms-o{width:76px;height:76px;aspect-ratio:1!important;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:40px;color:#24345C;}
@@ -1228,7 +1238,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
   <div class="wtip" id="wtip"></div>
 </div>
 
-<script src="vocab.js?v=8"></script>
+<script src="vocab.js?v=9"></script>
 <script src="run.js?v=24" defer></script>
 <script src="buggy.js?v=15" defer></script>
 <script src="chat.js?v=7"></script>
@@ -1238,9 +1248,10 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="ach.js?v=6"></script>
 <script src="games2.js?v=1"></script>
 <script src="games3.js?v=1"></script>
-<script src="pets.js?v=8"></script>
+<script src="games4.js?v=1"></script>
+<script src="pets.js?v=9"></script>
 <script src="balance.js?v=2"></script>
-<script src="brk.js?v=2"></script>
+<script src="brk.js?v=3"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -1620,8 +1631,8 @@ function buildWorld(w){
  out.push({t:'chest'});
  return out;
 }
-var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross','sing','store','chat','simon','dict','opp','miss','rhyme','seq'];
-var GINFO={miss:{i:'🔡',n:'Letra que falta'},rhyme:{i:'🎵',n:'Rimas'},seq:{i:'🕐',n:'¿Qué va primero?'},rev:{i:'🔁',n:'Repaso'},dict:{i:'✍️',n:'Dictado'},opp:{i:'↔️',n:'Opuestos'},simon:{i:'🙋',n:'Simón dice'},chat:{i:'🗣️',n:'Charla'},store:{i:'🏪',n:'La Tienda'},sing:{i:'🎤',n:'Karaoke'},cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
+var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross','sing','store','chat','simon','dict','opp','miss','rhyme','seq','mon','qa','bingo'];
+var GINFO={mon:{i:'👾',n:'Armá el monstruo'},qa:{i:'💬',n:'Pregunta y respuesta'},bingo:{i:'🎱',n:'Bingo'},miss:{i:'🔡',n:'Letra que falta'},rhyme:{i:'🎵',n:'Rimas'},seq:{i:'🕐',n:'¿Qué va primero?'},rev:{i:'🔁',n:'Repaso'},dict:{i:'✍️',n:'Dictado'},opp:{i:'↔️',n:'Opuestos'},simon:{i:'🙋',n:'Simón dice'},chat:{i:'🗣️',n:'Charla'},store:{i:'🏪',n:'La Tienda'},sing:{i:'🎤',n:'Karaoke'},cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
 function wordsOf(u){var us=Array.isArray(u)?u:[u],out=[];us.forEach(function(i){out=out.concat(UNITS[i].w);});return out;}
 
 /* ===== STATE ===== */
@@ -1711,7 +1722,7 @@ function openNode(i){
  if(nd.t==='lesson')startLesson(nd.u);
  else if(nd.t==='story')openStory(nd.s);
  else if(nd.t==='chest')openChest();
- else if(nd.t==='game'){ var lv=nd.lv||1; var F={miss:function(u,lv){startMissing(u,lv);},rhyme:function(u,lv){startRhymes(u,lv);},seq:function(u,lv){startSequence(u,lv);},rev:function(u,lv){openReview(u,true);},dict:function(u,lv){startDictation(u,lv);},opp:function(u,lv){startOpposites(u,lv);},simon:function(u,lv){startSimon(u,lv);},chat:function(u,lv){startChat(u,lv);},store:startStore,sing:startSing,cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
+ else if(nd.t==='game'){ var lv=nd.lv||1; var F={mon:function(u,lv){startBuildMonster(u,lv);},qa:function(u,lv){startQA(u,lv);},bingo:function(u,lv){startBingo(u,lv);},miss:function(u,lv){startMissing(u,lv);},rhyme:function(u,lv){startRhymes(u,lv);},seq:function(u,lv){startSequence(u,lv);},rev:function(u,lv){openReview(u,true);},dict:function(u,lv){startDictation(u,lv);},opp:function(u,lv){startOpposites(u,lv);},simon:function(u,lv){startSimon(u,lv);},chat:function(u,lv){startChat(u,lv);},store:startStore,sing:startSing,cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
  else if(nd.t==='dance')startDance();
 }
 function advance(){ countActivity(); S.prog=Math.max(S.prog, activeIdx+1); if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);NEW_WORLD=true;} save(); }
@@ -3143,8 +3154,8 @@ function gSetup(title){ if(title.indexOf('Kart')<0)ARCADE_RET=false;sTap();unloc
 function gScore(t){document.getElementById('gScore').textContent=t; var m=/(\d+)\s*\/\s*(\d+)/.exec(String(t)), w=document.getElementById('gProgW');
  if(w){ if(m&&+m[2]>0){ w.classList.add('on'); document.getElementById('gProg').style.width=Math.min(100,Math.round(+m[1]/+m[2]*100))+'%'; } else w.classList.remove('on'); } }
 /* 🦊 sistema de minijuegos (referencia design/ref_rediseno_minijuegos.webp): fondo, barra de progreso y zorrito guía */
-var MG_GUIDE=['Adivinanzas','¿Cuántos','Memotest','Deletreá','Frases','Sopa','¿Sí o no?','Escuchá','Monstruo','Karaoke','Desafío del','Repaso','Dictado','Opuestos','Qué letra','Rimas','En orden'];
-var MG_HELLO={'Qué letra':['Find the missing letter!','¡Buscá la letra que falta!'],'Rimas':['Find the rhyme!','¡Buscá la rima!'],'En orden':['What comes first?','¿Qué va primero?'],'Adivinanzas':['Guess what it is!','¡Adiviná qué es!'],'¿Cuántos':['Count with me!','¡Contá conmigo!'],'Memotest':['Find the pairs!','¡Buscá los pares!'],'Deletreá':['Spell the word!','¡Armá la palabra!'],
+var MG_GUIDE=['Adivinanzas','¿Cuántos','Memotest','Deletreá','Frases','Sopa','¿Sí o no?','Escuchá','Monstruo','Karaoke','Desafío del','Repaso','Dictado','Opuestos','Qué letra','Rimas','En orden','Mi monstruo','Bingo'];
+var MG_HELLO={'Mi monstruo':['Let\'s make a monster!','¡Armemos un monstruo!'],'Bingo':['Let\'s play bingo!','¡Juguemos al bingo!'],'Qué letra':['Find the missing letter!','¡Buscá la letra que falta!'],'Rimas':['Find the rhyme!','¡Buscá la rima!'],'En orden':['What comes first?','¿Qué va primero?'],'Adivinanzas':['Guess what it is!','¡Adiviná qué es!'],'¿Cuántos':['Count with me!','¡Contá conmigo!'],'Memotest':['Find the pairs!','¡Buscá los pares!'],'Deletreá':['Spell the word!','¡Armá la palabra!'],
  'Frases':['Let\'s make sentences!','¡Armemos frases!'],'Sopa':['Find the words!','¡Buscá las palabras!'],'Crucigrama':['Complete the crossword!','¡Completá el crucigrama!'],'¿Sí o no?':['Yes or no?','¿Sí o no?'],
  'Ordená':['Put them in order!','¡Ordenalas!'],'Escuchá':['Listen carefully!','¡Escuchá bien!'],'Monstruo':['Feed the monster!','¡Dale de comer al monstruo!'],'Hablá':['Say it out loud!','¡Decilo en voz alta!'],
  'Karaoke':['Let\'s sing!','¡A cantar!'],'Dictado':['Listen and write!','¡Escuchá y escribí!'],'Opuestos':['Find the opposite!','¡Buscá el contrario!'],'Desafío del':['Three new words!','¡Tres palabras nuevas!'],'Repaso':['Let\'s practice!','¡A repasar!'],'Globos':['Pop the balloons!','¡Reventá los globos!']};
@@ -3669,6 +3680,26 @@ var PHR=[
  {lv:5,en:'I have been learning English for {}.',s:[['a year','Estoy aprendiendo inglés hace un año.','📅'],['two months','Estoy aprendiendo inglés hace dos meses.','🗓️'],['a long time','Estoy aprendiendo inglés hace mucho tiempo.','⏳'],['three weeks','Estoy aprendiendo inglés hace tres semanas.','📆']]},
  {lv:5,en:'The best thing about {} is {}.',two:1,s:[['summer','Lo mejor del verano es la playa.','☀️🏖️','the beach'],['school','Lo mejor de la escuela son mis amigos.','🏫👭','my friends'],['weekends','Lo mejor de los fines de semana es dormir mucho.','📅😴','sleeping a lot'],['birthdays','Lo mejor de los cumpleaños es la torta.','🎂🎉','the cake']]},
  {lv:5,en:'I would rather {} than {}.',two:1,s:[['read','Prefiero leer que mirar tele.','📖📺','watch TV'],['swim','Prefiero nadar que correr.','🏊🏃','run'],['draw','Prefiero dibujar que cantar.','🎨🎤','sing'],['play outside','Prefiero jugar afuera que quedarme adentro.','🌳🏠','stay inside']]},
+ {lv:1,en:'I like the {} color.',s:[['red','Me gusta el color rojo.','🔴'],['blue','Me gusta el color azul.','🔵'],['green','Me gusta el color verde.','🟢'],['pink','Me gusta el color rosa.','🩷'],['purple','Me gusta el color violeta.','🟣']]},
+ {lv:1,en:'I love you, {}!',s:[['mom','¡Te quiero, mamá!','👩'],['dad','¡Te quiero, papá!','👨'],['grandma','¡Te quiero, abuela!','👵'],['grandpa','¡Te quiero, abuelo!','👴'],['my friend','¡Te quiero, amiga!','👭']]},
+ {lv:1,en:'The {} is sleeping.',s:[['baby','El bebé está durmiendo.','👶'],['cat','El gato está durmiendo.','🐱'],['dog','El perro está durmiendo.','🐶'],['bear','El oso está durmiendo.','🐻'],['owl','El búho está durmiendo.','🦉']]},
+ {lv:2,en:'Can I play with the {}?',s:[['ball','¿Puedo jugar con la pelota?','⚽'],['kite','¿Puedo jugar con el barrilete?','🪁'],['puzzle','¿Puedo jugar con el rompecabezas?','🧩'],['robot','¿Puedo jugar con el robot?','🤖'],['blocks','¿Puedo jugar con los bloques?','🧱']]},
+ {lv:2,en:'My {} is long.',s:[['hair','Mi pelo es largo.','💇'],['scarf','Mi bufanda es larga.','🧣'],['pencil','Mi lápiz es largo.','✏️'],['dress','Mi vestido es largo.','👗'],['name','Mi nombre es largo.','📛']]},
+ {lv:2,en:'We need some {}.',s:[['milk','Necesitamos leche.','🥛'],['bread','Necesitamos pan.','🍞'],['eggs','Necesitamos huevos.','🥚'],['water','Necesitamos agua.','💧'],['apples','Necesitamos manzanas.','🍎']]},
+ {lv:2,en:'The {} can fly.',s:[['bird','El pájaro puede volar.','🐦'],['butterfly','La mariposa puede volar.','🦋'],['plane','El avión puede volar.','✈️'],['bee','La abeja puede volar.','🐝'],['dragon','El dragón puede volar.','🐉']]},
+ {lv:3,en:'Look! The {} is running.',s:[['horse','¡Mirá! El caballo está corriendo.','🐴'],['dog','¡Mirá! El perro está corriendo.','🐶'],['boy','¡Mirá! El nene está corriendo.','👦'],['rabbit','¡Mirá! El conejo está corriendo.','🐇'],['cheetah','¡Mirá! El guepardo está corriendo.','🐆']]},
+ {lv:3,en:'I usually have {} for dinner.',s:[['pasta','Normalmente ceno fideos.','🍝'],['soup','Normalmente ceno sopa.','🍲'],['pizza','Normalmente ceno pizza.','🍕'],['chicken and rice','Normalmente ceno pollo con arroz.','🍗'],['milanesa','Normalmente ceno milanesa.','🥩']]},
+ {lv:3,en:'There are two {} on the shelf.',s:[['books','Hay dos libros en el estante.','📚'],['cups','Hay dos tazas en el estante.','☕'],['dolls','Hay dos muñecas en el estante.','🪆'],['plants','Hay dos plantas en el estante.','🪴'],['boxes','Hay dos cajas en el estante.','📦']]},
+ {lv:3,en:'Please, close the {}.',s:[['door','Por favor, cerrá la puerta.','🚪'],['window','Por favor, cerrá la ventana.','🪟'],['book','Por favor, cerrá el libro.','📕'],['box','Por favor, cerrá la caja.','📦'],['fridge','Por favor, cerrá la heladera.','🧊']]},
+ {lv:3,en:'It is {} outside.',s:[['raining','Está lloviendo afuera.','🌧️'],['snowing','Está nevando afuera.','❄️'],['windy','Hay viento afuera.','🌬️'],['hot','Hace calor afuera.','🥵'],['dark','Está oscuro afuera.','🌑']]},
+ {lv:4,en:'My mom asked me to {}.',s:[['clean my room','Mi mamá me pidió que ordene mi cuarto.','🧹'],['feed the cat','Mi mamá me pidió que le dé de comer al gato.','🐱'],['set the table','Mi mamá me pidió que ponga la mesa.','🍽️'],['buy some bread','Mi mamá me pidió que compre pan.','🍞'],['take a shower','Mi mamá me pidió que me bañe.','🚿']]},
+ {lv:4,en:'Last night I dreamed about {}.',s:[['a dragon','Anoche soñé con un dragón.','🐉'],['the beach','Anoche soñé con la playa.','🏖️'],['flying','Anoche soñé que volaba.','🪽'],['my friends','Anoche soñé con mis amigos.','👭'],['a giant cake','Anoche soñé con una torta gigante.','🎂']]},
+ {lv:4,en:'I need {} to make a cake.',s:[['eggs','Necesito huevos para hacer una torta.','🥚'],['flour','Necesito harina para hacer una torta.','🌾'],['sugar','Necesito azúcar para hacer una torta.','🍬'],['butter','Necesito manteca para hacer una torta.','🧈'],['milk','Necesito leche para hacer una torta.','🥛']]},
+ {lv:4,en:'How long does it take to {}?',s:[['get to school','¿Cuánto se tarda en llegar a la escuela?','🏫'],['bake a cake','¿Cuánto se tarda en hornear una torta?','🎂'],['fly to Spain','¿Cuánto se tarda en volar a España?','✈️'],['grow a tree','¿Cuánto tarda en crecer un árbol?','🌳']]},
+ {lv:5,en:'I was {} when the phone rang.',s:[['sleeping','Estaba durmiendo cuando sonó el teléfono.','😴'],['taking a bath','Me estaba bañando cuando sonó el teléfono.','🛁'],['doing my homework','Estaba haciendo la tarea cuando sonó el teléfono.','📝'],['eating dinner','Estaba cenando cuando sonó el teléfono.','🍽️']]},
+ {lv:5,en:'If you {}, you will {}.',two:1,s:[['study','Si estudiás, vas a aprender.','📚🧠','learn'],['eat well','Si comés bien, vas a crecer fuerte.','🥦💪','grow strong'],['run fast','Si corrés rápido, vas a ganar.','🏃🏆','win'],['practice','Si practicás, vas a mejorar.','🎹⭐','get better']]},
+ {lv:5,en:'She told me that she {}.',s:[['was tired','Me dijo que estaba cansada.','😴'],['liked my drawing','Me dijo que le gustaba mi dibujo.','🎨'],['had a new puppy','Me dijo que tenía un perrito nuevo.','🐶'],['wanted to play','Me dijo que quería jugar.','🎮']]},
+ {lv:5,en:'It is the {} day of my life!',s:[['best','¡Es el mejor día de mi vida!','🌟'],['happiest','¡Es el día más feliz de mi vida!','😄'],['funniest','¡Es el día más divertido de mi vida!','😂'],['busiest','¡Es el día más ocupado de mi vida!','📅']]},
  {lv:5,en:'Before I go to bed, I {}.',s:[['brush my teeth','Antes de acostarme, me lavo los dientes.','🪥'],['put on my pajamas','Antes de acostarme, me pongo el pijama.','👚'],['read a story','Antes de acostarme, leo un cuento.','📖'],['say good night','Antes de acostarme, digo buenas noches.','🌙']]}
 ];
 function startPhrase(u,lv){

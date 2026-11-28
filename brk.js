@@ -30,6 +30,20 @@ var BRL={
  add('facts',[['A group of flamingos is called a flamboyance!','¡A un grupo de flamencos en inglés le dicen flamboyance!','🦩'],['Polar bears have black skin under their white fur!','¡Los osos polares tienen la piel negra debajo del pelo blanco!','🐻‍❄️'],['A day on Venus is longer than a year on Venus!','¡Un día en Venus dura más que un año en Venus!','🪐'],['Sea otters hold hands when they sleep!','¡Las nutrias marinas se dan la mano para dormir!','🦦'],['Hippos make their own sunscreen!','¡Los hipopótamos hacen su propio protector solar!','🦛'],['Some fish can walk on land!','¡Algunos peces pueden caminar en la tierra!','🐟'],['Your nose can remember lots of smells!','¡Tu nariz puede recordar un montón de olores!','👃'],['Strawberries have their seeds on the outside!','¡Las frutillas tienen las semillas por fuera!','🍓'],['Lightning is hotter than the sun!','¡Un rayo es más caliente que el sol!','⚡'],['Zebras all have different stripes!','¡Cada cebra tiene rayas distintas!','🦓']]);
  add('bye',[['See you after the lesson!','¡Nos vemos después de la lección!'],['Your brain is ready to learn more!','¡Tu cerebro está listo para aprender más!'],['That was a super break!','¡Fue un súper descanso!']]);
 })();
+/* ➕ TANDA 3 (28/11) */
+(function(){ function add(k,more){ more.forEach(function(x){BRL[k].push(x);}); }
+ add('hello',[['Yay, {n}! It is break time!','¡Bien, {n}! ¡Es hora del descanso!'],['{n}, your brain worked a lot. Let\'s rest!','{n}, tu cerebro trabajó mucho. ¡Descansemos!']]);
+ add('hello2',[['Let\'s stretch like a cat!','¡Estirémonos como un gato!'],['Time to move like animals!','¡Hora de moverse como animales!']]);
+ add('praise',[['Super star!','¡Súper estrella!'],['You are unstoppable!','¡Nadie te para!'],['That was awesome!','¡Eso estuvo genial!'],['Perfect!','¡Perfecto!']]);
+ add('breathe',[['Breathe in like a big lion, and roar softly!','¡Tomá aire como un león grande y rugí bajito!'],['Let\'s blow bubbles: breathe in, blow out slowly.','Hagamos burbujas: tomá aire y soplá despacito.']]);
+ add('calm',[['You are calm like a quiet lake.','Estás tranquila como un lago quieto.'],['Everything is peaceful now.','Ahora todo está en paz.']]);
+ add('eyes',[['Close your eyes and imagine a rainbow.','Cerrá los ojos e imaginá un arcoíris.']]);
+ add('open',[['Surprise! Open your eyes!','¡Sorpresa! ¡Abrí los ojos!']]);
+ add('ask',[['Say {w} like a giant!','¡Decí {w} como un gigante!'],['Say {w} like a tiny mouse!','¡Decí {w} como un ratoncito!']]);
+ add('wow',[['That is so cool!','¡Qué genial!'],['Our world is full of surprises!','¡Nuestro mundo está lleno de sorpresas!']]);
+ add('facts',[['A blue whale is bigger than a dinosaur!','¡La ballena azul es más grande que un dinosaurio!','🐋'],['Owls cannot move their eyes, so they turn their heads!','¡Los búhos no pueden mover los ojos, por eso giran la cabeza!','🦉'],['Chameleons change color!','¡Los camaleones cambian de color!','🦎'],['A cheetah is the fastest animal on land!','¡El guepardo es el animal más rápido de la tierra!','🐆'],['The Earth goes around the Sun once a year!','¡La Tierra da una vuelta al Sol cada año!','🌍'],['Bats sleep upside down!','¡Los murciélagos duermen cabeza abajo!','🦇'],['Snails have thousands of tiny teeth!','¡Los caracoles tienen miles de dientitos!','🐌'],['There are more stars in the sky than grains of sand on a beach!','¡Hay más estrellas en el cielo que granitos de arena en una playa!','✨']]);
+ add('bye',[['Great break! Now, back to English!','¡Gran descanso! ¡Ahora, de vuelta al inglés!'],['You are ready! Let\'s go!','¡Estás lista! ¡Vamos!']]);
+})();
 window.BRL=BRL;
 window.brL=function(k,vars){ var arr=BRL[k]||[['Great!','¡Genial!']]; if(!S.brdeck)S.brdeck={}; var d=S.brdeck[k]||(S.brdeck[k]={q:[],last:-1});
  d.q=d.q.filter(function(x){return x<arr.length;}); if(!d.q.length){ d.q=shuffle(arr.map(function(_,j){return j;})); if(d.q.length>1&&d.q[0]===d.last)d.q.push(d.q.shift()); }
