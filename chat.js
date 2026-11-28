@@ -61,7 +61,7 @@ window.openDaily=function(){ var st=dchState(), ws=dayWords(), host=gSetup('📅
  if(st.done){ host.innerHTML='<div class="dc-done"><div class="dc-big">✅</div><h2>¡Ya hiciste el desafío de hoy!</h2><p>Mañana hay 3 palabras nuevas 🌅</p><div class="dc-ws">'+ws.map(function(w){return '<button onclick="sayBoth(\''+w.en.replace(/'/g,'')+'\',\''+w.es.replace(/'/g,'')+'\')"><b>'+w.e+'</b><span>'+w.en+'</span><small>'+w.es+'</small></button>';}).join('')+'</div><button class="btn ghost" onclick="exitGame()">Volver</button></div>'; return; }
  var steps=[]; ws.forEach(function(w){ steps.push(['learn',w]); }); ws.forEach(function(w){ steps.push(['pick',w]); }); if(window.SR)ws.forEach(function(w){ steps.push(['say',w]); });
  var i=0, first=0;
- function next(){ if(!GAME.on)return; if(i>=steps.length){ st.done=1; S.gems+=25; S.stars=(S.stars||0)+3; S.dstreak=(S.dlast===yesterdayKey()?(S.dstreak||0)+1:1); S.dlast=dkey(); save(); hdr();
+ function next(){ if(!GAME.on)return; if(i>=steps.length){ st.done=1; S.dchN=(S.dchN||0)+1; S.gems+=25; S.stars=(S.stars||0)+3; S.dstreak=(S.dlast===yesterdayKey()?(S.dstreak||0)+1:1); S.dlast=dkey(); save(); hdr();
    host.innerHTML='<div class="dc-done"><div class="dc-big">🏆</div><h2>¡Desafío completo!</h2><p>Aprendiste 3 palabras nuevas</p><div class="dc-ws">'+ws.map(function(w){return '<button><b>'+w.e+'</b><span>'+w.en+'</span><small>'+w.es+'</small></button>';}).join('')+'</div><div class="rewpill">💎 +25 · ⭐ +3'+(S.dstreak>1?' · 🔥 '+S.dstreak+' días seguidos':'')+'</div><button class="btn teal" onclick="exitGame()">¡Genial! →</button></div>';
    sWin(); burst(160); sayBoth('Great job! See you tomorrow!','¡Muy bien! ¡Nos vemos mañana!'); return; }
   var s=steps[i], w=s[1]; gScore((i+1)+'/'+steps.length);

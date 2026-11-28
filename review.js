@@ -55,7 +55,7 @@ window.openReview=function(){
   if(q.t==='listen'||q.t==='listenTxt'||q.t==='meaning')GAME.timer=setTimeout(function(){ say(w.en,0.85); },300); }
  function finish(){ var H=S.hist||{}; list.forEach(function(w){ var x=H[w.en]; if(x&&!miss[w.en])x[0]=Math.max(x[0],x[1]+2); }); /* perfecta en el repaso: deja de ser difícil */
   var after=hardCount(), today=dkey(), first=!(S.rev&&S.rev.day===today), g=first?50:10, st=first?2:0;
-  S.gems+=g; S.stars=(S.stars||0)+st; S.rev={day:today,n:((S.rev&&S.rev.day===today)?S.rev.n:0)+1}; save(); hdr();
+  S.gems+=g; S.stars=(S.stars||0)+st; S.rev={day:today,n:((S.rev&&S.rev.day===today)?S.rev.n:0)+1}; S.revN=(S.revN||0)+1; save(); hdr();
   host.innerHTML='<div class="dc-done"><div class="dc-big">🏆</div><h2>¡Repaso terminado!</h2>'
    +'<p>'+(after<before?'Palabras difíciles: <b>'+before+' → '+after+'</b> 💪':'¡Seguí practicando y van a ser fáciles!')+'</p>'
    +'<div class="dc-ws rv-ws">'+list.map(function(w){ var ok=!miss[w.en]; return '<button onclick="sayBoth(\''+w.en.replace(/'/g,'')+'\',\''+w.es.replace(/'/g,'')+'\')"><b>'+(w.e||'💬')+'</b><span>'+w.en+'</span><small>'+(ok?'✅ ¡bien!':'🔁 a repasar')+'</small></button>'; }).join('')+'</div>'
