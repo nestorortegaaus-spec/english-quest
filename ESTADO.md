@@ -344,3 +344,4 @@ le acepte la voz a la nena.
   "💬 ¡Sí, charlemos!" que dura 15 s (cada ~1,5 min si hoy no charló, cada ~4 min si ya charló). Panel: invitaciones aceptadas (S.chatInv/chatInvA).
 - ✅ HECHO (28/11): 📅 desafíos semanales (ach.js, lista WCH): 3 por semana elegidos según la semana, se renuevan cada lunes,
   💎30 cada uno; se ven arriba en 🏆 Mis medallas. Las medallas NO se resetean nunca (solo "Empezar de cero").
+- ✅ HECHO (28/11): la invitación a charlar de la mascota ahora es un ícono 💬 chico a la derecha y solo aparece si pasaron 24 hs sin charlar (S.chatSt.lastT).

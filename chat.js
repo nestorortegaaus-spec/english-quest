@@ -26,7 +26,7 @@ function petBox(id){ var p=S.home&&S.home.pets&&S.home.pets[id], key=petKey(id);
  var img=key?'<img id="chImg" src="'+buddyImg('idle')+'" alt="">':'<img id="chImg" src="'+(id==='fox'?IMG.fox:'img/friend_'+id+'.png')+'" alt="">';
  return dressWrap(key||'gen',img,wearOf(id)); }
 /* 📊 registro para el panel de padres: S.chatSt={n,said,tap,last,days:{fecha:charlas}} */
-function chatLog(k){ try{ var c=S.chatSt||(S.chatSt={n:0,said:0,tap:0,last:'',days:{}}); if(k==='done'){ c.n++; c.last=dkey(); if(window.wkInc)wkInc('chat'); c.days[dkey()]=(c.days[dkey()]||0)+1; var ks=Object.keys(c.days).sort(); while(ks.length>60)delete c.days[ks.shift()]; } else c[k]=(c[k]||0)+1; save(); }catch(e){} }
+function chatLog(k){ try{ var c=S.chatSt||(S.chatSt={n:0,said:0,tap:0,last:'',days:{}}); if(k==='done'){ c.n++; c.last=dkey(); c.lastT=Date.now(); if(window.wkInc)wkInc('chat'); c.days[dkey()]=(c.days[dkey()]||0)+1; var ks=Object.keys(c.days).sort(); while(ks.length>60)delete c.days[ks.shift()]; } else c[k]=(c[k]||0)+1; save(); }catch(e){} }
 window.CHATQ=CHATQ; window.chatLog=chatLog;
 window.startChat=function(u,lv){
  lv=lv||1; var id=buddyId(), f=friendById(id)||{n:'Zorrito'}, host=gSetup('🗣️ Charla con '+f.n+' · Nivel '+lv); GAME.quiet=true;
