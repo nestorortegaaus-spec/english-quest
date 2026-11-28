@@ -30,13 +30,13 @@ function runWords(){ var out=[], seen={}, maxU=UNITS.length;
 
 /* 🏃 corredores: amigos de la Casa con su hoja de espaldas (img/run/<id>_run1, _run2, _jump, _slide.webp) */
 var RUNNERS=['fox','kitty','puppy','bunny','penguin','panda'], RUNW={fox:0.9,kitty:0.8,puppy:0.8,bunny:0.86,penguin:0.8,panda:0.8}; /* RUNW: ancho del sprite para que todos midan parecido */
-function runOwned(id){ try{ return id==='fox'||(S.home&&S.home.own&&S.home.own.indexOf(id)>=0); }catch(e){ return id==='fox'; } }
+function runOwned(id){ try{ return ownedFriends().indexOf(id)>=0; }catch(e){ return id==='fox'; } } /* solo amigos desbloqueados y ya nacidos */
 function runner(){ var c=S.run&&S.run.ch; return c&&RUNNERS.indexOf(c)>=0&&runOwned(c)?c:'fox'; }
 window.startRun=function(){
  if(CLEAN){ try{CLEAN();}catch(e){} CLEAN=null; }
  var host=gSetup('🦊 Carrera Mágica'); GAME.quiet=true; ARCADE_RET=true;
  if(!S.run)S.run={best:0,stars:0}; gScore('🔮'+(S.crys||0));
- var ch=runner(), mates=RUNNERS.length>1?FRIENDS.filter(function(f){return RUNNERS.indexOf(f.id)>=0;}):[];
+ var ch=runner(), mates=FRIENDS.filter(function(f){return RUNNERS.indexOf(f.id)>=0&&runOwned(f.id);}); if(mates.length<2)mates=[];
  host.innerHTML='<div class="rn-start"><img id="rnHero" src="'+IMG+ch+'_run1.webp" alt=""><h2>Carrera Mágica</h2>'
   +(mates.length?'<div class="rn-mates">'+mates.map(function(f){ var own=runOwned(f.id); return '<button class="rn-mate'+(own?'':' lock')+(f.id===ch?' on':'')+'" data-id="'+f.id+'"><img src="'+IMG+f.id+'_run1.webp" alt=""><span>'+(own?f.n:'🔒 '+f.n)+'</span></button>'; }).join('')+'</div>':'')
   +'<div class="rn-howto"><span><b>👈 👉</b>deslizá para cambiar de carril</span><span><b>👆</b>deslizá hacia arriba para saltar</span><span><b>👇</b>deslizá hacia abajo para agacharte</span><span><b>🌸</b>pasá por la puerta de la palabra que escuchás</span></div>'

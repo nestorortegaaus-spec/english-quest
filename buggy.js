@@ -110,7 +110,8 @@ function play(host){
   var dustTex=canvasTex(64,64,function(c){ var g=c.createRadialGradient(32,32,2,32,32,30); g.addColorStop(0,'rgba(235,205,150,.9)'); g.addColorStop(1,'rgba(235,205,150,0)'); c.fillStyle=g; c.fillRect(0,0,64,64); });
   function dust(p,n){ for(var i=0;i<n;i++){ var s=new T.Sprite(new T.SpriteMaterial({map:dustTex,transparent:true,depthWrite:false})); s.scale.set(1.2,1.2,1); s.position.set(p.x+(Math.random()-.5)*1.5,p.y+0.4,p.z+(Math.random()-.5)*1.5); scene.add(s); fx.push({s:s,vx:(Math.random()-.5)*3,vy:1.5+Math.random()*2,vz:(Math.random()-.5)*3,life:0.8,grow:1}); } }
   /* --- corredores --- */
-  var racers=[{id:'fox',me:1},{id:'panda',ai:0.97},{id:'koala',ai:1.0},{id:'lion',ai:1.03},{id:'bunny',ai:0.99}];
+  var OWN=ownedFriends(); /* panda y conejita son amigos de la Casa: si todavía no los tiene, corre otro koala/león */
+  var racers=[{id:'fox',me:1},{id:OWN.indexOf('panda')>=0?'panda':'koala',ai:0.97},{id:'koala',ai:1.0},{id:'lion',ai:1.03},{id:OWN.indexOf('bunny')>=0?'bunny':'lion',ai:0.99}];
   racers.forEach(function(r,i){ var g=[4,0,1,2,3][i]; r.t=-3-g*5; r.d=[0,-2.6,2.6,-2.6,2.6][i]; r.sp=0; r.lap=-1; r.prog=r.t; r.spin=0; r.trap=0; r.slow=0; r.item=null; r.itemT=0; r.s=spr(r.id,2.1);
    r.bub=spr('p_bubble',3.2); r.bub.visible=false; r.hop=0; r.dz=0; r.dzS=new T.Sprite(new T.SpriteMaterial({map:dizzyTex,transparent:true,depthTest:false})); r.dzS.scale.set(2,1,1); r.dzS.visible=false; scene.add(r.dzS); r.wd=(rnd()-.5)*4; });
   var me=racers[0], MAX=30, objs=[], ended=false, started=false, steer=0, keyL=false, keyR=false, t=0, place=5, words=0, wrongs=0, boxRow=null, LAPS=3;

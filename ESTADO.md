@@ -261,3 +261,7 @@ le acepte la voz a la nena.
   5 mundos en cadena (S.dino.unl): Valle Dino, Selva Escondida, Oasis de Arena, Montaña Nevada, Planeta Cristal (reusa horizontes y decorados).
   Arte ChatGPT: bichitos img/dino/e_beetle (Valle, Selva), e_crab (Oasis), e_snowman (Nieve), e_alien (Planeta Cristal) y huevo img/dino/egg.webp (campo foe en DW).
   Los decorados entre la cámara y el dino se vuelven transparentes. (Modelado 3D .glb del dino: descartado por el dueño el 28/11; se queda con el arte de ChatGPT.)
+- ✅ REGLA (28/11, pedido del dueño): en cuentos Y juegos solo aparecen amigos de la Casa desbloqueados y ya nacidos (ownedFriends()).
+  Aplicado en: cuentos (storyPick), Tienda (clientes), Carrera Mágica (selector de corredor: solo los desbloqueados; las hojas de los demás
+  quedan guardadas y aparecen solas al desbloquearlos), Kart (KFRIEND/kOk: Coneja, Panda, Gatita, Pingüino y Unicornio solo si ya son
+  amigos, también como rivales) y Buggy Splash (si no tiene Panda/Conejita, corren otro koala/león). Charla y Simón dice usan el amigo compañero.
