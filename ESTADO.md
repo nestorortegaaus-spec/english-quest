@@ -128,7 +128,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): uso para las ⭐. Pestaña ⭐ Estrellas en la tienda (también al tocar ⭐ arriba): 10 trofeos por estrellas
   juntadas en total (STAR_GOALS, de 25 a 2000, cada uno regala 💎 al abrirlo; S.sgot), cambio de 20 ⭐ por 1 🔮 una vez por día
   (S.scrys) y 8 accesorios de ropa mágica que solo se compran con estrellas (ACC con st). Gastar estrellas no baja el nivel (S.spent).
-- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy ~1760 palabras y frases (base + vocab.js con 144 temas, lv 1-5,
+- 🔄 EN CURSO: MUCHO más vocabulario (meta: miles). Hoy ~1890 palabras y frases (base + vocab.js con 144 temas, lv 1-5,
   números generados 11-20 → decenas → 21-99 → cientos → miles/millón, ordinales, hora, países, pasado...).
   Mundos 2-4 traen al final 2 temas nuevos cada uno (NEWU[0..5]) + parada 🔁 Repaso del mundo anterior.
   Galaxias (mundo 5+) usan NEWU desde el 7º, 6 temas por galaxia en orden de dificultad (~10 galaxias de contenido nuevo).
@@ -302,3 +302,9 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): videojuegos de la Sala con el estilo nuevo por fuera: inicio con portada (.gs-cover, img/ui/cover_*), instrucciones
   en tarjetas, pistas/mundos en fila deslizable, selección de piloto/pista del Kart en tarjetas, paneles de carrera grandes, barra de
   velocidad en el Kart (.kq-dash) y portal de Dino como arco de piedra con 🔒 hasta abrirse.
+- ✅ HECHO (28/11): 🏆 Logros y medallas (ach.js): 22 medallas (palabras, rachas, estrellas, mundos, huevos, podios, amigos, accesorios,
+  figuritas, repasos, desafíos) con 💎 una vez; aviso solo en el camino; se ven con 🏆 arriba, tocando el perfil en Juegos y en el panel de padres.
+- ✅ HECHO (28/11): juegos nuevos en el camino (games2.js): ✍️ Dictado (escuchá y escribí con teclado, 🐢 más lento, pista de letra) y
+  ↔️ Opuestos (28 pares). Dino Aventura: bichitos dicen su nombre (beetle, crab, snowman, alien), misión del dino amigo (3 gemas de un
+  color = +15 💎) y récord de gemas por mundo. Tanda 6 de vocabulario (17 temas, 127 palabras, b:6) y frases tanda 5 (116 patrones).
+  Ladrillos con tablero claro. Voces del narrador: el dueño decidió NO ocultarlas.

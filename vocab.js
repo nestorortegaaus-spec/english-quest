@@ -172,5 +172,22 @@ window.VOCAB=[
  {n:'Pasado 5',lv:5,b:5,w:'began|empecé (empezar)|🏁;brought|traje (traer)|🎁;chose|elegí (elegir)|👉;drove|manejé (manejar)|🚗;fell|me caí (caer)|🍂;forgot|me olvidé (olvidar)|🤦;grew|crecí (crecer)|🌱;hid|me escondí (esconder)|🙈;wore|me puse (usar ropa)|👗;threw|tiré (tirar)|🤾;woke up|me desperté (despertarse)|⏰'},
  {n:'Pasado 6',lv:5,b:5,w:'understood|entendí (entender)|💡;spoke|hablé (hablar)|🗣️;stood|me paré (pararse)|🧍;kept|guardé (guardar)|📦;left|me fui (irse)|🚪;paid|pagué (pagar)|💵;sent|mandé (mandar)|📨;spent|gasté (gastar)|🪙;broke|rompí (romper)|💔;shook|sacudí (sacudir)|🎲;fed|di de comer (alimentar)|🍼'},
  {n:'Palabras para Unir',lv:5,b:5,w:'because|porque|🤔;but|pero|↔️;so|entonces|➡️;finally|al final|🏁;also|también|➕;or|o|🔀;if|si|❓;until|hasta|⏳;after|después de|⏭️;before|antes de|⏮️'},
- {n:'Palabritas Útiles',lv:5,b:5,w:'while|mientras|⌛;although|aunque|🤷;maybe|quizás|🤔;together|juntos|🤝;alone|solo|🧍;almost|casi|🤏;enough|suficiente|✋;very|muy|💯;too|demasiado|📈'}
+ {n:'Palabritas Útiles',lv:5,b:5,w:'while|mientras|⌛;although|aunque|🤷;maybe|quizás|🤔;together|juntos|🤝;alone|solo|🧍;almost|casi|🤏;enough|suficiente|✋;very|muy|💯;too|demasiado|📈'},
+ {n:'Postres',lv:1,b:6,w:'brownie|brownie|🍫;waffle cone|cucurucho|🍦;cheesecake|cheesecake|🍰;marshmallow|malvavisco|🍡;caramel|caramelo|🍯;sprinkles|granas de colores|🎉;whipped cream|crema batida|🥛'},
+ {n:'Mi Cumpleaños',lv:2,b:6,w:'candles|velitas|🕯️;present|regalo|🎁;guests|invitados|👫;party hat|gorrito de fiesta|🥳;wish|deseo|🌠;games|juegos|🎲;surprise|sorpresa|😲'},
+ {n:'Verbos de la Cocina',lv:3,b:6,w:'stir|revolver|🥄;chop|picar|🔪;squeeze|exprimir|🍋;spread|untar|🧈;slice|cortar en rodajas|🍞;sprinkle|espolvorear|🧂'},
+ {n:'Ropa 3',lv:3,b:6,w:'pajamas|pijama|👚;slippers|pantuflas|🥿;sweater|buzo|🧶;overalls|enterito|👖;belt|cinturón|🪢;earrings|aros|💎;bracelet|pulsera|📿;sneakers|zapatillas|👟;apron|delantal|🧑‍🍳'},
+ {n:'Preguntas 4',lv:3,isP:1,b:6,w:'Where are you going?|¿Adónde vas?|🚶;What are you doing?|¿Qué estás haciendo?|🤔;Do you want some?|¿Querés un poco?|🍪;Can you come?|¿Podés venir?|🙋;Whose is this?|¿De quién es esto?|🎒;Which one?|¿Cuál?|👉;How was your day?|¿Cómo fue tu día?|🌅;Are you ready?|¿Estás lista?|✅'},
+ {n:'Música 2',lv:4,b:6,w:'song|canción|🎵;band|banda|🎸;concert|concierto|🎤;rhythm|ritmo|🥁;melody|melodía|🎶;stage|escenario|🎭;audience|público|👏'},
+ {n:'Naturaleza 3',lv:4,b:6,w:'meadow|pradera|🌾;stream|arroyo|💧;seed|semilla|🌱;root|raíz|🪴;branch|rama|🌿;petal|pétalo|🌸;bark|corteza|🪵'},
+ {n:'Partes de la Casa 2',lv:4,b:6,w:'attic|altillo|🏠;basement|sótano|🔦;balcony|balcón|🪴;chimney|chimenea|🔥;hallway|pasillo|🚪;mailbox|buzón|📫'},
+ {n:'Frases de Cortesía',lv:4,isP:1,b:6,w:'May I come in?|¿Puedo pasar?|🚪;Thank you very much!|¡Muchas gracias!|🙏;Have a good weekend!|¡Buen fin de semana!|🌞;Sorry I\'m late|Perdón por llegar tarde|⏰;Could you help me, please?|¿Me podrías ayudar, por favor?|🙋;Enjoy your meal!|¡Buen provecho!|🍽️;Get well soon!|¡Que te mejores!|🤒'},
+ {n:'Futuro',lv:5,b:6,w:'next week|la semana que viene|🗓️;next year|el año que viene|🎆;someday|algún día|🌈;will be|será|🔮;going to|voy a|➡️;later today|más tarde hoy|🕓;in the future|en el futuro|🚀;plan|plan|📝'},
+ {n:'Mascotas y Cuidados',lv:2,b:6,w:'fur|pelaje|🧸;paw|pata|🐾;tail|cola|🦊;whiskers|bigotes|🐱;cage|jaula|🐦;guinea pig|cobayo|🐹'},
+ {n:'Juegos de Mesa',lv:2,b:6,w:'cards|cartas|🃏;checkers|damas|⚫;dominoes|dominó|🀄;turn|turno|🔄;winner|ganador|🏆;loser|perdedor|😕;rules|reglas|📜'},
+ {n:'Superhéroes',lv:3,b:6,w:'cape|capa|🧣;power|poder|⚡;strong|fuerte|💪;invisible|invisible|👻;villain|villano|🦹;rescue|rescatar|🛟;shield|escudo|🛡️;laser|láser|🔦;hero|héroe|🌟'},
+ {n:'Verbos de Movimiento',lv:3,b:6,w:'skip|saltar a la soga|🪢;hop|saltar en un pie|🦘;gallop|galopar|🐎;slither|reptar|🐍;waddle|caminar como pato|🦆;bend|agacharse|🙇;twirl|dar vueltas|💃;stomp|pisotear|🦶;roll|rodar|🌀'},
+ {n:'Frases del Cole',lv:4,isP:1,b:6,w:'Line up, please|Hagan una fila, por favor|🚶;Raise your hand|Levantá la mano|✋;Sit down, please|Siéntense, por favor|🪑;Listen carefully|Escuchen con atención|👂;Work in pairs|Trabajen en parejas|👭;Clean up time!|¡Hora de ordenar!|🧹;Well done, everyone!|¡Muy bien, todos!|🌟'},
+ {n:'Adjetivos 4',lv:4,b:6,w:'gentle|gentil|🤲;polite|educado|🎩;clever|inteligente|💡;busy|ocupado|📚;noisy|ruidoso|📢;messy|desordenado|🌪️;tidy|ordenado|🧺;cozy|acogedor|🛋️;spooky|tenebroso|👻;sparkly|brillante|✨;bumpy|lleno de pozos|🛤️'},
+ {n:'Comparar 2',lv:5,b:6,w:'the biggest|el más grande|🐳;the smallest|el más chico|🐜;better|mejor|👍;worse|peor|👎;the best|el mejor|🏆;more|más|➕'}
 ];
