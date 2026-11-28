@@ -313,3 +313,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11, pedido del dueño): mascotas proactivas (pets.js, petProactive desde petIdle): cada 13-24 s hablan solas; si una
   necesidad está baja dicen frases de esa necesidad (más urgentes si <18), si todo está bien dicen frases de su personalidad (PET_CHAT por
   amigo, 12 c/u + 10 generales). Rotan como mazo. REGLA: seguir sumando frases a PET_CHAT / NEED_MORE en pets.js.
+- ✅ HECHO (28/11, pedido del dueño): precios de los amigos de la Casa: Gatita y Perrito 2000 💎, Conejita, Pingüino y Panda 2500 💎,
+  Unicornio y Dragoncito 3000 💎.
