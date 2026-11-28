@@ -203,7 +203,7 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 .pa-wk{display:grid;grid-template-columns:1fr 1fr;gap:10px;} .pa-wk div{background:#F4F8F6;border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;}
 .pa-wk b{font-size:26px;font-weight:900;color:#2E3A45;} .pa-wk span{font-size:14px;font-weight:700;color:#66737F;} .pa-wk em{font-style:normal;font-size:12px;font-weight:800;margin-top:3px;} .pa-wk em.up{color:#3F8F6F;} .pa-wk em.dn{color:#C0604F;} .pa-wk em.eq{color:#7A8794;}
 .pa-set{margin-bottom:14px;} .pa-set-l{font-size:16px;font-weight:800;color:#4A5763;margin-bottom:6px;}
-.pa-seg{display:flex;background:#F0F4F2;border-radius:14px;padding:4px;gap:4px;} .pa-seg button{flex:1;border:none;background:none;border-radius:11px;padding:11px 4px;font-size:15px;font-weight:900;color:#66737F;font-family:inherit;cursor:pointer;}
+.pa-seg{display:flex;flex-wrap:wrap;background:#F0F4F2;border-radius:14px;padding:4px;gap:4px;} .pa-seg button{flex:1 0 17%;border:none;background:none;border-radius:11px;padding:11px 4px;font-size:15px;font-weight:900;color:#66737F;font-family:inherit;cursor:pointer;}
 .pa-seg button.on{background:#fff;color:#3F7F67;box-shadow:0 2px 6px rgba(60,90,80,.15);}
 .pa-danger{background:#FCF7F5;} .pa-reset{border:2px solid #E9C3BB;background:#fff;color:#C0604F;border-radius:14px;padding:12px 16px;font-size:16px;font-weight:900;font-family:inherit;cursor:pointer;width:100%;}
 .pa-link{border:none;background:none;color:#a9b4c2;font-weight:800;font-size:12px;text-decoration:underline;cursor:pointer;font-family:inherit;}
@@ -2090,19 +2090,19 @@ var SIMON=[['Stand up!','¡Parate!','🧍'],['Touch your nose!','¡Tocate la nar
  ['Turn around!','¡Date una vuelta!','🔄'],['Drink some water!','¡Tomá un poco de agua!','💧'],['Shake your body!','¡Sacudí el cuerpo!','🕺'],['Wave hello!','¡Saludá con la mano!','👋'],['Touch your head!','¡Tocate la cabeza!','🙋'],['Walk like a robot!','¡Caminá como un robot!','🤖']];
 function playD(){ if(!S.play||S.play.day!==dkey()){ var old=S.play||{}; S.play={day:dkey(),sec:0,sess:0,extra:0,warned:0,words:0,ok:0,st0:S.stars+(S.spent||0),recent:[],fatigue:0,breakUntil:old.breakUntil||0}; } return S.play; }
 function limitMin(){ return S.limit==null?60:S.limit; }
-function sessMin(){ return S.sessMin||20; }
+function sessMin(){ return S.sessMin==null?20:S.sessMin; } /* 0 = sin descansos */
 function isOver(){ var p=playD(), L=limitMin(); return L>0&&p.sec>=(L+(p.extra||0))*60; }
 var REST_PENDING=false;
 setInterval(function(){ try{ if(document.visibilityState!=='visible'||!S.name)return; var on=document.querySelector('.screen.on'); if(!on)return;
   var id=on.id; if(['s-start','s-break','s-sleep','s-parents'].indexOf(id)>=0)return;
   var p=playD(); p.sec+=5; p.sess+=5; dlog().sec+=5;
   var L=limitMin(); if(L>0&&!p.warned&&p.sec>=(L+(p.extra||0)-5)*60){ p.warned=1; toast('⏰ ¡Ya casi es hora de descansar! Almost time to rest!'); }
-  if(p.sess>=sessMin()*60)REST_PENDING=true;
+  if(sessMin()>0&&p.sess>=sessMin()*60)REST_PENDING=true;
   if(p.sec%60===0)save();
  }catch(e){} },5000);
 function dlog(){ if(!S.dlog)S.dlog={}; var k=dkey(), d=S.dlog[k]; if(!d){ var p=S.play&&S.play.day===k?S.play:null; d=S.dlog[k]={sec:p?p.sec:0,ok:p?p.ok:0,n:p?p.words:0}; var ks=Object.keys(S.dlog).sort(); while(ks.length>60)delete S.dlog[ks.shift()]; } return d; }
 function noteAnswer(ok){ var dl=dlog(); dl.n++; if(ok)dl.ok++; var p=playD(); p.recent.push(ok?1:0); if(p.recent.length>12)p.recent.shift(); if(ok){p.ok++;} p.words++;
- if(p.sess>=8*60&&!p.fatigue&&p.recent.length>=10){ var acc=p.recent.reduce(function(a,b){return a+b;},0)/p.recent.length; if(acc<0.45){p.fatigue=1;REST_PENDING=true;toast('😴 '+friendById(buddyId()).n+': I am tired… let\'s rest! (Estoy cansado… ¡descansemos!)');} } }
+ if(sessMin()>0&&p.sess>=8*60&&!p.fatigue&&p.recent.length>=10){ var acc=p.recent.reduce(function(a,b){return a+b;},0)/p.recent.length; if(acc<0.45){p.fatigue=1;REST_PENDING=true;toast('😴 '+friendById(buddyId()).n+': I am tired… let\'s rest! (Estoy cansado… ¡descansemos!)');} } }
 /* se llama al volver al camino, la casa o la sala: nunca corta una actividad a la mitad */
 function checkRest(id){ if(['s-path','s-home','s-arcade','s-start'].indexOf(id)<0)return false; if(!S.name)return false; var p=playD();
  if(isOver()){ setTimeout(openSleep,30); return true; }
@@ -2509,7 +2509,7 @@ function paSeg(label,opts,cur,fn){ return '<div class="pa-set"><div class="pa-se
 function shareWeek(){ var t=window.__weekTxt||''; try{ if(navigator.share){ navigator.share({text:t}); return; } }catch(e){} try{ navigator.clipboard.writeText(t); toast('📋 Resumen copiado'); }catch(e){ alert(t); } }
 function paSetGoal(n){S.goal=n;DAILY_GOAL=n;save();renderParents();}
 function paSetLimit(n){S.limit=n;save();renderParents();}
-function paSetSess(n){S.sessMin=n;save();renderParents();}
+function paSetSess(n){S.sessMin=n; if(n===0){REST_PENDING=false; try{playD().breakUntil=0;}catch(e){}} save();renderParents();}
 function paSetCrys(n){ if(n==='off'){S.arcadeOff=true;} else {S.crysMax=n;S.arcadeOff=false;S.crys=Math.min(S.crys||0,n);} save();renderParents(); }
 function renderParents(){
  var h=S.hist||{}, keys=Object.keys(h), tot=0, ok=0, DN=['D','L','M','M','J','V','S'];
@@ -2581,9 +2581,9 @@ function renderParents(){
  out+='<div class="pa-card"><div class="pa-h">Ajustes</div>'
   +paSeg('🎯 Meta diaria (paradas)',[[3,'3'],[5,'5'],[8,'8'],[10,'10']],DAILY_GOAL,'paSetGoal')
   +paSeg('⏱️ Límite de tiempo por día',[[30,'30 min'],[45,'45'],[60,'60'],[90,'90'],[0,'Sin límite']],L,'paSetLimit')
-  +paSeg('☕ Descanso de 5 min cada',[[15,'15 min'],[20,'20 min'],[30,'30 min']],sessMin(),'paSetSess')
+  +paSeg('☕ Descanso de 5 min cada',[[10,'10 min'],[15,'15'],[20,'20'],[25,'25'],[30,'30'],[40,'40'],[45,'45'],[60,'60'],[0,'Sin descanso']],sessMin(),'paSetSess')
   +paSeg('🕹️ Sala de Juegos (cristales 🔮 máximos)',[[3,'3'],[5,'5'],[8,'8'],['off','Apagada']],S.arcadeOff?'off':crysMax(),'paSetCrys')
-  +'<div class="pa-note">El descanso también aparece antes si nota que está cansada (muchos errores seguidos). La Sala de Juegos se abre después de 2 paradas del día. Hoy tiene '+(S.crys||0)+' 🔮.</div></div>';
+  +'<div class="pa-note">'+(sessMin()>0?'El descanso también aparece antes si nota que está cansada (muchos errores seguidos).':'Descansos apagados: no aparece el descanso de 5 min (ni siquiera si nota cansancio).')+' La Sala de Juegos se abre después de 2 paradas del día. Hoy tiene '+(S.crys||0)+' 🔮.</div></div>';
  out+='<div class="pa-card"><div class="pa-h">Clave de padres</div><div class="pa-note" style="margin:0 0 10px">Se pide para entrar a este panel y para dar más tiempo de juego.</div><button class="pa-pin" onclick="changePin()">🔒 Cambiar clave</button></div>';
  out+='<div class="pa-card pa-danger"><div class="pa-h">Avance guardado</div><div class="pa-note" style="margin:0 0 10px">Todo se guarda solo en este teléfono.</div><button class="pa-reset" onclick="if(confirm(\'¿Empezar de cero? Se borra todo el avance.\')){try{localStorage.removeItem(\'englishQuest\');}catch(e){}location.reload();}">Empezar de cero</button></div>';
  document.getElementById('paBody').innerHTML=out+'</div>';

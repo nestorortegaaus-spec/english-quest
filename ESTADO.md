@@ -373,3 +373,5 @@ le acepte la voz a la nena.
   empiezan igual, p. ej. "I am…", tiene que empezar así y agregar algo; si no, frase de 2+ palabras con palabras básicas del inglés).
   El micrófono también la acepta sin tocar el botón. La mascota le contesta con una reacción. En el panel de padres: "respuestas propias".
   (chat.js: chatMic, chatFreeBtn, freeOK; micListen acepta target=null para escucha libre).
+- ✅ HECHO (28/11, pedido del dueño): panel de padres → "☕ Descanso de 5 min cada": 10, 15, 20, 25, 30, 40, 45, 60 min o "Sin descanso"
+  (S.sessMin=0: no aparece el descanso, ni por tiempo ni por cansancio).
