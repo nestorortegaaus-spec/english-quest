@@ -338,3 +338,5 @@ le acepte la voz a la nena.
   micrófono); cuenta en la tarjeta del panel de padres. Pendiente: seguir mirando en el panel si charla por voluntad propia.
 - ✅ HECHO (28/11, pedido del dueño): medallas simplificadas a 13, solo de estudio (palabras, rachas, estrellas, mundos, repasos,
   desafíos); se quitaron las de juegos de la Sala (huevos, podios, Buggy, Carrera) y las de compras. Tarjetas: ícono + nombre + barrita.
+- ✅ HECHO (28/11, pedido del dueño): jerarquía visual única en minijuegos y lección (CSS "JERARQUÍA VISUAL"): instrucción = cinta violeta,
+  inglés = tarjeta blanca grande azul, castellano = texto chico celeste en itálica con 🇦🇷, respuestas = botones con borde y sombra de color.

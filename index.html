@@ -806,7 +806,26 @@ body.mgon .mute{top:62px;right:12px;width:44px;height:44px;border-radius:50%;}
 #s-game.mg .ls-card{border-radius:24px;box-shadow:0 6px 0 rgba(120,150,190,.28),0 8px 16px rgba(40,90,150,.15);}
 #s-game.mg .ls-card.ok{box-shadow:0 0 0 4px #2FCB72,0 6px 0 #17853F;background:#EFFCF4;}
 #s-game.mg .ls-card.no{box-shadow:0 0 0 4px #F2665A,0 6px 0 #C2473D;background:#FFF0EE;}
-#s-game.mg :is(.sp-es,.ph-step,.ph-sen,.ph-es,.cw-hint,.sk-word,.ls-ask,.dc-step,.dc-word,.sto-coins,.rv-fb,.sto-cust span){background:rgba(255,255,255,.94);border-radius:18px;padding:4px 14px;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;box-shadow:0 3px 8px rgba(40,90,150,.16);color:#24345C;}
+
+/* ===================== 🧭 JERARQUÍA VISUAL DE LOS MINIJUEGOS (igual en todos) =====================
+   1) QUÉ HACER  → cinta violeta chica con ícono (instrucción)
+   2) EN INGLÉS  → tarjeta blanca grande, letra azul oscuro (lo que hay que aprender)
+   3) castellano → texto chico, celeste translúcido, con bandera 🇦🇷 (ayuda, no protagonista)
+   4) RESPUESTAS → botones con borde de color y sombra gruesa (se tocan) */
+#s-lesson .qt, #s-game.mg :is(.ph-step,.g2-sub,.ls-ask,.dc-step,.sto-hint,.bl-ask){background:linear-gradient(180deg,#8B6CF5,#6B4FD8)!important;color:#fff!important;border-radius:999px!important;padding:6px 16px!important;font-family:'EQ Nunito',sans-serif;font-weight:900!important;font-size:15px!important;line-height:1.2;box-shadow:0 3px 0 #4E36A8!important;width:fit-content;max-width:94%;margin-left:auto;margin-right:auto;text-align:center;}
+#s-game.mg :is(.ph-step,.g2-sub,.ls-ask,.dc-step) b{color:#FFE38A;}
+#s-game.mg :is(.ph-sen,.sk-word,.dc-word,.ph-goal){background:#fff!important;border:none!important;border-radius:22px!important;padding:10px 22px!important;font-family:'EQ Baloo',sans-serif;font-weight:800!important;color:#1F3E86!important;box-shadow:0 6px 0 rgba(120,150,190,.25),0 8px 16px rgba(40,90,150,.12)!important;width:fit-content;max-width:96%;margin-left:auto;margin-right:auto;}
+#s-game.mg .ph-sen{font-size:28px!important;} #s-game.mg .ph-sen.big{font-size:32px!important;}
+#s-game.mg :is(.sp-es,.ph-es,.rv-es){background:rgba(232,244,255,.85)!important;color:#4A5A7A!important;font-family:'EQ Nunito',sans-serif;font-style:italic;font-weight:800!important;font-size:15px!important;border-radius:14px!important;padding:3px 12px!important;box-shadow:none!important;width:fit-content;max-width:92%;margin:-2px auto 0!important;border-top:none!important;}
+#s-game.mg :is(.sp-es,.ph-es):not(:empty)::before{content:'🇦🇷 ';font-style:normal;}
+#s-game.mg :is(.cw-hint,.sto-coins,.rv-fb,.sto-cust span){background:rgba(255,255,255,.94);border-radius:18px;padding:4px 14px;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;box-shadow:0 3px 8px rgba(40,90,150,.16);color:#24345C;}
+#s-game.mg :is(.ph-opt,.rv-opt,.sp-tile,.ph-picb,.ph-chip){border:3px solid #BFD8F5!important;box-shadow:0 5px 0 #7FA9D9!important;}
+#s-game.mg :is(.ph-opt,.rv-opt){background:#fff;color:#1F3E86;font-family:'EQ Baloo',sans-serif;font-weight:800;}
+#s-game.mg .ph-opts{gap:10px;margin-top:6px;}
+#s-game.mg :is(.ph-opt,.rv-opt).ok{border-color:#2FCB72!important;box-shadow:0 5px 0 #17853F!important;background:#EFFCF4;}
+#s-game.mg :is(.ph-opt,.rv-opt).no{border-color:#F2665A!important;box-shadow:0 5px 0 #C2473D!important;background:#FFF0EE;}
+
+#s-game.mg :is(.cw-hint,.sto-coins,.rv-fb,.sto-cust span,.dummy-x){background:rgba(255,255,255,.94);border-radius:18px;padding:4px 14px;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;box-shadow:0 3px 8px rgba(40,90,150,.16);color:#24345C;}
 #s-game.mg .rv-fb:empty{display:none;}
 #s-dance .dance-wrap{background:none;} #s-dance .dance-stage{margin:20px 16px 120px;background:rgba(255,255,255,.92);border-radius:30px;box-shadow:0 8px 20px rgba(40,90,150,.18);} #s-dance .dance-prog{height:18px;} #s-dance .lx{width:44px;height:44px;border-radius:50%;}
 #s-dance .dance-en{font-family:'EQ Baloo',sans-serif;font-weight:800;color:#7C5CF0;} #s-dance .dancehost{display:flex;flex-direction:column;flex:1;}
