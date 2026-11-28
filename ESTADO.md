@@ -280,3 +280,5 @@ le acepte la voz a la nena.
 - ⏭️ EN COLA (pedido 28/11): rediseño de TODOS los minijuegos con la misma línea (ref_rediseno_minijuegos.webp): fondo de naturaleza/cielo,
   Zorrito guía en cada actividad con globo de diálogo (instrucción en inglés + castellano), tarjetas 3D con volumen, instrucciones grandes,
   verde/rojo + animación al responder, barra de progreso visible arriba. Hacerlo como SISTEMA de diseño global (mismos componentes en todos).
+- ⏭️ EN COLA (pedido 28/11): rediseñar el menú de arriba del inicio/camino (contadores ⭐ Nv. Voz 💎, saludo, racha, Desafío, Repaso,
+  Casa y Sala) con la misma línea del rediseño. Captura del estado actual enviada al dueño; esperar su referencia o bosquejo.
