@@ -308,3 +308,5 @@ le acepte la voz a la nena.
   ↔️ Opuestos (28 pares). Dino Aventura: bichitos dicen su nombre (beetle, crab, snowman, alien), misión del dino amigo (3 gemas de un
   color = +15 💎) y récord de gemas por mundo. Tanda 6 de vocabulario (17 temas, 127 palabras, b:6) y frases tanda 5 (116 patrones).
   Ladrillos con tablero claro. Voces del narrador: el dueño decidió NO ocultarlas.
+- ✅ HECHO (28/11, pedido del dueño): se quitó el botón flotante de sonido 🔊 (muteB); el volumen se maneja con el celular. Las barras de
+  arriba ya no reservan lugar para ese botón.
