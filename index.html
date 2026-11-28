@@ -2596,8 +2596,16 @@ function renderParents(){
   +'<div class="pa-note">'+(sessMin()>0?'El descanso también aparece antes si nota que está cansada (muchos errores seguidos).':'Descansos apagados: no aparece el descanso de 5 min (ni siquiera si nota cansancio).')+' La Sala de Juegos se abre después de 2 paradas del día. Hoy tiene '+(S.crys||0)+' 🔮.</div></div>';
  out+='<div class="pa-card"><div class="pa-h">Clave de padres</div><div class="pa-note" style="margin:0 0 10px">Se pide para entrar a este panel y para dar más tiempo de juego.</div><button class="pa-pin" onclick="changePin()">🔒 Cambiar clave</button></div>';
  out+='<div class="pa-card pa-danger"><div class="pa-h">Avance guardado</div><div class="pa-note" style="margin:0 0 10px">Todo se guarda solo en este teléfono.</div><button class="pa-reset" onclick="if(confirm(\'¿Empezar de cero? Se borra todo el avance.\')){try{localStorage.removeItem(\'englishQuest\');}catch(e){}location.reload();}">Empezar de cero</button></div>';
+ out+='<div class="pa-card"><div class="pa-h">Versión de la app</div><div class="pa-note" style="margin:0 0 10px">Tenés la versión <b>'+APP_VER+'</b>. Si no ves los últimos cambios, tocá el botón: baja la versión nueva (no borra el avance).</div><button class="pa-pin" onclick="forceUpdate()">🔄 Buscar actualización</button></div>';
  document.getElementById('paBody').innerHTML=out+'</div>';
 }
+/* 🔄 versión: cambiar APP_VER en cada publicación importante; forceUpdate baja todo de nuevo sin tocar el avance (localStorage) */
+var APP_VER='28/11 · v39';
+function forceUpdate(){ try{toast('🔄 Buscando la versión nueva…');}catch(e){}
+ var done=function(){ location.replace(location.pathname+'?u='+Date.now()); };
+ var jobs=[]; try{ if(window.caches)jobs.push(caches.keys().then(function(ks){return Promise.all(ks.map(function(k){return caches.delete(k);}));})); }catch(e){}
+ try{ if(navigator.serviceWorker)jobs.push(navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister();}));})); }catch(e){}
+ Promise.all(jobs).then(done,done); setTimeout(done,2500); }
 
 /* ===== SALA DE JUEGOS: cristales 🔮 y cartuchos ===== */
 var CARTS=[

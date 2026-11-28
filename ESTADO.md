@@ -380,3 +380,5 @@ le acepte la voz a la nena.
   Cada amigo tiene FAVORITAS como en la vida real (pingüino: pescado, camarón, calamar; gatita: pescado, atún, pollo; perrito: hueso,
   carne, pollo; conejita: lechuga, trébol, pasto; panda: bambú, miel, batata; zorrito: arándanos, huevo, uvas, pollo; unicornio: flores,
   cupcake, terrón de azúcar, pasto; dragoncito: ají picante, malvavisco, carne). Las favoritas llenan más (+25) y dan más cariño (+10).
+- ✅ HECHO (28/11): panel de padres → tarjeta "Versión de la app" (APP_VER en index.html, subirla en cada publicación importante) con botón
+  "🔄 Buscar actualización": borra la caché y el service worker y recarga (no toca el avance guardado).
