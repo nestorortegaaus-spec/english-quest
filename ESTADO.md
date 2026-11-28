@@ -297,3 +297,5 @@ le acepte la voz a la nena.
   (íconos 3D, pestañas grandes) con el estilo nuevo (CSS "PREMIO, PADRES, VOZ Y VESTIDOR").
 - ✅ HECHO (28/11, pedido del dueño): en el descanso el castellano se cortaba (el siguiente texto arrancaba antes y cancelaba la voz).
   Ahora talk() espera a que termine el castellano (margen según el largo) y el castellano se dice un poco más rápido (rate 1.12, también en sayBoth).
+- ✅ HECHO (28/11): cuentos por dentro con el estilo nuevo (marco blanco en la escena, texto en tarjeta, letra nueva). Toda la app
+  queda con el rediseño salvo los videojuegos de la Sala y la Isla (juegos aparte).
