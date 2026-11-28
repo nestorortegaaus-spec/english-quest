@@ -239,7 +239,7 @@ le acepte la voz a la nena.
   sintetizada (musicStart/musicStop) en los menús del Kart y de la Carrera; se corta al empezar a jugar.
 - ✅ HECHO (28/11): 🏁 Garaje del Kart (KCARS): 4 autos de ChatGPT manejados por el Zorrito (Rayo, Tornado, Galaxia, Dorado; img/kcar_*.png),
   cada uno más rápido (sp/ac). Se compran con ⭐ (80/200/400/700) o 💎 (300/700/1300/2200); S.kart.cars. Los rivales siguen siendo los 5 pilotos.
-- 🔄 EN CURSO (hechos: Pradera, Playa, Nieve, Golosinas, Selva, Desierto, Espacio, Valle Dino, Bajo el Mar; rotan en cada carrera, RSCN en run.js, S.run.scn): más paisajes para la Carrera Mágica con ChatGPT (por paisaje: 1 horizonte panorámico + 1 hoja 2x2 de decorados; el camino y el
+- 🔄 EN CURSO (hechos: Pradera, Playa, Nieve, Golosinas, Selva, Desierto, Espacio, Valle Dino, Bajo el Mar, Bosque de Otoño, Reino del Castillo, Ciudad de Noche; rotan en cada carrera, RSCN en run.js, S.run.scn): más paisajes para la Carrera Mágica con ChatGPT (por paisaje: 1 horizonte panorámico + 1 hoja 2x2 de decorados; el camino y el
   pasto se dibujan por código con los colores del paisaje).
 - ✅ HECHO (28/11, buggy.js, Sala 2500 💎): 🏖️ Buggy Splash — antes: EN COLA (pedido 27/11): juego nuevo de carreras de BUGGYS en la playa (estilo de juego de Beach Buggy Racing, pero original: arte, personajes
   y nombre propios). Caminos de arena anchos, 3D con three.js como la Carrera Mágica, rivales, y el buggy tira poderes a los contrincantes
@@ -358,3 +358,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): 🧊 galaxias congeladas (galPlan en index.html): cada galaxia que ella alcanza guarda sus temas en S.gal. Las tandas
   nuevas de vocabulario se reparten solo desde la galaxia siguiente a la actual, así nunca cambia lo que ya vio ni se saltea palabras.
 - ✅ HECHO (28/11): 3 fondos nuevos de minijuegos de ChatGPT (espacio, bajo el mar, ciudad): img/ui/game_bg_space|sea|city.webp; MG_BGS rota 8 fondos.
+- ✅ HECHO (28/11): 3 paisajes nuevos de ChatGPT para la Carrera Mágica y el Buggy Splash: 🍂 Bosque de Otoño (au_*), 🏰 Reino del
+  Castillo (ca_*), 🌃 Ciudad de Noche (nt_*). Fondos img/run/bg_autumn|castle|night.jpg. La Carrera rota 12 paisajes y el Buggy tiene 12 pistas.

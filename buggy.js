@@ -27,7 +27,13 @@ var BTRK=[
  {id:'dino',n:'Valle Dino',e:'🦖',seed:104,amp:135,bg:'bg_dino.jpg',sky:'#0098FD',hz:0.8,fog:0x9FD67A,road:['#C99A62','#FF8A3D','#FFFFFF'],ground:['#6CC24A','#5DB33E','#7DD158'],
   deco:[['dn_brachio',5],['dn_fern',3.6],['dn_fern',3.6],['dn_nest',2.6],['dn_trice',3],['o_barrel',1.2]]},
  {id:'sea',n:'Arrecife Mágico',e:'🐠',seed:118,amp:125,bg:'bg_sea.jpg',sky:'#1EC8EE',hz:0.82,fog:0x5FD0E0,road:['#EBCF92','#FF7AA8','#FFFFFF'],ground:['#F2D59A','#E8C783','#F8E2B0'],
-  deco:[['sea_coral',4],['sea_coral',4],['sea_chest',3],['sea_octopus',3],['sea_turtle',3],['o_barrel',1.2]]}
+  deco:[['sea_coral',4],['sea_coral',4],['sea_chest',3],['sea_octopus',3],['sea_turtle',3],['o_barrel',1.2]]},
+ {id:'autumn',n:'Bosque de Otoño',e:'🍂',seed:131,amp:130,bg:'bg_autumn.jpg',sky:'#0094F8',hz:0.84,fog:0xE8B25A,road:['#B98A5A','#FF7A2E','#FFFFFF'],ground:['#8FC23E','#7FB234','#A2CF4C'],
+  deco:[['au_tree',5],['au_tree',5],['au_pumpkin',2.6],['au_mush',2.8],['au_squirrel',2.4],['o_barrel',1.2]]},
+ {id:'castle',n:'Reino del Castillo',e:'🏰',seed:144,amp:140,bg:'bg_castle.jpg',sky:'#0193FA',hz:0.84,fog:0xB8E39A,road:['#D8C8E0','#FF6FB5','#FFFFFF'],ground:['#6CC24A','#5DB33E','#7DD158'],
+  deco:[['ca_tower',5],['ca_bush',3],['ca_bush',3],['ca_chest',2.4],['ca_dragon',3],['o_barrel',1.2]]},
+ {id:'night',n:'Ciudad de Noche',e:'🌃',seed:157,amp:125,bg:'bg_night.jpg',sky:'#011588',hz:0.84,fog:0x3A3F9A,road:['#5A5F86','#FFD23F','#FFFFFF'],ground:['#3E9A4A','#348A40','#4AAA55'],
+  deco:[['nt_tree',5],['nt_tree',5],['nt_lamp',2.4],['nt_house',4],['nt_cart',3],['o_barrel',1.2]]}
 ];
 var PWN={banana:['banana','banana'],bubble:['bubble','burbuja'],rocket:['rocket','cohete'],wave:['wave','ola']};
 

@@ -22,7 +22,13 @@ var RSCN=[
  {id:'dino',n:'Valle Dino',bg:'bg_dino.jpg',hz:0.8,sky:'#0098FD',fog:0x9FD67A,road:'dino',ground:{base:'#6CC24A',a:'#5DB33E',b:'#7DD158',dots:['#FF6B3D','#B57BFF','#FFE07A','#FFFFFF']},
   deco:[['dn_brachio',2.2,.26],['dn_nest',1.3,.22],['dn_fern',1.8,.3],['dn_trice',1.4,.22]]},
  {id:'sea',n:'Bajo el Mar',bg:'bg_sea.jpg',hz:0.82,sky:'#1EC8EE',fog:0x5FD0E0,road:'sea',ground:{base:'#F2D59A',a:'#E8C783',b:'#F8E2B0',dots:['#FF7AA8','#FFFFFF','#FFB347','#B57BFF']},
-  deco:[['sea_coral',1.9,.32],['sea_chest',1.5,.22],['sea_octopus',1.5,.22],['sea_turtle',1.5,.22]]}
+  deco:[['sea_coral',1.9,.32],['sea_chest',1.5,.22],['sea_octopus',1.5,.22],['sea_turtle',1.5,.22]]},
+ {id:'autumn',n:'Bosque de Otoño',bg:'bg_autumn.jpg',hz:0.84,sky:'#0094F8',fog:0xE8B25A,road:'stone',ground:{base:'#8FC23E',a:'#7FB234',b:'#A2CF4C',dots:['#FF7A2E','#FFC23A','#E8402F','#FFFFFF']},
+  deco:[['au_tree',2.5,.36],['au_pumpkin',1.3,.24],['au_mush',1.4,.2],['au_squirrel',1.2,.2]]},
+ {id:'castle',n:'Reino del Castillo',bg:'bg_castle.jpg',hz:0.84,sky:'#0193FA',fog:0xB8E39A,road:'stone',ground:{base:'#6CC24A',a:'#5DB33E',b:'#7DD158',dots:['#FF8DC7','#FFFFFF','#FFE07A','#C9A0FF']},
+  deco:[['ca_tower',2.4,.3],['ca_bush',1.5,.28],['ca_chest',1.2,.2],['ca_dragon',1.5,.2]]},
+ {id:'night',stars:1,n:'Ciudad de Noche',bg:'bg_night.jpg',hz:0.84,sky:'#011588',fog:0x3A3F9A,road:'stone',ground:{base:'#3E9A4A',a:'#348A40',b:'#4AAA55',dots:['#FFE07A','#FF8DC7','#FFFFFF','#9FD8FF']},
+  deco:[['nt_tree',2.4,.34],['nt_lamp',1.1,.22,1],['nt_house',1.9,.22],['nt_cart',1.5,.2]]}
 ];
 function loadScript(src,cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ toast('No pude cargar el juego. Probá con internet.'); }; document.head.appendChild(s); }
 function runWords(){ var out=[], seen={}, maxU=UNITS.length;
