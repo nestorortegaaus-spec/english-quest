@@ -317,3 +317,5 @@ le acepte la voz a la nena.
   Unicornio y Dragoncito 3000 💎.
 - ✅ HECHO (28/11, pedido del dueño): Kart no da gemas (su premio son pistas nuevas) y ahora la pista siguiente se destraba SOLO saliendo 1°
   (antes 1°, 2° o 3°). Las pistas ya destrabadas se conservan.
+- ✅ REGLA (28/11, pedido del dueño): los juegos de la Sala (Kart, Carrera Mágica, Buggy Splash, Dino Aventura) NO dan gemas: las gemas se
+  ganan estudiando y sirven para comprar esos juegos. Su premio es avanzar (pistas, mundos, récords). No agregar gemas a juegos de la Sala.

@@ -151,11 +151,11 @@ function play(host){
   window.addEventListener('keydown',onKey); window.addEventListener('keyup',onKey);
   window.__bug={me:me,racers:racers,rows:rows,L:L,keys:function(l,r){keyL=l;keyR=r;},use:function(){usePower(me);},objs:objs,st:function(){return {place:place,ended:ended,started:started,lap:me.lap,words:words};}};
 
-  var newTrk=null; function end(){ if(ended)return; ended=true; var gems=[0,40,25,15,10,8][place]+words*2; S.gems+=gems; if(place===1)S.bug.wins=(S.bug.wins||0)+1; var ti=BTRK.indexOf(TK); if(place<=3){ if(!S.bug.cup[TK.id]||place<S.bug.cup[TK.id])S.bug.cup[TK.id]=place; if(ti+1>=S.bug.unl&&ti+1<BTRK.length){ S.bug.unl=ti+2; newTrk=BTRK[ti+1]; } } save();
+  var newTrk=null; function end(){ if(ended)return; ended=true; /* los juegos de la Sala ya son el premio: no dan gemas */ if(place===1)S.bug.wins=(S.bug.wins||0)+1; var ti=BTRK.indexOf(TK); if(place<=3){ if(!S.bug.cup[TK.id]||place<S.bug.cup[TK.id])S.bug.cup[TK.id]=place; if(ti+1>=S.bug.unl&&ti+1<BTRK.length){ S.bug.unl=ti+2; newTrk=BTRK[ti+1]; } } save();
    say(place===1?'You win!':'Finish!'); if(place<=3){sWin();burst(200);}
    setTimeout(function(){ if(!GAME.on)return; GAME.stop(); var b=document.getElementById('rewBody');
     b.innerHTML='<div class="chest">'+(['','🥇','🥈','🥉'][place]||'🏁')+'</div><h2>'+(place===1?'¡Ganaste la carrera!':place<=3?'¡Llegaste '+place+'°! ¡Al podio!':'Llegaste '+place+'°')+'</h2>'
-     +(newTrk?'<p>🔓 ¡Nueva pista: '+newTrk.e+' '+newTrk.n+'!</p>':place>3?'<p>Salí entre los 3 primeros para desbloquear la próxima pista</p>':'')+'<div class="rn-res"><div><b>'+place+'°</b><span>puesto</span></div><div><b>'+words+'</b><span>palabras</span></div></div><div class="rewpill">💎 +'+gems+' · 🔮 te quedan '+(S.crys||0)+'</div>'
+     +(newTrk?'<p>🔓 ¡Nueva pista: '+newTrk.e+' '+newTrk.n+'!</p>':place>3?'<p>Salí entre los 3 primeros para desbloquear la próxima pista</p>':'')+'<div class="rn-res"><div><b>'+place+'°</b><span>puesto</span></div><div><b>'+words+'</b><span>palabras</span></div></div><div class="rewpill">🔮 Te quedan '+(S.crys||0)+'</div>'
      +((S.crys||0)>0?'<button class="btn teal" onclick="startBuggy()">Otra carrera · 1 🔮</button><div style="height:8px"></div>':'<p style="font-size:13px">Estudiá para ganar más 🔮</p>')
      +'<button class="btn ghost" onclick="openArcade()">Volver a la Sala de Juegos</button>';
     show('s-reward'); },1500); }

@@ -208,13 +208,13 @@ function play(host){
 
   window.__dino={me:me,eggs:eggs,gems:gems,foes:foes,PL:PL,keys:keys,joy:joy,jump:jump,dash:dash,th:th,hatch:hatch,portal:{x:PX,z:PZ},st:function(){return {eggs:eggsGot,gems:gemsGot,hp:me.hp,ended:ended,paused:paused,portal:portalOn};}};
 
-  function end(win){ if(ended)return; ended=true; var bonus=win?20:0, got=gemsGot+eggsGot*5+bonus; S.gems+=got; var wi2=DW.indexOf(WD), nw=null;
+  function end(win){ if(ended)return; ended=true; /* los juegos de la Sala ya son el premio: no dan gemas (las gemas del juego son solo para juntar y el récord) */ var wi2=DW.indexOf(WD), nw=null;
    var recNew=false; if(win){ var best=S.dino.done[WD.id]||0; if(gemsGot>best){ S.dino.done[WD.id]=gemsGot; recNew=best>0; } if(wi2+1>=S.dino.unl&&wi2+1<DW.length){ S.dino.unl=wi2+2; nw=DW[wi2+1]; } sWin(); burst(200); say('You did it!'); } else say('Oh no!');
    save();
    setTimeout(function(){ if(!GAME.on)return; GAME.stop(); var b=document.getElementById('rewBody');
     b.innerHTML='<div class="chest">'+(win?'🏆':'🦖')+'</div><h2>'+(win?'¡Terminaste '+WD.n+'!':'¡Te quedaste sin corazones!')+'</h2>'
      +(recNew?'<p>🏆 ¡Nuevo récord en '+WD.n+': '+gemsGot+' gemas!</p>':win&&S.dino.done[WD.id]?'<p>🏆 Récord de '+WD.n+': '+S.dino.done[WD.id]+' gemas</p>':'')+(nw?'<p>🔓 ¡Nuevo mundo: '+nw.e+' '+nw.n+'!</p>':win?'':'<p>Encontrá los 5 huevos y entrá al portal para pasar de mundo</p>')
-     +'<div class="rn-res"><div><b>'+gemsGot+'/'+GEMS_N+'</b><span>gemas</span></div><div><b>'+eggsGot+'/5</b><span>huevos</span></div><div><b>'+words+'</b><span>palabras</span></div></div><div class="rewpill">💎 +'+got+' · 🔮 te quedan '+(S.crys||0)+'</div>'
+     +'<div class="rn-res"><div><b>'+gemsGot+'/'+GEMS_N+'</b><span>gemas</span></div><div><b>'+eggsGot+'/5</b><span>huevos</span></div><div><b>'+words+'</b><span>palabras</span></div></div><div class="rewpill">🔮 Te quedan '+(S.crys||0)+'</div>'
      +((S.crys||0)>0?'<button class="btn teal" onclick="startDino()">Jugar otra vez · 1 🔮</button><div style="height:8px"></div>':'<p style="font-size:13px">Estudiá para ganar más 🔮</p>')
      +'<button class="btn ghost" onclick="openArcade()">Volver a la Sala de Juegos</button>';
     show('s-reward'); },1600); }
@@ -251,7 +251,7 @@ function play(host){
    /* se cae al agua: chapuzón y vuelve a la orilla */
    if(me.y<-0.35){ for(var q=0;q<10;q++)burstAt(me,0xBFEFFF); tone(300,.2,'sine',.12,0); tone(200,.25,'sine',.1,.08); me.x=me.safe.x; me.z=me.safe.z; me.y=th(me.x,me.z)+3; me.vy=0; me.sp=0; big('💦 ¡Splash!',900); }
    /* gemas */
-   gems.forEach(function(g){ if(g.got)return; var p=g.m.position; if(Math.abs(p.x-me.x)<1.3&&Math.abs(p.z-me.z)<1.3&&Math.abs(p.y-0.9-me.y)<1.6){ g.got=true; scene.remove(g.m); gemsGot++; if(MIS&&!MIS.done&&g.ci===MIS.ci){ MIS.n++; misHud(); if(MIS.n>=3){ MIS.done=true; S.gems+=15; SFX.power(); for(var q3=0;q3<20;q3++)burstAt(me); big('🦕 Thank you!<br><small>¡Misión cumplida! +15 💎</small>',2000); sayBoth('Thank you! You found three '+GEMN[MIS.ci][0]+' gems!','¡Gracias! ¡Encontraste tres gemas '+GEMN[MIS.ci][1]+'!'); } } SFX.star(); sparkle(p); hud(); } });
+   gems.forEach(function(g){ if(g.got)return; var p=g.m.position; if(Math.abs(p.x-me.x)<1.3&&Math.abs(p.z-me.z)<1.3&&Math.abs(p.y-0.9-me.y)<1.6){ g.got=true; scene.remove(g.m); gemsGot++; if(MIS&&!MIS.done&&g.ci===MIS.ci){ MIS.n++; misHud(); if(MIS.n>=3){ MIS.done=true; SFX.power(); for(var q3=0;q3<20;q3++)burstAt(me); big('🦕 Thank you!<br><small>¡Misión cumplida!</small>',2000); sayBoth('Thank you! You found three '+GEMN[MIS.ci][0]+' gems!','¡Gracias! ¡Encontraste tres gemas '+GEMN[MIS.ci][1]+'!'); } } SFX.star(); sparkle(p); hud(); } });
    /* huevos */
    eggs.forEach(function(e){ if(e.got)return; if(Math.hypot(e.x-me.x,e.z-me.z)<1.6&&Math.abs(e.y-me.y)<1.8)hatch(e); });
    /* portal */

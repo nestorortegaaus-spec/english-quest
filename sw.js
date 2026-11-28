@@ -1,4 +1,4 @@
-const CACHE = 'eq-v19';
+const CACHE = 'eq-v20';
 const CORE = ['./', './index.html', './manifest.json', './icon.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));

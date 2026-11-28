@@ -251,10 +251,10 @@ function play(host){
    else { wrongs++; markWord(g.w,false); SFX.wrong(); say(g.w.en); big('🙈 Era <b>'+g.w.en+'</b> = '+g.w.es,1900); }
    g.lanes.forEach(function(o){ o.fade=true; }); hud(); }
 
-  function end(){ if(ended)return; ended=true; var m=Math.floor(dist), gems=Math.floor(stars/5)+words*3, rec=m>S.run.best; if(rec)S.run.best=m; S.run.stars=(S.run.stars||0)+stars; S.gems+=gems; save();
+  function end(){ if(ended)return; ended=true; var m=Math.floor(dist), gems=Math.floor(stars/5)+words*3, rec=m>S.run.best; if(rec)S.run.best=m; S.run.stars=(S.run.stars||0)+stars; save(); /* los juegos de la Sala ya son el premio: no dan gemas */
    setTimeout(function(){ if(!GAME.on)return; GAME.stop(); var b=document.getElementById('rewBody');
     b.innerHTML='<div class="chest">'+(rec?'🏆':'🦊')+'</div><h2>'+(rec?'¡Nuevo récord!':'¡Buena carrera!')+'</h2><div class="rn-res"><div><b>'+m+' m</b><span>recorridos</span></div><div><b>'+stars+' ⭐</b><span>estrellas</span></div><div><b>'+words+'</b><span>palabras</span></div></div>'
-     +'<div class="rewpill">💎 +'+gems+' · 🔮 te quedan '+(S.crys||0)+'</div>'+((S.crys||0)>0?'<button class="btn teal" onclick="startRun()">Otra carrera · 1 🔮</button><div style="height:8px"></div>':'<p style="font-size:13px">Estudiá para ganar más 🔮</p>')
+     +'<div class="rewpill">🔮 Te quedan '+(S.crys||0)+'</div>'+((S.crys||0)>0?'<button class="btn teal" onclick="startRun()">Otra carrera · 1 🔮</button><div style="height:8px"></div>':'<p style="font-size:13px">Estudiá para ganar más 🔮</p>')
      +'<button class="btn ghost" onclick="openArcade()">Volver a la Sala de Juegos</button>';
     show('s-reward'); sWin(); },900); }
 
