@@ -322,3 +322,4 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): recomendaciones del informe de balance (balance.js): 🎯 meta de ahorro en el inicio (S.saveGoal, barra y días que faltan),
   lecciones dan 10/15/20 💎 (antes 5/10/15) con mensaje de esfuerzo si no fue perfecta, 🛡️ comodín de racha (1 día de perdón por semana,
   S.freezeWk), 🗓️ premio semanal 💎100 por 5 días practicados (S.wkBonus), medallas de a una por visita y con texto de lo aprendido.
+- (28/11, pedido del dueño) se QUITÓ del inicio la tarjeta de meta de ahorro (sobrecargaba el home). El código sigue en balance.js sin usarse.
