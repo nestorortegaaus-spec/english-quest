@@ -305,6 +305,10 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .rn-best{font-weight:900;color:#C98A1C;font-size:17px;} .rn-load{font-weight:900;font-size:22px;color:var(--muted);}
 .rn-wrap{position:relative;align-self:stretch;width:100%;height:100%;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;background:#3FB0FB;} .rn-wrap canvas{display:block;width:100%;height:100%;}
 .rn-hud{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;gap:6px;pointer-events:none;} .rn-hud span{background:rgba(255,255,255,.9);border-radius:14px;padding:5px 11px;font-weight:900;font-size:17px;color:var(--ink);box-shadow:0 3px 0 rgba(0,0,0,.12);}
+.bg-pad{position:absolute;bottom:16px;width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.35);border:3px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.3);user-select:none;-webkit-user-select:none;touch-action:none;} .bg-pad.l{left:14px;} .bg-pad.r{right:14px;}
+.bg-pw{position:absolute;bottom:22px;left:50%;transform:translateX(-50%) scale(.7);width:92px;height:92px;border-radius:24px;border:4px solid #fff;background:rgba(255,255,255,.4);opacity:.35;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:inherit;padding:0;}
+.bg-pw.on{opacity:1;transform:translateX(-50%) scale(1);background:linear-gradient(160deg,#FFE07A,#FF9A3C);box-shadow:0 6px 0 #D9772A;animation:stPulse 1s ease-in-out infinite;} .bg-pw img{width:56px;height:56px;object-fit:contain;} .bg-pw small{font-weight:900;color:#fff;font-size:13px;text-shadow:0 1px 2px rgba(0,0,0,.4);}
+.bg-start .rn-howto span img{width:32px;height:32px;object-fit:contain;display:inline-block;}
 .rn-hitfx{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 60%,transparent 40%,rgba(255,40,40,.55) 100%);} .rn-hitfx.on{animation:rnHit .6s ease-out;} @keyframes rnHit{0%{opacity:1}100%{opacity:0}}
 .rn-spd{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(255,255,255,.35) 46px 49px,transparent 49px 90px);-webkit-mask:radial-gradient(ellipse at 50% 45%,transparent 35%,#000 75%);mask:radial-gradient(ellipse at 50% 45%,transparent 35%,#000 75%);animation:rnSpd .25s linear infinite;}
 .rn-spd.on{opacity:1;} @keyframes rnSpd{from{background-position:0 0}to{background-position:90px 0}}
@@ -845,6 +849,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
 
 <script src="vocab.js?v=5"></script>
 <script src="run.js?v=6" defer></script>
+<script src="buggy.js?v=2" defer></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -2126,6 +2131,7 @@ function renderParents(){
 /* ===== SALA DE JUEGOS: cristales 🔮 y cartuchos ===== */
 var CARTS=[
  {id:'kart',n:'Kart Quest',e:'🏎️',p:400,d:'Carreras de karts con portones de palabras en inglés'},
+ {id:'buggy',n:'Buggy Splash',e:'🏖️',p:2500,d:'Carreras de buggys en la playa: tirá poderes y agarrá la palabra'},
  {id:'run',n:'Carrera Mágica',e:'🦊',p:2000,d:'Corré, saltá y pasá por la puerta de la palabra en inglés'},
  {id:'snow',n:'Snow Rush',e:'🏂',p:900,d:'Próximamente',soon:true},
  {id:'space',n:'Star Pilot',e:'🚀',p:1600,d:'Próximamente',soon:true},
@@ -2153,7 +2159,7 @@ function renderArcade(){
 function buyCart(id){var c=CARTS.find(function(x){return x.id===id;}); if(!c||S.gems<c.p)return;
  if(!confirm('¿Comprar '+c.n+' por '+c.p+' 💎?'))return; S.gems-=c.p; S.carts.push(id); if(!S.crys)addCrys(2); save(); sWin(); burst(160); renderArcade(); toast('¡'+c.n+' es tuyo! 🎉'); }
 var ARCADE_RET=false;
-function playCart(id){ if((S.crys||0)<1){sBad();toast('Necesitás 🔮. ¡Estudiá un poco para ganar cristales!');return;} ARCADE_RET=true; if(id==='kart')startKart(); else if(id==='run'&&window.startRun)startRun(); }
+function playCart(id){ if((S.crys||0)<1){sBad();toast('Necesitás 🔮. ¡Estudiá un poco para ganar cristales!');return;} ARCADE_RET=true; if(id==='kart')startKart(); else if(id==='run'&&window.startRun)startRun(); else if(id==='buggy'&&window.startBuggy)startBuggy(); }
 
 /* ===== 🏎️ KART QUEST (pseudo-3D) ===== */
 var KCHARS=[
