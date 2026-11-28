@@ -284,7 +284,9 @@ le acepte la voz a la nena.
 - (antes EN COLA) rediseño de TODOS los minijuegos con la misma línea (ref_rediseno_minijuegos.webp): fondo de naturaleza/cielo,
   Zorrito guía en cada actividad con globo de diálogo (instrucción en inglés + castellano), tarjetas 3D con volumen, instrucciones grandes,
   verde/rojo + animación al responder, barra de progreso visible arriba. Hacerlo como SISTEMA de diseño global (mismos componentes en todos).
-- ⏭️ EN COLA (pedido 28/11): rediseñar el menú de arriba del inicio/camino (contadores ⭐ Nv. Voz 💎, saludo, racha, Desafío, Repaso,
+- ✅ HECHO (28/11): menú del inicio según design/ref_rediseno_inicio.webp (CSS "MENÚ DEL INICIO", clase .pt; íconos ChatGPT img/ui/ic_cal|ic_rev|ic_house|ic_pad.webp;
+  el calendario muestra el día y mes de hoy). Tienda del camino con puesto img/ui/stall.webp. Minijuegos: 5 fondos rotando (MG_BGS).
+- (antes EN COLA) rediseñar el menú de arriba del inicio/camino (contadores ⭐ Nv. Voz 💎, saludo, racha, Desafío, Repaso,
   Casa y Sala) con la misma línea del rediseño. Referencia del dueño: design/ref_rediseno_inicio.webp (copiar tal cual): pastillas blancas
   arriba, Desafío/Repaso como botones gruesos con ícono 3D a la izquierda y la info en una cápsula a la derecha, Casa y Sala con ícono 3D
   grande (casita, joystick amarillo). Falta de ChatGPT: íconos 3D (calendario, flechas de repaso, casita, joystick).

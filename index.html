@@ -840,6 +840,29 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 #s-lesson .fbsub{font-size:18px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
 .fb-e{font-size:34px;} .fb-spk{border:none;background:#fff;border-radius:50%;width:38px;height:38px;font-size:18px;box-shadow:0 2px 6px rgba(0,0,0,.15);cursor:pointer;}
 
+
+/* ===================== 🏠 MENÚ DEL INICIO (referencia: design/ref_rediseno_inicio.webp) ===================== */
+#s-path.pt{font-family:'EQ Nunito','Nunito',system-ui,sans-serif;}
+#s-path.pt .hud{padding:10px 54px 4px 10px;gap:5px;} #s-path.pt .hud .grow{flex:0 0 0;}
+#s-path.pt .hud .pill{height:40px;border-radius:20px;padding:0 8px;gap:3px;white-space:nowrap;flex-wrap:nowrap;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:16px;box-shadow:0 3px 8px rgba(40,90,150,.18);}
+#s-path.pt #hHello{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:17px!important;color:#24345C!important;padding:0 14px 2px!important;}
+#s-path.pt .dl{font-size:14px;padding:2px 12px 8px;gap:6px;flex-wrap:nowrap;white-space:nowrap;} #s-path.pt .dl-fire{background:#fff;border-radius:16px;padding:4px 12px;box-shadow:0 2px 6px rgba(40,90,150,.12);}
+#s-path.pt .dl-goal{color:#24345C;} #s-path.pt .dl-bar{background:#fff;border-radius:14px;padding:5px 8px;gap:5px;box-shadow:0 2px 6px rgba(40,90,150,.12);} #s-path.pt .dl-bar i{width:16px;height:10px;border-radius:5px;}
+#s-path.pt .pt-big{position:relative;min-height:60px;border-radius:24px;padding:6px 10px 6px 70px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:18px;line-height:1.05;text-align:left;border:3px solid rgba(255,255,255,.75);margin:0 14px 10px!important;}
+#s-path.pt .pt-big b{flex:1;min-width:0;}
+#s-path.pt #hRev b{font-size:17px;} #s-path.pt .pt-big span{margin-left:auto;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.25);border-radius:18px;padding:6px 12px;font-family:'EQ Nunito',sans-serif;font-weight:900;font-size:13px!important;opacity:1!important;line-height:1.1;text-align:center;max-width:52%;}
+#s-path.pt #hDay span{flex-direction:column;gap:3px;max-width:42%;} #s-path.pt .pt-big q{quotes:none;background:rgba(255,255,255,.3);border-radius:12px;padding:2px 8px;font-size:16px;white-space:nowrap;}
+#s-path.pt .pt-ic{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:58px;height:58px;display:flex;align-items:center;justify-content:center;}
+#s-path.pt .pt-ic img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2));}
+.pt-cal small{position:absolute;top:11px;left:0;right:0;text-align:center;font-family:'EQ Baloo',sans-serif;font-size:11px;color:#fff;}
+.pt-cal big{position:absolute;top:23px;left:0;right:0;text-align:center;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:23px;color:#24345C;}
+#s-path.pt .hm-entries{gap:10px;margin:0 14px 10px;}
+#s-path.pt .pt-sq{position:relative;min-height:96px;border-radius:24px;padding:8px 8px 8px 84px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:19px;line-height:1.02;text-align:left;border:3px solid rgba(255,255,255,.75);flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;}
+#s-path.pt .pt-sq .pt-ic{left:4px;width:66px;height:66px;} #s-path.pt .pt-sq{min-height:76px;padding-left:72px!important;}
+#s-path.pt .pt-sq span{background:rgba(255,255,255,.25);border-radius:14px;padding:2px 10px;font-family:'EQ Nunito',sans-serif;font-weight:900;font-size:16px;}
+#s-path.pt .pt-sq span i{font-style:normal;}
+#s-path.pt #hHome{background:linear-gradient(135deg,#FF9A4A,#F2558F);box-shadow:0 5px 0 #C9416E;}
+
 /* ===================== 🎨 REDISEÑO (referencia: design/ref_rediseno_principal.webp) ===================== */
 @font-face{font-family:'EQ Baloo';src:url(fonts/baloo2-latin.woff2) format('woff2');font-weight:400 800;font-display:swap;}
 @font-face{font-family:'EQ Nunito';src:url(fonts/nunito-latin.woff2) format('woff2');font-weight:200 1000;font-display:swap;}
@@ -958,7 +981,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
   </section>
 
   <!-- PATH -->
-  <section class="screen" id="s-path">
+  <section class="screen pt" id="s-path">
     <div class="hud">
       <button class="pill s" onclick="openShop('star')" style="border:none;cursor:pointer;font-family:inherit;">⭐ <span id="hStars">0</span></button>
       <div class="pill g">🌱 Nv.<span id="hLvl">1</span></div>
@@ -968,9 +991,9 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
     </div>
     <div style="padding:0 14px 2px;color:var(--muted);font-weight:800;font-size:13px;" id="hHello">¡Hola!</div>
     <div class="dl" id="hDaily"></div>
-    <button class="ar-entry dc-entry" id="hDay" onclick="openDaily()">📅 <b>Desafío del día</b><span>3 palabras nuevas · 💎25</span></button>
-    <button class="ar-entry rv-entry" id="hRev" onclick="openReview()" style="display:none">🔁 <b>Repasar palabras difíciles</b><span></span></button>
-    <div class="hm-entries"><button class="ar-entry hm-entry" id="hHome" onclick="openHome()">🏡 <b>Casa de Amigos</b></button><button class="ar-entry" id="hArc" onclick="openArcade()">🕹️ <b>Sala de Juegos</b><span>🔮 <i id="hCrys">0</i></span></button></div>
+    <button class="ar-entry dc-entry pt-big" id="hDay" onclick="openDaily()"><em class="pt-ic pt-cal"><img src="img/ui/ic_cal.webp" alt=""><small id="hCalM">JUL</small><big id="hCalD">17</big></em><b>Desafío del día</b><span>3 palabras nuevas <q>💎 25</q></span></button>
+    <button class="ar-entry rv-entry pt-big" id="hRev" onclick="openReview()" style="display:none"><em class="pt-ic"><img src="img/ui/ic_rev.webp" alt=""></em><b>Repasar<br>palabras difíciles</b><span></span></button>
+    <div class="hm-entries"><button class="ar-entry hm-entry pt-sq" id="hHome" onclick="openHome()"><em class="pt-ic"><img src="img/ui/ic_house.webp" alt=""></em><b>Casa de Amigos</b></button><button class="ar-entry pt-sq" id="hArc" onclick="openArcade()"><em class="pt-ic"><img src="img/ui/ic_pad.webp" alt=""></em><b>Sala de Juegos</b><span>🔮 <i id="hCrys">0</i></span></button></div>
     <div class="path-scroll" id="pathScroll"><div id="pathNodes"></div></div>
   </section>
 
@@ -1071,7 +1094,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="chat.js?v=1"></script>
 <script src="simon.js?v=1"></script>
 <script src="dino.js?v=6"></script>
-<script src="review.js?v=2"></script>
+<script src="review.js?v=3"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -1466,7 +1489,7 @@ function renderPath(){
  document.getElementById('hStars').textContent=S.stars;
  document.getElementById('hLvl').textContent=lvl();
  document.getElementById('hGems').textContent=S.gems; document.getElementById('hDaily').innerHTML=dailyHTML(); document.getElementById('hCrys').textContent=(S.crys||0)+'/'+crysMax(); document.getElementById('hHome').classList.toggle('alert',homeNeedsAttention()); document.getElementById('hArc').style.display=S.arcadeOff?'none':'';
- try{dailyHdr();}catch(e){} try{reviewHdr();}catch(e){} var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! '+(WI.ic||'🌍')+' Mundo '+S.world+' · '+WI.n;
+ try{dailyHdr();}catch(e){} try{reviewHdr();}catch(e){} try{ var dd=new Date(); document.getElementById('hCalD').textContent=dd.getDate(); document.getElementById('hCalM').textContent=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'][dd.getMonth()]; }catch(e){} var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! '+(WI.ic||'🌍')+' Mundo '+S.world+' · '+WI.n;
  var psc=document.getElementById('pathScroll');psc.classList.toggle('dark',!!WI.dark); var grad='linear-gradient(180deg,'+WI.bg[0]+' 0,'+WI.bg[1]+' 260px,'+WI.bg[2]+' 100%)'; var wa=WIMG[WI.id]<1?WIMG[WI.id]:.12; psc.style.background=WIMG[WI.id]?'linear-gradient(rgba(255,255,255,'+wa+'),rgba(255,255,255,'+wa+')),url(img/world_'+WI.id+'.jpg) center/cover no-repeat,'+grad:(WI.dark?'radial-gradient(circle at 20% 10%,rgba(255,255,255,.18) 0 2px,transparent 3px) 0 0/90px 70px,radial-gradient(circle at 70% 60%,rgba(255,255,255,.14) 0 1.5px,transparent 2.5px) 0 0/130px 110px,':'radial-gradient(circle at 15% 8%,rgba(255,255,255,.55) 0 40px,transparent 41px),')+grad;
  var box=document.getElementById('pathNodes');box.innerHTML='';
  var GAP=118, TOP=70, AMP=70, N=NODES.length;
