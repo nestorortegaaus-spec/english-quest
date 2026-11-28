@@ -29,7 +29,7 @@ function runWords(){ var out=[], seen={}, maxU=UNITS.length;
  return prioW(out); }
 
 /* 🏃 corredores: amigos de la Casa con su hoja de espaldas (img/run/<id>_run1, _run2, _jump, _slide.webp) */
-var RUNNERS=['fox'];
+var RUNNERS=['fox','kitty'], RUNW={fox:0.9,kitty:0.8}; /* RUNW: ancho del sprite para que todos midan parecido */
 function runOwned(id){ try{ return id==='fox'||(S.home&&S.home.own&&S.home.own.indexOf(id)>=0); }catch(e){ return id==='fox'; } }
 function runner(){ var c=S.run&&S.run.ch; return c&&RUNNERS.indexOf(c)>=0&&runOwned(c)?c:'fox'; }
 window.startRun=function(){
@@ -64,7 +64,7 @@ function play(host){
 
  function start(){
   if(!GAME.on)return;
-  S.crys--; save(); gScore('🔮'+S.crys); document.getElementById('gTitle').textContent='🦊 Carrera Mágica · '+SC.n;
+  S.crys--; save(); gScore('🔮'+S.crys); document.getElementById('gTitle').textContent=((friendById(RN)||{}).e||'🦊')+' Carrera Mágica · '+SC.n;
   host.innerHTML='<div class="rn-wrap" id="rnW"><div class="rn-hud"><span id="rnHp">❤️❤️❤️</span><span id="rnSt">⭐ 0</span><span id="rnM">0 m</span></div>'
    +'<div class="rn-spd" id="rnSpd"></div><div class="rn-hitfx" id="rnHit"></div><div class="rn-pw" id="rnPw"></div><div class="rn-ask" id="rnAsk"></div><div class="rn-big" id="rnBig"></div><div class="rn-tip" id="rnTip">👈 👉 deslizá · 👆 saltá · 👇 agachate</div></div>';
   var wrap=document.getElementById('rnW'), W=wrap.clientWidth||360, H=wrap.clientHeight||600;
@@ -124,7 +124,7 @@ function play(host){
 
   /* --- sprites --- */
   function spr(name,w,h,anchorBottom){ var m=new T.SpriteMaterial({map:TX[name],transparent:true,alphaTest:0.04}); var s=new T.Sprite(m); s.scale.set(w,h||w*IM[name].height/IM[name].width,1); if(anchorBottom!==false)s.center.set(0.5,0); scene.add(s); return s; }
-  var fox=spr(RN+'_run1',0.9); var shadow=new T.Mesh(new T.CircleGeometry(0.3,24),new T.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0.22,depthWrite:false})); shadow.rotation.x=-Math.PI/2; shadow.position.y=0.01; scene.add(shadow);
+  var RW=RUNW[RN]||0.85, fox=spr(RN+'_run1',RW); var shadow=new T.Mesh(new T.CircleGeometry(0.3,24),new T.MeshBasicMaterial({color:0x000000,transparent:true,opacity:0.22,depthWrite:false})); shadow.rotation.x=-Math.PI/2; shadow.position.y=0.01; scene.add(shadow);
   var dustTex=canvasTex(64,64,function(c){ var g=c.createRadialGradient(32,32,2,32,32,30); g.addColorStop(0,'rgba(240,225,200,.6)'); g.addColorStop(1,'rgba(250,240,220,0)'); c.fillStyle=g; c.fillRect(0,0,64,64); });
   var sparkTex=canvasTex(64,64,function(c){ c.fillStyle='#FFF7C2'; c.beginPath(); for(var i=0;i<8;i++){ var a=i*Math.PI/4, r=i%2?8:30; c.lineTo(32+Math.cos(a)*r,32+Math.sin(a)*r); } c.fill(); });
   var dizzyTex=canvasTex(128,64,function(c){ c.font='40px sans-serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('💫',22,32); c.fillText('⭐',64,22); c.fillText('💫',106,32); });
@@ -268,7 +268,7 @@ function play(host){
    lastRamp=onRamp;
    if(slide>0)slide-=dt; if(inv>0)inv-=dt; ['magnet','shoes','x2'].forEach(function(k){ if(PW[k]>0){ PW[k]-=dt; if(PW[k]<=0){PW[k]=0;hud();} } });
    frameT+=dt*speed/5.5; var fr=RN+(!onG?'_jump':slide>0?'_slide':(Math.floor(frameT*3)%2?'_run2':'_run1'));
-   if(fox.material.map!==TX[fr]){ fox.material.map=TX[fr]; var im=IM[fr]; fox.scale.set(0.9,0.9*im.height/im.width,1); }
+   if(fox.material.map!==TX[fr]){ fox.material.map=TX[fr]; var im=IM[fr]; fox.scale.set(RW,RW*im.height/im.width,1); }
    var bob=onG&&slide<=0?Math.abs(Math.sin(frameT*Math.PI*1.5))*0.05:0;
    fox.position.set(px,py+bob,0); fox.material.opacity=1; if(knock>0){ knock-=dt; var k=knock/0.9; fox.material.rotation=Math.sin(k*Math.PI*3)*0.9*k; fox.position.z=0.9*Math.sin(k*Math.PI)*0.9; var sq=1+Math.sin(k*Math.PI*4)*0.12*k; fox.scale.x*=sq; } else { fox.material.rotation=0; }
    if(dizzy.visible){ dizzy.position.set(px,fox.position.y+fox.scale.y+0.12,fox.position.z); dizzy.material.rotation=t*6; if(inv<=0.4)dizzy.visible=false; }
