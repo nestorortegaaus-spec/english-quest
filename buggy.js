@@ -23,7 +23,9 @@ var BTRK=[
  {id:'desert',n:'Dunas del Oasis',e:'🐪',seed:77,amp:130,bg:'bg_desert.jpg',sky:'#0590FE',hz:0.8,fog:0xF2C66A,road:['#C98A5A','#E84A4A','#FFFFFF'],ground:['#F2C14E','#E5AE3A','#F8D06A'],
   deco:[['de_cactus',4.4],['de_cactus',4.4],['de_palm',5],['de_arch',4],['de_camel',3.2],['o_barrel',1.2]]},
  {id:'space',stars:1,n:'Ruta Galáctica',e:'🚀',seed:91,amp:120,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,road:['#4A3A86','#22D3F5','#FF5FCF'],ground:['#9A5FE0','#8A4FD2','#AE78EA'],
-  deco:[['sp_crystal',3.6],['sp_crystal',3.6],['sp_rocket',5],['sp_alien',3.2],['sp_dish',4],['o_barrel',1.2]]}
+  deco:[['sp_crystal',3.6],['sp_crystal',3.6],['sp_rocket',5],['sp_alien',3.2],['sp_dish',4],['o_barrel',1.2]]},
+ {id:'dino',n:'Valle Dino',e:'🦖',seed:104,amp:135,bg:'bg_dino.jpg',sky:'#0098FD',hz:0.8,fog:0x9FD67A,road:['#C99A62','#FF8A3D','#FFFFFF'],ground:['#6CC24A','#5DB33E','#7DD158'],
+  deco:[['dn_brachio',5],['dn_fern',3.6],['dn_fern',3.6],['dn_nest',2.6],['dn_trice',3],['o_barrel',1.2]]}
 ];
 var PWN={banana:['banana','banana'],bubble:['bubble','burbuja'],rocket:['rocket','cohete'],wave:['wave','ola']};
 

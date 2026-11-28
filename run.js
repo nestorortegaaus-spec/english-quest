@@ -18,7 +18,9 @@ var RSCN=[
  {id:'desert',n:'Desierto',bg:'bg_desert.jpg',hz:0.8,sky:'#0590FE',fog:0xF2C66A,road:'adobe',ground:{base:'#F2C14E',a:'#E5AE3A',b:'#F8D06A',dots:['#D9824A','#C96E3A','#FF5FB0','#7CBF4A']},
   deco:[['de_cactus',2.2,.3],['de_palm',2.6,.26],['de_arch',2,.22],['de_camel',1.6,.22]]},
  {id:'space',stars:1,n:'Espacio',bg:'bg_space.jpg',hz:0.8,sky:'#050260',fog:0x8C5AD8,road:'space',ground:{base:'#9A5FE0',a:'#8A4FD2',b:'#AE78EA',dots:['#6FE6FF','#FF7AD9','#FFFFFF','#C9B5FF']},
-  deco:[['sp_crystal',1.8,.34],['sp_rocket',2.4,.22],['sp_alien',1.6,.2],['sp_dish',2,.24]]}
+  deco:[['sp_crystal',1.8,.34],['sp_rocket',2.4,.22],['sp_alien',1.6,.2],['sp_dish',2,.24]]},
+ {id:'dino',n:'Valle Dino',bg:'bg_dino.jpg',hz:0.8,sky:'#0098FD',fog:0x9FD67A,road:'dino',ground:{base:'#6CC24A',a:'#5DB33E',b:'#7DD158',dots:['#FF6B3D','#B57BFF','#FFE07A','#FFFFFF']},
+  deco:[['dn_brachio',2.2,.26],['dn_nest',1.3,.22],['dn_fern',1.8,.3],['dn_trice',1.4,.22]]}
 ];
 function loadScript(src,cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ toast('No pude cargar el juego. Probá con internet.'); }; document.head.appendChild(s); }
 function runWords(){ var out=[], seen={}, maxU=UNITS.length;
@@ -79,6 +81,11 @@ function play(host){
     c.fillStyle='#BCD5EE'; c.fillRect(0,0,w,h); var rs=rng(5); for(var i=0;i<260;i++){ c.fillStyle=rs()<.5?'rgba(160,190,225,.35)':'rgba(255,255,255,.8)'; c.beginPath(); c.arc(rs()*w,rs()*h,1+rs()*3,0,7); c.fill(); }
     c.fillStyle='rgba(95,135,190,.55)'; [w/6,w/2,5*w/6].forEach(function(cx){ c.fillRect(cx-16,0,6,h); c.fillRect(cx+10,0,6,h); });
     c.fillStyle='#6E9BD0'; c.fillRect(0,0,16,h); c.fillRect(w-16,0,16,h); c.fillStyle='#FFFFFF'; for(var y=0;y<h;y+=18){ c.beginPath(); c.arc(5,y+9,8,0,7); c.arc(w-5,y+9,8,0,7); c.fill(); } c.fillStyle='rgba(255,255,255,.6)'; for(var y3=0;y3<h;y3+=64){ c.fillRect(w/3-2,y3,4,30); c.fillRect(2*w/3-2,y3,4,30); } return; }
+   if(SC.road==='dino'){ /* sendero de tierra con huellas de dinosaurio */
+    c.fillStyle='#C99A62'; c.fillRect(0,0,w,h); var rd=rng(19); for(var i3=0;i3<220;i3++){ c.fillStyle=rd()<.5?'rgba(120,80,40,.3)':'rgba(255,235,200,.35)'; c.beginPath(); c.arc(rd()*w,rd()*h,1+rd()*3,0,7); c.fill(); }
+    c.fillStyle='rgba(110,70,35,.55)'; for(var yf=0;yf<h;yf+=128){ [[w/6,yf+20],[w/2,yf+84],[5*w/6,yf+40]].forEach(function(f){ var fx=f[0], fy=f[1]; c.beginPath(); c.ellipse(fx,fy+8,9,11,0,0,7); c.fill(); [-1,0,1].forEach(function(d){ c.beginPath(); c.ellipse(fx+d*8,fy-8+Math.abs(d)*4,3.5,7,d*.45,0,7); c.fill(); }); }); }
+    c.fillStyle='#8A8A80'; for(var yg=0;yg<h;yg+=22){ c.fillStyle=(yg/22)%2?'#9E9C90':'#86847A'; c.beginPath(); c.roundRect(-2,yg+1,15,20,6); c.roundRect(w-13,yg+1,15,20,6); c.fill(); }
+    c.fillStyle='rgba(255,255,255,.7)'; for(var yh=0;yh<h;yh+=64){ c.fillRect(w/3-3,yh,6,34); c.fillRect(2*w/3-3,yh,6,34); } return; }
    if(SC.road==='space'){ /* pista espacial de paneles metálicos con luces de neón */
     c.fillStyle='#3A2C6E'; c.fillRect(0,0,w,h); var rp=rng(17); for(var yp=0;yp<h;yp+=32){ for(var cp=0;cp<3;cp++){ var xp=cp*w/3+3, wp=w/3-6; c.fillStyle='hsl('+(252+rp()*10)+',38%,'+(34+rp()*8)+'%)'; c.fillRect(xp,yp+2,wp,28); c.fillStyle='rgba(255,255,255,.12)'; c.fillRect(xp,yp+4,wp,3); c.fillStyle='#8E7FD0'; c.beginPath(); c.arc(xp+6,yp+8,1.8,0,7); c.arc(xp+wp-6,yp+8,1.8,0,7); c.fill(); } }
     c.fillStyle='#22D3F5'; c.fillRect(0,0,12,h); c.fillRect(w-12,0,12,h); c.fillStyle='#FF5FCF'; for(var yq=0;yq<h;yq+=32){ c.fillRect(2,yq+10,8,12); c.fillRect(w-10,yq+10,8,12); }
