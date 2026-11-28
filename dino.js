@@ -4,7 +4,7 @@
    Arte: protagonista de ChatGPT en img/dino/ (de espaldas: run1, run2, jump, charge); bichitos en img/dino/e_<mundo>.webp.
    Si falta una imagen, usa un dibujo de reemplazo para que el juego igual funcione. */
 (function(){
-var DIMG='img/dino/', CLEAN=null;
+var DIMG='img/dino/', CLEAN=null, PWID={run1:443,run2:435,jump:438,charge:553}; /* ancho real de cada pose (px) para que el dino no cambie de tamaño */
 function loadScript(src,cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ toast('No pude cargar el juego. Probá con internet.'); }; document.head.appendChild(s); }
 function dinoWords(){ var out=[], seen={};
  try{ var wi=worldInfo(S.world||1); (wi.u||[]).forEach(function(i){ UNITS[i].w.forEach(function(w){ if(/^[a-z ]+$/i.test(w.en)&&w.en.length<=12&&w.e&&!seen[w.en]){seen[w.en]=1;out.push(w);} }); }); }catch(e){}
@@ -266,7 +266,7 @@ function play(host){
    /* sprite del dino */
    var moving=Math.abs(me.sp)>0.6&&me.ground, pose=me.dash>0?'charge':!me.ground?'jump':moving&&Math.floor(t*(me.sp>6?9:6))%2?'run2':'run1';
    if(hero.material.map!==TX[pose]){ hero.material.map=TX[pose]; hero.material.needsUpdate=true; }
-   var im=IM[pose]||{width:1,height:1}; hero.scale.set(2.3,2.3*im.height/im.width,1);
+   var im=IM[pose]||{width:1,height:1}, pw=(PWID[pose]||440)/440*2.0; hero.scale.set(pw,pw*im.height/im.width,1);
    var bob=moving&&me.dash<=0?Math.abs(Math.sin(t*12))*0.12:0;
    hero.position.set(me.x,me.y+bob,me.z); hero.material.rotation=me.hurt>0?Math.sin(me.hurt*20)*0.5:(-(joy.x||0)*0.12);
    var gh=groundAt(me.x,me.z,me.y+0.01); heroSh.position.set(me.x,gh+0.05,me.z); var hs=Math.max(0.4,1.9-(me.y-gh)*0.18); heroSh.scale.set(hs/1.9,hs/1.9,1);
@@ -274,8 +274,8 @@ function play(host){
    /* cámara atrás del dino */
    var dy=me.yaw-camYaw; while(dy>Math.PI)dy-=2*Math.PI; while(dy<-Math.PI)dy+=2*Math.PI; camYaw+=dy*Math.min(1,dt*5);
    var sh=cam.userData.shake||0; if(sh>0)cam.userData.shake=Math.max(0,sh-dt);
-   var cf=new T.Vector3(-Math.sin(camYaw),0,-Math.cos(camYaw)), camY=Math.max(me.y,th(me.x,me.z))+3.6;
-   cam.position.set(me.x-cf.x*7.5+(sh?(Math.random()-.5)*sh:0),camY,me.z-cf.z*7.5);
+   var cf=new T.Vector3(-Math.sin(camYaw),0,-Math.cos(camYaw)), camY=Math.max(me.y,th(me.x,me.z))+3.9;
+   cam.position.set(me.x-cf.x*8.6+(sh?(Math.random()-.5)*sh:0),camY,me.z-cf.z*7.5);
    var cg=th(cam.position.x,cam.position.z)+1.2; if(cam.position.y<cg)cam.position.y=cg;
    cam.lookAt(me.x+cf.x*5,me.y+1.3,me.z+cf.z*5);
    /* horizonte de fondo: gira con la cámara */
