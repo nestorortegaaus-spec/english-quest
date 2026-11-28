@@ -252,3 +252,10 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11, simon.js): 🙋 Simón dice (startSimon, en GROT): el amigo compañero da órdenes en inglés (36 acciones: touch your nose, clap your hands,
   hop like a frog…) y ella toca la tarjeta. Nivel 1 siempre "Simon says" + castellano; nivel 2+ órdenes trampa (sin "Simon says") → botón
   "🙅 ¡Simón no dijo!"; nivel 3+ sin castellano ni nombres; nivel 4+ dos órdenes seguidas ("… and …") y el texto aparece después de escuchar.
+- 🔄 EN CURSO (28/11, dino.js): 🦖 Dino Aventura (Sala, 3000 💎, todavía "Próximamente" hasta tener el arte del dino): aventura 3D libre con three.js.
+  Isla con colinas, montaña, playa y agua; columnas de piedra que suben a una isla flotante y escalones a una cornisa. Joystick (izquierda) para
+  girar/avanzar (cámara siempre atrás: el dino se ve de espaldas), botones saltar ⬆️ y embestir 💥. 💎 gemas 3D (~65), 🥚 5 huevos (al tocarlos
+  nace un dino bebé que pregunta una palabra en inglés con 3 opciones), bichitos gruñones (embestirlos o caerles encima; si te tocan: golpe
+  sin titilar, 3 ❤️), flecha al huevo más cercano, chapuzón si cae al agua. Con los 5 huevos se abre el 🌀 portal → mundo siguiente.
+  5 mundos en cadena (S.dino.unl): Valle Dino, Selva Escondida, Oasis de Arena, Montaña Nevada, Planeta Cristal (reusa horizontes y decorados).
+  Falta de ChatGPT: dino de espaldas (img/dino/run1, run2, jump, charge.webp), bichitos por mundo (img/dino/e_<mundo>.webp) y huevo (img/dino/egg.webp).
