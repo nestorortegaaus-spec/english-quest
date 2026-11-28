@@ -25,11 +25,13 @@ var CHATQ=[
 function petBox(id){ var p=S.home&&S.home.pets&&S.home.pets[id], key=petKey(id);
  var img=key?'<img id="chImg" src="'+buddyImg('idle')+'" alt="">':'<img id="chImg" src="'+(id==='fox'?IMG.fox:'img/friend_'+id+'.png')+'" alt="">';
  return dressWrap(key||'gen',img,wearOf(id)); }
+/* 📊 registro para el panel de padres: S.chatSt={n,said,tap,last,days:{fecha:charlas}} */
+function chatLog(k){ try{ var c=S.chatSt||(S.chatSt={n:0,said:0,tap:0,last:'',days:{}}); if(k==='done'){ c.n++; c.last=dkey(); c.days[dkey()]=(c.days[dkey()]||0)+1; var ks=Object.keys(c.days).sort(); while(ks.length>60)delete c.days[ks.shift()]; } else c[k]=(c[k]||0)+1; save(); }catch(e){} }
 window.startChat=function(u,lv){
  lv=lv||1; var id=buddyId(), f=friendById(id)||{n:'Zorrito'}, host=gSetup('🗣️ Charla con '+f.n+' · Nivel '+lv); GAME.quiet=true;
  var pool=CHATQ.filter(function(q){return q[2]<=Math.min(3,lv);}); if(S.chatI==null)S.chatI=0;
  var R=Math.min(6,pool.length), list=[]; for(var i=0;i<R;i++)list.push(pool[(S.chatI+i*3)%pool.length]); S.chatI+=2; save();
- var r=0, said=0, flapT=0, nm=(S.name||'').split(' ')[0]||'friend';
+ var logged=false, r=0, said=0, flapT=0, nm=(S.name||'').split(' ')[0]||'friend';
  host.innerHTML='<div class="g2 ch"><div class="ch-top"><div class="ch-pet" id="chPet">'+petBox(id)+'</div><div class="ch-bub" id="chBub"></div></div><div class="ch-ans" id="chAns"></div></div>';
  function flap(on,ms){ clearInterval(flapT); var im=document.getElementById('chImg'); if(!im||!petKey(id))return; if(!on){im.src=buddyImg('idle');return;} var o=0; flapT=setInterval(function(){ var i2=document.getElementById('chImg'); if(!i2||!GAME.on){clearInterval(flapT);return;} o^=1; i2.src=buddyImg(o?'open':'idle'); },150); setTimeout(function(){flap(false);},ms||1800); }
  function talk(en,es,happy){ var b=document.getElementById('chBub'); b.innerHTML='<b>'+en+'</b><small>'+es+'</small>'; b.classList.remove('on'); void b.offsetWidth; b.classList.add('on'); flap(true,900+en.length*55);
@@ -45,7 +47,7 @@ window.startChat=function(u,lv){
   var mb=document.querySelector('#chMic .mic-b'); if(mb)mb.onclick=function(){ micListen('chMic',opts[0][0],function(){ answer(opts[0],A.querySelector('.ch-opt[data-i="0"]'),true); },function(heard){ if(!heard)return; heard=heard.toLowerCase().replace(/[?.!,']/g,'');
     for(var i=1;i<opts.length;i++){ var tg=opts[i][0].toLowerCase().replace(/[?.!,']/g,''); if(heard.indexOf(tg)>=0||sim(heard,tg)){ answer(opts[i],A.querySelector('.ch-opt[data-i="'+i+'"]'),true); return; } } }); }; }
  function answer(o,b,spoken){ if(!GAME.on)return; try{micStop();}catch(e){} var A=document.getElementById('chAns'); A.querySelectorAll('.ch-opt').forEach(function(x){ x.disabled=true; x.classList.toggle('pick',x===b); x.classList.toggle('dim',x!==b); });
-  if(spoken){ said++; burst(30); sGood(); } else { tone(700,.06,'triangle',.12,0); say(o[0],0.85); }
+  if(!logged){ logged=true; chatLog('done'); } /* cuenta como charla apenas responde la primera */ chatLog(spoken?'said':'tap'); if(spoken){ said++; burst(30); sGood(); } else { tone(700,.06,'triangle',.12,0); say(o[0],0.85); }
   markWord({en:o[0],es:o[1],e:o[2]},true);
   GAME.timer=setTimeout(function(){ talk(o[3],o[4],true); r++; GAME.timer=setTimeout(ask,1500+o[3].length*60); },spoken?600:1400+o[0].length*55); }
  GAME.timer=setTimeout(function(){ talk('Hi, '+nm+'! Let\'s talk in English!','¡Hola! ¡Charlemos en inglés!',true); GAME.timer=setTimeout(ask,3300); },400);

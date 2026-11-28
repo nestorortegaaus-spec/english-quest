@@ -1203,7 +1203,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="vocab.js?v=7"></script>
 <script src="run.js?v=23" defer></script>
 <script src="buggy.js?v=14" defer></script>
-<script src="chat.js?v=2"></script>
+<script src="chat.js?v=4"></script>
 <script src="simon.js?v=1"></script>
 <script src="dino.js?v=9"></script>
 <script src="review.js?v=8"></script>
@@ -2498,6 +2498,12 @@ function renderParents(){
   +(th.length?'<div class="pa-h" style="margin-top:14px">Temas que más practicó</div><div class="pa-themes">'+th.slice(0,6).map(function(t){var pc=Math.round(t.pr/t.tot*100);
     return '<div class="pa-th"><div class="pa-th-l"><b>'+t.e+'</b><span>'+t.n+'</span><em>'+t.pr+'/'+t.tot+'</em></div><div class="pa-meter"><i style="width:'+pc+'%;background:'+(t.acc>=.75?'#5FA88B':t.acc>=.5?'#E8B04B':'#E07A6A')+'"></i></div></div>';}).join('')+'</div><div class="pa-legend"><span><i style="background:#5FA88B"></i>bien</span><span><i style="background:#E8B04B"></i>regular</span><span><i style="background:#E07A6A"></i>a repasar</span></div>':'')+'</div>';
  // palabras
+ var cs=S.chatSt||{n:0,said:0,tap:0,last:'',days:{}}, cw=0; for(var di=0;di<7;di++){ var dd=new Date(); dd.setDate(dd.getDate()-di); cw+=cs.days[dkey(dd)]||0; }
+ var ctot=(cs.said||0)+(cs.tap||0), cpc=ctot?Math.round((cs.said||0)/ctot*100):0;
+ out+='<div class="pa-card"><div class="pa-h">🗣️ Charla con su mascota <small>se cuenta desde el 28/11</small></div><div class="pa-wk">'
+  +'<div><b>'+cw+'</b><span>charlas esta semana</span></div><div><b>'+(cs.n||0)+'</b><span>charlas en total</span></div>'
+  +'<div><b>'+(cs.said||0)+'</b><span>respuestas dichas en voz alta 🎤'+(ctot?' ('+cpc+'%)':'')+'</span></div><div><b>'+(cs.tap||0)+'</b><span>respuestas tocadas 👆</span></div></div>'
+  +'<div class="pa-note" style="margin-top:8px">'+(cs.last?'Última charla: '+cs.last.split('-').reverse().join('/'):'Todavía no charló con su mascota. El botón está en la 🏡 Casa de Amigos.')+(ctot&&cpc<30?' · Animala a responder hablando con el micrófono 🎤: es lo que más ayuda a la pronunciación.':'')+'</div></div>';
  out+='<div class="pa-card"><div class="pa-h">🏆 Medallas <small>'+(window.ACH?ACH.filter(function(a){return S.ach&&S.ach[a.id];}).length+' de '+ACH.length:'')+'</small></div>'+(window.achGrid?achGrid():'')+'</div>';
  out+='<div class="pa-card"><div class="pa-h">Palabras para practicar juntos <small>tocá para escucharla</small></div>'+(hard.length?'<div class="pa-list">'+hard.map(function(k){var w=wordInfo(k),t=h[k][0]+h[k][1],pc=Math.round(h[k][0]/t*100);
    return '<button class="pa-w" onclick="say(\''+k.replace(/'/g,'')+'\')"><b>'+w.e+'</b><span><strong>'+k+'</strong><small>'+w.es+'</small></span><div class="pa-mini"><div class="pa-meter"><i style="width:'+pc+'%;background:'+(pc>=60?'#E8B04B':'#E07A6A')+'"></i></div><em>'+h[k][0]+' de '+t+'</em></div></button>';}).join('')+'</div>':'<div class="pa-note">Todavía no hay errores registrados. ¡Vamos bien! 💚</div>')+'</div>';

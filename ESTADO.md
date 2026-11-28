@@ -332,3 +332,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11, pedido del dueño): las mascotas hablan según su nivel (petLv: mundo 1 → 1, mundos 2-3 → 2, mundo 4+ → 3), suman frases
   más largas por nivel (CHAT_LV, PET_CHAT2) y ~30% de las veces usan palabras que ella YA aprendió (S.hist) con plantillas por nivel (WORD_T).
   REGLA: seguir sumando frases en pets.js.
+- ✅ HECHO (28/11): panel de padres con tarjeta "🗣️ Charla con su mascota" (S.chatSt: charlas por día, total, respuestas en voz alta vs tocadas,
+  última charla). Se cuenta desde el 28/11.
