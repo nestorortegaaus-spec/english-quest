@@ -272,8 +272,11 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): las ⭐ disponibles se ven donde se compra: arriba en la Tienda y la Sala de Juegos (junto a 💎), en el garaje del Kart
   ("Tenés ⭐ X y 💎 Y") y en la ventana de compra del auto ("te faltan N" en cada botón). La Casa y el camino ya las mostraban.
 - 🎨 REDISEÑO (pedido 28/11), referencias del dueño en design/: ref_rediseno_principal.webp (Juegos, Casa, Tienda) y ref_rediseno_minijuegos.webp.
-  Regla: copiar la referencia TAL CUAL (el dueño rechazó una versión "inspirada"). Bosquejo de las 3 pantallas principales hecho y enviado;
-  falta su OK + arte ChatGPT (4 portadas de juegos, fondo de la tienda con ropero/espejo, accesorios en 3D de a hojas de 9).
+  Regla: copiar la referencia TAL CUAL (el dueño rechazó una versión "inspirada").
+  ✅ HECHO (28/11): Juegos, Casa y Tienda rediseñadas (clase .rd, bloque CSS "REDISEÑO" al final del <style>; fuentes propias fonts/ EQ Baloo y EQ Nunito).
+  Arte ChatGPT: img/ui/cover_*.webp (portadas), img/ui/shop_bg.webp (probador), img/acc/<id>.webp (49 accesorios) y img/acc/cos_<id>.webp (14 disfraces)
+  → accIcon()/cosIcon(). Juegos: perfil + barra inferior (Juegos/Casa/Tienda/Colección=álbum). Casa: barras de necesidad dentro de cada
+  botón, ❤️ cariño junto a la carita, 👒 Vestir en la habitación, 🎒 en el amigo que acompaña. Tienda: flechas ‹ › eligen qué amigo vestir.
 - ⏭️ EN COLA (pedido 28/11): rediseño de TODOS los minijuegos con la misma línea (ref_rediseno_minijuegos.webp): fondo de naturaleza/cielo,
   Zorrito guía en cada actividad con globo de diálogo (instrucción en inglés + castellano), tarjetas 3D con volumen, instrucciones grandes,
   verde/rojo + animación al responder, barra de progreso visible arriba. Hacerlo como SISTEMA de diseño global (mismos componentes en todos).

@@ -778,6 +778,104 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
 .mem-card.open{background:#fff;color:var(--ink);border:2px solid var(--blue);}
 .mem-card.done{background:#D9F6EC;color:var(--teal-d);border:2px solid var(--teal);box-shadow:none;opacity:.85;}
 .mem-emo{font-size:34px;} .mem-word{font-size:19px;word-break:break-word;text-align:center;line-height:1.1;} .mem-q{font-size:26px;opacity:.85;}
+
+/* ===================== 🎨 REDISEÑO (referencia: design/ref_rediseno_principal.webp) ===================== */
+@font-face{font-family:'EQ Baloo';src:url(fonts/baloo2-latin.woff2) format('woff2');font-weight:400 800;font-display:swap;}
+@font-face{font-family:'EQ Nunito';src:url(fonts/nunito-latin.woff2) format('woff2');font-weight:200 1000;font-display:swap;}
+.rd{background:linear-gradient(180deg,#BFE6FF 0%,#DFF2FF 45%,#F4FAFF 100%);font-family:'EQ Nunito','Nunito',system-ui,sans-serif;color:#24345C;}
+.rd .rd-top{position:relative;z-index:6;display:flex;align-items:center;gap:6px;padding:10px 54px 6px 10px;}
+.rd-home{flex:0 0 44px;width:44px;height:44px;border-radius:50%;border:none;background:linear-gradient(180deg,#5AB8FF,#2E8FE6);font-size:22px;cursor:pointer;box-shadow:0 3px 0 #1F6FBF,0 5px 10px rgba(40,90,150,.25);}
+.rd-pill{background:#fff;border-radius:999px;height:40px;padding:0 10px;display:flex;align-items:center;gap:4px;font-weight:900;font-size:17px;white-space:nowrap;box-shadow:0 3px 8px rgba(40,90,150,.18);}
+.rd-sp{flex:1;min-width:0;}
+.rd-title{position:relative;background:#fff;border-radius:20px;padding:7px 14px 4px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:24px;line-height:1;color:#22325A;white-space:nowrap;box-shadow:0 4px 10px rgba(40,90,150,.2);}
+.rd-title.two{font-size:19px;line-height:.98;padding:9px 12px 4px;} .rd-tic{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:18px;}
+.rd .mute{top:12px;right:8px;width:40px;height:40px;border-radius:50%;}
+/* nav de abajo */
+.rd-nav{position:relative;z-index:6;display:flex;gap:4px;margin:6px 10px 10px;padding:6px;background:#fff;border-radius:26px;box-shadow:0 -3px 14px rgba(40,90,150,.15);}
+.rd-nav button{flex:1;height:60px;border:none;border-radius:18px;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:16px;color:#2E5AA8;cursor:pointer;}
+.rd-nav button i{font-style:normal;font-size:28px;line-height:1;} .rd-nav button.on{background:linear-gradient(180deg,#FFD84D,#FFB21A);color:#5A3300;box-shadow:0 4px 0 #D9890A;}
+/* ---- Juegos ---- */
+#s-arcade .ar-scene{position:absolute;left:0;right:0;top:0;height:300px;background:url(img/run/bg_meadow.jpg) 38% 40%/auto 160%;z-index:0;}
+#s-arcade .ar-scene:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(150,215,255,.5) 0%,rgba(190,230,255,.05) 45%,rgba(223,242,255,0) 72%,#DFF2FF 100%);}
+#s-arcade .ar-body{position:relative;z-index:1;padding:0 12px 12px;max-width:520px;}
+.ar-prof{display:flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:3px 10px 3px 3px;min-width:0;box-shadow:0 3px 8px rgba(40,90,150,.18);}
+.ar-av{flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#FFE2C4;border:3px solid #FFB36B;overflow:hidden;} .ar-av img{width:100%;height:120%;object-fit:cover;object-position:50% 8%;}
+.ar-pn{min-width:0;} .ar-pn b{display:block;font-family:'EQ Baloo',sans-serif;font-size:17px;line-height:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:76px;} .ar-pn small{display:block;font-weight:900;font-size:12px;line-height:1.1;color:#6F7FA0;white-space:nowrap;}
+.ar-lv{height:5px;width:62px;background:#E3EAF2;border-radius:6px;} .ar-lv i{display:block;height:100%;background:#3CC35F;border-radius:6px;}
+.ar-ttl{display:flex;flex-direction:column;align-items:center;margin:4px 0 14px;}
+.ar-pad{width:72px;height:48px;border-radius:16px;background:linear-gradient(180deg,#FFD84D,#FFB21A);box-shadow:0 4px 0 #D9890A;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:-14px;z-index:2;}
+.ar-cloud{background:#fff;border-radius:44px;padding:10px 34px 2px;box-shadow:0 6px 14px rgba(40,90,150,.2);}
+.ar-cloud h1{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:54px;line-height:1;color:#1F3E86;margin:0;}
+.ar-rib{position:relative;margin-top:-10px;padding:5px 22px;border-radius:10px;background:linear-gradient(180deg,#FFD84D,#FFB21A);color:#6B3B00;font-weight:900;font-size:18px;box-shadow:0 4px 0 #D9890A;transform:rotate(-3deg);}
+.ar-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ar-card{border:none;padding:4px;border-radius:24px;background:var(--c);cursor:pointer;box-shadow:0 6px 12px rgba(60,60,120,.25);font-family:inherit;}
+.ar-card:active{transform:scale(.97);}
+.ar-in{position:relative;aspect-ratio:1/1.02;border-radius:20px;border:3px solid #fff;overflow:hidden;background-size:cover;background-position:center;}
+.ar-nm{position:absolute;left:7px;right:7px;bottom:7px;background:rgba(255,255,255,.95);border-radius:14px;text-align:center;padding:2px 0;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:20px;white-space:nowrap;color:#1F2F55;box-shadow:0 3px 0 rgba(0,0,0,.1);}
+.ar-card.lock .ar-in:before{content:'';position:absolute;inset:0;background:rgba(40,50,90,.38);}
+.ar-buy{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(180deg,#FFD84D,#FFB21A);border-radius:16px;padding:5px 12px;font-weight:900;font-size:17px;color:#5A3300;text-align:center;white-space:nowrap;box-shadow:0 4px 0 #D9890A;}
+.ar-buy small{display:block;font-size:12px;}
+.ar-crysl{margin:14px 0 4px;background:rgba(255,255,255,.8);border-radius:18px;padding:7px 12px;text-align:center;font-weight:900;font-size:15px;color:#5B44B0;box-shadow:0 3px 8px rgba(40,90,150,.12);}
+.ar-crysl span i{font-style:normal;font-size:16px;opacity:.25;} .ar-crysl span i.on{opacity:1;} .ar-crysl small{display:block;font-size:12px;color:#7C8AA5;}
+.ar-soon{position:relative;margin-top:24px;background:rgba(255,255,255,.75);border-radius:22px;padding:22px 10px 10px;box-shadow:0 4px 10px rgba(40,90,150,.12);}
+.ar-soon h3{position:absolute;top:-17px;left:50%;transform:translateX(-50%);margin:0;background:#fff;border-radius:14px;padding:2px 16px;font-family:'EQ Baloo',sans-serif;font-size:21px;white-space:nowrap;box-shadow:0 3px 8px rgba(40,90,150,.15);}
+.ar-sr{display:flex;gap:8px;} .ar-lk{flex:1;height:62px;border-radius:14px;position:relative;overflow:hidden;background-size:cover;background-position:center;}
+.ar-lk:before{content:'';position:absolute;inset:0;background:var(--t);} .ar-lk span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:'EQ Baloo',sans-serif;font-size:18px;line-height:1.05;text-shadow:0 2px 3px rgba(0,0,0,.45);} .ar-lk span i{font-style:normal;font-size:24px;}
+/* ---- Casa de Amigos ---- */
+#s-home .hm-top{position:absolute;top:0;left:0;right:0;}
+#s-home .hm-body{padding:0 12px 20px;max-width:480px;}
+#s-home .hm-room{margin:0 -12px;border-radius:0 0 30px 30px;padding:118px 10px 12px;min-height:440px;justify-content:flex-end;background:url(img/home_bg.jpg) center 30%/cover;box-shadow:0 6px 16px rgba(40,70,120,.18);}
+#s-home .hm-room:after{content:'';position:absolute;left:0;right:0;top:0;height:70px;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0));pointer-events:none;}
+#s-home .hm-bub{top:62px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:22px;line-height:1.05;border-radius:22px;padding:8px 18px;box-shadow:0 4px 10px rgba(0,0,0,.14);z-index:6;}
+#s-home .hm-bub small{font-family:'EQ Nunito',sans-serif;font-size:14px;color:#5A6A8A;}
+#s-home .hm-friend{width:230px;height:230px;z-index:3;}
+.hm-rug{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);width:270px;height:58px;border-radius:50%;background:radial-gradient(ellipse,#F2B8EE 0 48%,#D58FE0 49% 66%,#C57AD3 67% 70%,transparent 71%);z-index:1;}
+#s-home .hm-name{position:relative;z-index:4;margin-top:-6px;background:#fff;border-radius:18px;padding:3px 20px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:24px;box-shadow:0 3px 8px rgba(40,90,150,.18);}
+#s-home .hm-name small{font-family:'EQ Nunito',sans-serif;font-weight:900;font-size:15px;color:#6F7FA0;}
+#s-home .hm-mood{top:118px;right:12px;width:48px;height:48px;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.15);}
+.hm-love{position:absolute;top:170px;right:10px;z-index:4;display:flex;flex-direction:column;align-items:center;font-size:16px;}
+.hm-love span{width:42px;height:7px;background:rgba(255,255,255,.85);border-radius:6px;overflow:hidden;} .hm-love span i{display:block;height:100%;background:#FF6B8B;}
+.hm-dressb{position:absolute;right:12px;bottom:70px;z-index:5;width:48px;height:48px;border-radius:50%;border:none;background:#fff;font-size:24px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.18);}
+#s-home .hm-poops{bottom:66px;left:14px;z-index:5;}
+#s-home .hm-grow{width:auto;margin:12px 4px 0;background:#fff;border-radius:22px;padding:8px 18px 10px;box-shadow:0 4px 10px rgba(40,90,150,.14);}
+#s-home .hm-grow span{font-size:17px;color:#2B6A3A;margin:0 0 5px;} #s-home .hm-grow b{display:block;height:14px;border-radius:9px;background:#E6EDF0;overflow:hidden;}
+#s-home .hm-grow b i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#3CD167,#20B04A);}
+#s-home .hm-acts{gap:5px;margin:12px 0 10px;}
+#s-home .hm-act{border-radius:18px;padding:8px 2px 7px;box-shadow:0 4px 10px rgba(40,90,150,.14);gap:0;}
+#s-home .hm-act b{font-size:34px;} #s-home .hm-act span{font-size:14px;font-weight:900;line-height:1.1;} #s-home .hm-act small{font-weight:800;font-size:11px;color:#7C8AA5;}
+#s-home .hm-act u{display:block;width:78%;height:6px;margin-top:4px;border-radius:5px;background:#EEF1F5;overflow:hidden;} #s-home .hm-act u i{position:static;display:block;height:100%;border-radius:5px;background:#4CC3A0;}
+#s-home .hm-act u i.mid{background:#FFB34D;} #s-home .hm-act u i.low{background:#F2665A;}
+#s-home .hm-act.need{box-shadow:0 0 0 3px #FFB55E,0 4px 10px rgba(240,140,60,.3);} #s-home .hm-act i.ok{position:absolute;top:3px;right:6px;font-style:normal;}
+.hm-chat2{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:58px;border:none;border-radius:22px;background:linear-gradient(180deg,#FFDA4D,#FFB717);box-shadow:0 5px 0 #D98E0B,0 8px 14px rgba(200,120,0,.25);font-family:inherit;font-weight:900;font-size:20px;color:#3A2400;cursor:pointer;margin-bottom:10px;}
+.hm-chat2 i{font-style:normal;width:36px;height:30px;border-radius:14px;background:#3A8DFF;color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.hm-buddy2{width:100%;border:none;border-radius:18px;padding:11px;background:#fff;font-family:inherit;font-weight:900;font-size:16px;color:#1E9A7C;box-shadow:0 4px 10px rgba(40,90,150,.14);cursor:pointer;margin-bottom:10px;}
+#s-home .hm-tip{font-size:15px;color:#5A6A8A;margin:0 0 10px;}
+.hm-h2{display:flex;justify-content:space-between;align-items:center;margin:8px 4px 8px;} .hm-h2 b{font-family:'EQ Baloo',sans-serif;font-size:22px;font-weight:800;}
+.hm-h2 button{border:none;background:none;font-family:inherit;font-weight:900;font-size:15px;color:#3C5A92;cursor:pointer;}
+#s-home .hm-row{display:flex;gap:7px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none;} #s-home .hm-row::-webkit-scrollbar{display:none;}
+#s-home .hm-row.all{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible;}
+#s-home .hm-fr{flex:0 0 72px;border-radius:16px;box-shadow:0 3px 8px rgba(40,90,150,.14);padding:5px 2px 4px;}
+#s-home .hm-fr span{font-size:13px;} #s-home .hm-fr.on{border-color:#FFB21A;background:#FFF7E2;}
+#s-home .hm-fr.lock .hm-mini{filter:brightness(0);opacity:.18;} #s-home .hm-fr.lock span{color:#2E8FE6;}
+.hm-bag{position:absolute;top:-7px;right:-5px;z-index:3;font-style:normal;font-size:15px;background:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.15);}
+/* ---- Tienda ---- */
+.sh-ttl{padding-top:11px;margin-top:6px;font-size:27px;} .sh-awn{position:absolute;top:-8px;left:6px;right:6px;height:15px;border-radius:7px 7px 0 0;background:repeating-linear-gradient(90deg,#F2464E 0 16px,#fff 16px 30px);}
+#s-shop .sh-tabs{padding:6px 12px 8px;gap:8px;}
+#s-shop .sh-tab{height:52px;border-radius:18px;font-size:17px;white-space:nowrap;padding:0 4px;color:#24345C;font-family:inherit;box-shadow:0 4px 10px rgba(40,90,150,.15);}
+#s-shop .sh-tab.on{background:linear-gradient(180deg,#2FCB72,#17A957);color:#fff;box-shadow:0 4px 0 #11853F;}
+#s-shop .sh-body{padding:0 10px 24px;}
+.sh-stage{position:relative;margin:0 -10px;height:290px;background:url(img/ui/shop_bg.webp) center 72%/cover;}
+.sh-stage .sh-fox{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);width:230px;height:230px;margin:0;}
+.sh-arr{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;border:none;background:#fff;font-size:30px;font-weight:900;color:#24345C;line-height:1;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.18);z-index:5;} .sh-arr.l{left:12px;} .sh-arr.r{right:12px;}
+.sh-cap{text-align:center;font-weight:900;font-size:18px;line-height:1.25;margin:12px 4px 4px;}
+#s-shop .sh-slot{font-family:'EQ Baloo',sans-serif;font-size:21px;font-weight:800;margin:16px 4px 8px;} #s-shop .sh-slot small{font-family:'EQ Nunito',sans-serif;font-size:14px;}
+#s-shop .sh-grid{gap:9px;}
+#s-shop .sh-item{border-radius:20px;padding:8px 4px 10px;gap:0;box-shadow:0 4px 10px rgba(40,90,150,.15);min-height:150px;justify-content:flex-end;}
+#s-shop .sh-item b{flex:1;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;} #s-shop .sh-item b .acc3d{width:76px;height:76px;}
+#s-shop .sh-item small{font-size:16px;line-height:1.1;text-align:center;} #s-shop .sh-item em{font-style:normal;font-weight:800;font-size:12px;color:#7C8AA5;}
+#s-shop .sh-item span{margin-top:3px;font-size:18px;color:#24345C;} #s-shop .sh-item.on span{color:#1E9A7C;font-size:15px;}
+#s-shop .sh-item.on{border-color:#2FCB72;background:#EFFCF4;} #s-shop .sh-item.sel{border-color:#FFB21A;}
+.acc3d{width:1.15em;height:1.15em;object-fit:contain;vertical-align:middle;display:inline-block;}
 </style>
 </head>
 <body>
@@ -840,21 +938,23 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
   </section>
 
   <!-- CASA DE AMIGOS -->
-  <section class="screen" id="s-home">
-    <div class="hud"><button class="lx" onclick="sTap();renderPath();show('s-path')">✕</button><div class="pill" style="color:#D9622B">🏡 Casa de Amigos</div><div class="grow"></div><div class="pill s">⭐ <span id="hmStars">0</span></div><div class="pill gem">💎 <span id="hmGems">0</span></div></div>
+  <section class="screen rd" id="s-home">
+    <div class="rd-top hm-top"><button class="rd-home" onclick="sTap();renderPath();show('s-path')" aria-label="Volver al camino">🏠</button><div class="rd-title two"><span class="rd-tic">🐾</span>Casa de<br>Amigos</div><div class="rd-sp"></div><div class="rd-pill">⭐ <span id="hmStars">0</span></div><div class="rd-pill">💎 <span id="hmGems">0</span></div></div>
     <div class="hm-body" id="hmBody"></div>
   </section>
 
   <!-- SALA DE JUEGOS -->
-  <section class="screen" id="s-arcade">
-    <div class="hud"><button class="lx" onclick="sTap();renderPath();show('s-path')">✕</button><div class="pill" style="color:#6B4FD8;white-space:nowrap">🕹️ Juegos</div><div class="grow"></div><div class="pill" style="color:#8C5BE0">🔮 <span id="arCrys">0</span></div><div class="pill s">⭐ <span id="arStars">0</span></div><div class="pill gem">💎 <span id="arGems">0</span></div></div>
+  <section class="screen rd" id="s-arcade">
+    <div class="ar-scene"></div>
+    <div class="rd-top"><button class="rd-home" onclick="sTap();renderPath();show('s-path')" aria-label="Volver al camino">🏠</button><div class="ar-prof" id="arProf"></div><div class="rd-sp"></div><div class="rd-pill">⭐ <span id="arStars">0</span></div><div class="rd-pill">💎 <span id="arGems">0</span></div></div>
     <div class="ar-body" id="arBody"></div>
+    <nav class="rd-nav"><button class="on" onclick="sTap()"><i>🎮</i>Juegos</button><button onclick="openHome()"><i>🐾</i>Casa</button><button onclick="openShop('fox')"><i>🏪</i>Tienda</button><button onclick="openShop('alb')"><i>📒</i>Colección</button></nav>
   </section>
 
   <!-- SHOP -->
-  <section class="screen" id="s-shop">
-    <div class="hud"><button class="lx" onclick="closeShop()">✕</button><div class="pill" style="color:#C98A1C">🏪 Tienda</div><div class="grow"></div><div class="pill s">⭐ <span id="shStars">0</span></div><div class="pill gem">💎 <span id="shGems">0</span></div></div>
-    <div class="sh-tabs"><button class="sh-tab" id="shTabFox" onclick="SHOP_TAB='fox';SHOP_SEL=null;sTap();renderShop()">👒 Ropa</button><button class="sh-tab" id="shTabStar" onclick="SHOP_TAB='star';SHOP_SEL=null;sTap();renderShop()">⭐ Estrellas</button><button class="sh-tab" id="shTabAlb" onclick="SHOP_TAB='alb';sTap();renderShop()">📒 Álbum</button></div>
+  <section class="screen rd" id="s-shop">
+    <div class="rd-top"><button class="rd-home" onclick="closeShop()" aria-label="Volver al camino">🏠</button><div class="rd-title sh-ttl"><span class="sh-awn"></span>Tienda</div><div class="rd-sp"></div><div class="rd-pill">⭐ <span id="shStars">0</span></div><div class="rd-pill">💎 <span id="shGems">0</span></div></div>
+    <div class="sh-tabs"><button class="sh-tab" id="shTabFox" onclick="SHOP_TAB='fox';SHOP_SEL=null;sTap();renderShop()">👕 Ropa</button><button class="sh-tab" id="shTabStar" onclick="SHOP_TAB='star';SHOP_SEL=null;sTap();renderShop()">⭐ Estrellas</button><button class="sh-tab" id="shTabAlb" onclick="SHOP_TAB='alb';sTap();renderShop()">📒 Álbum</button></div>
     <div class="sh-body" id="shBody"></div>
   </section>
 
@@ -1925,7 +2025,9 @@ COSTUMES.push({id:'mermaid',n:'Sirena',en:'mermaid',e:'🧜‍♀️',w:['mermai
  {id:'firefighter',n:'Bombera',en:'firefighter',e:'🧑‍🚒',w:['firehelmet','medalhero','hose']},{id:'astro2',n:'Astronauta en el espacio',en:'astronaut',e:'👩‍🚀',w:['astrohelmet','jetpack','flag']},
  {id:'santa',n:'Navidad',en:'Christmas',e:'🎄',w:['santahat','scarf','gift']},{id:'winter',n:'Invierno',en:'winter',e:'⛄',w:['beanie','scarf','snowflake']},{id:'cozy',n:'Abrigadita',en:'cozy',e:'🧣',w:['earmuffs','scarf','teddy']});
 function accGlyph(a){ return a.svg&&ACC_SVG[a.id]?'<svg viewBox="0 0 100 100">'+ACC_SVG[a.id]+'</svg>':a.e; }
-function accIcon(a){ return a.svg&&ACC_SVG[a.id]?'<i class="acc-ico"><svg viewBox="'+(a.dx?'46 0 56 100':'0 0 100 100')+'">'+ACC_SVG[a.id]+'</svg></i>':a.e; }
+var ACC3D=['balloon','bell','bouquet','bow','broom','butterfly','cap','crown','crystalball','diamond','flag','flower','gift','glasses','glowstar','goggles','gold','gradcap','guitar','headphones','helmet','hose','icecream','lollipop','mask','medal','moon','necklace','party','rainbow','ribbon','rose','rosette','scarf','shellhand','shooting','snowflake','sparkler','sparkles','specs','star','sunflower','sunhat','sword','teddy','tophat','trophy','umbrella','wand'], COS3D=['astro','bunny','butterfly','chef','cowgirl','dino','fairy','hero','kitty','ninja','pirate','school','viking','witch']; /* arte ChatGPT en img/acc/ */
+function cosIcon(c){ return COS3D.indexOf(c.id)>=0?'<img class="acc3d" src="img/acc/cos_'+c.id+'.webp" alt="">':c.e; }
+function accIcon(a){ if(ACC3D.indexOf(a.id)>=0)return '<img class="acc3d" src="img/acc/'+a.id+'.webp" alt="">'; return a.svg&&ACC_SVG[a.id]?'<i class="acc-ico"><svg viewBox="'+(a.dx?'46 0 56 100':'0 0 100 100')+'">'+ACC_SVG[a.id]+'</svg></i>':a.e; }
 var ACC_IMG={}; function accImg(a){ if(!ACC_IMG[a.id]){ var im=new Image(); im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'+ACC_SVG[a.id]+'</svg>'); ACC_IMG[a.id]=im; } return ACC_IMG[a.id]; }
 /* ⭐ trofeos por estrellas juntadas (las gastadas también cuentan) */
 var STAR_GOALS=[{n:25,t:'Estrellita',e:'⭐',g:20},{n:50,t:'Brillante',e:'🌟',g:30},{n:100,t:'Súper Estrella',e:'💫',g:50},{n:200,t:'Cometa',e:'☄️',g:80},
@@ -2014,15 +2116,17 @@ function renderShop(){
  if(SHOP_TAB==='star'){ b.innerHTML=starTabHTML(); return; }
  if(SHOP_TAB==='fox'){
   var bw=wearOf(buddyId()), bf=friendById(buddyId()), selC=SHOP_SEL&&String(SHOP_SEL).indexOf('cos:')===0?COSTUMES.find(function(c){return 'cos:'+c.id===SHOP_SEL;}):null;
-  var h=foxHTML('sh-fox',selC?null:SHOP_SEL,selC?cosTry(selC):null)+'<div class="sh-hint">Tocá un accesorio para probárselo a '+(bf?bf.n:'tu amigo')+'. ¡Podés combinar uno de cada lugar!</div>';
+  var mates=ownedFriends(), many=mates.length>1;
+  var h='<div class="sh-stage">'+foxHTML('sh-fox',selC?null:SHOP_SEL,selC?cosTry(selC):null)+(many?'<button class="sh-arr l" onclick="shopMate(-1)" aria-label="Amigo anterior">‹</button><button class="sh-arr r" onclick="shopMate(1)" aria-label="Amigo siguiente">›</button>':'')+'</div>'
+   +'<div class="sh-cap">Cambiá el look de '+(bf?bf.n:'tu amigo')+'.<br>¡Combiná y coleccioná accesorios!</div>';
   h+='<div class="sh-slot">🎭 Disfraces <small>'+COSTUMES.filter(function(c){return !cosMissing(c).length;}).length+'/'+COSTUMES.length+'</small></div><div class="sh-grid">';
   COSTUMES.forEach(function(c){ var miss=cosMissing(c), on=!miss.length&&cosOn(c);
-   h+='<button class="sh-item cos'+(on?' on':'')+(SHOP_SEL==='cos:'+c.id?' sel':'')+'" onclick="shopCostume(\''+c.id+'\')"><b>'+c.e+'</b><small>'+c.n+'</small><span>'+(on?'Puesto ✓':!miss.length?'Ponerse':cosPrice(c)+' 💎')+'</span></button>'; });
+   h+='<button class="sh-item cos'+(on?' on':'')+(SHOP_SEL==='cos:'+c.id?' sel':'')+'" onclick="shopCostume(\''+c.id+'\')"><b>'+cosIcon(c)+'</b><small>'+c.n+'</small><span>'+(on?'Puesto ✓':!miss.length?'Ponerse':'💎 '+cosPrice(c))+'</span></button>'; });
   h+='</div>';
   ACC_SLOTS.forEach(function(sl){ var its=ACC.filter(function(a){return a.pos===sl.k;}), n=its.filter(function(a){return S.owned.indexOf(a.id)>=0;}).length;
    h+='<div class="sh-slot">'+sl.e+' '+sl.n+' <small>'+n+'/'+its.length+'</small></div><div class="sh-grid">';
    its.forEach(function(a){var own=S.owned.indexOf(a.id)>=0, on=bw[sl.k]===a.id;
-    h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+accIcon(a)+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
+    h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+accIcon(a)+'</b><small>'+cap1(a.es)+'</small><em>'+a.en+'</em><span>'+(on?'Puesto ✓':own?'Usar':priceTxt2(a))+'</span></button>';});
    h+='</div>'; });
   if(wearCount(bw))h+='<button class="btn ghost" style="margin-top:12px" onclick="S.home.wear[buddyId()]={};save();renderShop();">Sacar todo</button>';
   b.innerHTML=h;
@@ -2054,7 +2158,7 @@ function starTabHTML(){ var T=starsTotal(), cur=starTitle(), nx=STAR_GOALS.find(
  var bw=wearOf(buddyId()), its=ACC.filter(function(a){return a.st;});
  h+='<div class="sh-slot">✨ Ropa mágica <small>solo con estrellas</small></div><div class="sh-grid">';
  its.forEach(function(a){var own=(S.owned||[]).indexOf(a.id)>=0, on=bw[a.pos]===a.id;
-  h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+accIcon(a)+'</b><small>'+a.en+'</small><span>'+(on?'Puesto ✓':own?'Usar':priceTxt(a))+'</span></button>';});
+  h+='<button class="sh-item'+(on?' on':'')+(SHOP_SEL===a.id?' sel':'')+'" onclick="shopPick(\''+a.id+'\')"><b>'+accIcon(a)+'</b><small>'+cap1(a.es)+'</small><em>'+a.en+'</em><span>'+(on?'Puesto ✓':own?'Usar':priceTxt2(a))+'</span></button>';});
  h+='</div><div class="sh-hint" style="margin-top:10px">🍓 En la 🏡 Casa de Amigos también podés usar estrellas para darles comidas ricas a tus amigos.</div>';
  return h; }
 function starClaim(n){ var g=STAR_GOALS.find(function(x){return x.n===n;}); if(!S.sgot)S.sgot={};
@@ -2062,6 +2166,10 @@ function starClaim(n){ var g=STAR_GOALS.find(function(x){return x.n===n;}); if(!
  if(S.sgot[n]){ sTap(); say('You are a star!'); return; }
  S.sgot[n]=1; S.gems+=g.g; save(); sWin(); burst(160); sayBoth('Amazing! You are a star!','¡Sos una '+g.t+'!'); toast(g.e+' ¡'+g.t+'! +'+g.g+' 💎'); renderShop(); }
 function starCrys(){ if(S.scrys===dkey()||(S.crys||0)>=crysMax()||!spendStars(STAR_CRYS))return; addCrys(1); S.scrys=dkey(); save(); sWin(); burst(60); toast('🔮 ¡Un cristal nuevo!'); renderShop(); }
+function cap1(t){ t=String(t||''); return t.charAt(0).toUpperCase()+t.slice(1); }
+function priceTxt2(a){ return a.st?'⭐ '+a.st:'💎 '+a.p; }
+/* flechas de la tienda: elegir a cuál de sus amigos (solo desbloqueados) vestir */
+function shopMate(d){ var m=ownedFriends(); if(m.length<2)return; var i=m.indexOf(buddyId()); var nx=m[(i+d+m.length)%m.length]; if(!S.home)return; S.home.buddy=nx; SHOP_SEL=null; save(); sTap(); renderShop(); var f=friendById(nx); if(f)sayBoth(f.en,f.n); }
 function shopPick(id){var a=accById(id); say(a.en); if(!S.owned)S.owned=[];
  if(S.owned.indexOf(id)>=0){var w=wearOf(buddyId()); if(w[a.pos]===id)delete w[a.pos]; else w[a.pos]=id; SHOP_SEL=null;save();sGood();renderShop();return;}
  if(SHOP_SEL!==id){SHOP_SEL=id;renderShop();
@@ -2213,21 +2321,24 @@ function crysMax(){return S.crysMax||5;}
 function addCrys(n){var before=S.crys||0;S.crys=Math.min(crysMax(),before+n);CRYS_GAINED+=S.crys-before;}
 function toast(msg){var t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.classList.add('out');},1800);setTimeout(function(){t.remove();},2300);}
 function openArcade(){ sTap(); if(todayCount()<2){ toast('🧠 Primero aprendé un poquito: completá '+(2-todayCount())+' parada'+(2-todayCount()>1?'s':'')+' del camino hoy y se abre la Sala'); return; } if(S.arcadeOff){alert('La Sala de Juegos está apagada desde el panel para padres.');return;} renderArcade(); show('s-arcade'); }
+var CART_ART={kart:{img:'cover_kart',c:'linear-gradient(160deg,#FF6FB0,#9B5CF0)'},buggy:{img:'cover_buggy',c:'linear-gradient(160deg,#54C6FF,#2E86E8)'},run:{img:'cover_run',c:'linear-gradient(160deg,#B884FF,#7D52E6)'},dino:{img:'cover_dino',c:'linear-gradient(160deg,#5FE08A,#22B35E)'},
+ snow:{bg:'kart_bg_snow.jpg',t:'rgba(80,150,230,.55)'},space:{bg:'kart_bg_space.jpg',t:'rgba(150,90,200,.55)'}};
 function renderArcade(){
  if(!S.carts)S.carts=[];
- document.getElementById('arCrys').textContent=(S.crys||0)+'/'+crysMax();
  document.getElementById('arGems').textContent=S.gems; document.getElementById('arStars').textContent=S.stars||0;
- var h='<div class="ar-info"><b>🔮 Cristales de energía</b><span>Cada partida gasta 1 🔮. Los ganás <b>solo estudiando</b>: 1 cada 3 paradas del camino y 2 más al cumplir la meta del día. Guardás hasta '+crysMax()+'.</span>'
-  +'<div class="ar-crys">'+Array.apply(null,Array(crysMax())).map(function(_,i){return '<i class="'+(i<(S.crys||0)?'on':'')+'">🔮</i>';}).join('')+'</div>'
-  +'<small>Próximo cristal: '+(S.crysAcc||0)+'/3 paradas</small></div><div class="ar-h">🗄️ Tu colección de juegos</div><div class="ar-shelf">';
- CARTS.forEach(function(c){ var own=S.carts.indexOf(c.id)>=0;
-  h+='<div class="ar-cart'+(own?' own':'')+(c.soon?' soon':'')+'"><div class="ar-art">'+(own||!c.soon?c.e:'❔')+'</div><b>'+c.n+'</b><small>'+c.d+'</small>'
-   +(own?'<button class="btn teal" onclick="playCart(\''+c.id+'\')">Jugar · 1 🔮</button>'
-    :c.soon?'<div class="ar-lock">🔒 '+c.p+' 💎</div>'
-    :'<button class="btn sun" onclick="buyCart(\''+c.id+'\')"'+(S.gems<c.p?' disabled':'')+'>Comprar · '+c.p+' 💎</button>'+(S.gems<c.p?'<div class="sh-need">Te faltan '+(c.p-S.gems)+' 💎</div>':''))+'</div>'; });
- document.getElementById('arBody').innerHTML=h+'</div>';
+ var lv=lvl(), lp=Math.round(((S.stars+(S.spent||0))%9)/9*100);
+ document.getElementById('arProf').innerHTML='<div class="ar-av"><img src="'+buddyImg('idle')+'" alt=""></div><div class="ar-pn"><b>'+(S.name||'Yo')+'</b><small>Nivel '+lv+'</small><div class="ar-lv"><i style="width:'+lp+'%"></i></div></div>';
+ var h='<div class="ar-ttl"><div class="ar-pad">🎮</div><div class="ar-cloud"><h1>Juegos</h1></div><div class="ar-rib">¡Aprendé inglés jugando!</div></div><div class="ar-grid">';
+ CARTS.filter(function(c){return !c.soon;}).forEach(function(c){ var own=S.carts.indexOf(c.id)>=0, A=CART_ART[c.id]||{};
+  h+='<button class="ar-card'+(own?'':' lock')+'" style="--c:'+(A.c||'#7FC4F2')+'" onclick="'+(own?'playCart(\''+c.id+'\')':'buyCart(\''+c.id+'\')')+'"><div class="ar-in" style="background-image:url(img/ui/'+(A.img||'cover_kart')+'.webp)">'
+   +(own?'':'<div class="ar-buy">🔒 '+c.p+' 💎'+(S.gems<c.p?'<small>te faltan '+(c.p-S.gems)+'</small>':'<small>¡Comprar!</small>')+'</div>')
+   +'<div class="ar-nm">'+c.n+'</div></div></button>'; });
+ h+='</div><div class="ar-crysl"><span>'+Array.apply(null,Array(crysMax())).map(function(_,i){return '<i class="'+(i<(S.crys||0)?'on':'')+'">🔮</i>';}).join('')+'</span><b>'+(S.crys||0)+'/'+crysMax()+'</b> · cada partida usa 1 🔮<small>Los ganás estudiando · próximo: '+(S.crysAcc||0)+'/3 paradas</small></div>';
+ var soon=CARTS.filter(function(c){return c.soon;});
+ if(soon.length)h+='<div class="ar-soon"><h3>⭐ Próximamente</h3><div class="ar-sr">'+soon.map(function(c){var A=CART_ART[c.id]||{};return '<div class="ar-lk" style="background-image:url(img/'+(A.bg||'kart_bg_sky.jpg')+');--t:'+(A.t||'rgba(80,120,200,.5)')+'"><span><i>🔒</i>'+c.n+'</span></div>';}).join('')+'</div></div>';
+ document.getElementById('arBody').innerHTML=h;
 }
-function buyCart(id){var c=CARTS.find(function(x){return x.id===id;}); if(!c||S.gems<c.p)return;
+function buyCart(id){var c=CARTS.find(function(x){return x.id===id;}); if(!c)return; if(S.gems<c.p){ sBad(); toast('🔒 Te faltan '+(c.p-S.gems)+' 💎 para '+c.n+'. ¡Jugá y estudiá para juntar más!'); return; }
  if(!confirm('¿Comprar '+c.n+' por '+c.p+' 💎?'))return; S.gems-=c.p; S.carts.push(id); if(!S.crys)addCrys(2); save(); sWin(); burst(160); renderArcade(); toast('¡'+c.n+' es tuyo! 🎉'); }
 var ARCADE_RET=false;
 function playCart(id){ if((S.crys||0)<1){sBad();toast('Necesitás 🔮. ¡Estudiá un poco para ganar cristales!');return;} ARCADE_RET=true; if(id==='kart')startKart(); else if(id==='run'&&window.startRun)startRun(); else if(id==='buggy'&&window.startBuggy)startBuggy(); else if(id==='dino'&&window.startDino)startDino(); }
@@ -2524,22 +2635,24 @@ function renderHome(){
    :(petArt(f.id,p.stage)?'<div class="hm-friend art m-'+mood+'" style="--sc:'+petScale2(f.id,p)+'" onclick="petPet()">'+dressWrap(f.id+'_'+p.stage,'<img data-art="'+petArt(f.id,p.stage)+'" src="'+petArt(f.id,p.stage)+'_idle.webp" alt="">',wearOf(f.id))+'</div>'
    :'<div class="hm-friend m-'+mood+'" style="--sc:'+petScale(p)+'" onclick="petPet()">'+friendHTML(f,'hm-in').replace(/^<div class="hm-in">|<\/div>$/g,'')+(p.stage===1?'<span class="hm-baby">🍼</span>':'')+'</div>'))
   +'<div class="hm-poops">'+Array.apply(null,Array(p.poop||0)).map(function(_,i){return '<button class="hm-poop" onclick="petClean('+i+')">💩</button>';}).join('')+'</div>'
+  +'<div class="hm-rug"></div>'
+  +(p.stage>0?'<div class="hm-love" title="Cariño">❤️<span><i style="width:'+p.nd.love+'%"></i></span></div><button class="hm-dressb" onclick="homeDress()" aria-label="Vestir">👒</button>':'')
   +'<div class="hm-name">'+f.n+' <small>('+f.en+') · '+STAGES[p.stage].n+'</small></div>'
-  +(p.stage>0&&p.stage<3?'<div class="hm-grow"><i style="width:'+Math.min(100,Math.round((p.care-STAGE_AT[p.stage])/(STAGE_AT[p.stage+1]-STAGE_AT[p.stage])*100))+'%"></i><span>🌱 crece: '+(STAGE_AT[p.stage+1]-p.care)+' cuidados más</span></div>':p.stage===3?'<div class="hm-grow"><span>⭐ ¡Ya es grande! Seguí cuidándola ❤️</span></div>':'')
-  +'</div>';
- if(p.stage>0)html+='<div class="hm-needs">'+NEEDS.map(function(n){var v=p.nd[n.k];return '<div class="hm-need"><b>'+n.e+'</b><span><i class="'+(v<35?'low':v<65?'mid':'')+'" style="width:'+v+'%"></i></span></div>';}).join('')+'</div>';
+  +'</div>'
+  +(p.stage>0&&p.stage<3?'<div class="hm-grow"><span>🌱 Crece: '+(STAGE_AT[p.stage+1]-p.care)+' cuidados más</span><b><i style="width:'+Math.min(100,Math.round((p.care-STAGE_AT[p.stage])/(STAGE_AT[p.stage+1]-STAGE_AT[p.stage])*100))+'%"></i></b></div>':p.stage===3?'<div class="hm-grow"><span>⭐ ¡Ya es grande! Seguí cuidándola ❤️</span></div>':'');
  if(HOME_SEL&&HACTS[HOME_SEL]){ var A=HACTS[HOME_SEL];
   html+='<div class="hm-pick"><div class="hm-ph">'+A.b+' Elegí en inglés y <b>arrastralo hasta '+f.n+'</b> 👆</div><div class="hm-items">'+A.items.map(function(it,i){var pr=it[4]?it[4]+' 💎':it[3]?it[3]+' ⭐':'Gratis';var can=it[4]?S.gems>=it[4]:S.stars>=(it[3]||0);return '<button class="hm-it drag'+(can?'':' poor')+'" data-i="'+i+'"><b>'+it[0]+'</b><span>'+it[1]+'</span><em class="'+(it[3]||it[4]?'':'free')+'">'+pr+'</em></button>';}).join('')+'</div><button class="btn ghost" onclick="HOME_SEL=null;sTap();renderHome()">← Volver</button></div>';
  } else if(p.stage>0) {
-  html+='<div class="hm-acts">'+Object.keys(HACTS).map(function(k){var A=HACTS[k];return '<button class="hm-act'+(done[k]?' done':'')+((A.need==='health'?p.sick:p.nd[A.need]<35)?' need':'')+'" onclick="homeAct(\''+k+'\')"><b>'+A.b+'</b><span>'+A.n+'</span>'+(done[k]?'<i>✔</i>':'')+'</button>';}).join('')+'</div>';
+  var HEN={eat:'Eat',play:'Play',bath:'Wash',med:'Medicine',sleep:'Sleep'};
+  html+='<div class="hm-acts">'+Object.keys(HACTS).map(function(k){var A=HACTS[k], v=A.need==='health'?(p.sick?15:100):p.nd[A.need];return '<button class="hm-act'+(done[k]?' done':'')+((A.need==='health'?p.sick:p.nd[A.need]<35)?' need':'')+'" onclick="homeAct(\''+k+'\')"><b>'+A.b+'</b><span>'+A.n+'</span><small>'+(HEN[k]||'')+'</small><u><i class="'+(v<35?'low':v<65?'mid':'')+'" style="width:'+v+'%"></i></u>'+(done[k]?'<i class="ok">✔</i>':'')+'</button>';}).join('')+'</div>';
   if(petReady(p))html+='<div class="gr-ready"><b>🎓 '+f.n+' ya es grande y está lista para irse a jugar con otros amigos.</b><span>Podés despedirla cuando quieras: te deja un premio, te manda postales y llega un bebé nuevo.</span><button class="btn sun" onclick="graduate()">🎓 Despedir a '+f.n+'</button></div>';
   else if(p.stage===3&&p.bigAt)html+='<div class="hm-tip">🎓 En '+Math.max(1,Math.ceil((GRAD_DAYS*86400000-(Date.now()-p.bigAt))/86400000))+' días '+f.n+' va a estar lista para graduarse</div>';
-  html+='<div class="hm-tip'+(p.sick?' sick':'')+'">'+(p.sick?'🤒 '+f.n+' está enferma: dale un remedio 💊':'Tocá a '+f.n+' para hacerle mimos ❤️'+(p.poop?' · ¡Limpiá la caca 💩!':''))+'</div>';
-  html+='<button class="btn sun hm-chat" onclick="if(buddyId()!==hData().cur){toast(\'🎒 Primero llevalo de aventura para charlar\');return;} startChat(0,Math.min(3,(S.world||1)))">🗣️ Charlar en inglés con '+(friendById(buddyId())||{n:''}).n+'</button>';
-  html+='<div class="hm-two"><button class="btn ghost hm-dress" onclick="homeDress()">👒 Vestir</button>'+(buddyId()===f.id?'<div class="hm-buddy on">🎒 Te acompaña ✓</div>':'<button class="btn sun hm-buddy" onclick="setBuddy()">🎒 Llevar de aventura</button>')+'</div>';
+  if(p.sick||p.poop)html+='<div class="hm-tip'+(p.sick?' sick':'')+'">'+(p.sick?'🤒 '+f.n+' está enferma: dale un remedio 💊':'💩 ¡Limpiá la caca! Tocala para limpiarla')+'</div>';
+  html+='<button class="hm-chat2" onclick="if(buddyId()!==hData().cur){toast(\'🎒 Primero llevalo de aventura para charlar\');return;} startChat(0,Math.min(3,(S.world||1)))"><i>💬</i>Charlar en inglés con '+(friendById(buddyId())||{n:''}).n+'</button>';
+  if(buddyId()!==f.id)html+='<button class="hm-buddy2" onclick="setBuddy()">🎒 Llevar a '+f.n+' de aventura</button>';
  } else html+='<div class="hm-tip big">🥚 ¡Tocá el huevo para que nazca tu '+f.n+'!</div>';
- if(!HOME_SEL){ html+='<div class="hm-h">🏡 Mis amigos</div><div class="hm-row">'+FRIENDS.map(function(x){var own=h.own.indexOf(x.id)>=0, pp=own?h.pets[x.id]:null, alert=own&&(pp.stage===0||petMood(pp)!=='happy');
-   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own&&petArt(x.id,pp.stage)?'<div class="hm-mini"><img src="'+petArt(x.id,pp.stage)+'_idle.webp" alt=""></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><b class="fe">'+x.e+'</b></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>';
+ if(!HOME_SEL){ html+='<div class="hm-h2"><b>👥 Mis amigos</b><button onclick="sTap();var r=document.querySelector(\'.hm-row\');r.classList.toggle(\'all\');this.textContent=r.classList.contains(\'all\')?\'Ver menos ←\':\'Ver todos →\'">Ver todos →</button></div><div class="hm-row">'+FRIENDS.map(function(x){var own=h.own.indexOf(x.id)>=0, pp=own?h.pets[x.id]:null, alert=own&&(pp.stage===0||petMood(pp)!=='happy');
+   return '<button class="hm-fr'+(x.id===h.cur?' on':'')+(own?'':' lock')+'" onclick="homePick(\''+x.id+'\')">'+(alert?'<em>!</em>':'')+(own&&x.id===buddyId()?'<i class="hm-bag">🎒</i>':'')+(own&&pp.stage===0?'<div class="hm-mini"><b class="fe">🥚</b></div>':own&&petArt(x.id,pp.stage)?'<div class="hm-mini"><img src="'+petArt(x.id,pp.stage)+'_idle.webp" alt=""></div>':own?friendHTML(x,'hm-mini'):'<div class="hm-mini"><img src="img/friend_'+x.id+'.png" alt=""></div>')+'<span>'+(own?x.n:x.p+' 💎')+'</span></button>';}).join('')+'</div>';
   if(h.grads&&h.grads.length)html+='<div class="hm-h">🎓 Amigos que crecieron</div><div class="gr-wall">'+h.grads.map(function(g){return '<div class="gr-ph"><img src="'+gradImg(g.id)+'" alt=""><b>'+g.n+'</b><small>'+g.days+' días cuidado'+'</small></div>';}).join('')+'</div>'; }
  document.getElementById('hmBody').innerHTML=html;
 }
