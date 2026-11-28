@@ -2945,7 +2945,7 @@ var MG_HELLO={'Adivinanzas':['Guess what it is!','¡Adiviná qué es!'],'¿Cuán
  'Karaoke':['Let\'s sing!','¡A cantar!'],'Desafío del':['Three new words!','¡Tres palabras nuevas!'],'Repaso':['Let\'s practice!','¡A repasar!'],'Globos':['Pop the balloons!','¡Reventá los globos!']};
 var MG_ON=false, MG_T=0;
 /* fondos de los minijuegos: rotan en cada juego (arte ChatGPT en img/ui/) */
-var MG_BGS=['game_bg'];
+var MG_BGS=['game_bg','game_bg_beach','game_bg_autumn','game_bg_snow','game_bg_candy'];
 function mgSetup(title){ var sc=document.getElementById('s-game'); if(!sc)return; sc.classList.add('mg');
  S.mgBg=((S.mgBg||0)+1)%MG_BGS.length; sc.style.backgroundImage='url(img/ui/'+MG_BGS[S.mgBg]+'.webp)'; var key=MG_GUIDE.find(function(k){return title.indexOf(k)>=0;});
  MG_ON=!!key; sc.classList.toggle('mg-g',MG_ON); var w=document.getElementById('gProgW'); if(w)w.classList.remove('on');
