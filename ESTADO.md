@@ -368,3 +368,8 @@ le acepte la voz a la nena.
   conectores, pasado 8, opinar, emociones, insectos, espacio). Total ~2250. Frases Kumon Tanda 6: +20 patrones (156 en total).
   Frases de mascotas y descanso: tanda 3 (+4 por amigo, +6 generales, +4 por nivel, +8 datos curiosos).
 
+- ✅ HECHO (28/11, pedido del dueño): ✨ respuesta libre en la charla con la mascota (juego Charla y charla del descanso). Además de las
+  opciones hay un botón "✨ Otra respuesta": abre el micrófono y acepta una respuesta propia si está bien dicha en inglés (si las opciones
+  empiezan igual, p. ej. "I am…", tiene que empezar así y agregar algo; si no, frase de 2+ palabras con palabras básicas del inglés).
+  El micrófono también la acepta sin tocar el botón. La mascota le contesta con una reacción. En el panel de padres: "respuestas propias".
+  (chat.js: chatMic, chatFreeBtn, freeOK; micListen acepta target=null para escucha libre).

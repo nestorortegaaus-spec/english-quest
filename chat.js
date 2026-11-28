@@ -27,6 +27,29 @@ function petBox(id){ var p=S.home&&S.home.pets&&S.home.pets[id], key=petKey(id);
  return dressWrap(key||'gen',img,wearOf(id)); }
 /* 📊 registro para el panel de padres: S.chatSt={n,said,tap,last,days:{fecha:charlas}} */
 function chatLog(k){ try{ var c=S.chatSt||(S.chatSt={n:0,said:0,tap:0,last:'',days:{}}); if(k==='done'){ c.n++; c.last=dkey(); c.lastT=Date.now(); if(window.wkInc)wkInc('chat'); c.days[dkey()]=(c.days[dkey()]||0)+1; var ks=Object.keys(c.days).sort(); while(ks.length>60)delete c.days[ks.shift()]; } else c[k]=(c[k]||0)+1; save(); }catch(e){} }
+/* ✨ RESPUESTA LIBRE: además de las opciones, puede decir con el micrófono su propia respuesta. Se acepta si es una frase
+   en inglés bien dicha: si las opciones empiezan igual ("My favorite color is…"), tiene que empezar así y agregar algo; si no,
+   tiene que ser una frase de 2 palabras o más con palabras básicas del inglés (I, my, it, yes, like…). */
+function cl(t){ return String(t||'').toLowerCase().replace(/[?.!,'’"]/g,'').replace(/\s+/g,' ').trim(); }
+function frameOf(opts){ var ws=opts.map(function(o){return cl(o[0]).split(' ');}), f=[]; for(var i=0;i<ws[0].length;i++){ var x=ws[0][i]; if(ws.every(function(w){return w[i]===x;}))f.push(x); else break; } return f; }
+function near(words,x){ var tol=x.length<=3?0:x.length<=5?1:2; return words.some(function(y){ return y===x||(tol&&lev(y,x)<=tol); }); }
+function matchOpt(alts,opts,frame){ for(var a=0;a<alts.length;a++){ var h=cl(alts[a]), w=h.split(' ');
+  for(var i=0;i<opts.length;i++){ var tg=cl(opts[i][0]); if(h.indexOf(tg)>=0)return i;
+   var dw=tg.split(' ').filter(function(x){return frame.indexOf(x)<0&&x.length>1;}); if(dw.length&&dw.every(function(x){return near(w,x);})&&sim(h,tg))return i; } } return -1; }
+var FUNC=['i','im','my','me','it','its','yes','no','am','is','are','was','like','love','want','have','has','can','the','a','an','we','you','because','to','do','dont','play','go','went','be','and','but','with','in','at','she','he','they','our','your','this','that','very','so','too','not','did','will','would','favorite'];
+function freeOK(alts,frame){ for(var a=0;a<alts.length;a++){ var h=cl(alts[a]), w=h.split(' ').filter(Boolean); if(w.length<2||w.length>16)continue;
+  if(frame.length>=2){ var hit=frame.filter(function(x,k){ return w[k]===x||near(w.slice(0,frame.length+1),x); }).length; if(hit/frame.length>=0.75&&w.length>frame.length)return h; }
+  else if(w.filter(function(x){return FUNC.indexOf(x)>=0;}).length>=1)return h; } return null; }
+var FREE_R=[['Wow, I love your answer!','¡Guau, me encanta tu respuesta!'],['Cool! Thank you for telling me!','¡Genial! ¡Gracias por contarme!'],['That is so interesting!','¡Qué interesante!'],['Great answer! You speak very well!','¡Muy buena respuesta! ¡Hablás muy bien!'],['Really? How nice!','¿En serio? ¡Qué lindo!'],['I did not know that! Tell me more next time!','¡No lo sabía! ¡La próxima contame más!']];
+window.chatFreeReply=function(){ return FREE_R[(Math.random()*FREE_R.length)|0]; };
+window.chatFreeBtn=function(opts){ if(!window.SR)return ''; var f=frameOf(opts), st=f.length>=2?opts[0][0].split(' ').slice(0,f.length).join(' ')+'…':'';
+ return '<button class="ch-opt ch-free" type="button"><i>✨</i><span><b>Otra respuesta</b><small>Decí la tuya con el micrófono 🎤'+(st?' · Empezá con: "'+st+'"':'')+'</small></span></button>'; };
+/* escucha libre: onPick(índice de opción) si dijo una de las opciones; onFree(texto) si dijo su propia respuesta bien dicha */
+window.chatMic=function(wid,opts,onPick,onFree){ var frame=frameOf(opts);
+ micListen(wid,null,null,function(heard,why,all){ if(why||heard==null)return; var alts=(all&&all.length?all:[heard]);
+  var i=matchOpt(alts,opts,frame); if(i>=0){ micSet(wid,'ok','Dijiste "'+opts[i][0]+'"'); onPick(i); return; }
+  var fr=freeOK(alts,frame); if(fr){ micSet(wid,'ok','¡Respuesta propia! "'+fr+'"'); onFree(fr.charAt(0).toUpperCase()+fr.slice(1)); return; }
+  micSet(wid,'retry',heard?'Escuché "'+heard+'". Decí una frase completa en inglés'+(frame.length>=2?' (empezá con "'+opts[0][0].split(' ').slice(0,frame.length).join(' ')+'…")':'')+' y tocá 🎤':'No te escuché. Tocá 🎤 y hablá fuerte'); }); };
 window.CHATQ=CHATQ; window.chatLog=chatLog;
 window.startChat=function(u,lv){
  lv=lv||1; var id=buddyId(), f=friendById(id)||{n:'Zorrito'}, host=gSetup('🗣️ Charla con '+f.n+' · Nivel '+lv); GAME.quiet=true;
@@ -42,11 +65,16 @@ window.startChat=function(u,lv){
   if(r>=R){ talk('Thank you for talking with me, '+nm+'!','¡Gracias por charlar conmigo!',true); GAME.timer=setTimeout(function(){ finishGameNode('🗣️ ¡Qué linda charla!','Charlaste en inglés con '+f.n+' ('+said+' respuestas dichas en voz alta) 💬'); },3200); return; }
   var q=list[r]; gScore((r+1)+'/'+R); talk(q[0],q[1]);
   var A=document.getElementById('chAns'), opts=shuffle(q[3].slice());
-  A.innerHTML='<div class="ch-hint">Tocá tu respuesta o decila con el micrófono 🎤</div>'+opts.map(function(o,i){return '<button class="ch-opt" data-i="'+i+'"><i>'+o[2]+'</i><span><b>'+o[0]+'</b><small>'+o[1]+'</small></span><em class="ch-spk" data-s="'+i+'">🔊</em></button>';}).join('')+(window.SR?micWidgetHTML('chMic'):'');
+  A.innerHTML='<div class="ch-hint">Tocá tu respuesta o decila con el micrófono 🎤</div>'+opts.map(function(o,i){return '<button class="ch-opt" data-i="'+i+'"><i>'+o[2]+'</i><span><b>'+o[0]+'</b><small>'+o[1]+'</small></span><em class="ch-spk" data-s="'+i+'">🔊</em></button>';}).join('')+chatFreeBtn(opts)+(window.SR?micWidgetHTML('chMic'):'');
   A.querySelectorAll('.ch-spk').forEach(function(sp){ sp.onclick=function(e){ e.stopPropagation(); say(opts[+sp.dataset.s][0],0.8); }; });
   A.querySelectorAll('.ch-opt').forEach(function(b){ b.onclick=function(){ answer(opts[+b.dataset.i],b,false); }; });
-  var mb=document.querySelector('#chMic .mic-b'); if(mb)mb.onclick=function(){ micListen('chMic',opts[0][0],function(){ answer(opts[0],A.querySelector('.ch-opt[data-i="0"]'),true); },function(heard){ if(!heard)return; heard=heard.toLowerCase().replace(/[?.!,']/g,'');
-    for(var i=1;i<opts.length;i++){ var tg=opts[i][0].toLowerCase().replace(/[?.!,']/g,''); if(heard.indexOf(tg)>=0||sim(heard,tg)){ answer(opts[i],A.querySelector('.ch-opt[data-i="'+i+'"]'),true); return; } } }); }; }
+  var mb=document.querySelector('#chMic .mic-b'); if(mb)mb.onclick=function(){ chatMic('chMic',opts,function(i){ answer(opts[i],A.querySelector('.ch-opt[data-i="'+i+'"]'),true); },function(txt){ answerFree(txt); }); };
+  var fb=A.querySelector('.ch-free'); if(fb)fb.onclick=function(){ fb.classList.add('on'); var mw=document.getElementById('chMic'); if(mw)mw.scrollIntoView({block:'center',behavior:'smooth'}); if(mb)mb.click(); }; }
+ function answerFree(txt){ if(!GAME.on)return; var A=document.getElementById('chAns'), fb=A.querySelector('.ch-free');
+  A.querySelectorAll('.ch-opt').forEach(function(x){ x.disabled=true; x.classList.toggle('pick',x===fb); x.classList.toggle('dim',x!==fb); });
+  if(fb)fb.innerHTML='<i>🗣️</i><span><b>"'+txt+'"</b><small>¡Tu propia respuesta!</small></span>';
+  if(!logged){ logged=true; chatLog('done'); } chatLog('said'); chatLog('free'); said++; burst(40); sGood();
+  var rp=chatFreeReply(); GAME.timer=setTimeout(function(){ talk(rp[0],rp[1],true); r++; GAME.timer=setTimeout(ask,1500+rp[0].length*60); },700); }
  function answer(o,b,spoken){ if(!GAME.on)return; try{micStop();}catch(e){} var A=document.getElementById('chAns'); A.querySelectorAll('.ch-opt').forEach(function(x){ x.disabled=true; x.classList.toggle('pick',x===b); x.classList.toggle('dim',x!==b); });
   if(!logged){ logged=true; chatLog('done'); } /* cuenta como charla apenas responde la primera */ chatLog(spoken?'said':'tap'); if(spoken){ said++; burst(30); sGood(); } else { tone(700,.06,'triangle',.12,0); say(o[0],0.85); }
   markWord({en:o[0],es:o[1],e:o[2]},true);
