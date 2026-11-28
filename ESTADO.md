@@ -323,3 +323,5 @@ le acepte la voz a la nena.
   lecciones dan 10/15/20 💎 (antes 5/10/15) con mensaje de esfuerzo si no fue perfecta, 🛡️ comodín de racha (1 día de perdón por semana,
   S.freezeWk), 🗓️ premio semanal 💎100 por 5 días practicados (S.wkBonus), medallas de a una por visita y con texto de lo aprendido.
 - (28/11, pedido del dueño) se QUITÓ del inicio la tarjeta de meta de ahorro (sobrecargaba el home). El código sigue en balance.js sin usarse.
+- ✅ HECHO (28/11, pedido del dueño): el Repaso ya no es botón del inicio: es una parada del camino ('rev', 🔁) en todos los mundos (cerca
+  del final, antes del Memotest; en el mundo 1 antes del último cofre). Usa las palabras difíciles y completa con las del mundo si hay pocas.

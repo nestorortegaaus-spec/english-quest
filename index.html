@@ -1106,7 +1106,6 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
     <div style="padding:0 14px 2px;color:var(--muted);font-weight:800;font-size:13px;" id="hHello">¡Hola!</div>
     <div class="dl" id="hDaily"></div>
     <button class="ar-entry dc-entry pt-big" id="hDay" onclick="openDaily()"><em class="pt-ic pt-cal"><img src="img/ui/ic_cal.webp" alt=""><small id="hCalM">JUL</small><big id="hCalD">17</big></em><b>Desafío del día</b><span>3 palabras nuevas <q>💎 25</q></span></button>
-    <button class="ar-entry rv-entry pt-big" id="hRev" onclick="openReview()" style="display:none"><em class="pt-ic"><img src="img/ui/ic_rev.webp" alt=""></em><b>Repasar<br>palabras difíciles</b><span></span></button>
     <div class="hm-entries"><button class="ar-entry hm-entry pt-sq" id="hHome" onclick="openHome()"><em class="pt-ic"><img src="img/ui/ic_house.webp" alt=""></em><b>Casa de Amigos</b></button><button class="ar-entry pt-sq" id="hArc" onclick="openArcade()"><em class="pt-ic"><img src="img/ui/ic_pad.webp" alt=""></em><b>Sala de Juegos</b><span>🔮 <i id="hCrys">0</i></span></button></div>
     <div class="path-scroll" id="pathScroll"><div id="pathNodes"></div></div>
   </section>
@@ -1207,7 +1206,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="chat.js?v=2"></script>
 <script src="simon.js?v=1"></script>
 <script src="dino.js?v=9"></script>
-<script src="review.js?v=6"></script>
+<script src="review.js?v=8"></script>
 <script src="ach.js?v=4"></script>
 <script src="games2.js?v=1"></script>
 <script src="pets.js?v=4"></script>
@@ -1511,7 +1510,7 @@ var NODES_W1=[
  {t:'lesson',u:4},{t:'lesson',u:5},{t:'game',g:'listen',us:[4,5]},{t:'game',g:'blaster',u:1,lv:2},{t:'chest'},
  {t:'lesson',u:6},{t:'lesson',u:7},{t:'game',g:'listen',us:[6,7]},{t:'game',g:'memory',u:6},{t:'dance'},{t:'chest'},
  {t:'lesson',u:8},{t:'lesson',u:9},{t:'game',g:'blaster',u:2,lv:2},{t:'chest'},
- {t:'lesson',u:10},{t:'lesson',u:11},{t:'chest'}
+ {t:'lesson',u:10},{t:'lesson',u:11},{t:'game',g:'rev',u:[8,9,10,11]},{t:'chest'}
 ];
 
 /* TEMAS DE LOS MUNDOS: colores, camino, decoración, efecto que flota (fx) e imagen de fondo de ChatGPT (img/world_<id>.jpg cuando está en WIMG) */
@@ -1575,13 +1574,13 @@ function buildWorld(w){
  var prevU=w===2?[0,1,2,7]:(worldInfo(w-1).u||[]).slice(0,4); if(prevU.length)out.push({t:'game',g:'listen',us:prevU,lv:lv,rev:true});
  out.push({t:'game',g:'tf',u:U.slice(),lv:lv+1});
  out.push({t:'game',g:'phrase',u:U.slice(),lv:Math.min(5,w-1)},{t:'game',g:'safari',u:U.slice(),lv:lv},{t:'game',g:'paint',u:U.slice(),lv:lv},{t:'game',g:'speak',u:U.slice(),lv:lv});
- out.push({t:'game',g:'memory',u:U.slice(),lv:lv+1});
+ out.push({t:'game',g:'rev',u:U.slice(),lv:lv},{t:'game',g:'memory',u:U.slice(),lv:lv+1});
  out.push({t:'game',g:'blaster',u:U.slice(),lv:lv+1,boss:true});
  out.push({t:'chest'});
  return out;
 }
 var GROT=['spell','riddle','balloons','blaster','search','monster','sort','count','tf','island','memory','listen','cross','sing','store','chat','simon','dict','opp'];
-var GINFO={dict:{i:'✍️',n:'Dictado'},opp:{i:'↔️',n:'Opuestos'},simon:{i:'🙋',n:'Simón dice'},chat:{i:'🗣️',n:'Charla'},store:{i:'🏪',n:'La Tienda'},sing:{i:'🎤',n:'Karaoke'},cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
+var GINFO={rev:{i:'🔁',n:'Repaso'},dict:{i:'✍️',n:'Dictado'},opp:{i:'↔️',n:'Opuestos'},simon:{i:'🙋',n:'Simón dice'},chat:{i:'🗣️',n:'Charla'},store:{i:'🏪',n:'La Tienda'},sing:{i:'🎤',n:'Karaoke'},cross:{i:'✏️',n:'Crucigrama'},blaster:{i:'🧱',n:'Ladrillos'},memory:{i:'🧠',n:'Memoria'},island:{i:'🏝️',n:'Isla'},listen:{i:'👂',n:'Escuchá'},spell:{i:'🔤',n:'Deletreá'},speak:{i:'🚀',n:'¡Hablá!'},paint:{i:'🎨',n:'Pintá'},safari:{i:'📸',n:'Safari'},phrase:{i:'🧩',n:'Frases'},search:{i:'🔠',n:'Sopa de letras'},riddle:{i:'❓',n:'Adivinanzas'},count:{i:'🔢',n:'¿Cuántos?'},balloons:{i:'🎈',n:'Globos'},monster:{i:'👾',n:'Monstruo'},sort:{i:'🗂️',n:'Ordená'},tf:{i:'✅',n:'¿Sí o no?'}};
 function wordsOf(u){var us=Array.isArray(u)?u:[u],out=[];us.forEach(function(i){out=out.concat(UNITS[i].w);});return out;}
 
 /* ===== STATE ===== */
@@ -1671,7 +1670,7 @@ function openNode(i){
  if(nd.t==='lesson')startLesson(nd.u);
  else if(nd.t==='story')openStory(nd.s);
  else if(nd.t==='chest')openChest();
- else if(nd.t==='game'){ var lv=nd.lv||1; var F={dict:function(u,lv){startDictation(u,lv);},opp:function(u,lv){startOpposites(u,lv);},simon:function(u,lv){startSimon(u,lv);},chat:function(u,lv){startChat(u,lv);},store:startStore,sing:startSing,cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
+ else if(nd.t==='game'){ var lv=nd.lv||1; var F={rev:function(u,lv){openReview(u,true);},dict:function(u,lv){startDictation(u,lv);},opp:function(u,lv){startOpposites(u,lv);},simon:function(u,lv){startSimon(u,lv);},chat:function(u,lv){startChat(u,lv);},store:startStore,sing:startSing,cross:startCross,search:startSearch,riddle:startRiddle,count:startCount,phrase:startPhrase,safari:startSafari,paint:startPaint,speak:startSpeak,memory:startMemory,island:startIsland,spell:startSpell,balloons:startBalloons,monster:startMonster,sort:startSort,tf:startTF}; if(nd.g==='listen')startListen(nd.us,lv); else if(F[nd.g])F[nd.g](nd.u,lv); else startBlaster(nd.u, lv, nd.boss); }
  else if(nd.t==='dance')startDance();
 }
 function advance(){ countActivity(); S.prog=Math.max(S.prog, activeIdx+1); if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);NEW_WORLD=true;} save(); }

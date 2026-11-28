@@ -19,15 +19,17 @@ function pool(w){ /* distractores: primero del mismo tema, después de cualquier
  shuffle(same).concat(shuffle(all)).forEach(function(x){ if(out.length>=3||seenE[x.e]||seenEn[x.en]||!x.es)return; seenE[x.e]=1; seenEn[x.en]=1; out.push({en:x.en,es:x.es,e:x.e}); });
  return out; }
 
-window.openReview=function(){
+window.openReview=function(u,node){
  var list=hardList().slice(0,6), host=gSetup('🔁 Repaso inteligente'); GAME.quiet=false;
+ /* como parada del camino: si hay pocas difíciles, completa con palabras del mundo */
+ if(node&&list.length<6&&u){ var seen={}; list.forEach(function(w){seen[w.en]=1;}); shuffle(wordsOf(u)).forEach(function(w){ if(list.length>=6||seen[w.en]||!w.es||!w.e)return; seen[w.en]=1; var f=findW(w.en); if(f)list.push(f); }); }
  if(list.length<3){ host.innerHTML='<div class="dc-done"><div class="dc-big">💚</div><h2>¡No tenés palabras difíciles!</h2><p>Cuando alguna te cueste, aparece acá para repasarla.</p><button class="btn ghost" onclick="exitGame()">Volver</button></div>'; return; }
  var before=hardCount(), firstOk={}, miss={};
  /* tipos de pregunta: escuchar→dibujo, dibujo→palabra, inglés→castellano, castellano→inglés (frases sin dibujo: solo texto) */
  var Q=[]; list.forEach(function(w){ var types=w.isP||!w.e?['meaning','toEn','listenTxt']:['listen','read','meaning','toEn']; shuffle(types).slice(0,2).forEach(function(t){ Q.push({w:w,t:t}); }); });
  var A=Q.filter(function(_,i){return i%2===0;}), B=Q.filter(function(_,i){return i%2===1;}); Q=shuffle(A).concat(shuffle(B)); /* primero una vuelta por todas, después la segunda */
  var qi=0, total=Q.length;
- function intro(){ host.innerHTML='<div class="dc rv"><div class="dc-step">🔁 Estas palabras te costaron. ¡Vamos a repasarlas!</div><div class="dc-ws rv-ws">'
+ function intro(){ host.innerHTML='<div class="dc rv"><div class="dc-step">🔁 '+(hardCount()>=3?'Estas palabras te costaron. ¡Vamos a repasarlas!':'¡Vamos a repasar estas palabras!')+'</div><div class="dc-ws rv-ws">'
    +list.map(function(w,i){return '<button data-i="'+i+'"><b>'+(w.e||'💬')+'</b><span>'+w.en+'</span><small>'+w.es+'</small></button>';}).join('')
    +'</div><p class="rv-tip">Tocá cada una para escucharla 👂</p><button class="btn teal" id="rvGo">¡Empezar! →</button></div>';
   host.querySelectorAll('.rv-ws button').forEach(function(b){ b.onclick=function(){ var w=list[+b.dataset.i]; sayBoth(w.en,w.es); b.classList.add('heard'); }; });
@@ -60,6 +62,7 @@ window.openReview=function(){
    +'<p>'+(after<before?'Palabras difíciles: <b>'+before+' → '+after+'</b> 💪':'¡Seguí practicando y van a ser fáciles!')+'</p>'
    +'<div class="dc-ws rv-ws">'+list.map(function(w){ var ok=!miss[w.en]; return '<button onclick="sayBoth(\''+w.en.replace(/'/g,'')+'\',\''+w.es.replace(/'/g,'')+'\')"><b>'+(w.e||'💬')+'</b><span>'+w.en+'</span><small>'+(ok?'✅ ¡bien!':'🔁 a repasar')+'</small></button>'; }).join('')+'</div>'
    +'<div class="rewpill rv-prize">🎉 ¡Ganaste <b>💎 '+g+'</b>'+(st?' y <b>⭐ '+st+'</b>':'')+'!'+(first?'':'<small>El premio grande (💎 50) es una vez por día</small>')+'</div><button class="btn teal" onclick="exitGame()">¡Genial! →</button></div>';
+  if(node){ var gem=g, nn=after<before?'Palabras difíciles: '+before+' → '+after+' 💪':'Repasaste '+list.length+' palabras'; GAME.timer=setTimeout(function(){ finishGameNode('🔁 ¡Muy buen repaso!',nn+' · 💎 +'+gem); },2600); }
   sWin(); burst(140); try{mgGuide('cheer','Great practice!','¡Muy buen repaso!',4000);}catch(e){} sayBoth('Great practice!','¡Muy buen repaso! ¡Ganaste '+g+' gemas!'); try{toast('💎 +'+g+' gemas');}catch(e){} }
  window.__rv=function(){ return {Q:Q,qi:qi,list:list}; };
  intro();
