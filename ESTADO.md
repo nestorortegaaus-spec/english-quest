@@ -237,3 +237,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11, buggy.js, Sala 2500 💎): 🏖️ Buggy Splash — antes: EN COLA (pedido 27/11): juego nuevo de carreras de BUGGYS en la playa (estilo de juego de Beach Buggy Racing, pero original: arte, personajes
   y nombre propios). Caminos de arena anchos, 3D con three.js como la Carrera Mágica, rivales, y el buggy tira poderes a los contrincantes
   (por ejemplo burbuja, cáscara de banana, ola, cohete de confeti). Inglés integrado (cajas de poder con palabras). Arte de buggys y pilotos con ChatGPT.
+- ✅ HECHO (28/11): Buggy Splash con 4 pistas (BTRK en buggy.js): Playa Splash, Pradera Loca, Pista Helada (derrapa más) y Ruta Dulce; cada una con
+  su trazado, colores, horizonte y decorados (reusa el arte de la Carrera Mágica). Se desbloquean saliendo en el podio (S.bug.unl/cup/sel).
