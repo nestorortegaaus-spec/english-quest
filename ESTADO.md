@@ -293,3 +293,5 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): la LECCIÓN con el estilo de los minijuegos (fondo, barra grande, consigna en globo, tarjeta blanca, opciones con volumen,
   zorrito guía y cartel de resultado con el zorrito festejando/triste + dibujo + 🔊). Todos los minijuegos usan el sistema (salvo la Isla,
   que es un juego aparte). Textos sueltos van en recuadro blanco. Memotest con 🐾. Fondos: MG_BGS rota en cada juego; faltan más fondos ChatGPT.
+- ✅ HECHO (28/11): pantalla de premio (fondo que rota + tarjeta blanca + Zorrito festejando), panel de padres, elegir voz y vestidor
+  (íconos 3D, pestañas grandes) con el estilo nuevo (CSS "PREMIO, PADRES, VOZ Y VESTIDOR").

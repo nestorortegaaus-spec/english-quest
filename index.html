@@ -867,6 +867,32 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 #s-path.pt .pt-sq span i{font-style:normal;}
 #s-path.pt #hHome{background:linear-gradient(135deg,#FF9A4A,#F2558F);box-shadow:0 5px 0 #C9416E;}
 
+
+/* ===================== 🏆 PREMIO, PADRES, VOZ Y VESTIDOR con el estilo nuevo ===================== */
+#s-reward{background:#8FD86A center bottom/cover no-repeat;font-family:'EQ Nunito','Nunito',system-ui,sans-serif;}
+#s-reward .rew{flex:0 0 auto;justify-content:flex-start;gap:12px;margin:46px 16px 0;padding:22px 18px 26px;background:rgba(255,255,255,.95);border-radius:32px;box-shadow:0 8px 22px rgba(40,90,150,.2);max-height:calc(100% - 230px);overflow-y:auto;}
+#s-reward .rew>*{position:relative;z-index:1;}
+#s-reward .chest{font-size:84px;}
+#s-reward .rew h2{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:32px;line-height:1.05;color:#F08A12;margin:0;}
+#s-reward .rew p{font-size:18px;color:#24345C;font-weight:900;}
+#s-reward .rewpill{font-size:19px;background:linear-gradient(180deg,#FFE38A,#FFC23D);color:#5A3300;box-shadow:0 4px 0 #D9890A;border-radius:20px;}
+#s-reward .rew .btn{width:100%;max-width:340px;height:58px;border-radius:22px;font-size:21px;font-family:'EQ Baloo',sans-serif;font-weight:800;}
+#s-reward .rew-buddy{width:170px;height:190px;margin-left:-85px;bottom:2%;z-index:2;}
+#s-parents,#s-voice{background:linear-gradient(180deg,#BFE6FF 0%,#DFF2FF 45%,#F4FAFF 100%);font-family:'EQ Nunito','Nunito',system-ui,sans-serif;}
+#s-parents .hud .pill,#s-voice .hud .pill{height:44px;border-radius:22px;padding:0 16px;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:19px!important;color:#24345C!important;box-shadow:0 3px 8px rgba(40,90,150,.2);}
+#s-parents .lx,#s-voice .lx{width:44px;height:44px;border-radius:50%;font-size:20px;color:#2E5AA8;box-shadow:0 3px 8px rgba(40,90,150,.22);}
+#s-parents .pa-hero{background:#fff;box-shadow:0 6px 16px rgba(40,90,150,.15);}
+#s-parents .pa-hero-t h2{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:34px;color:#1F3E86;}
+#s-parents .pa-card{border-radius:24px;box-shadow:0 6px 16px rgba(40,90,150,.13);}
+#s-parents :is(.pa-h,.pa-wk h3){font-family:'EQ Baloo',sans-serif;font-weight:800;}
+#s-voice .vc-h{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:22px;}
+#s-voice .vc-char{border-radius:22px;box-shadow:0 5px 12px rgba(40,90,150,.15);} #s-voice .vc-char b{font-size:42px;} #s-voice .vc-char span{font-size:15px;}
+#s-voice .vc-char.on{border-color:#2FCB72;background:#EFFCF4;}
+.pk-box .dr-tab{font-size:15px;padding:9px 13px;border-radius:16px;background:#fff;color:#24345C;box-shadow:0 3px 8px rgba(40,90,150,.15);}
+.pk-box .dr-tab.on{background:linear-gradient(180deg,#2FCB72,#17A957);color:#fff;}
+.pk-box h2{font-family:'EQ Baloo',sans-serif;font-weight:800;}
+.pk-box .hm-it b .acc3d{width:52px;height:52px;}
+
 /* ===================== 🎨 REDISEÑO (referencia: design/ref_rediseno_principal.webp) ===================== */
 @font-face{font-family:'EQ Baloo';src:url(fonts/baloo2-latin.woff2) format('woff2');font-weight:400 800;font-display:swap;}
 @font-face{font-family:'EQ Nunito';src:url(fonts/nunito-latin.woff2) format('woff2');font-weight:200 1000;font-display:swap;}
@@ -1483,7 +1509,7 @@ S.mig1=1;
 if(S.prog>=NODES.length){S.world++;S.prog=0;NODES=buildWorld(S.world);save();}
 var NEW_WORLD=false;
 
-function show(id){try{micStop();}catch(e){} document.body.classList.toggle('mgon',id==='s-game'); if(id!=='s-game')musicStop(); try{if(checkRest(id))return;}catch(e){} if(id==='s-reward'){setTimeout(function(){var r=document.getElementById('s-reward');if(!r||!r.classList.contains('on'))return;var o=r.querySelector('.rew-buddy');if(!o){o=document.createElement('img');o.className='rew-buddy';r.appendChild(o);}o.src=buddyImg('happy');o.classList.remove('go');void o.offsetWidth;o.classList.add('go');},30);} if(id==='s-game'){NSTREAK=0;NARR_T=0;NARR_START=Date.now();narr('start',1200);}document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
+function show(id){try{micStop();}catch(e){} document.body.classList.toggle('mgon',id==='s-game'); if(id!=='s-game')musicStop(); try{if(checkRest(id))return;}catch(e){} if(id==='s-reward'){ try{ var rw=document.getElementById('s-reward'); S.mgBg=((S.mgBg||0)+1)%MG_BGS.length; rw.style.backgroundImage='url(img/ui/'+MG_BGS[S.mgBg]+'.webp)'; }catch(e){} setTimeout(function(){var r=document.getElementById('s-reward');if(!r||!r.classList.contains('on'))return;var o=r.querySelector('.rew-buddy');if(!o){o=document.createElement('img');o.className='rew-buddy';r.appendChild(o);}o.src=(buddyId()==='fox'?'img/guide/fox_cheer.webp':buddyImg('happy'));o.classList.remove('go');void o.offsetWidth;o.classList.add('go');},30);} if(id==='s-game'){NSTREAK=0;NARR_T=0;NARR_START=Date.now();narr('start',1200);}document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
 function lvl(){return Math.floor((S.stars+(S.spent||0))/9)+1;}
 
 function startGame(){var n=document.getElementById('nameIn').value.trim();S.name=n||'Explorador';save();unlockSpeech();sTap();renderPath();show('s-path');}
@@ -1673,8 +1699,8 @@ function finishLesson(){
  // reward screen
  var b=document.getElementById('rewBody');
  b.innerHTML='<div class="chest">🌟</div><h2>'+(stars===3?'¡Parada perfecta!':'¡Parada completada!')+'</h2>'
-   +'<div style="font-size:30px">'+'⭐'.repeat(stars)+'☆'.repeat(3-stars)+'</div>'
-   +'<p>Ganaste '+(stars*5)+' gemas 💎</p>'
+   +'<div style="font-size:44px;letter-spacing:4px">'+'⭐'.repeat(stars)+'<span style="opacity:.25">'+'⭐'.repeat(3-stars)+'</span></div>'
+   +'<div class="rewpill">⭐ +'+stars+' · 💎 +'+(stars*5)+'</div>'
    +'<button class="btn teal" onclick="afterReward()">Seguir el camino →</button>';
  show('s-reward'); sWin(); burst(120);
 }
@@ -2952,7 +2978,7 @@ function homeDress(){ var h=hData(), f=friendById(h.cur), own=(S.owned||[]), w=w
  function draw(){ var its=ACC.filter(function(a){return a.pos===DRESS_SLOT&&own.indexOf(a.id)>=0;}), cs=COSTUMES.filter(function(c){return !cosMissing(c).length;});
   ov.innerHTML='<div class="pk-box"><h2>👒 Vestir a '+f.n+'</h2><div class="dr-prev">'+prev()+'</div>'
    +'<div class="dr-tabs">'+ACC_SLOTS.map(function(sl){return '<button class="dr-tab'+(sl.k===DRESS_SLOT?' on':'')+'" data-s="'+sl.k+'">'+sl.e+' '+sl.n+(w[sl.k]?' ✓':'')+'</button>';}).join('')+'<button class="dr-tab'+(DRESS_SLOT==='cos'?' on':'')+'" data-s="cos">🎭 Disfraces</button></div>'
-   +(DRESS_SLOT==='cos'?(cs.length?'<div class="hm-items">'+cs.map(function(c){return '<button class="hm-it cosb'+(cosOn(c,f.id)?' on':'')+'" data-c="'+c.id+'"><b>'+c.e+'</b><span>'+c.n+'</span></button>';}).join('')+'</div>':'<p>Todavía no tenés disfraces completos. ¡Los conseguís en la tienda 🎭!</p><button class="btn sun" id="hmShop">🏪 Ir a la tienda</button>'):its.length?'<div class="hm-items">'+its.map(function(a){return '<button class="hm-it'+(w[a.pos]===a.id?' on':'')+'" data-id="'+a.id+'"><b>'+accIcon(a)+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>'
+   +(DRESS_SLOT==='cos'?(cs.length?'<div class="hm-items">'+cs.map(function(c){return '<button class="hm-it cosb'+(cosOn(c,f.id)?' on':'')+'" data-c="'+c.id+'"><b>'+cosIcon(c)+'</b><span>'+c.n+'</span></button>';}).join('')+'</div>':'<p>Todavía no tenés disfraces completos. ¡Los conseguís en la tienda 🎭!</p><button class="btn sun" id="hmShop">🏪 Ir a la tienda</button>'):its.length?'<div class="hm-items">'+its.map(function(a){return '<button class="hm-it'+(w[a.pos]===a.id?' on':'')+'" data-id="'+a.id+'"><b>'+accIcon(a)+'</b><span>'+a.en+'</span></button>';}).join('')+'</div>'
      :'<p>Todavía no tenés nada para '+ACC_SLOTS.find(function(x){return x.k===DRESS_SLOT;}).n.toLowerCase()+'. ¡Conseguilo en la tienda 💎!</p><button class="btn sun" id="hmShop">🏪 Ir a la tienda</button>')
    +'<div style="display:flex;gap:8px"><button class="btn ghost" id="hmNone">Sacar todo</button><button class="btn teal" id="hmOk">Listo</button></div></div>';
   ov.querySelectorAll('.dr-tab').forEach(function(b){b.onclick=function(){DRESS_SLOT=b.dataset.s;sTap();draw();};});
