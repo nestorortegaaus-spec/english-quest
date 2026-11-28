@@ -271,3 +271,9 @@ le acepte la voz a la nena.
   vuelve al final. Las que hace perfectas dejan de ser difíciles. Premio 💎15 ⭐2 la primera vez del día, 💎5 las siguientes (S.rev).
 - ✅ HECHO (28/11): las ⭐ disponibles se ven donde se compra: arriba en la Tienda y la Sala de Juegos (junto a 💎), en el garaje del Kart
   ("Tenés ⭐ X y 💎 Y") y en la ventana de compra del auto ("te faltan N" en cada botón). La Casa y el camino ya las mostraban.
+- 🎨 REDISEÑO (pedido 28/11), referencias del dueño en design/: ref_rediseno_principal.webp (Juegos, Casa, Tienda) y ref_rediseno_minijuegos.webp.
+  Regla: copiar la referencia TAL CUAL (el dueño rechazó una versión "inspirada"). Bosquejo de las 3 pantallas principales hecho y enviado;
+  falta su OK + arte ChatGPT (4 portadas de juegos, fondo de la tienda con ropero/espejo, accesorios en 3D de a hojas de 9).
+- ⏭️ EN COLA (pedido 28/11): rediseño de TODOS los minijuegos con la misma línea (ref_rediseno_minijuegos.webp): fondo de naturaleza/cielo,
+  Zorrito guía en cada actividad con globo de diálogo (instrucción en inglés + castellano), tarjetas 3D con volumen, instrucciones grandes,
+  verde/rojo + animación al responder, barra de progreso visible arriba. Hacerlo como SISTEMA de diseño global (mismos componentes en todos).
