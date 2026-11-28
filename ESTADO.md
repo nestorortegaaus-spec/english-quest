@@ -375,3 +375,8 @@ le acepte la voz a la nena.
   (chat.js: chatMic, chatFreeBtn, freeOK; micListen acepta target=null para escucha libre).
 - ✅ HECHO (28/11, pedido del dueño): panel de padres → "☕ Descanso de 5 min cada": 10, 15, 20, 25, 30, 40, 45, 60 min o "Sin descanso"
   (S.sessMin=0: no aparece el descanso, ni por tiempo ni por cansancio).
+- ✅ HECHO (28/11, pedido del dueño): 🛒 comida de las mascotas (food.js). En "Comer": 4 comidas gratis (manzana, banana, zanahoria, leche)
+  + la DESPENSA con lo comprado (S.home.pantry) + botón "🛒 Comprar más comida" que abre el ALMACÉN: 32 comidas en paquetes de 3, con ⭐.
+  Cada amigo tiene FAVORITAS como en la vida real (pingüino: pescado, camarón, calamar; gatita: pescado, atún, pollo; perrito: hueso,
+  carne, pollo; conejita: lechuga, trébol, pasto; panda: bambú, miel, batata; zorrito: arándanos, huevo, uvas, pollo; unicornio: flores,
+  cupcake, terrón de azúcar, pasto; dragoncito: ají picante, malvavisco, carne). Las favoritas llenan más (+25) y dan más cariño (+10).

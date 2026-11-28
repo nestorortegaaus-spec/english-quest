@@ -476,6 +476,16 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .rew-buddy{position:absolute;left:50%;margin-left:-75px;bottom:4%;width:150px;height:170px;object-fit:contain;pointer-events:none;opacity:0;filter:drop-shadow(0 6px 6px rgba(0,0,0,.18));}
 .rew-buddy.go{animation:rewbud 1.4s ease-out forwards;} @keyframes rewbud{0%{opacity:0;transform:translateY(60px) scale(.6)}40%{opacity:1;transform:translateY(-24px) scale(1.05)}60%{transform:translateY(0)}80%{transform:translateY(-10px)}100%{opacity:1;transform:translateY(0)}}
 .hm-it em{font-style:normal;font-weight:900;font-size:11px;color:#C98A1C;} .hm-it em.free{color:var(--teal-d);} .hm-it.poor{opacity:.5;}
+/* 🛒 comida: despensa, favoritas y almacén (food.js) */
+.hm-it{position:relative;} .hm-it em.qty{color:#7A4FD8;} .hm-it.fav{background:#FFE9F3;border-color:#FF8DC7;} .fd-heart{position:absolute;top:-6px;right:-4px;font-style:normal;font-size:16px;}
+.fd-favs{background:#FFF0F7;border-radius:14px;padding:6px 12px;font-weight:900;font-size:14px;color:#B23A7A;text-align:center;margin-bottom:8px;}
+.fd-shopb{margin-top:10px;} .fd-box{max-height:88vh;display:flex;flex-direction:column;} .fd-box h2{margin:0;text-align:center;font-family:'EQ Baloo',sans-serif;}
+.fd-bal{text-align:center;font-weight:900;color:#5A6A8A;font-size:14px;margin:2px 0 8px;} .fd-bal b{color:#C98A1C;}
+.fd-tabs{display:flex;gap:6px;background:#F0F4F8;border-radius:14px;padding:4px;margin-bottom:10px;} .fd-tabs button{flex:1;border:none;background:none;border-radius:11px;padding:9px 4px;font:900 14px 'EQ Nunito',sans-serif;color:#66737F;cursor:pointer;} .fd-tabs button.on{background:#fff;color:#B23A7A;box-shadow:0 2px 6px rgba(60,90,80,.15);}
+.fd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;overflow-y:auto;padding:4px 2px 8px;flex:1;min-height:0;}
+.fd-it{position:relative;border:3px solid transparent;border-radius:16px;background:#FFF6DE;padding:8px 2px 6px;display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;font-family:inherit;}
+.fd-it b{font-size:34px;line-height:1.1;} .fd-it span{font-weight:900;font-size:13px;color:#24345C;} .fd-it small{font-weight:800;font-size:11px;color:#7C8AA5;} .fd-it em{font-style:normal;font-weight:900;font-size:12px;color:#C98A1C;margin-top:2px;}
+.fd-it i{position:absolute;top:2px;left:4px;font-style:normal;font-size:12px;} .fd-it u{text-decoration:none;font-size:10px;font-weight:900;color:#7A4FD8;} .fd-it.fav{background:#FFE9F3;border-color:#FF8DC7;} .fd-it.poor{opacity:.5;}
 .hm-friend.m-sick img{filter:saturate(.35) sepia(.35) hue-rotate(55deg) brightness(.92) drop-shadow(0 8px 8px rgba(0,0,0,.18))!important;} .hm-friend.m-sick{animation:sleepy 2.4s ease-in-out infinite;}
 .hm-therm{position:absolute;top:96px;left:50%;margin-left:40px;font-size:38px;z-index:3;transform:rotate(25deg);animation:p-wig .6s infinite alternate;}
 .hm-tip.sick{color:#E06E58;font-size:15px;}
@@ -2922,7 +2932,8 @@ function renderHome(){
   +'<div class="hm-name">'+f.n+' <small>('+f.en+') · '+STAGES[p.stage].n+'</small></div>'
   +'</div>'
   +(p.stage>0&&p.stage<3?'<div class="hm-grow"><span>🌱 Crece: '+(STAGE_AT[p.stage+1]-p.care)+' cuidados más</span><b><i style="width:'+Math.min(100,Math.round((p.care-STAGE_AT[p.stage])/(STAGE_AT[p.stage+1]-STAGE_AT[p.stage])*100))+'%"></i></b></div>':p.stage===3?'<div class="hm-grow"><span>⭐ ¡Ya es grande! Seguí cuidándola ❤️</span></div>':'');
- if(HOME_SEL&&HACTS[HOME_SEL]){ var A=HACTS[HOME_SEL];
+ if(HOME_SEL==='eat'&&window.eatPickHTML){ html+=eatPickHTML(f);
+ } else if(HOME_SEL&&HACTS[HOME_SEL]){ var A=HACTS[HOME_SEL];
   html+='<div class="hm-pick"><div class="hm-ph">'+A.b+' Elegí en inglés y <b>arrastralo hasta '+f.n+'</b> 👆</div><div class="hm-items">'+A.items.map(function(it,i){var pr=it[4]?it[4]+' 💎':it[3]?it[3]+' ⭐':'Gratis';var can=it[4]?S.gems>=it[4]:S.stars>=(it[3]||0);return '<button class="hm-it drag'+(can?'':' poor')+'" data-i="'+i+'"><b>'+it[0]+'</b><span>'+it[1]+'</span><em class="'+(it[3]||it[4]?'':'free')+'">'+pr+'</em></button>';}).join('')+'</div><button class="btn ghost" onclick="HOME_SEL=null;sTap();renderHome()">← Volver</button></div>';
  } else if(p.stage>0) {
   var HEN={eat:'Eat',play:'Play',bath:'Wash',med:'Medicine',sleep:'Sleep'};
@@ -3103,7 +3114,7 @@ function petScene(k,it,done){
  document.addEventListener('pointermove',function(e){ if(!D||e.pointerId!==D.id)return;
   if(!D.g){ if(Math.hypot(e.clientX-D.x,e.clientY-D.y)<8)return; if(D.el.classList.contains('poor')){D=null;return;}
    D.g=document.createElement('div'); D.g.className='hm-ghost'; D.g.textContent=D.el.querySelector('b').textContent; document.body.appendChild(D.g); D.el.classList.add('lift');
-   try{ var A=HACTS[HOME_SEL], it=A&&A.items[D.i]; if(it)say(it[1]); }catch(_){} }
+   try{ var it=actItems(HOME_SEL)[D.i]; if(it)say(it[1]); }catch(_){} }
   e.preventDefault(); D.g.style.left=e.clientX+'px'; D.g.style.top=e.clientY+'px';
   var f=document.querySelector('.hm-friend'); if(f)f.classList.toggle('drop',over(e.clientX,e.clientY)); },{passive:false});
  function up(e){ if(!D||e.pointerId!==D.id)return; var d=D; D=null; var f=document.querySelector('.hm-friend'); if(f)f.classList.remove('drop'); d.el.classList.remove('lift');
@@ -3111,7 +3122,8 @@ function petScene(k,it,done){
   if(d.el.classList.contains('poor')){ homeGive(d.i); return; } hint(d.el); }
  document.addEventListener('pointerup',up); document.addEventListener('pointercancel',function(e){ if(D&&D.g)D.g.remove(); if(D)D.el.classList.remove('lift'); D=null; });
 })();
-function homeGive(i){ if(HOME_BUSY)return; var h=hData(), f=friendById(h.cur), p=pet(), k=HOME_SEL, A=HACTS[k], it=A.items[i];
+function actItems(k){ return k==='eat'&&window.eatItems?eatItems():HACTS[k].items; }
+function homeGive(i){ if(HOME_BUSY)return; var h=hData(), f=friendById(h.cur), p=pet(), k=HOME_SEL, A=HACTS[k], it=actItems(k)[i]; if(!it)return;
  var cs=it[3]||0, cg=it[4]||0;
  if(cg&&S.gems<cg){ sBad(); toast('Te faltan '+(cg-S.gems)+' 💎. ¡Jugá para juntar más!'); return; }
  if(cs&&S.stars<cs){ sBad(); toast('Te faltan '+(cs-S.stars)+' ⭐.'+(k==='eat'?' ¡Probá con una comida gratis!':' ¡Estudiá para ganar más!')); return; }
@@ -3119,7 +3131,7 @@ function homeGive(i){ if(HOME_BUSY)return; var h=hData(), f=friendById(h.cur), p
  if(k==='med'){ if(!h.done[f.id])h.done[f.id]={}; HOME_SEL=null; HOME_BUSY=true; p.sick=0; p.nd.love=Math.min(100,p.nd.love+15); careUp(p,'med'); save(); renderHome();
    petScene('med',it,function(){ sGood(); burst(60); HOME_BUSY=false; renderHome(); }); return; }
  if(!h.done[f.id])h.done[f.id]={}; var first=!h.done[f.id][k]; h.done[f.id][k]=1; HOME_SEL=null; HOME_BUSY=true;
- p.nd[A.need]=Math.min(100,p.nd[A.need]+(k==='bath'?55:k==='sleep'?60:40)); if(k==='play'){p.nd.energy=Math.max(0,p.nd.energy-10);p.nd.love=Math.min(100,p.nd.love+10);} if(k==='eat')p.nd.love=Math.min(100,p.nd.love+5);
+ p.nd[A.need]=Math.min(100,p.nd[A.need]+(k==='bath'?55:k==='sleep'?60:40)); if(k==='play'){p.nd.energy=Math.max(0,p.nd.energy-10);p.nd.love=Math.min(100,p.nd.love+10);} if(k==='eat'){ p.nd.love=Math.min(100,p.nd.love+5); if(window.eatUse)eatUse(it,p); }
  careUp(p,k); save(); renderHome();
  petScene(k,it,function(){ sGood(); if(first)burst(30); HOME_BUSY=false; });
  if(Object.keys(h.done[f.id]).length===4&&h.gift!==dkey()){ h.gift=dkey(); S.gems+=15; save(); setTimeout(function(){toast('❤️ '+f.n+' está feliz: +15 💎 de regalo');sWin();burst(120);renderHome();},5600); } }
@@ -4288,5 +4300,6 @@ if('serviceWorker' in navigator){
  document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible'){navigator.serviceWorker.getRegistration().then(function(r){if(r)r.update();});} });
 }
 </script>
+<script src="food.js?v=1"></script>
 </body>
 </html>
