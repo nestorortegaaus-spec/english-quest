@@ -1195,6 +1195,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="review.js?v=6"></script>
 <script src="ach.js?v=2"></script>
 <script src="games2.js?v=1"></script>
+<script src="pets.js?v=4"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -2804,12 +2805,12 @@ function friendHTML(f,cls){ var h=hData(), w=wearOf(f.id);
 function homeNeedsAttention(){ try{var h=hData(); return h.own.some(function(id){var p=h.pets[id];petTick(p);return p.stage===0||petMood(p)!=='happy'||petReady(p);});}catch(e){return false;} }
 function openHome(){ sTap(); unlockSpeech(); HOME_SEL=null; blinkLoop(); Object.keys(POSE_SETS).forEach(function(id){Object.keys(POSE_SETS[id]).forEach(function(st){preloadPoses('img/pet/'+id+'_'+st);});}); var h=hData(); h.own.forEach(function(id){petTick(h.pets[id]);}); save(); renderHome(); show('s-home');
  var f=friendById(h.cur), p=pet(), m=petMood(p); setTimeout(function(){ if(petReady(p)&&m==='happy')homeSay('I am big now! I want to play with other friends!','¡Ya soy grande! ¡Quiero ir a jugar con otros amigos!'); else petTalk('need',m); },350); setTimeout(maybePostcard,2500);
- clearInterval(window._petIv); window._petIv=setInterval(function(){ if(!document.getElementById('s-home').classList.contains('on')){clearInterval(window._petIv);return;} petIdle(); },2600); }
-function homeSay(t,es){ mouthFlap(Math.min(8,2+Math.round(String(t).length/5))); var b=document.getElementById('hmBub'); if(b){b.innerHTML='';b.appendChild(document.createTextNode(t));if(es){var sm=document.createElement('small');sm.textContent=es;b.appendChild(sm);}b.classList.remove('on');void b.offsetWidth;b.classList.add('on');} say(t); }
+ if(window.petProactiveReset)petProactiveReset(7000); clearInterval(window._petIv); window._petIv=setInterval(function(){ if(!document.getElementById('s-home').classList.contains('on')){clearInterval(window._petIv);return;} petIdle(); },2600); }
+function homeSay(t,es){ if(window.petProactiveReset)petProactiveReset(12000); mouthFlap(Math.min(8,2+Math.round(String(t).length/5))); var b=document.getElementById('hmBub'); if(b){b.innerHTML='';b.appendChild(document.createTextNode(t));if(es){var sm=document.createElement('small');sm.textContent=es;b.appendChild(sm);}b.classList.remove('on');void b.offsetWidth;b.classList.add('on');} say(t); }
 function fx(chars,n,cls){ var room=document.querySelector('.hm-room'); if(!room)return; for(var i=0;i<n;i++){ var e=document.createElement('span'); e.className='hm-fx '+(cls||''); e.textContent=chars[i%chars.length];
  e.style.left=(35+Math.random()*30)+'%'; e.style.top=(30+Math.random()*25)+'%'; e.style.animationDelay=(i*0.12)+'s'; e.style.setProperty('--dx',((Math.random()-.5)*160)+'px'); room.appendChild(e); setTimeout(function(x){return function(){x.remove();};}(e),2400); } }
 function petAnim(cls,ms){ var el=document.querySelector('.hm-friend'); if(!el)return; el.classList.remove('a-eat','a-jump','a-bath','a-sleep','a-love','a-wiggle','a-hatch','a-chew','a-shake','a-stretch'); void el.offsetWidth; el.classList.add(cls); clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove(cls);},ms||1400); }
-function petIdle(){ if(HOME_BUSY)return; var p=pet(); if(!p)return; var m=petMood(p), el=document.querySelector('.hm-friend'); if(!el)return;
+function petIdle(){ if(HOME_BUSY)return; var p=pet(); if(!p)return; if(window.petProactive&&p.stage>0&&!p.sick){ petProactive(); if(Math.random()<.3)petAnim('a-jump',900); return; } var m=petMood(p), el=document.querySelector('.hm-friend'); if(!el)return;
  if(m==='egg'){petAnim('a-wiggle',800);return;}
  if(m==='sick'){ var now=Date.now(); if(now-(window._sickT||0)<9000)return; window._sickT=now;
    if(!window._sneezed&&Math.random()<0.25){ window._sneezed=1; petAnim('a-shake',700); setPose&&setPose('closed',500,true); var room=document.querySelector('.hm-room'),B=petBox&&petBox(); if(room&&B)pop(room,'Achoo!',B.x+B.w*0.3,B.y+10); homeSay('Achoo!','¡Achís!'); tone(500,.05,'square',.1,0);tone(300,.15,'sawtooth',.08,.05); }
