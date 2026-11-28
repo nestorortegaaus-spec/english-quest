@@ -259,4 +259,4 @@ le acepte la voz a la nena.
   sin titilar, 3 ❤️), flecha al huevo más cercano, chapuzón si cae al agua. Con los 5 huevos se abre el 🌀 portal → mundo siguiente.
   5 mundos en cadena (S.dino.unl): Valle Dino, Selva Escondida, Oasis de Arena, Montaña Nevada, Planeta Cristal (reusa horizontes y decorados).
   Arte ChatGPT: bichitos img/dino/e_beetle (Valle, Selva), e_crab (Oasis), e_snowman (Nieve), e_alien (Planeta Cristal) y huevo img/dino/egg.webp (campo foe en DW).
-  Los decorados entre la cámara y el dino se vuelven transparentes. Idea: pasar el dino a modelo 3D .glb animado (Meshy/Tripo) si el dueño lo consigue.
+  Los decorados entre la cámara y el dino se vuelven transparentes. (Modelado 3D .glb del dino: descartado por el dueño el 28/11; se queda con el arte de ChatGPT.)
