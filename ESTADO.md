@@ -277,7 +277,11 @@ le acepte la voz a la nena.
   Arte ChatGPT: img/ui/cover_*.webp (portadas), img/ui/shop_bg.webp (probador), img/acc/<id>.webp (49 accesorios) y img/acc/cos_<id>.webp (14 disfraces)
   → accIcon()/cosIcon(). Juegos: perfil + barra inferior (Juegos/Casa/Tienda/Colección=álbum). Casa: barras de necesidad dentro de cada
   botón, ❤️ cariño junto a la carita, 👒 Vestir en la habitación, 🎒 en el amigo que acompaña. Tienda: flechas ‹ › eligen qué amigo vestir.
-- ⏭️ EN COLA (pedido 28/11): rediseño de TODOS los minijuegos con la misma línea (ref_rediseno_minijuegos.webp): fondo de naturaleza/cielo,
+- ✅ HECHO (28/11): sistema de minijuegos (mgSetup en gSetup; CSS "SISTEMA DE MINIJUEGOS"): fondo img/ui/game_bg.webp, barra superior grande,
+  barra de progreso automática (gScore "a/b"), zorrito guía img/guide/fox_<wave|think|cheer|point|apple|sad>.webp abajo a la izquierda
+  con globo (saluda al empezar, festeja con sGood, se pone triste con sBad, dice las frases de narr). Guía solo en MG_GUIDE (juegos de
+  tarjetas); no en Crucigrama/Ordená/Globos/Hablá/Tienda/Simón/Charla porque tapaba controles. Falta: retoques por juego y la lección.
+- (antes EN COLA) rediseño de TODOS los minijuegos con la misma línea (ref_rediseno_minijuegos.webp): fondo de naturaleza/cielo,
   Zorrito guía en cada actividad con globo de diálogo (instrucción en inglés + castellano), tarjetas 3D con volumen, instrucciones grandes,
   verde/rojo + animación al responder, barra de progreso visible arriba. Hacerlo como SISTEMA de diseño global (mismos componentes en todos).
 - ⏭️ EN COLA (pedido 28/11): rediseñar el menú de arriba del inicio/camino (contadores ⭐ Nv. Voz 💎, saludo, racha, Desafío, Repaso,
