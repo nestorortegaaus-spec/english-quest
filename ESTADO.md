@@ -334,3 +334,5 @@ le acepte la voz a la nena.
   REGLA: seguir sumando frases en pets.js.
 - ✅ HECHO (28/11): panel de padres con tarjeta "🗣️ Charla con su mascota" (S.chatSt: charlas por día, total, respuestas en voz alta vs tocadas,
   última charla). Se cuenta desde el 28/11.
+- ✅ HECHO (28/11, pedido del dueño): en el descanso el amigo charla con ella (paso chat en PLAN, preguntas CHATQ de chat.js, tocar o
+  micrófono); cuenta en la tarjeta del panel de padres. Pendiente: seguir mirando en el panel si charla por voluntad propia.
