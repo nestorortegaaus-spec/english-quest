@@ -963,6 +963,20 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 .op-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;}
 .op-o{aspect-ratio:auto!important;flex-direction:column;padding:10px 4px;gap:2px;} .op-o b{font-size:46px;line-height:1.1;} .op-o span{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:22px;color:#24345C;} .op-o small{font-size:13px;font-weight:900;color:#7C8AA5;}
 
+
+/* ⚖️ balance: meta de ahorro, esfuerzo, medallas */
+.sg-card{display:flex;align-items:center;gap:10px;width:calc(100% - 28px);margin:0 14px 10px;border:3px solid rgba(255,255,255,.8);border-radius:22px;padding:8px 12px;background:linear-gradient(135deg,#FFF6D6,#FFE7A3);box-shadow:0 4px 0 #E8B84A;font-family:inherit;text-align:left;cursor:pointer;}
+.sg-card img{width:52px;height:52px;object-fit:cover;border-radius:14px;background:#fff;} .sg-e{font-size:40px;}
+.sg-t{flex:1;min-width:0;} .sg-t>b{display:block;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:17px;color:#5A3300;line-height:1.1;}
+.sg-bar{height:12px;border-radius:8px;background:rgba(255,255,255,.75);overflow:hidden;margin:4px 0 3px;} .sg-bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#5BE07E,#22B456);}
+.sg-t small{font-weight:800;font-size:12px;color:#7A5A20;} .sg-t small b{color:#5A3300;}
+.sg-empty{justify-content:center;font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:18px;color:#5A3300;} .sg-empty span{font-family:'EQ Nunito',sans-serif;font-size:13px;font-weight:800;color:#7A5A20;}
+.sg-pick h2{font-family:'EQ Baloo',sans-serif;font-weight:800;text-align:center;} .sg-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-height:52vh;overflow-y:auto;margin-bottom:10px;}
+.sg-list button{border:3px solid transparent;border-radius:18px;background:#F4F7FB;padding:6px 4px;display:flex;flex-direction:column;align-items:center;font-family:inherit;cursor:pointer;}
+.sg-list button.on{border-color:#2FCB72;background:#EFFCF4;} .sg-list img{width:56px;height:56px;object-fit:cover;border-radius:14px;} .sg-list b{font-size:13px;font-weight:900;color:#24345C;} .sg-list span{font-size:12px;font-weight:900;color:#1E86C6;}
+.rew-eff{font-size:15px!important;color:#2B6A3A!important;}
+.ach-learn{font-family:'EQ Baloo',sans-serif;font-weight:800!important;font-size:20px;color:#1F3E86!important;} .ach-g{display:block;color:#7C8AA5!important;font-size:14px!important;margin-bottom:6px;}
+
 /* ===================== 🎨 REDISEÑO (referencia: design/ref_rediseno_principal.webp) ===================== */
 @font-face{font-family:'EQ Baloo';src:url(fonts/baloo2-latin.woff2) format('woff2');font-weight:400 800;font-display:swap;}
 @font-face{font-family:'EQ Nunito';src:url(fonts/nunito-latin.woff2) format('woff2');font-weight:200 1000;font-display:swap;}
@@ -1091,6 +1105,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
     </div>
     <div style="padding:0 14px 2px;color:var(--muted);font-weight:800;font-size:13px;" id="hHello">¡Hola!</div>
     <div class="dl" id="hDaily"></div>
+    <div id="hSave"></div>
     <button class="ar-entry dc-entry pt-big" id="hDay" onclick="openDaily()"><em class="pt-ic pt-cal"><img src="img/ui/ic_cal.webp" alt=""><small id="hCalM">JUL</small><big id="hCalD">17</big></em><b>Desafío del día</b><span>3 palabras nuevas <q>💎 25</q></span></button>
     <button class="ar-entry rv-entry pt-big" id="hRev" onclick="openReview()" style="display:none"><em class="pt-ic"><img src="img/ui/ic_rev.webp" alt=""></em><b>Repasar<br>palabras difíciles</b><span></span></button>
     <div class="hm-entries"><button class="ar-entry hm-entry pt-sq" id="hHome" onclick="openHome()"><em class="pt-ic"><img src="img/ui/ic_house.webp" alt=""></em><b>Casa de Amigos</b></button><button class="ar-entry pt-sq" id="hArc" onclick="openArcade()"><em class="pt-ic"><img src="img/ui/ic_pad.webp" alt=""></em><b>Sala de Juegos</b><span>🔮 <i id="hCrys">0</i></span></button></div>
@@ -1194,9 +1209,10 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="simon.js?v=1"></script>
 <script src="dino.js?v=9"></script>
 <script src="review.js?v=6"></script>
-<script src="ach.js?v=2"></script>
+<script src="ach.js?v=4"></script>
 <script src="games2.js?v=1"></script>
 <script src="pets.js?v=4"></script>
+<script src="balance.js?v=2"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -1587,10 +1603,10 @@ function lvl(){return Math.floor((S.stars+(S.spent||0))/9)+1;}
 function startGame(){var n=document.getElementById('nameIn').value.trim();S.name=n||'Explorador';save();unlockSpeech();sTap();renderPath();show('s-path');}
 
 /* ===== PATH ===== */
-function renderPath(){ setTimeout(function(){ if(window.checkAch)checkAch(); },700);
+function renderPath(){ setTimeout(function(){ if(window.weekCheck&&weekCheck())return; if(window.checkAch)checkAch(); },700);
  document.getElementById('hStars').textContent=S.stars;
  document.getElementById('hLvl').textContent=lvl();
- document.getElementById('hGems').textContent=S.gems; document.getElementById('hDaily').innerHTML=dailyHTML(); document.getElementById('hCrys').textContent=(S.crys||0)+'/'+crysMax(); document.getElementById('hHome').classList.toggle('alert',homeNeedsAttention()); document.getElementById('hArc').style.display=S.arcadeOff?'none':'';
+ document.getElementById('hGems').textContent=S.gems; document.getElementById('hDaily').innerHTML=dailyHTML(); try{ document.getElementById('hSave').innerHTML=window.saveGoalHTML?saveGoalHTML():''; }catch(e){} document.getElementById('hCrys').textContent=(S.crys||0)+'/'+crysMax(); document.getElementById('hHome').classList.toggle('alert',homeNeedsAttention()); document.getElementById('hArc').style.display=S.arcadeOff?'none':'';
  try{dailyHdr();}catch(e){} try{reviewHdr();}catch(e){} try{ var dd=new Date(); document.getElementById('hCalD').textContent=dd.getDate(); document.getElementById('hCalM').textContent=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'][dd.getMonth()]; }catch(e){} var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! '+(WI.ic||'🌍')+' Mundo '+S.world+' · '+WI.n;
  var psc=document.getElementById('pathScroll');psc.classList.toggle('dark',!!WI.dark); var grad='linear-gradient(180deg,'+WI.bg[0]+' 0,'+WI.bg[1]+' 260px,'+WI.bg[2]+' 100%)'; var wa=WIMG[WI.id]<1?WIMG[WI.id]:.12; psc.style.background=WIMG[WI.id]?'linear-gradient(rgba(255,255,255,'+wa+'),rgba(255,255,255,'+wa+')),url(img/world_'+WI.id+'.jpg) center/cover no-repeat,'+grad:(WI.dark?'radial-gradient(circle at 20% 10%,rgba(255,255,255,.18) 0 2px,transparent 3px) 0 0/90px 70px,radial-gradient(circle at 70% 60%,rgba(255,255,255,.14) 0 1.5px,transparent 2.5px) 0 0/130px 110px,':'radial-gradient(circle at 15% 8%,rgba(255,255,255,.55) 0 40px,transparent 41px),')+grad;
  var box=document.getElementById('pathNodes');box.innerHTML='';
@@ -1767,12 +1783,12 @@ function quitLesson(){ if(confirm('¿Salir? Perdés el avance de esta parada.'))
 function finishLesson(){
  var acc=L.ok/L.qs.length, stars=acc>=1?3:acc>=.75?2:1;
  var ui=L.ui; if(!window._us)window._us={};
- S.stars += stars; S.gems += stars*5; advance();
+ S.stars += stars; S.gems += 5+stars*5; advance(); /* 10/15/20: siempre hay premio por el esfuerzo */
  // reward screen
  var b=document.getElementById('rewBody');
  b.innerHTML='<div class="chest">🌟</div><h2>'+(stars===3?'¡Parada perfecta!':'¡Parada completada!')+'</h2>'
    +'<div style="font-size:44px;letter-spacing:4px">'+'⭐'.repeat(stars)+'<span style="opacity:.25">'+'⭐'.repeat(3-stars)+'</span></div>'
-   +'<div class="rewpill">⭐ +'+stars+' · 💎 +'+(stars*5)+'</div>'
+   +'<div class="rewpill">⭐ +'+stars+' · 💎 +'+(5+stars*5)+'</div>'+(stars<3?'<p class="rew-eff">💪 ¡Cada práctica suma! Repetila para ganar más estrellas.</p>':'')
    +'<button class="btn teal" onclick="afterReward()">Seguir el camino →</button>';
  show('s-reward'); sWin(); burst(120);
 }
@@ -2004,12 +2020,12 @@ var DAILY_GOAL=(S&&S.goal)||5, GOAL_DONE=false;
 function dkey(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function yesterdayKey(){var d=new Date();d.setDate(d.getDate()-1);return dkey(d);}
 function todayCount(){return (S.days&&S.days[dkey()])||0;}
-function curStreak(){ if(!S.streak)return 0; return (S.lastGoal===dkey()||S.lastGoal===yesterdayKey())?S.streak:0; }
+function curStreak(){ if(!S.streak)return 0; if(window.streakAlive)return streakAlive()?S.streak:0; return (S.lastGoal===dkey()||S.lastGoal===yesterdayKey())?S.streak:0; }
 function countActivity(){
  if(!S.days)S.days={}; var k=dkey(); S.days[k]=(S.days[k]||0)+1;
  S.crysAcc=(S.crysAcc||0)+1; if(S.crysAcc>=3){S.crysAcc=0;addCrys(1);}
  var ks=Object.keys(S.days).sort(); while(ks.length>90){delete S.days[ks.shift()];}
- if(S.days[k]===DAILY_GOAL && S.lastGoal!==k){ S.streak=(S.lastGoal===yesterdayKey()?(S.streak||0):0)+1; S.lastGoal=k; S.gems+=20; addCrys(2); GOAL_DONE=true; }
+ if(S.days[k]===DAILY_GOAL && S.lastGoal!==k){ S.streak=window.streakNext?streakNext():(S.lastGoal===yesterdayKey()?(S.streak||0):0)+1; S.lastGoal=k; S.gems+=20; addCrys(2); GOAL_DONE=true; }
 }
 function dailyHTML(){ var n=Math.min(todayCount(),DAILY_GOAL), st=curStreak(), bar='';
  for(var i=0;i<DAILY_GOAL;i++)bar+='<i class="'+(i<n?'on':'')+'"></i>';

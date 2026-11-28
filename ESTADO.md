@@ -319,3 +319,6 @@ le acepte la voz a la nena.
   (antes 1°, 2° o 3°). Las pistas ya destrabadas se conservan.
 - ✅ REGLA (28/11, pedido del dueño): los juegos de la Sala (Kart, Carrera Mágica, Buggy Splash, Dino Aventura) NO dan gemas: las gemas se
   ganan estudiando y sirven para comprar esos juegos. Su premio es avanzar (pistas, mundos, récords). No agregar gemas a juegos de la Sala.
+- ✅ HECHO (28/11): recomendaciones del informe de balance (balance.js): 🎯 meta de ahorro en el inicio (S.saveGoal, barra y días que faltan),
+  lecciones dan 10/15/20 💎 (antes 5/10/15) con mensaje de esfuerzo si no fue perfecta, 🛡️ comodín de racha (1 día de perdón por semana,
+  S.freezeWk), 🗓️ premio semanal 💎100 por 5 días practicados (S.wkBonus), medallas de a una por visita y con texto de lo aprendido.

@@ -7,10 +7,10 @@ function nMaster(){ var h=S.hist||{}; return Object.keys(h).filter(function(k){r
 function nCups(){ var c=(S.kart&&S.kart.cup)||{}; return Object.keys(c).filter(function(k){return c[k]<=3;}).length; }
 function nFriends(){ try{ return (S.home.own||[]).length+((S.home.grads||[]).length); }catch(e){ return 1; } }
 var ACH=[
- {id:'w10',e:'🌱',n:'10 palabras',d:'Acertaste 10 palabras distintas',g:20,v:nWords,t:10},
- {id:'w50',e:'🌿',n:'50 palabras',d:'Acertaste 50 palabras distintas',g:40,v:nWords,t:50},
- {id:'w100',e:'🌳',n:'100 palabras',d:'Acertaste 100 palabras nuevas',g:80,v:nWords,t:100},
- {id:'w300',e:'🏞️',n:'300 palabras',d:'¡Sabés un montón de inglés!',g:150,v:nWords,t:300},
+ {id:'w10',e:'🌱',n:'10 palabras',d:'¡Ya sabés 10 palabras en inglés!',g:20,v:nWords,t:10},
+ {id:'w50',e:'🌿',n:'50 palabras',d:'¡Ya sabés 50 palabras en inglés!',g:40,v:nWords,t:50},
+ {id:'w100',e:'🌳',n:'100 palabras',d:'¡Ya sabés 100 palabras en inglés!',g:80,v:nWords,t:100},
+ {id:'w300',e:'🏞️',n:'300 palabras',d:'¡Ya sabés 300 palabras! ¡Un montón de inglés!',g:150,v:nWords,t:300},
  {id:'m25',e:'🧠',n:'Memoria de oro',d:'25 palabras perfectas (3 bien y ninguna mal)',g:60,v:nMaster,t:25},
  {id:'s3',e:'🔥',n:'3 días seguidos',d:'Cumpliste la meta 3 días seguidos',g:40,v:function(){return S.streak||0;},t:3},
  {id:'s10',e:'🔥',n:'10 días seguidos',d:'Cumpliste la meta 10 días seguidos',g:120,v:function(){return S.streak||0;},t:10},
@@ -34,12 +34,12 @@ window.ACH=ACH;
 var QUEUE=[], showing=false;
 function pop(){ if(showing||!QUEUE.length)return; var a=QUEUE.shift(); showing=true;
  var ov=document.createElement('div'); ov.className='pk-ov ach-ov';
- ov.innerHTML='<div class="pk-box ach-box"><div class="ach-medal">'+a.e+'</div><small>¡Nueva medalla!</small><h2>'+a.n+'</h2><p>'+a.d+'</p><div class="rewpill">💎 +'+a.g+'</div><button class="btn teal">¡Genial!</button></div>';
+ ov.innerHTML='<div class="pk-box ach-box"><div class="ach-medal">'+a.e+'</div><small>¡Nueva medalla!</small><h2>'+a.n+'</h2><p class="ach-learn">'+a.d+'</p><small class="ach-g">💎 +'+a.g+'</small><button class="btn teal">¡Genial!</button></div>';
  document.body.appendChild(ov); try{ sWin(); burst(120); sayBoth('New medal!','¡Nueva medalla! '+a.n); }catch(e){}
  ov.querySelector('.btn').onclick=function(){ ov.remove(); showing=false; try{sTap();}catch(e){} setTimeout(pop,250); }; }
-window.checkAch=function(){ try{ var on=document.querySelector('.screen.on'); if(!on||on.id!=='s-path')return; /* solo en el camino, para no tapar juegos */ if(!S.ach)S.ach={}; var got=[];
+window.checkAch=function(){ try{ var on=document.querySelector('.screen.on'); if(!on||on.id!=='s-path')return; /* solo en el camino, para no tapar juegos */ if(document.querySelector('.pk-ov'))return; if(!S.ach)S.ach={}; var got=[];
   ACH.forEach(function(a){ if(S.ach[a.id])return; if(a.v()>=a.t){ S.ach[a.id]=dkey(); S.gems+=a.g; got.push(a); } });
-  if(got.length){ save(); got.forEach(function(a){QUEUE.push(a);}); pop(); try{ var g=document.getElementById('hGems'); if(g)g.textContent=S.gems; }catch(e){} } }catch(e){} };
+  if(got.length){ save(); if(!QUEUE.length&&!showing){ QUEUE.push(got[0]); pop(); } /* una por visita: las demás ya quedan ganadas y se ven en Mis medallas */ try{ var g=document.getElementById('hGems'); if(g)g.textContent=S.gems; }catch(e){} } }catch(e){} };
 window.achGrid=function(){ if(!S.ach)S.ach={}; return '<div class="ach-grid">'+ACH.map(function(a){ var ok=!!S.ach[a.id], v=Math.min(a.t,a.v()), pc=Math.round(v/a.t*100);
   return '<div class="ach'+(ok?' ok':'')+'"><b>'+(ok?a.e:'🔒')+'</b><span>'+a.n+'</span><small>'+a.d+'</small>'+(ok?'<em>✓ 💎'+a.g+'</em>':'<i><u style="width:'+pc+'%"></u></i><em>'+v+'/'+a.t+' · 💎'+a.g+'</em>')+'</div>'; }).join('')+'</div>'; };
 window.openAch=function(){ try{sTap();}catch(e){} var n=ACH.filter(function(a){return S.ach&&S.ach[a.id];}).length;
