@@ -10,7 +10,7 @@ function hardList(){ var h=S.hist||{}, out=[];
  out.sort(function(a,b){return b.score-a.score;}); return out; }
 window.hardCount=function(){ try{ return hardList().length; }catch(e){ return 0; } };
 function hdr(){ try{ var b=document.getElementById('hRev'); if(!b)return; var n=hardCount(); b.style.display=n>=3?'':'none';
-  var done=S.rev&&S.rev.day===dkey(); b.querySelector('span').textContent=n+' palabra'+(n>1?'s':'')+(done?' · ✓ hoy':' · 💎15'); }catch(e){} }
+  var done=S.rev&&S.rev.day===dkey(); b.querySelector('span').textContent=n+' palabra'+(n>1?'s':'')+(done?' · ✓ hoy · 💎10':' · 💎50'); }catch(e){} }
 window.reviewHdr=hdr; setTimeout(hdr,0); /* el camino se dibuja antes de que cargue este archivo */
 
 function pool(w){ /* distractores: primero del mismo tema, después de cualquiera; con emoji distinto */
@@ -54,13 +54,13 @@ window.openReview=function(){
   var sp=document.getElementById('rvS'); if(sp)sp.onclick=function(){ say(w.en,0.7); };
   if(q.t==='listen'||q.t==='listenTxt'||q.t==='meaning')GAME.timer=setTimeout(function(){ say(w.en,0.85); },300); }
  function finish(){ var H=S.hist||{}; list.forEach(function(w){ var x=H[w.en]; if(x&&!miss[w.en])x[0]=Math.max(x[0],x[1]+2); }); /* perfecta en el repaso: deja de ser difícil */
-  var after=hardCount(), today=dkey(), first=!(S.rev&&S.rev.day===today), g=first?15:5, st=first?2:0;
+  var after=hardCount(), today=dkey(), first=!(S.rev&&S.rev.day===today), g=first?50:10, st=first?2:0;
   S.gems+=g; S.stars=(S.stars||0)+st; S.rev={day:today,n:((S.rev&&S.rev.day===today)?S.rev.n:0)+1}; save(); hdr();
   host.innerHTML='<div class="dc-done"><div class="dc-big">🏆</div><h2>¡Repaso terminado!</h2>'
    +'<p>'+(after<before?'Palabras difíciles: <b>'+before+' → '+after+'</b> 💪':'¡Seguí practicando y van a ser fáciles!')+'</p>'
    +'<div class="dc-ws rv-ws">'+list.map(function(w){ var ok=!miss[w.en]; return '<button onclick="sayBoth(\''+w.en.replace(/'/g,'')+'\',\''+w.es.replace(/'/g,'')+'\')"><b>'+(w.e||'💬')+'</b><span>'+w.en+'</span><small>'+(ok?'✅ ¡bien!':'🔁 a repasar')+'</small></button>'; }).join('')+'</div>'
-   +'<div class="rewpill">💎 +'+g+(st?' · ⭐ +'+st:'')+'</div><button class="btn teal" onclick="exitGame()">¡Genial! →</button></div>';
-  sWin(); burst(140); sayBoth('Great practice!','¡Muy buen repaso!'); }
+   +'<div class="rewpill rv-prize">🎉 ¡Ganaste <b>💎 '+g+'</b>'+(st?' y <b>⭐ '+st+'</b>':'')+'!'+(first?'':'<small>El premio grande (💎 50) es una vez por día</small>')+'</div><button class="btn teal" onclick="exitGame()">¡Genial! →</button></div>';
+  sWin(); burst(140); try{mgGuide('cheer','Great practice!','¡Muy buen repaso!',4000);}catch(e){} sayBoth('Great practice!','¡Muy buen repaso! ¡Ganaste '+g+' gemas!'); try{toast('💎 +'+g+' gemas');}catch(e){} }
  window.__rv=function(){ return {Q:Q,qi:qi,list:list}; };
  intro();
 };

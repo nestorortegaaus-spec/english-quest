@@ -268,7 +268,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11, review.js): 🔁 Repaso inteligente. Botón naranja en el camino (debajo del Desafío del día) que aparece con 3+ palabras
   difíciles (S.hist: errores > 0 y aciertos < errores+2). Elige hasta 6 de las más falladas, las muestra para escuchar, y pregunta cada una
   de 2 formas (escuchar→dibujo, dibujo→palabra, inglés→castellano, castellano→inglés; las frases sin dibujo, solo texto). Si erra, la palabra
-  vuelve al final. Las que hace perfectas dejan de ser difíciles. Premio 💎15 ⭐2 la primera vez del día, 💎5 las siguientes (S.rev).
+  vuelve al final. Las que hace perfectas dejan de ser difíciles. Premio 💎50 ⭐2 la primera vez del día, 💎10 las siguientes (S.rev); el botón y el final lo muestran claro.
 - ✅ HECHO (28/11): las ⭐ disponibles se ven donde se compra: arriba en la Tienda y la Sala de Juegos (junto a 💎), en el garaje del Kart
   ("Tenés ⭐ X y 💎 Y") y en la ventana de compra del auto ("te faltan N" en cada botón). La Casa y el camino ya las mostraban.
 - 🎨 REDISEÑO (pedido 28/11), referencias del dueño en design/: ref_rediseno_principal.webp (Juegos, Casa, Tienda) y ref_rediseno_minijuegos.webp.

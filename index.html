@@ -806,6 +806,10 @@ body.mgon .mute{top:62px;right:12px;width:44px;height:44px;border-radius:50%;}
 #s-game.mg .ls-card.no{box-shadow:0 0 0 4px #F2665A,0 6px 0 #C2473D;background:#FFF0EE;}
 #s-game.mg :is(.sp-es,.ph-step,.ph-sen,.ph-es,.cw-hint,.sk-word,.ls-ask,.dc-step,.dc-word,.sto-coins,.rv-fb,.sto-cust span){background:rgba(255,255,255,.94);border-radius:18px;padding:4px 14px;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;box-shadow:0 3px 8px rgba(40,90,150,.16);color:#24345C;}
 #s-game.mg .rv-fb:empty{display:none;}
+#s-dance .dance-wrap{background:none;} #s-dance .dance-stage{margin:20px 16px 120px;background:rgba(255,255,255,.92);border-radius:30px;box-shadow:0 8px 20px rgba(40,90,150,.18);} #s-dance .dance-prog{height:18px;} #s-dance .lx{width:44px;height:44px;border-radius:50%;}
+#s-dance .dance-en{font-family:'EQ Baloo',sans-serif;font-weight:800;color:#7C5CF0;} #s-dance .dancehost{display:flex;flex-direction:column;flex:1;}
+#s-game.mg .bl-area{background:none;} #s-game.mg .bl-ask{border-radius:20px;padding:8px 18px;box-shadow:0 4px 10px rgba(40,90,150,.18);}
+.rv-prize{font-size:20px!important;padding:10px 18px!important;background:linear-gradient(180deg,#FFE38A,#FFC23D)!important;color:#5A3300!important;box-shadow:0 4px 0 #D9890A;} .rv-prize small{display:block;font-size:12px;font-weight:800;}
 /* 🏪 Tienda del camino: puesto con toldo (arte ChatGPT img/ui/stall.webp); los productos van en los estantes */
 #s-game.mg .sto-shelf{background:url(img/ui/stall.webp) center top/100% 100% no-repeat;box-shadow:none;border-radius:0;aspect-ratio:600/650;padding:21% 11% 33%;gap:6px 8px;align-content:space-between;max-width:400px;margin:0 auto;}
 #s-game.mg .sto-it{background:rgba(255,255,255,.92);border-radius:14px;padding:4px 2px;box-shadow:0 3px 0 rgba(120,70,20,.25);}
@@ -1094,7 +1098,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="chat.js?v=1"></script>
 <script src="simon.js?v=1"></script>
 <script src="dino.js?v=6"></script>
-<script src="review.js?v=3"></script>
+<script src="review.js?v=5"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -3824,7 +3828,7 @@ function startCount(u,lv){
 }
 
 function startDance(){ ARCADE_RET=false;
- sTap();unlockSpeech();GAME.stop();show('s-dance');
+ sTap();unlockSpeech();GAME.stop();show('s-dance'); try{ S.mgBg=((S.mgBg||0)+1)%MG_BGS.length; document.getElementById('s-dance').style.background='url(img/ui/'+MG_BGS[S.mgBg]+'.webp) center bottom/cover'; }catch(e){}
  var host=document.getElementById('danceHost');
  var moves=[{en:'Jump!',es:'¡Saltá!',e:'🤸'},{en:'Clap!',es:'¡Aplaudí!',e:'👏'},{en:'Run!',es:'¡Corré!',e:'🏃'},{en:'Spin!',es:'¡Girá!',e:'🌀'},{en:'Wave!',es:'¡Saludá!',e:'👋'},{en:'Stomp!',es:'¡Pisá fuerte!',e:'🦶'},{en:'Touch your head!',es:'¡Tocate la cabeza!',e:'🙆'},{en:'Freeze!',es:'¡Congelate!',e:'🧊'}];
  var i=0;GAME.on=true;
