@@ -230,7 +230,8 @@ le acepte la voz a la nena.
 - ✅ HECHO (27/11): Carrera Mágica cuesta 2000 💎. Golpe sin titilar (sale despedido girando, rebote, temblor de cámara, destello rojo, estrellitas
   de mareo, vibración). Sonidos sintetizados SFX (estrella, poder, puerta, error, golpe, salto, aterrizaje, rampa, turbo, carril). Música suave
   sintetizada (musicStart/musicStop) en los menús del Kart y de la Carrera; se corta al empezar a jugar.
-- ⏭️ EN COLA: Kart con tienda de autos más rápidos (se compran con ⭐ o 💎 dentro del juego), autos nuevos con ChatGPT.
+- ✅ HECHO (28/11): 🏁 Garaje del Kart (KCARS): 4 autos de ChatGPT manejados por el Zorrito (Rayo, Tornado, Galaxia, Dorado; img/kcar_*.png),
+  cada uno más rápido (sp/ac). Se compran con ⭐ (80/200/400/700) o 💎 (300/700/1300/2200); S.kart.cars. Los rivales siguen siendo los 5 pilotos.
 - 🔄 EN CURSO (hechos: Pradera, Playa, Nieve, Golosinas; rotan en cada carrera, RSCN en run.js, S.run.scn): más paisajes para la Carrera Mágica con ChatGPT (por paisaje: 1 horizonte panorámico + 1 hoja 2x2 de decorados; el camino y el
   pasto se dibujan por código con los colores del paisaje).
 - ⏭️ EN COLA (pedido 27/11): juego nuevo de carreras de BUGGYS en la playa (estilo de juego de Beach Buggy Racing, pero original: arte, personajes

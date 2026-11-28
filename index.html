@@ -314,6 +314,10 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .rn-big{position:absolute;top:34%;left:0;right:0;text-align:center;font-size:30px;font-weight:900;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 12px rgba(0,0,0,.25);opacity:0;transform:scale(.6);transition:all .2s;pointer-events:none;padding:0 12px;line-height:1.25;} .rn-big.on{opacity:1;transform:scale(1);} .rn-big img{width:40px;height:40px;vertical-align:middle;} .rn-big b{color:#FFE07A;}
 .rn-tip{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.45);color:#fff;font-weight:900;font-size:15px;border-radius:14px;padding:8px 14px;white-space:nowrap;transition:opacity .6s;pointer-events:none;} .rn-tip.off{opacity:0;}
 .rn-res{display:flex;gap:10px;justify-content:center;margin:6px 0 10px;} .rn-res div{background:#fff;border-radius:16px;padding:8px 12px;display:flex;flex-direction:column;align-items:center;box-shadow:0 4px 0 rgba(120,140,170,.18);} .rn-res b{font-size:22px;color:var(--ink);} .rn-res span{font-size:12px;font-weight:800;color:var(--muted);}
+.kg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.kg-car{position:relative;border:4px solid transparent;border-radius:18px;background:linear-gradient(180deg,#fff,#F3F6FA);padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-family:inherit;box-shadow:0 5px 0 var(--c);}
+.kg-car img{width:82%;aspect-ratio:1/1;object-fit:contain;} .kg-car b{font-size:17px;color:var(--ink);} .kg-sp{font-size:13px;letter-spacing:-2px;} .kg-car em{font-style:normal;font-weight:900;font-size:13px;color:var(--teal-d);} .kg-car em.pr{color:#C98A1C;}
+.kg-car:not(.own) img{filter:brightness(.55) saturate(.6);} .kg-car.on{border-color:var(--c);background:#FFFBEA;transform:translateY(-3px);}
 .kq-wrap{position:relative;align-self:stretch;width:100%;height:100%;overflow:hidden;touch-action:none;user-select:none;}
 .kq-wrap canvas{display:block;}
 .kq-hud{position:absolute;top:8px;left:10px;right:10px;display:flex;justify-content:space-between;pointer-events:none;}
@@ -2156,6 +2160,10 @@ var KCHARS=[
  {id:'fox',n:'Zorrito',e:'🦊',c:'#E8642B'},{id:'panda',n:'Panda',e:'🐼',c:'#2FA866'},{id:'koala',n:'Koala',e:'🐨',c:'#3F96DE'},
  {id:'lion',n:'León',e:'🦁',c:'#E5A800'},{id:'bunny',n:'Coneja',e:'🐰',c:'#EE5FA6'},{id:'robot',n:'Robot',e:'🤖',c:'#5866C4'}
 ];
+/* 🏁 garaje: autos más rápidos (ChatGPT, img/kcar_<id>.png), los maneja el Zorrito. sp = velocidad extra */
+var KCARS=[{id:'rayo',n:'Rayo',sp:1.06,ac:1.1,st:80,g:300,c:'#E84A4A'},{id:'tornado',n:'Tornado',sp:1.12,ac:1.18,st:200,g:700,c:'#3FA9F5'},
+ {id:'galaxia',n:'Galaxia',sp:1.18,ac:1.26,st:400,g:1300,c:'#9B6BE8'},{id:'dorado',n:'Dorado',sp:1.25,ac:1.35,st:700,g:2200,c:'#E0A82E'}];
+KCARS.forEach(function(k){ KCHARS.push({id:'car_'+k.id,n:k.n,e:'🏎️',c:k.c,img:'img/kcar_'+k.id+'.png',car:k}); });
 var KTRACKS=[
  {id:'beach',n:'Playa Sol',e:'🏖️',sky:['#5EC8F8','#BFEFFF'],hill:['#7CCB6B','#5FB052'],g:['#EAD9A2','#E0CD90'],road:['#7A7A7A','#747474'],rum:['#FFFFFF','#E84A4A'],lane:'#F4F4F4',deco:['🌴','🌴','⛱️','🦀','🌴'],ai:0.80},
  {id:'city',n:'Ciudad Neón',e:'🏙️',sky:['#7D8CF0','#D6DCFF'],hill:['#8C94B8','#737BA0'],g:['#9AA59A','#8E998E'],road:['#5E5E66','#585860'],rum:['#FFFFFF','#3B6BE8'],lane:'#FFE066',deco:['🏢','🏬','🚦','🌳','🏢'],ai:0.86},
@@ -2177,13 +2185,26 @@ var KTRACKS=[
 ];
 var KART_IMG={}, KART_BG=null, KART_BGS={};
 function kartBg(id){ if(KART_BGS[id]!==undefined)return; KART_BGS[id]=null; var im=new Image(); im.onload=function(){KART_BGS[id]=im;}; im.src='img/kart_bg_'+id+'.jpg'; }
-function kartImgs(){ KTRACKS.forEach(function(t){kartBg(t.id);}); KCHARS.forEach(function(c){ if(KART_IMG[c.id])return; var im=new Image(); im.onload=function(){KART_IMG[c.id]=im;}; im.src='img/kart_'+c.id+'.png'; }); }
+function kartImgs(){ KTRACKS.forEach(function(t){kartBg(t.id);}); KCHARS.forEach(function(c){ if(KART_IMG[c.id])return; var im=new Image(); im.onload=function(){KART_IMG[c.id]=im;}; im.src=c.img||'img/kart_'+c.id+'.png'; }); }
 function startKart(){
  var host=gSetup('🏎️ Kart Quest'); kartImgs(); if(!S.kart)S.kart={unl:1,cup:{}}; KTRACKS.forEach(function(t,i){ var c=S.kart.cup&&S.kart.cup[t.id]; if(c&&c<=3&&S.kart.unl<i+2&&i+1<KTRACKS.length)S.kart.unl=i+2; }); gScore('🔮'+(S.crys||0));
- var sel={c:S.kart.ch||'fox',t:0}; musicStart();
- function pickChar(){ host.innerHTML='<div class="kq-sel"><h2>Elegí tu piloto</h2><div class="kq-grid">'+KCHARS.map(function(c){return '<button class="kq-ch'+(sel.c===c.id?' on':'')+'" data-id="'+c.id+'" style="--c:'+c.c+'"><img src="img/kart_'+c.id+'.png" alt="" onerror="this.outerHTML=\'<b>'+c.e+'</b>\'"><span>'+c.n+'</span></button>';}).join('')+'</div><button class="btn teal" id="kqNext">Elegir pista →</button></div>';
+ var sel={c:S.kart.ch||'fox',t:0}; musicStart(); if(sel.c.indexOf('car_')===0&&(S.kart.cars||[]).indexOf(sel.c.slice(4))<0)sel.c='fox';
+ if(!S.kart.cars)S.kart.cars=[];
+ function pickChar(){ var pil=KCHARS.filter(function(c){return !c.car;});
+  host.innerHTML='<div class="kq-sel"><h2>Elegí tu piloto</h2><div class="kq-grid">'+pil.map(function(c){return '<button class="kq-ch'+(sel.c===c.id?' on':'')+'" data-id="'+c.id+'" style="--c:'+c.c+'"><img src="img/kart_'+c.id+'.png" alt="" onerror="this.outerHTML=\'<b>'+c.e+'</b>\'"><span>'+c.n+'</span></button>';}).join('')+'</div>'+garageHTML()+'<button class="btn teal" id="kqNext">Elegir pista →</button></div>';
   host.querySelectorAll('.kq-ch').forEach(function(b){b.onclick=function(){sel.c=b.dataset.id;sTap();pickChar();};});
+  host.querySelectorAll('.kg-car').forEach(function(b){b.onclick=function(){ var k=KCARS.find(function(x){return x.id===b.dataset.k;}); if(S.kart.cars.indexOf(k.id)>=0){ sel.c='car_'+k.id; sTap(); pickChar(); return; } carBuy(k); };});
   document.getElementById('kqNext').onclick=function(){S.kart.ch=sel.c;save();sTap();pickTrack();}; }
+ function garageHTML(){ return '<h2 style="margin-top:6px">🏁 Garaje <small style="font-size:14px;color:var(--muted)">autos más rápidos</small></h2><div class="kg-grid">'+KCARS.map(function(k,i){ var own=S.kart.cars.indexOf(k.id)>=0, on=sel.c==='car_'+k.id;
+   return '<button class="kg-car'+(own?' own':'')+(on?' on':'')+'" data-k="'+k.id+'" style="--c:'+k.c+'"><img src="img/kcar_'+k.id+'.png" alt=""><b>'+k.n+'</b><span class="kg-sp">'+'⚡'.repeat(i+1)+'</span>'+(own?'<em>'+(on?'Elegido ✓':'Usar')+'</em>':'<em class="pr">⭐ '+k.st+' · 💎 '+k.g+'</em>')+'</button>'; }).join('')+'</div>'; }
+ function carBuy(k){ sayBoth(k.n,'');
+  var ov=document.createElement('div'); ov.className='pk-ov'; var okS=(S.stars||0)>=k.st, okG=(S.gems||0)>=k.g;
+  ov.innerHTML='<div class="pk-box"><img src="img/kcar_'+k.id+'.png" style="width:160px;display:block;margin:0 auto"><h2>'+k.n+'</h2><p>Más rápido: '+'⚡'.repeat(KCARS.indexOf(k)+1)+'</p>'
+   +'<button class="btn sun" id="kgS"'+(okS?'':' disabled')+'>Comprar con ⭐ '+k.st+'</button><button class="btn teal" id="kgG"'+(okG?'':' disabled')+'>Comprar con 💎 '+k.g+'</button>'
+   +(!okS&&!okG?'<p class="sh-need">Te faltan ⭐ o 💎. ¡Estudiá y jugá para juntar más!</p>':'')+'<button class="btn ghost" id="kgX">Cerrar</button></div>';
+  document.body.appendChild(ov);
+  function buy(byStars){ if(byStars){ if(!spendStars(k.st))return; } else { if(S.gems<k.g)return; S.gems-=k.g; } S.kart.cars.push(k.id); sel.c='car_'+k.id; S.kart.ch=sel.c; save(); ov.remove(); sWin(); burst(160); toast('🏎️ ¡'+k.n+' es tuyo!'); pickChar(); }
+  document.getElementById('kgS').onclick=function(){buy(true);}; document.getElementById('kgG').onclick=function(){buy(false);}; document.getElementById('kgX').onclick=function(){ov.remove();sTap();}; }
  function pickTrack(){ host.innerHTML='<div class="kq-sel"><h2>Elegí la pista</h2><div class="kq-tracks">'+KTRACKS.map(function(t,i){var lock=i>=S.kart.unl, cup=S.kart.cup[t.id];
    return '<button class="kq-tr'+(lock?' lock':'')+'" data-i="'+i+'" style="background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.38)),url(img/kart_bg_'+t.id+'.jpg) center/cover,linear-gradient(160deg,'+t.sky[0]+','+t.g[0]+')"><b>'+(lock?'🔒':t.e)+'</b><span>'+t.n+'</span><small>'+(lock?'Salí 1°, 2° o 3° en la anterior':cup?['','🥇','🥈','🥉'][cup]||'🏁':'¡Nueva!')+'</small></button>';}).join('')
    +'</div><button class="btn ghost" id="kqBack">← Cambiar piloto</button></div>';
@@ -2220,9 +2241,10 @@ function startKart(){
   function fillGate(g){ var a=gWord(), b=gWord(); g.o=[a,b]; g.t=Math.random()<.5?0:1; }
   var gates=[]; [0.12,0.24,0.36,0.48,0.6,0.72,0.84,0.95].forEach(function(f){var g={i:Math.floor(N*f),said:-1,done:-1};fillGate(g);gates.push(g);});
   // ---- corredores ----
+  var CS=me.car?me.car.sp:1, CA=me.car?me.car.ac:1;
   var maxSp=segL*60, accel=maxSp/5, offDec=-maxSp/2, offLim=maxSp/4, cent=0.3;
   var P={x:0,z:0,sp:0,lap:0,boost:0,slow:0,steer:0,vx:0,shake:0,spark:0,sparkDir:0}, cars=[];
-  KCHARS.filter(function(x){return x.id!==me.id;}).forEach(function(ch,k){cars.push({ch:ch,z:(k+1)*segL*4,x:[-0.6,0.6,-0.2,0.25,-0.5][k],sp:0,max:maxSp*T.ai*(0.92+k*0.025),lap:0,ph:k,vx:0,spin:0,cd:0,spark:0,sparkDir:0});});
+  KCHARS.filter(function(x){return x.id!==me.id&&!x.car&&!(me.car&&x.id==='fox');}).slice(0,5).forEach(function(ch,k){cars.push({ch:ch,z:(k+1)*segL*4,x:[-0.6,0.6,-0.2,0.25,-0.5][k],sp:0,max:maxSp*T.ai*(0.92+k*0.025),lap:0,ph:k,vx:0,spin:0,cd:0,spark:0,sparkDir:0});});
   P.z=0;
   function segAt(z){return segs[Math.floor(z/segL)%N];}
   function proj(p,cx,cy,cz){p.camera.x=(p.world.x||0)-cx;p.camera.y=p.world.y-cy;p.camera.z=p.world.z-cz;p.screen.scale=camD/p.camera.z;
@@ -2268,10 +2290,10 @@ function startKart(){
    var pseg=segAt(P.z+playerZ), spPct=P.sp/maxSp, dx=dt*2*spPct;
    var steer=(keyL?-1:0)+(keyR?1:0); P.steer+= (steer-P.steer)*Math.min(1,dt*10);
    P.x+=dx*P.steer*1.25; P.x-=dx*spPct*pseg.curve*cent; P.x+=P.vx*dt; P.vx*=Math.pow(0.05,dt); if(P.shake>0)P.shake-=dt; if(P.spark>0)P.spark-=dt;
-   var top=maxSp*(P.boost>0?1.35:1)*(P.slow>0?0.6:1); if(P.boost>0)P.boost-=dt; if(P.slow>0)P.slow-=dt;
-   P.sp+=accel*dt*(P.sp<top?1:-1.5);
+   var top=maxSp*CS*(P.boost>0?1.35:1)*(P.slow>0?0.6:1); if(P.boost>0)P.boost-=dt; if(P.slow>0)P.slow-=dt;
+   P.sp+=accel*CA*dt*(P.sp<top?1:-1.5);
    if((P.x<-1||P.x>1)&&P.sp>offLim){P.sp+=offDec*dt;}
-   P.x=Math.max(-2.2,Math.min(2.2,P.x)); P.sp=Math.max(0,Math.min(maxSp*1.35,P.sp));
+   P.x=Math.max(-2.2,Math.min(2.2,P.x)); P.sp=Math.max(0,Math.min(maxSp*CS*1.35,P.sp));
    var oz=P.z; P.z+=dt*P.sp; if(P.z>=trackLen){P.z-=trackLen;P.lap++; if(P.lap>=LAPS){finish();return;} bigMsg(P.lap===LAPS-1?'¡Última vuelta! 🏁':'Vuelta '+(P.lap+1),1200); if(!speechBusy())say(P.lap===LAPS-1?'Final lap!':'Lap '+(P.lap+1));}
    // autos
    cars.forEach(function(k){ var tgt=k.max*(1+0.04*Math.sin(t0/2+k.ph)); k.sp+=(tgt-k.sp)*Math.min(1,dt*0.6);
