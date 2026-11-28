@@ -355,3 +355,6 @@ le acepte la voz a la nena.
   "If I were a…, I would…", "I would rather … than …", "The best thing about … is …".
 - ✅ HECHO (28/11): tanda 2 de frases de mascotas (pets.js: +6 por amigo, +8 generales, +6 por nivel) y del descanso (brk.js: +10 datos
   curiosos y más saludos, elogios, respiraciones y despedidas).
+- ✅ HECHO (28/11): 🧊 galaxias congeladas (galPlan en index.html): cada galaxia que ella alcanza guarda sus temas en S.gal. Las tandas
+  nuevas de vocabulario se reparten solo desde la galaxia siguiente a la actual, así nunca cambia lo que ya vio ni se saltea palabras.
+- ⏳ EN CURSO (ChatGPT): 3 fondos nuevos de minijuegos (espacio, bajo el mar, ciudad) → img/ui/game_bg_space|sea|city.webp + MG_BGS.

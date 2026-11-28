@@ -1568,12 +1568,23 @@ var WTHEMES=[
 /* fondos de ChatGPT que ya están subidos (img/world_<id>.jpg) */
 var WIMG={meadow:1,city:1,nature:1,adventure:1,beach:1,snow:1,space:1,sea:1,jungle:1,candy:1,desert:1,dino:1,fairy:1,sky:1,music:.3,farm:1}; /* 1 = velo normal; un número menor a 1 = velo blanco más fuerte para fondos muy cargados */
 function rng(seed){return function(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};}
+/* 🧊 GALAXIAS CONGELADAS: las galaxias que ya alcanzó guardan sus temas en S.gal (índices de UNITS), así las tandas nuevas de
+   vocabulario nunca cambian lo que ya vio: lo nuevo se reparte solo desde la galaxia siguiente a la actual. */
+function galPlan(k){
+ if(!S.gal)S.gal={}; var reach=Math.max(-1,(S.world||1)-5), used={}, usedP={}, K=0, ch=false;
+ function valid(g){ return g&&g.u&&g.u.every(function(i){return UNITS[i];})&&g.p.every(function(i){return UNITS[i];}); }
+ while(valid(S.gal[K])){ S.gal[K].u.forEach(function(i){used[i]=1;}); S.gal[K].p.forEach(function(i){usedP[i]=1;}); K++; }
+ var restU=NEWU.slice(6).filter(function(i){return !used[i];}), restP=NEWP.filter(function(i){return !usedP[i];});
+ for(;K<=reach;K++){ S.gal[K]={u:restU.splice(0,6),p:restP.splice(0,2)}; ch=true; } /* congela las alcanzadas que falten */
+ if(ch)try{save();}catch(e){}
+ if(k<K)return S.gal[k];
+ return {u:restU.slice((k-K)*6,(k-K)*6+6),p:restP.slice((k-K)*2,(k-K)*2+2)}; }
 function worldInfo(w){
  if(w<=4)return WORLDS[w];
  var r=rng(w*977), all=[], ph=[], k=w-5;
  for(var i=0;i<UNITS.length;i++){(UNITS[i].isP?ph:all).push(i);}
  all.sort(function(){return r()-0.5;}); ph.sort(function(){return r()-0.5;});
- var u=NEWU.slice(6+k*6,12+k*6), pp=NEWP.slice(k*2,k*2+2);
+ var gp=galPlan(k), u=gp.u.slice(), pp=gp.p.slice();
  all.forEach(function(x){if(u.length<6&&u.indexOf(x)<0)u.push(x);}); ph.forEach(function(x){if(pp.length<2&&pp.indexOf(x)<0)pp.push(x);});
  var T=WTHEMES[k%WTHEMES.length], lap=Math.floor(k/WTHEMES.length);
  return Object.assign({},T,{n:T.n+(lap?' '+['','II','III','IV','V'][Math.min(4,lap)]:''),u:u,p:pp,s:STORIES.length>4?4+k%(STORIES.length-4):k%STORIES.length});
