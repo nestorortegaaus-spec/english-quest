@@ -987,7 +987,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 .op-card{background:#fff;border-radius:28px;padding:12px 34px;display:flex;flex-direction:column;align-items:center;box-shadow:0 6px 0 rgba(120,150,190,.25),0 8px 16px rgba(40,90,150,.15);}
 .op-card b{font-size:72px;line-height:1.1;} .op-card span{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:30px;color:#1F3E86;} .op-card small{font-weight:900;color:#5A6A8A;font-size:16px;}
 .op-arrow{font-size:34px;line-height:1;} #s-game.mg .op-o.no{opacity:1;background:#FFF0EE!important;box-shadow:0 0 0 4px #F2665A,0 6px 0 #C2473D!important;} #s-game.mg .op-o.no b{opacity:.5;}
-.op-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;}
+.op-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;} .op-opts>:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 5px);}
 .op-o{aspect-ratio:auto!important;flex-direction:column;padding:10px 4px;gap:2px;} .op-o b{font-size:46px;line-height:1.1;} .op-o span{font-family:'EQ Baloo',sans-serif;font-weight:800;font-size:22px;color:#24345C;} .op-o small{font-size:13px;font-weight:900;color:#7C8AA5;}
 
 
@@ -3150,7 +3150,7 @@ var MG_HELLO={'Qué letra':['Find the missing letter!','¡Buscá la letra que fa
  'Karaoke':['Let\'s sing!','¡A cantar!'],'Dictado':['Listen and write!','¡Escuchá y escribí!'],'Opuestos':['Find the opposite!','¡Buscá el contrario!'],'Desafío del':['Three new words!','¡Tres palabras nuevas!'],'Repaso':['Let\'s practice!','¡A repasar!'],'Globos':['Pop the balloons!','¡Reventá los globos!']};
 var MG_ON=false, MG_T=0;
 /* fondos de los minijuegos: rotan en cada juego (arte ChatGPT en img/ui/) */
-var MG_BGS=['game_bg','game_bg_beach','game_bg_autumn','game_bg_snow','game_bg_candy'];
+var MG_BGS=['game_bg','game_bg_beach','game_bg_space','game_bg_autumn','game_bg_sea','game_bg_snow','game_bg_city','game_bg_candy'];
 function mgSetup(title){ var sc=document.getElementById('s-game'); if(!sc)return; sc.classList.add('mg');
  S.mgBg=((S.mgBg||0)+1)%MG_BGS.length; sc.style.backgroundImage='url(img/ui/'+MG_BGS[S.mgBg]+'.webp)'; var key=MG_GUIDE.find(function(k){return title.indexOf(k)>=0;});
  MG_ON=!!key; sc.classList.toggle('mg-g',MG_ON); var w=document.getElementById('gProgW'); if(w)w.classList.remove('on');
