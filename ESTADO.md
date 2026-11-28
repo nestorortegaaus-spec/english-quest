@@ -154,7 +154,7 @@ le acepte la voz a la nena.
   Tanda 4 (28/11): +20 patrones (100 en total): "I hear a…", "Give me the…, please", "I am … now", "Is it a…?", "Don't…!", "Who wants…?",
   "I have to … today", "Have you ever seen a…?", "It smells like…", "I have been … for an hour", "I like … more than …", "You should…",
   "While I was…, it started to rain", "I can't wait to…!".
-- ⏭️ PENDIENTE (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke, tienda, charla, Simón dice): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
+- 🔄 EN CURSO (pedido 27/11, ya hechos: sopa, adivinanzas, contar, frases, crucigrama, karaoke, tienda, charla, Simón dice, dictado, opuestos, letra que falta, rimas, en orden): más juegos nuevos para aprender inglés, inspirados en mecánicas de otras apps
   (Lingokids, Duolingo, Studycat, Monkey Junior, etc.), originales, con niveles y rotando en el camino.
   Ideas posibles: sopa de letras, completar la frase, armar oraciones con fichas, crucigrama con dibujos,
   "Simon dice" (seguir órdenes en inglés), adivinanzas con pistas, karaoke de canciones cortas, contar objetos (numbers).
