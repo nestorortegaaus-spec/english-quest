@@ -12,7 +12,9 @@ var RSCN=[
  {id:'snow',n:'Nieve',bg:'bg_snow.jpg',hz:0.80,sky:'#0086FD',fog:0xE4F1FF,road:'snow',ground:{base:'#F4F9FF',a:'#E3EEFA',b:'#FFFFFF',dots:['#BFE3FF','#FFFFFF','#DDEBFF','#FFFFFF'],sparkle:1},
   deco:[['s_pine',2.5,.42],['s_snowman',1.3,.22],['s_sled',1.2,.18],['s_igloo',1.4,.18]]},
  {id:'candy',n:'Golosinas',bg:'bg_candy.jpg',hz:0.80,sky:'#1297FC',fog:0xFFC2DD,road:'candy',ground:{base:'#FFB3D4',a:'#FF9EC6',b:'#FFC8E0',dots:['#FFE07A','#7FD3FF','#B58BFF','#7DD158','#FF6B6B'],sprinkles:1},
-  deco:[['c_lolli',2.3,.36],['c_cupcake',1.4,.24],['c_cane',1.6,.2],['c_house',1.8,.2]]}
+  deco:[['c_lolli',2.3,.36],['c_cupcake',1.4,.24],['c_cane',1.6,.2],['c_house',1.8,.2]]},
+ {id:'jungle',n:'Selva',bg:'bg_jungle.jpg',hz:0.82,sky:'#2B9BE0',fog:0x7CBF6A,road:'stone',ground:{base:'#4FA83A',a:'#3E9530',b:'#62BC48',dots:['#FF6B6B','#FFE07A','#FF8DC7','#FFFFFF']},
+  deco:[['j_palm',2.8,.34],['j_plant',1.6,.3],['j_statue',1.6,.18],['j_toucan',1.5,.18]]}
 ];
 function loadScript(src,cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ toast('No pude cargar el juego. Probá con internet.'); }; document.head.appendChild(s); }
 function runWords(){ var out=[], seen={}, maxU=UNITS.length;
