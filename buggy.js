@@ -94,14 +94,14 @@ function play(host){
   var me=racers[0], MAX=30, objs=[], ended=false, started=false, steer=0, keyL=false, keyR=false, t=0, place=5, words=0, wrongs=0, boxRow=null, LAPS=3;
 
   function big(txt,ms){ var b=document.getElementById('bgBig'); if(!b)return; b.innerHTML=txt; b.classList.remove('on'); void b.offsetWidth; b.classList.add('on'); clearTimeout(b._t); b._t=setTimeout(function(){b.classList.remove('on');},ms||1300); }
-  function pwBtn(){ var b=document.getElementById('bgPw'); if(!b)return; if(me.item){ b.innerHTML='<img src="'+IMG+'p_'+me.item+'.webp"><small>'+PWN[me.item][0]+'</small>'; b.classList.add('on'); } else { b.innerHTML=''; b.classList.remove('on'); } }
+  function pwBtn(){ var b=document.getElementById('bgPw'); if(!b)return; if(me.item){ b.innerHTML='<img src="'+IMG+(me.item==='wave'?'o_wave':'p_'+me.item)+'.webp"><small>'+PWN[me.item][0]+'</small>'; b.classList.add('on'); } else { b.innerHTML=''; b.classList.remove('on'); } }
 
   /* --- cajas de palabras: la voz pide una palabra; la caja correcta da un poder --- */
   var pool=bugWords(), wi=0, ROWS=[0.18,0.43,0.68,0.9].map(function(f){return f*L;});
   var labTex={}; function wordTex(w){ if(labTex[w.en])return labTex[w.en]; return labTex[w.en]=canvasTex(256,128,function(c,cw,ch){ c.fillStyle='rgba(255,255,255,.95)'; c.beginPath(); c.roundRect?c.roundRect(4,4,cw-8,ch-8,26):c.rect(4,4,cw-8,ch-8); c.fill(); c.font='58px sans-serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(w.e,cw/2,ch/2+2); }); }
   function makeRow(t0){ var w=pool[wi++%pool.length], others=shuffle(pool.filter(function(x){return x!==w;})).slice(0,2), ws=shuffle([w].concat(others)), row={t:t0,w:w,boxes:[],said:false,done:false};
-   ws.forEach(function(x,i){ var d=(i-1)*3.6, b=spr('p_box',1.7), lb=new T.Sprite(new T.SpriteMaterial({map:wordTex(x),transparent:true})); lb.center.set(0.5,0); lb.scale.set(2,1,1); scene.add(lb);
-    at(t0,d,P0); b.position.copy(P0); b.position.y=0.3; lb.position.copy(P0); lb.position.y=2.2; row.boxes.push({w:x,d:d,s:b,lb:lb,y0:0.3}); });
+   ws.forEach(function(x,i){ var d=(i-1)*3.6, b=spr('p_box',2.2), lb=new T.Sprite(new T.SpriteMaterial({map:wordTex(x),transparent:true})); lb.center.set(0.5,0); lb.scale.set(3.2,1.6,1); scene.add(lb);
+    at(t0,d,P0); b.position.copy(P0); b.position.y=0.3; lb.position.copy(P0); lb.position.y=2.7; row.boxes.push({w:x,d:d,s:b,lb:lb,y0:0.3}); });
    return row; }
   var rows=ROWS.map(makeRow);
   function resetRow(r){ r.boxes.forEach(function(b){ scene.remove(b.s); scene.remove(b.lb); }); var nr=makeRow(r.t); rows[rows.indexOf(r)]=nr; }
