@@ -239,3 +239,7 @@ le acepte la voz a la nena.
   (por ejemplo burbuja, cáscara de banana, ola, cohete de confeti). Inglés integrado (cajas de poder con palabras). Arte de buggys y pilotos con ChatGPT.
 - ✅ HECHO (28/11): Buggy Splash con 4 pistas (BTRK en buggy.js): Playa Splash, Pradera Loca, Pista Helada (derrapa más) y Ruta Dulce; cada una con
   su trazado, colores, horizonte y decorados (reusa el arte de la Carrera Mágica). Se desbloquean saliendo en el podio (S.bug.unl/cup/sel).
+- ✅ HECHO (28/11, chat.js): 🗣️ Charla con el amigo compañero (startChat, en GROT y botón en la Casa): 18 preguntas en inglés por nivel con 2-3
+  respuestas (tocar o decir con micrófono), el amigo contesta con voz, boca animada y pose feliz. 📅 Desafío del día (openDaily, botón en el
+  camino): 3 palabras nuevas por día (ver/escuchar, elegir, decir) → 💎25 ⭐3, racha S.dstreak. 📊 Resumen semanal en el panel de padres
+  (días, minutos, palabras nuevas por S.hfirst, aciertos, comparación con la semana anterior, botón Compartir).

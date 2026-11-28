@@ -199,6 +199,8 @@ body{background:linear-gradient(180deg,var(--sky),var(--meadow));color:var(--ink
 #s-parents .pa-w b{font-size:30px;} #s-parents .pa-w span{flex:1;display:flex;flex-direction:column;} #s-parents .pa-w strong{font-size:18px;color:#2E3A45;} #s-parents .pa-w small{font-size:15px;font-weight:700;color:#66737F;}
 .pa-mini{width:86px;display:flex;flex-direction:column;gap:4px;align-items:flex-end;} .pa-mini .pa-meter{width:100%;} .pa-mini em{font-style:normal;font-size:13px;font-weight:800;color:#7A8794;}
 #s-parents .pa-tags{display:flex;flex-wrap:wrap;gap:7px;} #s-parents .pa-tags span{background:#E6F2EC;border-radius:12px;padding:6px 10px;font-size:15px;font-weight:800;color:#3F7F67;} #s-parents .pa-tags span.more{background:#EEF1F0;color:#66737F;}
+.pa-wk{display:grid;grid-template-columns:1fr 1fr;gap:10px;} .pa-wk div{background:#F4F8F6;border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;}
+.pa-wk b{font-size:26px;font-weight:900;color:#2E3A45;} .pa-wk span{font-size:14px;font-weight:700;color:#66737F;} .pa-wk em{font-style:normal;font-size:12px;font-weight:800;margin-top:3px;} .pa-wk em.up{color:#3F8F6F;} .pa-wk em.dn{color:#C0604F;} .pa-wk em.eq{color:#7A8794;}
 .pa-set{margin-bottom:14px;} .pa-set-l{font-size:16px;font-weight:800;color:#4A5763;margin-bottom:6px;}
 .pa-seg{display:flex;background:#F0F4F2;border-radius:14px;padding:4px;gap:4px;} .pa-seg button{flex:1;border:none;background:none;border-radius:11px;padding:11px 4px;font-size:15px;font-weight:900;color:#66737F;font-family:inherit;cursor:pointer;}
 .pa-seg button.on{background:#fff;color:#3F7F67;box-shadow:0 2px 6px rgba(60,90,80,.15);}
@@ -2083,6 +2085,7 @@ function paLine(vals,labels,col){ var W=330,H=130,pl=40,pb=24,pt=12, n=vals.leng
  pts.forEach(function(q){ g+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="4.5" fill="#fff" stroke="'+col+'" stroke-width="2.5"/>'; });
  return g+'</svg>'; }
 function paSeg(label,opts,cur,fn){ return '<div class="pa-set"><div class="pa-set-l">'+label+'</div><div class="pa-seg">'+opts.map(function(o){return '<button class="'+(o[0]===cur?'on':'')+'" onclick="'+fn+'('+JSON.stringify(o[0]).replace(/"/g,'&quot;')+')">'+o[1]+'</button>';}).join('')+'</div></div>'; }
+function shareWeek(){ var t=window.__weekTxt||''; try{ if(navigator.share){ navigator.share({text:t}); return; } }catch(e){} try{ navigator.clipboard.writeText(t); toast('📋 Resumen copiado'); }catch(e){ alert(t); } }
 function paSetGoal(n){S.goal=n;DAILY_GOAL=n;save();renderParents();}
 function paSetLimit(n){S.limit=n;save();renderParents();}
 function paSetSess(n){S.sessMin=n;save();renderParents();}
@@ -2100,6 +2103,18 @@ function renderParents(){
  // HERO
  out+='<div class="pa-hero"><div class="pa-hero-t"><small>Progreso de</small><h2>'+nm+'</h2><span>'+(wi.ic||'🌍')+' Mundo '+(S.world||1)+' · '+wi.n+'</span><span>🌱 Nivel '+lvl()+' · ⭐ '+(S.stars||0)+' · 💎 '+(S.gems||0)+'</span></div>'
   +paRing(prog/nds,'#5FA88B',118,Math.round(prog/nds*100)+'%','del mundo')+'</div>';
+ // 📊 resumen de la semana (comparado con la anterior)
+ (function(){ function wk(from,to){ var r={stops:0,days:0,sec:0,ok:0,n:0,newW:[]}; for(var i=from;i<to;i++){ var d=new Date(); d.setDate(d.getDate()-i); var k=dkey(d), st=(S.days&&S.days[k])||0, l=S.dlog&&S.dlog[k];
+   r.stops+=st; if(st)r.days++; if(l){ r.sec+=l.sec; r.ok+=l.ok; r.n+=l.n; } Object.keys(S.hfirst||{}).forEach(function(w){ if(S.hfirst[w]===k)r.newW.push(w); }); } return r; }
+  var A=wk(0,7), B=wk(7,14), accA=A.n?Math.round(A.ok/A.n*100):null, accB=B.n?Math.round(B.ok/B.n*100):null;
+  function cmp(a,b,u){ if(b==null||a==null)return ''; var d=a-b; return d===0?'<em class="eq">igual que la semana pasada</em>':'<em class="'+(d>0?'up':'dn')+'">'+(d>0?'▲ ':'▼ ')+Math.abs(d)+(u||'')+' vs. semana pasada</em>'; }
+  var txt='📊 English Quest – resumen de la semana de '+nm+':\n• Practicó '+A.days+' de 7 días ('+A.stops+' paradas, '+Math.round(A.sec/60)+' min)\n• Palabras nuevas: '+A.newW.length+(A.newW.length?' ('+A.newW.slice(0,12).join(', ')+')':'')+'\n'+(accA!=null?'• Respuestas bien: '+accA+'%\n':'')+'• Racha: '+curStreak()+' días';
+  window.__weekTxt=txt;
+  out+='<div class="pa-card pa-week"><div class="pa-h">📊 Resumen de la semana <small>últimos 7 días</small></div>'
+   +'<div class="pa-wk"><div><b>'+A.days+'/7</b><span>días que practicó</span>'+cmp(A.days,B.days,' días')+'</div><div><b>'+Math.round(A.sec/60)+' min</b><span>tiempo total</span>'+cmp(Math.round(A.sec/60),B.sec?Math.round(B.sec/60):null,' min')+'</div>'
+   +'<div><b>'+A.newW.length+'</b><span>palabras nuevas</span>'+cmp(A.newW.length,B.newW.length)+'</div><div><b>'+(accA!=null?accA+'%':'—')+'</b><span>respuestas bien</span>'+cmp(accA,accB,'%')+'</div></div>'
+   +(A.newW.length?'<div class="pa-h" style="font-size:16px;margin-top:12px">Palabras nuevas de esta semana</div><div class="pa-tags">'+A.newW.slice(0,24).map(function(w){return '<span>'+wordInfo(w).e+' '+w+'</span>';}).join('')+'</div>':'')
+   +'<button class="pa-pin" style="margin-top:12px" onclick="shareWeek()">📤 Compartir resumen</button></div>'; })();
  // KPIs
  out+='<div class="pa-kpis">'
   +'<div class="pa-k"><i style="background:#FFF1DD">🔥</i><b>'+curStreak()+'</b><span>días de racha</span></div>'
