@@ -37,7 +37,7 @@ function pop(){ if(showing||!QUEUE.length)return; var a=QUEUE.shift(); showing=t
  ov.innerHTML='<div class="pk-box ach-box"><div class="ach-medal">'+a.e+'</div><small>¡Nueva medalla!</small><h2>'+a.n+'</h2><p>'+a.d+'</p><div class="rewpill">💎 +'+a.g+'</div><button class="btn teal">¡Genial!</button></div>';
  document.body.appendChild(ov); try{ sWin(); burst(120); sayBoth('New medal!','¡Nueva medalla! '+a.n); }catch(e){}
  ov.querySelector('.btn').onclick=function(){ ov.remove(); showing=false; try{sTap();}catch(e){} setTimeout(pop,250); }; }
-window.checkAch=function(){ try{ if(!S.ach)S.ach={}; var got=[];
+window.checkAch=function(){ try{ var on=document.querySelector('.screen.on'); if(!on||on.id!=='s-path')return; /* solo en el camino, para no tapar juegos */ if(!S.ach)S.ach={}; var got=[];
   ACH.forEach(function(a){ if(S.ach[a.id])return; if(a.v()>=a.t){ S.ach[a.id]=dkey(); S.gems+=a.g; got.push(a); } });
   if(got.length){ save(); got.forEach(function(a){QUEUE.push(a);}); pop(); try{ var g=document.getElementById('hGems'); if(g)g.textContent=S.gems; }catch(e){} } }catch(e){} };
 window.achGrid=function(){ if(!S.ach)S.ach={}; return '<div class="ach-grid">'+ACH.map(function(a){ var ok=!!S.ach[a.id], v=Math.min(a.t,a.v()), pc=Math.round(v/a.t*100);
