@@ -525,6 +525,13 @@ body.mic-on .screen.on{box-shadow:inset 0 0 0 7px #2FBF5B;transition:box-shadow 
 .sto-it{border:none;border-radius:16px;background:#fff;padding:8px 2px;display:flex;flex-direction:column;align-items:center;box-shadow:0 4px 0 rgba(120,140,170,.2);cursor:pointer;font-family:inherit;}
 .sto-it b{font-size:42px;line-height:1.1;} .sto-shelf.big .sto-it b{font-size:34px;} .sto-it small{font-weight:900;font-size:15px;color:var(--ink);} .sto-it.no{animation:lsshake .35s;background:#FFE3DD;}
 .sto-coins{font-weight:900;font-size:22px;color:#C98A1C;} .sto-coins.pop{animation:lspop .4s;}
+.rv-entry{margin:0 14px 6px!important;background:linear-gradient(90deg,#E8805A,#F0A14A)!important;box-shadow:0 4px 0 #B8613F!important;} .rv-entry span{margin-left:auto;font-size:12px;opacity:.95;}
+.rv-ws{flex-wrap:wrap;justify-content:center;} .rv-ws button.heard{outline:3px solid var(--teal);} .rv-tip{font-weight:800;color:var(--muted);font-size:14px;margin:4px 0;}
+.rv-big{font-size:96px;line-height:1.1;margin:6px 0;} .rv-es{color:#7A6AD8;} .ls-spk.sm{width:52px;height:52px;font-size:22px;}
+.rv-opts{display:grid;grid-template-columns:1fr;gap:9px;width:100%;max-width:380px;}
+.rv-opt{border:0;border-radius:18px;padding:14px;font-family:inherit;font-weight:900;font-size:20px;color:var(--ink);background:#fff;box-shadow:0 5px 0 rgba(120,140,170,.25);cursor:pointer;}
+.rv-opt.ok{background:#D9F6EC;box-shadow:0 5px 0 var(--teal);animation:lspop .4s;} .rv-opt.no{background:#FFE1E1;opacity:.6;}
+.rv-fb{min-height:30px;font-size:19px;font-weight:800;color:var(--ink);text-align:center;margin-top:8px;} .rv-fb b{color:var(--teal-d);}
 .dc-entry{margin:0 14px 6px!important;background:linear-gradient(90deg,#2FB5A0,#4CC37A)!important;box-shadow:0 4px 0 #23866F!important;} .dc-entry span{margin-left:auto;font-size:12px;opacity:.9;} .dc-entry.done{background:linear-gradient(90deg,#9FB8B2,#A9C5B0)!important;box-shadow:0 4px 0 #7F9A93!important;}
 .dc{gap:12px;display:flex;flex-direction:column;align-items:center;padding:10px;width:100%;max-width:420px;} .dc-step{font-weight:900;font-size:18px;color:var(--teal-d);}
 .dc-card{background:#fff;border-radius:24px;padding:16px 30px;display:flex;flex-direction:column;align-items:center;box-shadow:0 6px 0 rgba(120,140,170,.2);} .dc-card b{font-size:90px;line-height:1.1;} .dc-card span{font-size:36px;font-weight:900;color:var(--ink);} .dc-card small{font-size:20px;font-weight:800;color:var(--muted);}
@@ -802,6 +809,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
     <div style="padding:0 14px 2px;color:var(--muted);font-weight:800;font-size:13px;" id="hHello">¡Hola!</div>
     <div class="dl" id="hDaily"></div>
     <button class="ar-entry dc-entry" id="hDay" onclick="openDaily()">📅 <b>Desafío del día</b><span>3 palabras nuevas · 💎25</span></button>
+    <button class="ar-entry rv-entry" id="hRev" onclick="openReview()" style="display:none">🔁 <b>Repasar palabras difíciles</b><span></span></button>
     <div class="hm-entries"><button class="ar-entry hm-entry" id="hHome" onclick="openHome()">🏡 <b>Casa de Amigos</b></button><button class="ar-entry" id="hArc" onclick="openArcade()">🕹️ <b>Sala de Juegos</b><span>🔮 <i id="hCrys">0</i></span></button></div>
     <div class="path-scroll" id="pathScroll"><div id="pathNodes"></div></div>
   </section>
@@ -898,6 +906,7 @@ canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:50;}
 <script src="chat.js?v=1"></script>
 <script src="simon.js?v=1"></script>
 <script src="dino.js?v=6"></script>
+<script src="review.js?v=2"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -1291,7 +1300,7 @@ function renderPath(){
  document.getElementById('hStars').textContent=S.stars;
  document.getElementById('hLvl').textContent=lvl();
  document.getElementById('hGems').textContent=S.gems; document.getElementById('hDaily').innerHTML=dailyHTML(); document.getElementById('hCrys').textContent=(S.crys||0)+'/'+crysMax(); document.getElementById('hHome').classList.toggle('alert',homeNeedsAttention()); document.getElementById('hArc').style.display=S.arcadeOff?'none':'';
- try{dailyHdr();}catch(e){} var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! '+(WI.ic||'🌍')+' Mundo '+S.world+' · '+WI.n;
+ try{dailyHdr();}catch(e){} try{reviewHdr();}catch(e){} var WI=worldInfo(S.world);document.getElementById('hHello').textContent='¡Hola, '+S.name+'! '+(WI.ic||'🌍')+' Mundo '+S.world+' · '+WI.n;
  var psc=document.getElementById('pathScroll');psc.classList.toggle('dark',!!WI.dark); var grad='linear-gradient(180deg,'+WI.bg[0]+' 0,'+WI.bg[1]+' 260px,'+WI.bg[2]+' 100%)'; var wa=WIMG[WI.id]<1?WIMG[WI.id]:.12; psc.style.background=WIMG[WI.id]?'linear-gradient(rgba(255,255,255,'+wa+'),rgba(255,255,255,'+wa+')),url(img/world_'+WI.id+'.jpg) center/cover no-repeat,'+grad:(WI.dark?'radial-gradient(circle at 20% 10%,rgba(255,255,255,.18) 0 2px,transparent 3px) 0 0/90px 70px,radial-gradient(circle at 70% 60%,rgba(255,255,255,.14) 0 1.5px,transparent 2.5px) 0 0/130px 110px,':'radial-gradient(circle at 15% 8%,rgba(255,255,255,.55) 0 40px,transparent 41px),')+grad;
  var box=document.getElementById('pathNodes');box.innerHTML='';
  var GAP=118, TOP=70, AMP=70, N=NODES.length;

@@ -265,3 +265,8 @@ le acepte la voz a la nena.
   Aplicado en: cuentos (storyPick), Tienda (clientes), Carrera Mágica (selector de corredor: solo los desbloqueados; las hojas de los demás
   quedan guardadas y aparecen solas al desbloquearlos), Kart (KFRIEND/kOk: Coneja, Panda, Gatita, Pingüino y Unicornio solo si ya son
   amigos, también como rivales) y Buggy Splash (si no tiene Panda/Conejita, corren otro koala/león). Charla y Simón dice usan el amigo compañero.
+- ✅ HECHO (28/11, review.js): 🔁 Repaso inteligente. Botón naranja en el camino (debajo del Desafío del día) que aparece con 3+ palabras
+  difíciles (S.hist: errores > 0 y aciertos < errores+2). Elige hasta 6 de las más falladas, las muestra para escuchar, y pregunta cada una
+  de 2 formas (escuchar→dibujo, dibujo→palabra, inglés→castellano, castellano→inglés; las frases sin dibujo, solo texto). Si erra, la palabra
+  vuelve al final. Las que hace perfectas dejan de ser difíciles. Premio 💎15 ⭐2 la primera vez del día, 💎5 las siguientes (S.rev).
+- ⏭️ EN COLA (pedido 28/11): mostrar las ⭐ disponibles donde se compra con estrellas (ej. garaje del Kart muestra 💎 pero no ⭐).
