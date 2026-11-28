@@ -280,7 +280,7 @@ le acepte la voz a la nena.
 - ✅ HECHO (28/11): sistema de minijuegos (mgSetup en gSetup; CSS "SISTEMA DE MINIJUEGOS"): fondo img/ui/game_bg.webp, barra superior grande,
   barra de progreso automática (gScore "a/b"), zorrito guía img/guide/fox_<wave|think|cheer|point|apple|sad>.webp abajo a la izquierda
   con globo (saluda al empezar, festeja con sGood, se pone triste con sBad, dice las frases de narr). Guía solo en MG_GUIDE (juegos de
-  tarjetas); no en Crucigrama/Ordená/Globos/Hablá/Tienda/Simón/Charla porque tapaba controles. Falta: retoques por juego y la lección.
+  tarjetas); no en Crucigrama/Ordená/Globos/Hablá/Tienda/Simón/Charla porque tapaba controles. (Lección y retoques: hechos el 28/11.)
 - (antes EN COLA) rediseño de TODOS los minijuegos con la misma línea (ref_rediseno_minijuegos.webp): fondo de naturaleza/cielo,
   Zorrito guía en cada actividad con globo de diálogo (instrucción en inglés + castellano), tarjetas 3D con volumen, instrucciones grandes,
   verde/rojo + animación al responder, barra de progreso visible arriba. Hacerlo como SISTEMA de diseño global (mismos componentes en todos).
@@ -289,7 +289,7 @@ le acepte la voz a la nena.
 - (antes EN COLA) rediseñar el menú de arriba del inicio/camino (contadores ⭐ Nv. Voz 💎, saludo, racha, Desafío, Repaso,
   Casa y Sala) con la misma línea del rediseño. Referencia del dueño: design/ref_rediseno_inicio.webp (copiar tal cual): pastillas blancas
   arriba, Desafío/Repaso como botones gruesos con ícono 3D a la izquierda y la info en una cápsula a la derecha, Casa y Sala con ícono 3D
-  grande (casita, joystick amarillo). Falta de ChatGPT: íconos 3D (calendario, flechas de repaso, casita, joystick).
+  grande (casita, joystick amarillo). Íconos 3D: hechos el 28/11.
 - ✅ HECHO (28/11): la LECCIÓN con el estilo de los minijuegos (fondo, barra grande, consigna en globo, tarjeta blanca, opciones con volumen,
   zorrito guía y cartel de resultado con el zorrito festejando/triste + dibujo + 🔊). Todos los minijuegos usan el sistema (salvo la Isla,
   que es un juego aparte). Textos sueltos van en recuadro blanco. Memotest con 🐾. Fondos: MG_BGS rota en cada juego; faltan más fondos ChatGPT.
