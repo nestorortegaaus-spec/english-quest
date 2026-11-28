@@ -12,13 +12,13 @@ function dinoWords(){ var out=[], seen={};
  return prioW(out); }
 /* 🗺️ mundos: horizonte y decorados (arte de la Carrera Mágica), colores del pasto, la arena y el agua */
 var DW=[
- {id:'valley',n:'Valle Dino',e:'🦖',seed:5,bg:'bg_dino.jpg',sky:'#0098FD',hz:0.8,fog:0xA6DA84,grass:'#6CC24A',sand:'#EAD59B',rock:'#A89F91',water:'#38C3EA',en:'🪲',
+ {id:'valley',foe:'e_beetle',n:'Valle Dino',e:'🦖',seed:5,bg:'bg_dino.jpg',sky:'#0098FD',hz:0.8,fog:0xA6DA84,grass:'#6CC24A',sand:'#EAD59B',rock:'#A89F91',water:'#38C3EA',en:'🪲',
   deco:[['dn_fern',2.6],['dn_fern',2.6],['dn_brachio',4.2],['dn_nest',1.5],['dn_trice',2.2]]},
- {id:'jungle',n:'Selva Escondida',e:'🐒',seed:17,bg:'bg_jungle.jpg',sky:'#2B9BE0',hz:0.82,fog:0x7CBF6A,grass:'#4FA83A',sand:'#D9C08A',rock:'#8F8A7A',water:'#2FB8C8',en:'🐍',
+ {id:'jungle',foe:'e_beetle',n:'Selva Escondida',e:'🐒',seed:17,bg:'bg_jungle.jpg',sky:'#2B9BE0',hz:0.82,fog:0x7CBF6A,grass:'#4FA83A',sand:'#D9C08A',rock:'#8F8A7A',water:'#2FB8C8',en:'🐍',
   deco:[['j_palm',5.2],['j_palm',5.2],['j_plant',2.6],['j_statue',2.8],['j_toucan',2.4]]},
- {id:'desert',n:'Oasis de Arena',e:'🐪',seed:29,bg:'bg_desert.jpg',sky:'#0590FE',hz:0.8,fog:0xF2C66A,grass:'#F2C14E',sand:'#F6D58A',rock:'#C9764A',water:'#35C6E0',en:'🦂',
+ {id:'desert',foe:'e_crab',n:'Oasis de Arena',e:'🐪',seed:29,bg:'bg_desert.jpg',sky:'#0590FE',hz:0.8,fog:0xF2C66A,grass:'#F2C14E',sand:'#F6D58A',rock:'#C9764A',water:'#35C6E0',en:'🦂',
   deco:[['de_cactus',3.2],['de_cactus',3.2],['de_palm',4.6],['de_arch',3.4],['de_camel',2.6]]},
- {id:'snow',n:'Montaña Nevada',e:'❄️',seed:41,bg:'bg_snow.jpg',sky:'#0086FD',hz:0.8,fog:0xE4F1FF,grass:'#F4F9FF',sand:'#DCE9F7',rock:'#9FB3C8',water:'#8FD3F5',en:'⛄',
+ {id:'snow',foe:'e_snowman',n:'Montaña Nevada',e:'❄️',seed:41,bg:'bg_snow.jpg',sky:'#0086FD',hz:0.8,fog:0xE4F1FF,grass:'#F4F9FF',sand:'#DCE9F7',rock:'#9FB3C8',water:'#8FD3F5',en:'⛄',
   deco:[['s_pine',4.6],['s_pine',4.6],['s_snowman',2.4],['s_sled',2],['s_igloo',3]]},
  {id:'space',n:'Planeta Cristal',e:'🚀',seed:53,stars:1,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,grass:'#9A5FE0',sand:'#7E4CC4',rock:'#5B4A9A',water:'#3A2C8E',en:'👾',
   deco:[['sp_crystal',2.6],['sp_crystal',2.6],['sp_rocket',3.4],['sp_alien',2],['sp_dish',2.8]]}
@@ -52,7 +52,7 @@ function play(host){
  var deco=WD.deco.map(function(d){return d[0];}).filter(function(n,i,a){return a.indexOf(n)===i;});
  var TX={}, IM={}, ldr=new T.TextureLoader(), list=[];
  ['run1','run2','jump','charge'].forEach(function(n){ list.push([n,DIMG+n+'.webp']); });
- list.push(['enemy',DIMG+'e_'+WD.id+'.webp']); list.push(['egg',DIMG+'egg.webp']);
+ if(WD.foe)list.push(['enemy',DIMG+WD.foe+'.webp']); list.push(['egg',DIMG+'egg.webp']);
  deco.forEach(function(n){ list.push([n,'img/run/'+n+'.webp']); }); ['dn_trice','dn_brachio'].forEach(function(n){ if(deco.indexOf(n)<0)list.push([n,'img/run/'+n+'.webp']); });
  var left=list.length; function done(){ if(--left===0)start(); }
  list.forEach(function(it){ ldr.load(it[1],function(t){ t.encoding=T.sRGBEncoding; t.anisotropy=4; TX[it[0]]=t; IM[it[0]]=t.image; done(); },undefined,done); });
@@ -130,7 +130,7 @@ function play(host){
   var eggTex=TX.egg||canvasTex(128,128,function(c,w,h){ c.fillStyle='#FFF4DC'; c.fillRect(0,0,w,h); var r=rng(WD.seed); var cs=['#3FA9F5','#FF6FA8','#37D67A','#FFB23D','#B36BFF'];
    for(var i=0;i<16;i++){ c.fillStyle=cs[i%5]; c.beginPath(); c.arc(r()*w,r()*h,6+r()*9,0,7); c.fill(); } });
   var eggs=[], eggsGot=0;
-  function egg(x,z,y){ var gy=(y!=null?y:th(x,z)); var m=TX.egg?spr('egg',1.5):new T.Mesh(new T.SphereGeometry(0.62,20,16),new T.MeshLambertMaterial({map:eggTex}));
+  function egg(x,z,y){ var gy=(y!=null?y:th(x,z)); var m=TX.egg?spr('egg',1.8):new T.Mesh(new T.SphereGeometry(0.62,20,16),new T.MeshLambertMaterial({map:eggTex}));
    if(!TX.egg){ m.scale.set(1,1.3,1); m.position.set(x,gy+0.8,z); scene.add(m); } else m.position.set(x,gy,z);
    var glow=shadow(2.6); glow.material.color=new T.Color(0xFFF2A0); glow.material.opacity=0.9; glow.position.set(x,gy+0.04,z);
    eggs.push({m:m,x:x,z:z,y:gy,glow:glow,got:false}); }
@@ -146,7 +146,7 @@ function play(host){
 
   /* --- bichitos gruñones --- */
   var foes=[]; for(var fI=0;fI<40&&foes.length<7;fI++){ var fx=(rnd()-.5)*2*(RAD-14), fz=(rnd()-.5)*2*(RAD-14); if(!freeSpot(fx,fz,2)||Math.hypot(fx,fz-40)<16)continue;
-   var fs=spr('enemy',1.5); fs.position.set(fx,th(fx,fz),fz); foes.push({s:fs,x:fx,z:fz,hx:fx,hz:fz,a:rnd()*7,sh:shadow(1.6),dead:false,fly:0,vx:0,vy:0,vz:0}); }
+   var fs=spr('enemy',WD.foe==='e_snowman'?1.6:1.8); fs.position.set(fx,th(fx,fz),fz); foes.push({s:fs,x:fx,z:fz,hx:fx,hz:fz,a:rnd()*7,sh:shadow(1.6),dead:false,fly:0,vx:0,vy:0,vz:0}); }
 
   /* --- el dino --- */
   var me={x:0,z:40,y:th(0,40),vy:0,yaw:0,sp:0,ground:true,dash:0,dashCd:0,hurt:0,inv:0,hp:3,safe:{x:0,z:40},walk:0,kx:0,kz:0};
