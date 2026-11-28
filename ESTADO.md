@@ -239,12 +239,12 @@ le acepte la voz a la nena.
   sintetizada (musicStart/musicStop) en los menús del Kart y de la Carrera; se corta al empezar a jugar.
 - ✅ HECHO (28/11): 🏁 Garaje del Kart (KCARS): 4 autos de ChatGPT manejados por el Zorrito (Rayo, Tornado, Galaxia, Dorado; img/kcar_*.png),
   cada uno más rápido (sp/ac). Se compran con ⭐ (80/200/400/700) o 💎 (300/700/1300/2200); S.kart.cars. Los rivales siguen siendo los 5 pilotos.
-- 🔄 EN CURSO (hechos: Pradera, Playa, Nieve, Golosinas, Selva, Desierto, Espacio, Valle Dino; rotan en cada carrera, RSCN en run.js, S.run.scn): más paisajes para la Carrera Mágica con ChatGPT (por paisaje: 1 horizonte panorámico + 1 hoja 2x2 de decorados; el camino y el
+- 🔄 EN CURSO (hechos: Pradera, Playa, Nieve, Golosinas, Selva, Desierto, Espacio, Valle Dino, Bajo el Mar; rotan en cada carrera, RSCN en run.js, S.run.scn): más paisajes para la Carrera Mágica con ChatGPT (por paisaje: 1 horizonte panorámico + 1 hoja 2x2 de decorados; el camino y el
   pasto se dibujan por código con los colores del paisaje).
 - ✅ HECHO (28/11, buggy.js, Sala 2500 💎): 🏖️ Buggy Splash — antes: EN COLA (pedido 27/11): juego nuevo de carreras de BUGGYS en la playa (estilo de juego de Beach Buggy Racing, pero original: arte, personajes
   y nombre propios). Caminos de arena anchos, 3D con three.js como la Carrera Mágica, rivales, y el buggy tira poderes a los contrincantes
   (por ejemplo burbuja, cáscara de banana, ola, cohete de confeti). Inglés integrado (cajas de poder con palabras). Arte de buggys y pilotos con ChatGPT.
-- ✅ HECHO (28/11): Buggy Splash con 8 pistas (BTRK en buggy.js): Playa Splash, Pradera Loca, Pista Helada (derrapa más), Ruta Dulce, Selva Salvaje, Dunas del Oasis, Ruta Galáctica y Valle Dino; cada una con
+- ✅ HECHO (28/11): Buggy Splash con 9 pistas (BTRK en buggy.js): Playa Splash, Pradera Loca, Pista Helada (derrapa más), Ruta Dulce, Selva Salvaje, Dunas del Oasis, Ruta Galáctica, Valle Dino y Arrecife Mágico; cada una con
   su trazado, colores, horizonte y decorados (reusa el arte de la Carrera Mágica). Se desbloquean saliendo en el podio (S.bug.unl/cup/sel).
 - ✅ HECHO (28/11, chat.js): 🗣️ Charla con el amigo compañero (startChat, en GROT y botón en la Casa): 18 preguntas en inglés por nivel con 2-3
   respuestas (tocar o decir con micrófono), el amigo contesta con voz, boca animada y pose feliz. 📅 Desafío del día (openDaily, botón en el

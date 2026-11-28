@@ -20,7 +20,9 @@ var RSCN=[
  {id:'space',stars:1,n:'Espacio',bg:'bg_space.jpg',hz:0.8,sky:'#050260',fog:0x8C5AD8,road:'space',ground:{base:'#9A5FE0',a:'#8A4FD2',b:'#AE78EA',dots:['#6FE6FF','#FF7AD9','#FFFFFF','#C9B5FF']},
   deco:[['sp_crystal',1.8,.34],['sp_rocket',2.4,.22],['sp_alien',1.6,.2],['sp_dish',2,.24]]},
  {id:'dino',n:'Valle Dino',bg:'bg_dino.jpg',hz:0.8,sky:'#0098FD',fog:0x9FD67A,road:'dino',ground:{base:'#6CC24A',a:'#5DB33E',b:'#7DD158',dots:['#FF6B3D','#B57BFF','#FFE07A','#FFFFFF']},
-  deco:[['dn_brachio',2.2,.26],['dn_nest',1.3,.22],['dn_fern',1.8,.3],['dn_trice',1.4,.22]]}
+  deco:[['dn_brachio',2.2,.26],['dn_nest',1.3,.22],['dn_fern',1.8,.3],['dn_trice',1.4,.22]]},
+ {id:'sea',n:'Bajo el Mar',bg:'bg_sea.jpg',hz:0.82,sky:'#1EC8EE',fog:0x5FD0E0,road:'sea',ground:{base:'#F2D59A',a:'#E8C783',b:'#F8E2B0',dots:['#FF7AA8','#FFFFFF','#FFB347','#B57BFF']},
+  deco:[['sea_coral',1.9,.32],['sea_chest',1.5,.22],['sea_octopus',1.5,.22],['sea_turtle',1.5,.22]]}
 ];
 function loadScript(src,cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ toast('No pude cargar el juego. Probá con internet.'); }; document.head.appendChild(s); }
 function runWords(){ var out=[], seen={}, maxU=UNITS.length;
@@ -88,6 +90,11 @@ function play(host){
     c.fillStyle='#BCD5EE'; c.fillRect(0,0,w,h); var rs=rng(5); for(var i=0;i<260;i++){ c.fillStyle=rs()<.5?'rgba(160,190,225,.35)':'rgba(255,255,255,.8)'; c.beginPath(); c.arc(rs()*w,rs()*h,1+rs()*3,0,7); c.fill(); }
     c.fillStyle='rgba(95,135,190,.55)'; [w/6,w/2,5*w/6].forEach(function(cx){ c.fillRect(cx-16,0,6,h); c.fillRect(cx+10,0,6,h); });
     c.fillStyle='#6E9BD0'; c.fillRect(0,0,16,h); c.fillRect(w-16,0,16,h); c.fillStyle='#FFFFFF'; for(var y=0;y<h;y+=18){ c.beginPath(); c.arc(5,y+9,8,0,7); c.arc(w-5,y+9,8,0,7); c.fill(); } c.fillStyle='rgba(255,255,255,.6)'; for(var y3=0;y3<h;y3+=64){ c.fillRect(w/3-2,y3,4,30); c.fillRect(2*w/3-2,y3,4,30); } return; }
+   if(SC.road==='sea'){ /* camino de arena del fondo del mar con caracolitos y bordes de coral */
+    c.fillStyle='#EBCF92'; c.fillRect(0,0,w,h); var rq=rng(23); for(var i4=0;i4<240;i4++){ c.fillStyle=rq()<.5?'rgba(180,140,80,.25)':'rgba(255,250,230,.5)'; c.beginPath(); c.arc(rq()*w,rq()*h,1+rq()*2.5,0,7); c.fill(); }
+    c.strokeStyle='rgba(255,255,255,.35)'; c.lineWidth=3; for(var ys=0;ys<h;ys+=40){ c.beginPath(); for(var xs=16;xs<=w-16;xs+=8)c.lineTo(xs,ys+Math.sin(xs/18)*4); c.stroke(); }
+    for(var yc=0;yc<h;yc+=22){ c.fillStyle=(yc/22)%2?'#FF7AA8':'#FFB347'; c.beginPath(); c.roundRect(-2,yc+1,15,20,7); c.roundRect(w-13,yc+1,15,20,7); c.fill(); }
+    c.fillStyle='rgba(255,255,255,.75)'; for(var yt=0;yt<h;yt+=64){ c.fillRect(w/3-3,yt,6,34); c.fillRect(2*w/3-3,yt,6,34); } return; }
    if(SC.road==='dino'){ /* sendero de tierra con huellas de dinosaurio */
     c.fillStyle='#C99A62'; c.fillRect(0,0,w,h); var rd=rng(19); for(var i3=0;i3<220;i3++){ c.fillStyle=rd()<.5?'rgba(120,80,40,.3)':'rgba(255,235,200,.35)'; c.beginPath(); c.arc(rd()*w,rd()*h,1+rd()*3,0,7); c.fill(); }
     c.fillStyle='rgba(110,70,35,.55)'; for(var yf=0;yf<h;yf+=128){ [[w/6,yf+20],[w/2,yf+84],[5*w/6,yf+40]].forEach(function(f){ var fx=f[0], fy=f[1]; c.beginPath(); c.ellipse(fx,fy+8,9,11,0,0,7); c.fill(); [-1,0,1].forEach(function(d){ c.beginPath(); c.ellipse(fx+d*8,fy-8+Math.abs(d)*4,3.5,7,d*.45,0,7); c.fill(); }); }); }

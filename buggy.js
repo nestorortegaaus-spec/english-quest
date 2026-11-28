@@ -25,7 +25,9 @@ var BTRK=[
  {id:'space',stars:1,n:'Ruta Galáctica',e:'🚀',seed:91,amp:120,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,road:['#4A3A86','#22D3F5','#FF5FCF'],ground:['#9A5FE0','#8A4FD2','#AE78EA'],
   deco:[['sp_crystal',3.6],['sp_crystal',3.6],['sp_rocket',5],['sp_alien',3.2],['sp_dish',4],['o_barrel',1.2]]},
  {id:'dino',n:'Valle Dino',e:'🦖',seed:104,amp:135,bg:'bg_dino.jpg',sky:'#0098FD',hz:0.8,fog:0x9FD67A,road:['#C99A62','#FF8A3D','#FFFFFF'],ground:['#6CC24A','#5DB33E','#7DD158'],
-  deco:[['dn_brachio',5],['dn_fern',3.6],['dn_fern',3.6],['dn_nest',2.6],['dn_trice',3],['o_barrel',1.2]]}
+  deco:[['dn_brachio',5],['dn_fern',3.6],['dn_fern',3.6],['dn_nest',2.6],['dn_trice',3],['o_barrel',1.2]]},
+ {id:'sea',n:'Arrecife Mágico',e:'🐠',seed:118,amp:125,bg:'bg_sea.jpg',sky:'#1EC8EE',hz:0.82,fog:0x5FD0E0,road:['#EBCF92','#FF7AA8','#FFFFFF'],ground:['#F2D59A','#E8C783','#F8E2B0'],
+  deco:[['sea_coral',4],['sea_coral',4],['sea_chest',3],['sea_octopus',3],['sea_turtle',3],['o_barrel',1.2]]}
 ];
 var PWN={banana:['banana','banana'],bubble:['bubble','burbuja'],rocket:['rocket','cohete'],wave:['wave','ola']};
 
