@@ -225,7 +225,7 @@ le acepte la voz a la nena.
   arco de estrellas), ⚡ plataforma turbo (4,5 s: muy rápido, invencible, solo estrellas, líneas de velocidad) y 🚃 trencitos de vagones 3D
   (con o sin rampa adelante) para correr por arriba; chocarlos de frente saca vida. Modelos hechos con código (ExtrudeGeometry/Box/Cylinder).
   28/11: se elige corredor entre los amigos adoptados en la Casa (RUNNERS/RUNW en run.js, S.run.ch; hoja img/run/<id>_run1, _run2, _jump, _slide).
-  Hechos: 🦊 Zorrito, 🐱 Gatita, 🐶 Perrito. Faltan (ChatGPT): Conejita, Pingüino, Panda, Unicornio, Dragoncito.
+  Hechos: 🦊 Zorrito, 🐱 Gatita, 🐶 Perrito, 🐰 Conejita. Faltan (ChatGPT): Pingüino, Panda, Unicornio, Dragoncito.
 - ✅ HECHO (27/11): 🏪 La Tienda (startStore, en GROT): ella atiende un negocio (rotan: frutería, panadería, juguetería, librería, ropa, kiosco)
   y los amigos de la Casa le piden cosas en inglés ("Can I have…, please?", "I want…", "I would like…"). Nivel 1 con traducción y voz en
   castellano; nivel 3+ piden cantidades (two apples → tocar 2 veces + "Here you are!"); nivel 4+ estante sin nombres.
