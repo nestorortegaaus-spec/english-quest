@@ -2198,7 +2198,7 @@ function playCart(id){ if((S.crys||0)<1){sBad();toast('Necesitás 🔮. ¡Estudi
 var KCHARS=[
  {id:'fox',n:'Zorrito',e:'🦊',c:'#E8642B'},{id:'panda',n:'Panda',e:'🐼',c:'#2FA866'},{id:'koala',n:'Koala',e:'🐨',c:'#3F96DE'},
  {id:'lion',n:'León',e:'🦁',c:'#E5A800'},{id:'bunny',n:'Coneja',e:'🐰',c:'#EE5FA6'},{id:'robot',n:'Robot',e:'🤖',c:'#5866C4'},
- {id:'cat',n:'Gatita',e:'🐱',c:'#E8358F'}
+ {id:'cat',n:'Gatita',e:'🐱',c:'#E8358F'},{id:'penguin',n:'Pingüino',e:'🐧',c:'#2E9BE0'}
 ];
 /* 🏁 garaje: autos más rápidos (ChatGPT, img/kcar_<id>.png), los maneja el Zorrito. sp = velocidad extra */
 var KCARS=[{id:'rayo',n:'Rayo',sp:1.06,ac:1.1,st:80,g:300,c:'#E84A4A'},{id:'tornado',n:'Tornado',sp:1.12,ac:1.18,st:200,g:700,c:'#3FA9F5'},
@@ -2284,7 +2284,7 @@ function startKart(){
   var CS=me.car?me.car.sp:1, CA=me.car?me.car.ac:1;
   var maxSp=segL*60, accel=maxSp/5, offDec=-maxSp/2, offLim=maxSp/4, cent=0.3;
   var P={x:0,z:0,sp:0,lap:0,boost:0,slow:0,steer:0,vx:0,shake:0,spark:0,sparkDir:0}, cars=[];
-  KCHARS.filter(function(x){return x.id!==me.id&&!x.car&&!(me.car&&x.id==='fox');}).slice(0,5).forEach(function(ch,k){cars.push({ch:ch,z:(k+1)*segL*4,x:[-0.6,0.6,-0.2,0.25,-0.5][k],sp:0,max:maxSp*T.ai*(0.92+k*0.025),lap:0,ph:k,vx:0,spin:0,cd:0,spark:0,sparkDir:0});});
+  shuffle(KCHARS.filter(function(x){return x.id!==me.id&&!x.car&&!(me.car&&x.id==='fox');})).slice(0,5).forEach(function(ch,k){cars.push({ch:ch,z:(k+1)*segL*4,x:[-0.6,0.6,-0.2,0.25,-0.5][k],sp:0,max:maxSp*T.ai*(0.92+k*0.025),lap:0,ph:k,vx:0,spin:0,cd:0,spark:0,sparkDir:0});});
   P.z=0;
   function segAt(z){return segs[Math.floor(z/segL)%N];}
   function proj(p,cx,cy,cz){p.camera.x=(p.world.x||0)-cx;p.camera.y=p.world.y-cy;p.camera.z=p.world.z-cz;p.screen.scale=camD/p.camera.z;

@@ -210,7 +210,7 @@ le acepte la voz a la nena.
   Bosque de hadas, Valle Dino, Ciudad Musical. Fondo = img/kart_bg_<id>.jpg con parallax, piso y líquido de colores propios, y un bichito
   distinto para pisar (snake, scorpion, penguin, snail, alien, ladybug, dinosaur, mouse) que dice su nombre en inglés y castellano.
 - ✅ HECHO (27/11): Kart con 16 pistas (+Granja Feliz y Bajo el Mar, bloqueadas en cadena).
-- 🔄 EN CURSO: pilotos nuevos del Kart hechos con ChatGPT (de espaldas, mismo estilo que kart_panda.png; los de código se descartaron). Hechos: 🐱 Gatita (img/kart_cat.png, n° 7). Faltan: Pingüino, Unicornio, Dino.
+- 🔄 EN CURSO: pilotos nuevos del Kart hechos con ChatGPT (de espaldas, mismo estilo que kart_panda.png; los de código se descartaron). Hechos: 🐱 Gatita (kart_cat.png, n° 7), 🐧 Pingüino (kart_penguin.png, n° 8). Rivales al azar entre todos los pilotos. Faltan: Unicornio, Dino.
 - ✅ HECHO (27/11): 🦊 Carrera Mágica (run.js, Sala de Juegos, 600 💎, 1 🔮 por partida): corredor 3D de 3 carriles con three.js
   (lib/three.min.js, MIT, guardado local para funcionar offline). Arte ChatGPT en img/run/ (zorrito de espaldas 4 poses, valla, tronco, arco con
   cartel, carrito, estrella, 4 poderes, arco de palabras, horizonte, 4 decorados). Deslizar ←→ carril, ↑ saltar, ↓ agacharse. Puertas de palabras
