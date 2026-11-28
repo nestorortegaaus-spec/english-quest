@@ -1211,6 +1211,7 @@ body:has(#s-lesson.on) .mute{top:10px;right:10px;width:44px;height:44px;border-r
 <script src="games2.js?v=1"></script>
 <script src="pets.js?v=4"></script>
 <script src="balance.js?v=2"></script>
+<script src="brk.js?v=1"></script>
 <script>
 /* ===== FOX ===== */
 function foxSVG(mood){
@@ -2066,7 +2067,7 @@ var BR_TOK=0;
 function brWords(){ var out=[], seen={}; UNITS.forEach(function(U){ if(U.isP)return; U.w.forEach(function(w){ if(!w.e||!w.en||w.en.split(' ').length>2||seen[w.en])return; seen[w.en]=1; if(S.hist&&S.hist[w.en])out.push(w); }); });
  if(out.length<4)UNITS.slice(0,6).forEach(function(U){U.w.forEach(function(w){if(w.e&&!seen[w.en+'#']){seen[w.en+'#']=1;out.push(w);}});}); return shuffle(out); }
 function openBreak(){ var p=playD(); show('s-break'); var host=document.getElementById('brBody'), tok=++BR_TOK, id=buddyId(), f=friendById(id)||{n:'Zorrito',en:'fox'};
- var nm=(S.name||'').split(' ')[0]||'friend', key=petKey(id)||'gen', words=brWords(), wi=0, sim=shuffle(SIMON), si=0, facts=shuffle(BR_FACTS), fi=0, flapT=0, blinkT=0, talking=false;
+ var nm=(S.name||'').split(' ')[0]||'friend', key=petKey(id)||'gen', words=brWords(), wi=0, sim=shuffle(SIMON), si=0, facts=window.BRL?BRL.facts:shuffle(BR_FACTS), fi=0, flapT=0, blinkT=0, talking=false;
  host.innerHTML='<div class="br-top"><span>☕ Descanso con '+f.n+'</span><b id="brTime"></b></div>'
   +'<div class="br-say" id="brSay"></div><div class="br-pet" id="brPet">'+dressWrap(key,'<img id="brImg" src="'+buddyImg('idle')+'" alt="">',wearOf(id))+'</div>'
   +'<div class="br-act" id="brAct"></div><div class="br-note">Si descansás todo el tiempo ganás 💎 +5</div>';
@@ -2086,28 +2087,28 @@ function openBreak(){ var p=playD(); show('s-break'); var host=document.getEleme
  function act(h){ var a=document.getElementById('brAct'); if(a)a.innerHTML=h; return a; }
  function wait(ms,cb){ setTimeout(function(){ if(alive())cb(); },ms); }
  /* --- actividades --- */
- function greet(nx){ act(''); anim('hap',800); pose('happy'); talk('Hi '+nm+'! Time for a little break!','¡Hola '+nm+'! ¡Es hora de un descansito!',function(){ talk('Let\'s move and play together!','¡Movámonos y juguemos juntos!',nx); }); }
+ function greet(nx){ act(''); anim('hap',800); pose('happy'); var a=brL('hello',{n:nm}), b2=brL('hello2'); talk(a[0],a[1],function(){ talk(b2[0],b2[1],nx); }); }
  function simon(nx){ var e=sim[si++%sim.length]; act('<div class="br-card"><b>'+e[2]+'</b><span>'+e[0]+'</span><small>'+e[1]+'</small></div><button class="btn sun" id="brOk">¡Listo! ✓</button>');
   anim('wig'); var ok=false, t, my=actTok;
-  function fin(){ if(ok||my!==actTok)return; ok=true; clearTimeout(t); anim('hap',800); pose('happy'); sGood(); talk(pickR(['Great job!','Well done!','Super!','You did it!']),pickR(['¡Muy bien!','¡Genial!','¡Bárbaro!','¡Lo hiciste!']),nx); }
+  function fin(){ if(ok||my!==actTok)return; ok=true; clearTimeout(t); anim('hap',800); pose('happy'); sGood(); var pz=brL('praise'); talk(pz[0],pz[1],nx); }
   document.getElementById('brOk').onclick=fin;
   t=setTimeout(function(){ if(alive())fin(); },16000); talk('Simon says: '+e[0],'Simón dice: '+e[1],null); }
  function breathe(nx){ act('<div class="br-breath" id="brB"></div><div class="br-step" id="brStep"></div>'); var n=0;
-  talk('Let\'s breathe slowly with me.','Respiremos despacito conmigo.',function(){ (function one(){ if(!alive())return; if(n>=3){ talk('Very good! You are calm now.','¡Muy bien! Ahora estás tranquila.',nx); return; } n++;
+  var bi=brL('breathe'); talk(bi[0],bi[1],function(){ (function one(){ if(!alive())return; if(n>=3){ var cm=brL('calm'); talk(cm[0],cm[1],nx); return; } n++;
    var B=document.getElementById('brB'), st=document.getElementById('brStep'); B.className='br-breath in'; st.textContent='Breathe in… · Inhalá…'; anim('big'); say('Breathe in');
    wait(3500,function(){ B.className='br-breath out'; st.textContent='Breathe out… · Exhalá…'; var e=document.getElementById('brPet'); if(e)e.classList.remove('big'); say('Breathe out'); wait(3500,one); }); })(); }); }
  function eyes(nx){ act('<div class="br-count" id="brC">😌</div>');
-  talk('Close your eyes and count with me.','Cerrá los ojos y contá conmigo.',function(){ pose('closed'); var k=0, N=['One','Two','Three','Four','Five'];
-   (function c(){ if(!alive())return; if(k>=5){ pose('happy'); anim('hap',800); talk('Open your eyes!','¡Abrí los ojos!',nx); return; } var el=document.getElementById('brC'); if(el){el.textContent=k+1;el.classList.remove('on');void el.offsetWidth;el.classList.add('on');} say(N[k]); talking=true; k++; wait(1500,function(){ talking=false; pose('closed'); c(); }); })(); }); }
+  var ey=brL('eyes'); talk(ey[0],ey[1],function(){ pose('closed'); var k=0, N=['One','Two','Three','Four','Five'];
+   (function c(){ if(!alive())return; if(k>=5){ pose('happy'); anim('hap',800); var op=brL('open'); talk(op[0],op[1],nx); return; } var el=document.getElementById('brC'); if(el){el.textContent=k+1;el.classList.remove('on');void el.offsetWidth;el.classList.add('on');} say(N[k]); talking=true; k++; wait(1500,function(){ talking=false; pose('closed'); c(); }); })(); }); }
  function word(nx){ var w=words[wi++%words.length]; if(!w){nx();return;} var tries=0, fin=false, my=actTok;
   act('<div class="br-word"><b>'+w.e+'</b><span>'+w.en+'</span><small>'+w.es+'</small></div>'+micWidgetHTML('brMic')+'<button class="sk-skip" id="brSkip" style="visibility:hidden">Ya lo dije ✓</button>');
-  function good(){ if(fin||my!==actTok)return; fin=true; micStop(); anim('hap',800); pose('happy'); sGood(); burst(30); markWord(w,true); talk('Yes! '+w.en+'! Great!','¡Sí! '+w.es+'. ¡Genial!',nx); }
+  function good(){ if(fin||my!==actTok)return; fin=true; micStop(); anim('hap',800); pose('happy'); sGood(); burst(30); markWord(w,true); var pw=brL('praise'); talk('Yes! '+w.en+'! '+pw[0],'¡Sí! '+w.es+'. '+pw[1],nx); }
   function bad(){ if(fin||my!==actTok)return; tries++; if(tries>=2){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } talk(tries>=2?'Good try! Listen: '+w.en:'Try again: '+w.en,tries>=2?'¡Buen intento! Escuchá.':'Probá otra vez.',null); }
   document.getElementById('brSkip').onclick=good;
   document.querySelector('#brMic .mic-b').onclick=function(){ micListen('brMic',w.en,good,bad); };
-  talk('Can you say '+w.en+'?','¿Podés decir '+w.es+' en inglés?',function(){ if(fin||my!==actTok)return; say(w.en,0.75); micSet('brMic','idle','Tocá 🎤 y decí: "'+w.en+'"'); wait(14000,function(){ if(!fin){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } }); }); }
- function fact(nx){ var x=facts[fi++%facts.length]; act('<div class="br-card fact"><b>'+x[2]+'</b><small>¿Sabías que…?</small></div>'); anim('wig');
-  talk('Did you know? '+x[0],'¿Sabías que… '+x[1].replace(/^¡/,''),function(){ pose('happy'); talk('Wow!','¡Guau!',nx); },x[2]); }
+  var ak=brL('ask',{w:w.en,e:w.es}); talk(ak[0],ak[1],function(){ if(fin||my!==actTok)return; say(w.en,0.75); micSet('brMic','idle','Tocá 🎤 y decí: "'+w.en+'"'); wait(14000,function(){ if(!fin){ var sk=document.getElementById('brSkip'); if(sk)sk.style.visibility='visible'; } }); }); }
+ function fact(nx){ var x=window.brL?brL('facts'):facts[fi++%facts.length]; act('<div class="br-card fact"><b>'+x[2]+'</b><small>¿Sabías que…?</small></div>'); anim('wig');
+  talk('Did you know? '+x[0],'¿Sabías que… '+x[1].replace(/^¡/,''),function(){ pose('happy'); var wo=brL('wow'); talk(wo[0],wo[1],nx); },x[2]); }
  var actTok=0, lastStep=Date.now();
  var PLAN=[greet,simon,breathe,word,simon,eyes,fact,word,simon,breathe,word,fact,simon,eyes,word], pi=0;
  function next(){ if(!alive())return; actTok++; lastStep=Date.now(); try{micStop();}catch(e){} var fn=PLAN[pi%PLAN.length]; pi++; if(pi>PLAN.length&&fn===greet){fn=simon;} fn(next); }

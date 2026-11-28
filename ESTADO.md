@@ -327,3 +327,5 @@ le acepte la voz a la nena.
   del final, antes del Memotest; en el mundo 1 antes del último cofre). Usa las palabras difíciles y completa con las del mundo si hay pocas.
 - ✅ ARREGLADO (28/11): la app se reiniciaba sola (al alimentar en la Casa) por la auto-actualización: recargaba también en Casa/Sala
   y al cambiar el service worker en cualquier pantalla. Ahora recarga SOLO en inicio o camino y sin ventanas abiertas.
+- ✅ HECHO (28/11, pedido del dueño): frases del descanso en brk.js (saludos, ánimo, respiración, ojos, pedir palabra, 30 datos curiosos,
+  asombro), rotan como mazo (S.brdeck). REGLA: seguir sumando frases nuevas en brk.js constantemente.
