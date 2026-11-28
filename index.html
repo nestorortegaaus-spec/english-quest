@@ -804,6 +804,8 @@ body.mgon .mute{top:62px;right:12px;width:44px;height:44px;border-radius:50%;}
 #s-game.mg .ls-card{border-radius:24px;box-shadow:0 6px 0 rgba(120,150,190,.28),0 8px 16px rgba(40,90,150,.15);}
 #s-game.mg .ls-card.ok{box-shadow:0 0 0 4px #2FCB72,0 6px 0 #17853F;background:#EFFCF4;}
 #s-game.mg .ls-card.no{box-shadow:0 0 0 4px #F2665A,0 6px 0 #C2473D;background:#FFF0EE;}
+#s-game.mg :is(.sp-es,.ph-step,.ph-sen,.ph-es,.cw-hint,.sk-word,.ls-ask,.dc-step,.dc-word,.sto-coins,.rv-fb,.sto-cust span){background:rgba(255,255,255,.94);border-radius:18px;padding:4px 14px;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;box-shadow:0 3px 8px rgba(40,90,150,.16);color:#24345C;}
+#s-game.mg .rv-fb:empty{display:none;}
 #s-game.mg .mem-card{border-radius:16px;background:linear-gradient(160deg,#B48CFF,#8A5CF0);box-shadow:0 5px 0 #6A3FCC;}
 
 /* ===================== 🎨 REDISEÑO (referencia: design/ref_rediseno_principal.webp) ===================== */
@@ -1695,7 +1697,7 @@ function gameCanvas(){ var host=document.getElementById('gameHost');host.innerHT
 function startBlaster(unitIdx, level, boss){
  level=level||1;
  sTap();unlockSpeech();GAME.stop();show('s-game');
- document.getElementById('gTitle').textContent=(boss?'👑 Desafío':'🧱 Ladrillos')+' · Nivel '+level;
+ document.getElementById('gTitle').textContent=(boss?'👑 Desafío':'🧱 Ladrillos')+' · Nivel '+level; mgSetup(document.getElementById('gTitle').textContent);
  var g=gameCanvas(),cvs=g.cvs,c=g.c,W=g.W,H=g.H;
  var words=shuffle(wordsOf(unitIdx).filter(function(w){return w.en.length<=12;}));
  var padY=Math.round(H*0.66);
@@ -1774,7 +1776,7 @@ function startRacer(u){ startBlaster(u,2); }
 function startMemory(unitIdx,lv){
  lv=lv||1;
  sTap();unlockSpeech();GAME.stop();show('s-game');
- document.getElementById('gTitle').textContent='🧠 Memotest · Nivel '+lv;
+ document.getElementById('gTitle').textContent='🧠 Memotest · Nivel '+lv; mgSetup(document.getElementById('gTitle').textContent);
  var NP=Math.min(10,6+(lv-1)*2), words=shuffle(prioW(uniqEmo(wordsOf(unitIdx))).slice(0,NP));
  document.getElementById('gScore').textContent='0/'+words.length;
  var cards=[]; words.forEach(function(w){cards.push({w:w,face:'emoji'});cards.push({w:w,face:'word'});}); cards=shuffle(cards);
@@ -1783,14 +1785,14 @@ function startMemory(unitIdx,lv){
  var flipped=[], matched=0, lock=false;
  GAME.on=true;
  cards.forEach(function(card){
-   var el=document.createElement('button'); el.className='mem-card'; el.innerHTML='<span class="mem-q">?</span>';
+   var el=document.createElement('button'); el.className='mem-card'; el.innerHTML='<span class="mem-q">🐾</span>';
    el.onclick=function(){ if(!GAME.on||lock||el.classList.contains('open')||el.classList.contains('done'))return;
      el.classList.add('open'); el.innerHTML = card.face==='emoji'?('<span class="mem-emo">'+card.w.e+'</span>'):('<span class="mem-word">'+card.w.en+'</span>'); sTap();
      if(card.face==='word')say(card.w.en);
      flipped.push({el:el,card:card});
      if(flipped.length===2){ lock=true; var a=flipped[0],b=flipped[1];
        if(a.card.w.en===b.card.w.en){ setTimeout(function(){a.el.className='mem-card done';b.el.className='mem-card done';sGood();burst(8);say(a.card.w.en);matched++;document.getElementById('gScore').textContent=matched+'/'+words.length;flipped=[];lock=false; if(matched>=words.length){finishGameNode('🧠 ¡Ganaste Memotest!','Encontraste todos los pares 🎉');} },480); }
-       else { sBad(); setTimeout(function(){a.el.className='mem-card';b.el.className='mem-card';a.el.innerHTML='<span class="mem-q">?</span>';b.el.innerHTML='<span class="mem-q">?</span>';flipped=[];lock=false;},Math.max(480,820-(lv-1)*90)); }
+       else { sBad(); setTimeout(function(){a.el.className='mem-card';b.el.className='mem-card';a.el.innerHTML='<span class="mem-q">🐾</span>';b.el.innerHTML='<span class="mem-q">🐾</span>';flipped=[];lock=false;},Math.max(480,820-(lv-1)*90)); }
      }
    };
    grid.appendChild(el);
@@ -1801,7 +1803,7 @@ function startMemory(unitIdx,lv){
 function startListen(us,lv){
  lv=lv||1;
  sTap();unlockSpeech();GAME.stop();show('s-game');
- document.getElementById('gTitle').textContent='👂 Escuchá'+(lv>1?' · Nivel '+lv:' y tocá');
+ document.getElementById('gTitle').textContent='👂 Escuchá'+(lv>1?' · Nivel '+lv:' y tocá'); mgSetup(document.getElementById('gTitle').textContent);
  var pool=[],seen={};
  us.forEach(function(u){UNITS[u].w.forEach(function(w){if(!seen[w.e]){seen[w.e]=1;pool.push(w);}});});
  var NOPT=lv>=2?6:4, ROUNDS=Math.min(8+2*(lv-1),12,pool.length), order=prioW(pool).slice(0,ROUNDS), r=0, okCount=0;
@@ -2908,13 +2910,16 @@ function gSetup(title){ if(title.indexOf('Kart')<0)ARCADE_RET=false;sTap();unloc
 function gScore(t){document.getElementById('gScore').textContent=t; var m=/(\d+)\s*\/\s*(\d+)/.exec(String(t)), w=document.getElementById('gProgW');
  if(w){ if(m&&+m[2]>0){ w.classList.add('on'); document.getElementById('gProg').style.width=Math.min(100,Math.round(+m[1]/+m[2]*100))+'%'; } else w.classList.remove('on'); } }
 /* 🦊 sistema de minijuegos (referencia design/ref_rediseno_minijuegos.webp): fondo, barra de progreso y zorrito guía */
-var MG_GUIDE=['Adivinanzas','¿Cuántos','Memotest','Deletreá','Frases','Sopa','¿Sí o no?','Escuchá','Monstruo','Karaoke','Desafío','Repaso'];
+var MG_GUIDE=['Adivinanzas','¿Cuántos','Memotest','Deletreá','Frases','Sopa','¿Sí o no?','Escuchá','Monstruo','Karaoke','Desafío del','Repaso'];
 var MG_HELLO={'Adivinanzas':['Guess what it is!','¡Adiviná qué es!'],'¿Cuántos':['Count with me!','¡Contá conmigo!'],'Memotest':['Find the pairs!','¡Buscá los pares!'],'Deletreá':['Spell the word!','¡Armá la palabra!'],
  'Frases':['Let\'s make sentences!','¡Armemos frases!'],'Sopa':['Find the words!','¡Buscá las palabras!'],'Crucigrama':['Complete the crossword!','¡Completá el crucigrama!'],'¿Sí o no?':['Yes or no?','¿Sí o no?'],
  'Ordená':['Put them in order!','¡Ordenalas!'],'Escuchá':['Listen carefully!','¡Escuchá bien!'],'Monstruo':['Feed the monster!','¡Dale de comer al monstruo!'],'Hablá':['Say it out loud!','¡Decilo en voz alta!'],
- 'Karaoke':['Let\'s sing!','¡A cantar!'],'Desafío':['Three new words!','¡Tres palabras nuevas!'],'Repaso':['Let\'s practice!','¡A repasar!'],'Globos':['Pop the balloons!','¡Reventá los globos!']};
+ 'Karaoke':['Let\'s sing!','¡A cantar!'],'Desafío del':['Three new words!','¡Tres palabras nuevas!'],'Repaso':['Let\'s practice!','¡A repasar!'],'Globos':['Pop the balloons!','¡Reventá los globos!']};
 var MG_ON=false, MG_T=0;
-function mgSetup(title){ var sc=document.getElementById('s-game'); if(!sc)return; sc.classList.add('mg'); var key=MG_GUIDE.find(function(k){return title.indexOf(k)>=0;});
+/* fondos de los minijuegos: rotan en cada juego (arte ChatGPT en img/ui/) */
+var MG_BGS=['game_bg'];
+function mgSetup(title){ var sc=document.getElementById('s-game'); if(!sc)return; sc.classList.add('mg');
+ S.mgBg=((S.mgBg||0)+1)%MG_BGS.length; sc.style.backgroundImage='url(img/ui/'+MG_BGS[S.mgBg]+'.webp)'; var key=MG_GUIDE.find(function(k){return title.indexOf(k)>=0;});
  MG_ON=!!key; sc.classList.toggle('mg-g',MG_ON); var w=document.getElementById('gProgW'); if(w)w.classList.remove('on');
  if(MG_ON){ var hi=MG_HELLO[key]||['Let\'s go!','¡Vamos!']; mgGuide('wave',hi[0],hi[1],3200); } }
 function mgGuide(pose,en,es,ms){ if(!MG_ON)return; var im=document.getElementById('mgGi'), b=document.getElementById('mgGb'), g=document.getElementById('mgG'); if(!im||!b)return;
@@ -3798,7 +3803,7 @@ var ISL_SCN=[
 ];
 function startIsland(unitIdx,lv){
  lv=lv||1;
- sTap();unlockSpeech();GAME.stop();show('s-game');
+ sTap();unlockSpeech();GAME.stop();show('s-game'); (function(){ var g=document.getElementById('s-game'); g.classList.remove('mg','mg-g'); g.style.backgroundImage=''; MG_ON=false; })();
  var CH=lv>=3; /* modo desafío: palabra en castellano → agarrar la manzana en inglés */
  document.getElementById('gTitle').textContent='🏝️ Isla · Nivel '+lv+(CH?' · 🎯 Desafío':'');
  var g=gameCanvas(),cvs=g.cvs,c=g.c,W=g.W,H=g.H;
