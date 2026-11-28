@@ -21,7 +21,9 @@ var BTRK=[
  {id:'jungle',n:'Selva Salvaje',e:'🐒',seed:63,amp:125,bg:'bg_jungle.jpg',sky:'#2B9BE0',hz:0.82,fog:0x7CBF6A,road:['#B98A5A','#FFD36B','#5A3A22'],ground:['#4FA83A','#3E9530','#62BC48'],
   deco:[['j_palm',5.2],['j_palm',5.2],['j_plant',3],['j_statue',3],['j_toucan',2.8],['o_barrel',1.2]]},
  {id:'desert',n:'Dunas del Oasis',e:'🐪',seed:77,amp:130,bg:'bg_desert.jpg',sky:'#0590FE',hz:0.8,fog:0xF2C66A,road:['#C98A5A','#E84A4A','#FFFFFF'],ground:['#F2C14E','#E5AE3A','#F8D06A'],
-  deco:[['de_cactus',4.4],['de_cactus',4.4],['de_palm',5],['de_arch',4],['de_camel',3.2],['o_barrel',1.2]]}
+  deco:[['de_cactus',4.4],['de_cactus',4.4],['de_palm',5],['de_arch',4],['de_camel',3.2],['o_barrel',1.2]]},
+ {id:'space',stars:1,n:'Ruta Galáctica',e:'🚀',seed:91,amp:120,bg:'bg_space.jpg',sky:'#050260',hz:0.8,fog:0x8C5AD8,road:['#4A3A86','#22D3F5','#FF5FCF'],ground:['#9A5FE0','#8A4FD2','#AE78EA'],
+  deco:[['sp_crystal',3.6],['sp_crystal',3.6],['sp_rocket',5],['sp_alien',3.2],['sp_dish',4],['o_barrel',1.2]]}
 ];
 var PWN={banana:['banana','banana'],bubble:['bubble','burbuja'],rocket:['rocket','cohete'],wave:['wave','ola']};
 
@@ -67,7 +69,7 @@ function play(host){
   var scene=new T.Scene(); scene.fog=new T.Fog(TK.fog,60,170);
   var asp=W/H, cam=new T.PerspectiveCamera(asp<0.75?62:48,asp,0.1,600);
   scene.add(new T.HemisphereLight(0xffffff,0xC9A66B,1.05)); var sun=new T.DirectionalLight(0xfff3d6,0.5); sun.position.set(-3,8,4); scene.add(sun);
-  wrap.style.background='url(img/run/'+TK.bg+') repeat-x, linear-gradient('+TK.sky+','+TK.sky+')';
+  wrap.style.background='url(img/run/'+TK.bg+') repeat-x, '+(TK.stars?skyStars(TK.sky,W,H):'linear-gradient('+TK.sky+','+TK.sky+')');
 
   /* --- pista: circuito cerrado con curvas --- */
   var rnd=rng(TK.seed), CP=[], NC=14; for(var i=0;i<NC;i++){ var a=i/NC*Math.PI*2, r=120+(rnd()-.5)*TK.amp+(i%3===0?30:0); CP.push(new T.Vector3(Math.cos(a)*r*1.25,0,Math.sin(a)*r)); }
@@ -222,3 +224,4 @@ function play(host){
  }
 }
 })();
+function skyStars(col,w,h){ var c=document.createElement('canvas'); c.width=Math.max(50,w|0); c.height=Math.max(50,h|0); var x=c.getContext('2d'); x.fillStyle=col; x.fillRect(0,0,c.width,c.height); var r=rng(5); for(var i=0;i<c.width*c.height/2600;i++){ var sx=r()*c.width, sy=r()*c.height, s=r(); x.fillStyle=s<.15?'#FFE9A8':s<.3?'#B8E8FF':'#FFFFFF'; x.globalAlpha=.45+r()*.55; x.beginPath(); x.arc(sx,sy,s<.08?2.2:.6+r()*1.1,0,7); x.fill(); } x.globalAlpha=1; return 'url('+c.toDataURL()+')'; }
