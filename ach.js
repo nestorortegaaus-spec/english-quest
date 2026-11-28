@@ -18,15 +18,6 @@ var ACH=[
  {id:'st500',e:'🌟',n:'500 estrellas',d:'Juntaste 500 estrellas en total',g:120,v:function(){return starsTotal();},t:500},
  {id:'w2',e:'🗺️',n:'Exploradora',d:'Llegaste al Mundo 2',g:40,v:function(){return S.world||1;},t:2},
  {id:'w5',e:'🌌',n:'Viajera galáctica',d:'Llegaste a las Galaxias (Mundo 5)',g:150,v:function(){return S.world||1;},t:5},
- {id:'egg10',e:'🥚',n:'10 huevos',d:'Encontraste 10 huevos en Dino Aventura',g:40,v:function(){return (S.dino&&S.dino.eggs)||0;},t:10},
- {id:'egg50',e:'🦖',n:'50 huevos',d:'Encontraste 50 huevos en Dino Aventura',g:120,v:function(){return (S.dino&&S.dino.eggs)||0;},t:50},
- {id:'cup3',e:'🏆',n:'Piloto de podio',d:'Subiste al podio en 3 pistas del Kart',g:60,v:nCups,t:3},
- {id:'bug1',e:'🏖️',n:'Campeona de playa',d:'Ganaste una carrera de Buggy Splash',g:40,v:function(){return (S.bug&&S.bug.wins)||0;},t:1},
- {id:'run500',e:'🦊',n:'Corredora',d:'Corriste 500 m en la Carrera Mágica',g:40,v:function(){return (S.run&&S.run.best)||0;},t:500},
- {id:'fr3',e:'🏡',n:'Familia de amigos',d:'Tenés 3 amigos en la Casa',g:50,v:nFriends,t:3},
- {id:'fr6',e:'💞',n:'Gran familia',d:'Tenés 6 amigos en la Casa',g:120,v:nFriends,t:6},
- {id:'acc10',e:'👒',n:'Fashionista',d:'Compraste 10 accesorios',g:50,v:function(){return (S.owned||[]).length;},t:10},
- {id:'stk30',e:'📒',n:'Coleccionista',d:'Juntaste 30 figuritas en el álbum',g:60,v:function(){return Object.keys(S.stk||{}).length;},t:30},
  {id:'rev5',e:'🔁',n:'Repasadora',d:'Hiciste 5 repasos de palabras difíciles',g:60,v:function(){return S.revN||0;},t:5},
  {id:'day7',e:'📅',n:'Desafiante',d:'Hiciste 7 desafíos del día',g:60,v:function(){return S.dchN||0;},t:7}
 ];
@@ -34,14 +25,14 @@ window.ACH=ACH;
 var QUEUE=[], showing=false;
 function pop(){ if(showing||!QUEUE.length)return; var a=QUEUE.shift(); showing=true;
  var ov=document.createElement('div'); ov.className='pk-ov ach-ov';
- ov.innerHTML='<div class="pk-box ach-box"><div class="ach-medal">'+a.e+'</div><small>¡Nueva medalla!</small><h2>'+a.n+'</h2><p class="ach-learn">'+a.d+'</p><small class="ach-g">💎 +'+a.g+'</small><button class="btn teal">¡Genial!</button></div>';
+ ov.innerHTML='<div class="pk-box ach-box"><div class="ach-medal">'+a.e+'</div><small>¡Nueva medalla!</small><h2>'+a.n+'</h2><p class="ach-learn">'+a.d+'</p><button class="btn teal">¡Genial!</button></div>';
  document.body.appendChild(ov); try{ sWin(); burst(120); sayBoth('New medal!','¡Nueva medalla! '+a.n); }catch(e){}
  ov.querySelector('.btn').onclick=function(){ ov.remove(); showing=false; try{sTap();}catch(e){} setTimeout(pop,250); }; }
 window.checkAch=function(){ try{ var on=document.querySelector('.screen.on'); if(!on||on.id!=='s-path')return; /* solo en el camino, para no tapar juegos */ if(document.querySelector('.pk-ov'))return; if(!S.ach)S.ach={}; var got=[];
   ACH.forEach(function(a){ if(S.ach[a.id])return; if(a.v()>=a.t){ S.ach[a.id]=dkey(); S.gems+=a.g; got.push(a); } });
   if(got.length){ save(); if(!QUEUE.length&&!showing){ QUEUE.push(got[0]); pop(); } /* una por visita: las demás ya quedan ganadas y se ven en Mis medallas */ try{ var g=document.getElementById('hGems'); if(g)g.textContent=S.gems; }catch(e){} } }catch(e){} };
 window.achGrid=function(){ if(!S.ach)S.ach={}; return '<div class="ach-grid">'+ACH.map(function(a){ var ok=!!S.ach[a.id], v=Math.min(a.t,a.v()), pc=Math.round(v/a.t*100);
-  return '<div class="ach'+(ok?' ok':'')+'"><b>'+(ok?a.e:'🔒')+'</b><span>'+a.n+'</span><small>'+a.d+'</small>'+(ok?'<em>✓ 💎'+a.g+'</em>':'<i><u style="width:'+pc+'%"></u></i><em>'+v+'/'+a.t+' · 💎'+a.g+'</em>')+'</div>'; }).join('')+'</div>'; };
+  return '<div class="ach'+(ok?' ok':'')+'" title="'+a.d+'"><b>'+a.e+'</b><span>'+a.n+'</span>'+(ok?'':'<i><u style="width:'+pc+'%"></u></i>')+'</div>'; }).join('')+'</div>'; };
 window.openAch=function(){ try{sTap();}catch(e){} var n=ACH.filter(function(a){return S.ach&&S.ach[a.id];}).length;
  var ov=document.createElement('div'); ov.className='pk-ov';
  ov.innerHTML='<div class="pk-box ach-list"><h2>🏆 Mis medallas</h2><div class="ach-cnt">'+n+' de '+ACH.length+'</div>'+achGrid()+'<button class="btn teal">Cerrar</button></div>';
