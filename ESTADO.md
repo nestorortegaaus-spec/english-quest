@@ -281,4 +281,6 @@ le acepte la voz a la nena.
   Zorrito guía en cada actividad con globo de diálogo (instrucción en inglés + castellano), tarjetas 3D con volumen, instrucciones grandes,
   verde/rojo + animación al responder, barra de progreso visible arriba. Hacerlo como SISTEMA de diseño global (mismos componentes en todos).
 - ⏭️ EN COLA (pedido 28/11): rediseñar el menú de arriba del inicio/camino (contadores ⭐ Nv. Voz 💎, saludo, racha, Desafío, Repaso,
-  Casa y Sala) con la misma línea del rediseño. Captura del estado actual enviada al dueño; esperar su referencia o bosquejo.
+  Casa y Sala) con la misma línea del rediseño. Referencia del dueño: design/ref_rediseno_inicio.webp (copiar tal cual): pastillas blancas
+  arriba, Desafío/Repaso como botones gruesos con ícono 3D a la izquierda y la info en una cápsula a la derecha, Casa y Sala con ícono 3D
+  grande (casita, joystick amarillo). Falta de ChatGPT: íconos 3D (calendario, flechas de repaso, casita, joystick).
